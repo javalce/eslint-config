@@ -45,7 +45,7 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
         },
       },
       plugins: {
-        'import-x': eslintPluginImport,
+        'import-x': eslintPluginImport.configs.recommended,
       },
     },
     {
