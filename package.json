@@ -15,23 +15,51 @@
   },
   "license": "MIT",
   "author": "Javier Valero <javalce29@gmail.com>",
+  "type": "module",
   "main": "index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "prepare": "husky"
   },
   "lint-staged": {
     "*": "prettier -w --ignore-unknown"
   },
   "prettier": "@javalce/prettier-config",
+  "dependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/eslint-parser": "^7.24.7",
+    "@eslint/js": "^9.7.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import-x": "^3.0.1",
+    "eslint-plugin-unicorn": "^54.0.0",
+    "globals": "^15.8.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@javalce/prettier-config": "^1.0.0",
+    "@types/eslint": "^8.56.10",
+    "@types/eslint__js": "^8.42.3",
+    "eslint": "npm:eslint-ts-patch@9.5.0-0",
+    "eslint-flat-config-utils": "^0.2.5",
+    "eslint-ts-patch": "9.5.0-0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
     "tsup": "^8.1.0",
     "typescript": "^5.5.3"
+  },
+  "peerDependencies": {
+    "eslint": "^8.0.0 || ^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    }
   }
 }
