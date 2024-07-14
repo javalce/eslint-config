@@ -17,14 +17,6 @@ import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
 export async function javascript(): Promise<TypedFlatConfigItem[]> {
   return [
     js.configs.recommended,
-    bestPracticeConfig,
-    importConfig,
-    eslintCommentsConfig,
-    es6Config,
-    posibleErrorsConfig,
-    stylisticConfig,
-    unicornConfig,
-    variablesConfig,
     {
       ignores: ['!.*.js'],
       linterOptions: {
@@ -48,6 +40,14 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
         'import-x': eslintPluginImport.configs.recommended,
       },
     },
+    bestPracticeConfig,
+    importConfig,
+    eslintCommentsConfig,
+    es6Config,
+    posibleErrorsConfig,
+    stylisticConfig,
+    unicornConfig,
+    variablesConfig,
     {
       files: JAVASCRIPT_FILES,
       languageOptions: {

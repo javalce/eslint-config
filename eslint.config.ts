@@ -1,13 +1,33 @@
+import { resolve } from 'node:path';
 import javalce from './src/index';
 
-export default javalce([
+const project = resolve(__dirname, 'tsconfig.json');
+
+export default javalce(
   {
-    ignores: ['dist'],
+    typescript: true,
   },
-  {
-    files: ['src/rules/**/*.ts'],
-    rules: {
-      'sort-keys': 'error',
+  [
+    {
+      ignores: ['dist'],
+      settings: {
+        'import-x/resolver': {
+          typescript: {
+            project,
+          },
+        },
+      },
+      languageOptions: {
+        parserOptions: {
+          project,
+        },
+      },
     },
-  },
-]);
+    {
+      files: ['src/rules/**/*.ts'],
+      rules: {
+        'sort-keys': 'error',
+      },
+    },
+  ],
+);
