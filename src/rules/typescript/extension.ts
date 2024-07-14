@@ -1,8 +1,9 @@
 import type { TypedFlatConfigItem } from '../../types';
+
 import variablesConfig from '../variables';
 
 // These share identical configuration options, so we want to keep them in sync.
-const noUnusedVarsConfig = variablesConfig.rules!['no-unused-vars'];
+const noUnusedVarsConfig = variablesConfig.rules?.['no-unused-vars'];
 
 const config: TypedFlatConfigItem = {
   rules: {

@@ -213,18 +213,18 @@ const config: TypedFlatConfigItem = {
      */
     'prefer-promise-reject-errors': ['error', { allowEmptyReject: true }],
     /**
-     * Disallow "Yoda conditions", ensuring the comparison.
-     *
-     * 🔧 Fixable - https://eslint.org/docs/rules/yoda
-     */
-    yoda: 'warn',
-    /**
      * Disallow use of the RegExp constructor in favor of regular expression
      * literals.
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/prefer-regex-literals
      */
     'prefer-regex-literals': 'error',
+    /**
+     * Disallow "Yoda conditions", ensuring the comparison.
+     *
+     * 🔧 Fixable - https://eslint.org/docs/rules/yoda
+     */
+    yoda: 'warn',
   },
 };
 

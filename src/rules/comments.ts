@@ -1,9 +1,11 @@
-// @ts-ignore
+// @ts-expect-error - ESLint plugin import is not resolved correctly
 import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
+
 import { TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
   plugins: {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- This is safe
     'eslint-comments': eslintCommentsPlugin,
   },
   rules: {

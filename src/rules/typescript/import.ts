@@ -1,5 +1,6 @@
-import { Linter } from 'eslint';
 import type { TypedFlatConfigItem } from '../../types';
+
+import { Linter } from 'eslint';
 
 /**
  * These are enabled by `import-x/recommended`, but are better handled by

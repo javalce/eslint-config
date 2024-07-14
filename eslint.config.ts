@@ -1,25 +1,12 @@
-import { resolve } from 'node:path';
 import { defineConfig } from './src/index';
 
-const project = resolve(__dirname, 'tsconfig.json');
-
 export default defineConfig({
-  typescript: true,
+  typescript: {
+    tsconfigPath: 'tsconfig.json',
+  },
   userConfigs: [
     {
       ignores: ['dist'],
-      settings: {
-        'import-x/resolver': {
-          typescript: {
-            project,
-          },
-        },
-      },
-      languageOptions: {
-        parserOptions: {
-          project,
-        },
-      },
     },
     {
       files: ['src/rules/**/*.ts'],

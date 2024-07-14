@@ -1,14 +1,10 @@
 import eslintPluginImport from 'eslint-plugin-import-x';
+
 import { TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
   plugins: {
     'import-x': eslintPluginImport,
-  },
-  settings: {
-    'import-x/resolver': {
-      node: {},
-    },
   },
   rules: {
     /**
@@ -97,6 +93,11 @@ const config: TypedFlatConfigItem = {
         ],
       },
     ],
+  },
+  settings: {
+    'import-x/resolver': {
+      node: {},
+    },
   },
 };
 

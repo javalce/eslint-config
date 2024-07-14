@@ -1,22 +1,25 @@
-import { Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
-import { javascript } from './configs/javascript';
-import typescript from './configs/typescript';
 import type { OptionsConfig, TypedFlatConfigItem } from './types';
 
+import { Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
+
+import { javascript } from './configs/javascript';
+import typescript from './configs/typescript';
+
 export function defineConfig(options: OptionsConfig): FlatConfigComposer<TypedFlatConfigItem> {
-  const { typescript: enableTypescript = false, userConfigs = [] } = options;
+  const { typescript: typescriptOptions, userConfigs = [] } = options;
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
   configs.push(javascript());
 
-  if (enableTypescript) {
-    configs.push(typescript());
+  if (typescriptOptions !== undefined) {
+    configs.push(typescript(typescriptOptions));
   }
 
-  let composer = new FlatConfigComposer();
+  const composer = new FlatConfigComposer<TypedFlatConfigItem>();
 
-  composer.append(...configs, ...(userConfigs as any));
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any -- This is safe
+  void composer.append(...configs, ...(userConfigs as any));
 
   return composer;
 }
