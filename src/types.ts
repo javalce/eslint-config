@@ -6,4 +6,5 @@ export type TypedFlatConfigItem = Omit<Linter.FlatConfig<Linter.RulesRecord>, 'p
 
 export interface OptionsConfig {
   typescript?: boolean;
+  userConfigs: TypedFlatConfigItem[] | Linter.FlatConfig[];
 }

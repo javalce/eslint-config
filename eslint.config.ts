@@ -1,13 +1,11 @@
 import { resolve } from 'node:path';
-import javalce from './src/index';
+import { defineConfig } from './src/index';
 
 const project = resolve(__dirname, 'tsconfig.json');
 
-export default javalce(
-  {
-    typescript: true,
-  },
-  [
+export default defineConfig({
+  typescript: true,
+  userConfigs: [
     {
       ignores: ['dist'],
       settings: {
@@ -30,4 +28,4 @@ export default javalce(
       },
     },
   ],
-);
+});

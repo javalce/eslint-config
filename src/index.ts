@@ -1,14 +1,10 @@
-import { Linter } from 'eslint';
 import { Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 import { javascript } from './configs/javascript';
 import typescript from './configs/typescript';
 import type { OptionsConfig, TypedFlatConfigItem } from './types';
 
-export default function javalce(
-  options: OptionsConfig & TypedFlatConfigItem = {},
-  ...userConfigs: Awaitable<TypedFlatConfigItem[] | Linter.FlatConfig[]>[]
-): FlatConfigComposer<TypedFlatConfigItem> {
-  const { typescript: enableTypescript = false } = options;
+export function defineConfig(options: OptionsConfig): FlatConfigComposer<TypedFlatConfigItem> {
+  const { typescript: enableTypescript = false, userConfigs } = options;
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
