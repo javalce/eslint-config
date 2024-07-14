@@ -4,7 +4,7 @@ import typescript from './configs/typescript';
 import type { OptionsConfig, TypedFlatConfigItem } from './types';
 
 export function defineConfig(options: OptionsConfig): FlatConfigComposer<TypedFlatConfigItem> {
-  const { typescript: enableTypescript = false, userConfigs } = options;
+  const { typescript: enableTypescript = false, userConfigs = [] } = options;
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 

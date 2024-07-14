@@ -1,7 +1,6 @@
 // @ts-ignore
 import babelEslintParser from '@babel/eslint-parser';
 import js from '@eslint/js';
-import * as eslintPluginImport from 'eslint-plugin-import-x';
 import globals from 'globals';
 import bestPracticeConfig from '../rules/best-practice';
 import eslintCommentsConfig from '../rules/comments';
@@ -17,6 +16,14 @@ import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
 export async function javascript(): Promise<TypedFlatConfigItem[]> {
   return [
     js.configs.recommended,
+    bestPracticeConfig,
+    importConfig,
+    eslintCommentsConfig,
+    es6Config,
+    posibleErrorsConfig,
+    stylisticConfig,
+    unicornConfig,
+    variablesConfig,
     {
       ignores: ['!.*.js'],
       linterOptions: {
@@ -31,23 +38,7 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
           ...globals.node,
         },
       },
-      settings: {
-        'import-x/resolver': {
-          node: {},
-        },
-      },
-      plugins: {
-        'import-x': eslintPluginImport.configs.recommended,
-      },
     },
-    bestPracticeConfig,
-    importConfig,
-    eslintCommentsConfig,
-    es6Config,
-    posibleErrorsConfig,
-    stylisticConfig,
-    unicornConfig,
-    variablesConfig,
     {
       files: JAVASCRIPT_FILES,
       languageOptions: {

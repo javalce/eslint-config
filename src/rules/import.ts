@@ -1,6 +1,14 @@
 import { TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
+  plugins: {
+    'import-x': require('eslint-plugin-import-x'),
+  },
+  settings: {
+    'import-x/resolver': {
+      node: {},
+    },
+  },
   rules: {
     /**
      * Disallow non-import statements appearing before import statements.
