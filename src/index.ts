@@ -2,6 +2,7 @@ import type { OptionsConfig, TypedFlatConfigItem } from './types';
 
 import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 
+import { ignores } from './configs/ignores';
 import { javascript } from './configs/javascript';
 import typescript from './configs/typescript';
 
@@ -10,7 +11,7 @@ export function defineConfig(options: OptionsConfig): FlatConfigComposer<TypedFl
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
-  configs.push(javascript());
+  configs.push(ignores(), javascript());
 
   const typescriptOptions = resolveSubOptions(options, 'typescript');
   const tsconfigPath =

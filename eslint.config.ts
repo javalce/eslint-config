@@ -4,7 +4,6 @@ export default defineConfig({
   typescript: true,
   userConfigs: [
     {
-      ignores: ['dist'],
       rules: {
         '@typescript-eslint/no-unsafe-argument': 'off',
         '@typescript-eslint/no-unsafe-return': 'off',

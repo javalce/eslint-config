@@ -29,6 +29,9 @@ importers:
       eslint-config-prettier:
         specifier: ^9.1.0
         version: 9.1.0(eslint-ts-patch@9.5.0-0)
+      eslint-flat-config-gitignore:
+        specifier: ^2.0.0
+        version: 2.0.0
       eslint-import-resolver-typescript:
         specifier: ^3.6.1
         version: 3.6.1(@typescript-eslint/parser@7.16.1(eslint-ts-patch@9.5.0-0)(typescript@5.5.3))(eslint-plugin-import@2.29.1)(eslint-ts-patch@9.5.0-0)
@@ -1191,6 +1194,10 @@ packages:
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
+
+  eslint-flat-config-gitignore@2.0.0:
+    resolution: {integrity: sha512-SBB+R0KpVepS6Z/FZU5LcojCipOhxAJ/qcAP/asb3OCTvVOCNVtLd451YKtj4X0Rpm/xc3/JmpCNkQBCqC999A==}
+    engines: {node: '>=20'}
 
   eslint-flat-config-utils@0.2.5:
     resolution: {integrity: sha512-iO+yLZtC/LKgACerkpvsZ6NoRVB2sxT04mOpnNcEM1aTwKy+6TsT46PUvrML4y2uVBS6I67hRCd2JiKAPaL/Uw==}
@@ -3646,6 +3653,10 @@ snapshots:
   eslint-config-prettier@9.1.0(eslint-ts-patch@9.5.0-0):
     dependencies:
       eslint: eslint-ts-patch@9.5.0-0
+
+  eslint-flat-config-gitignore@2.0.0:
+    dependencies:
+      ignore: 5.3.1
 
   eslint-flat-config-utils@0.2.5:
     dependencies:
