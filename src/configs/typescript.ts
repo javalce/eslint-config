@@ -9,7 +9,7 @@ import eslintPluginImportConfig from '../rules/typescript/import';
 import { type TypedFlatConfigItem, type TypeScriptOptions } from '../types';
 import { TYPESCRIPT_FILES } from '../utils/constants';
 
-export default async function typescript({
+export async function typescript({
   tsconfigPath,
 }: TypeScriptOptions): Promise<TypedFlatConfigItem[]> {
   const project = Array.isArray(tsconfigPath)

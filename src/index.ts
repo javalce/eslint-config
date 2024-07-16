@@ -2,9 +2,7 @@ import type { OptionsConfig, TypedFlatConfigItem } from './types';
 
 import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { ignores } from './configs/ignores';
-import { javascript } from './configs/javascript';
-import typescript from './configs/typescript';
+import { ignores, javascript, typescript } from './configs';
 
 export function defineConfig(options: OptionsConfig): FlatConfigComposer<TypedFlatConfigItem> {
   const { typescript: enableTypeScript, userConfigs = [] } = options;
