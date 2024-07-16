@@ -16,7 +16,6 @@ import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
 import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
 
-// eslint-disable-next-line @typescript-eslint/require-await -- top-level await
 export async function javascript(): Promise<TypedFlatConfigItem[]> {
   return [
     mergeConfigs(

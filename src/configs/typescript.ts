@@ -10,7 +10,6 @@ import eslintPluginImportConfig from '../rules/typescript/import';
 import { TypedFlatConfigItem, TypeScriptOptions } from '../types';
 import { TYPESCRIPT_FILES } from '../utils/constants';
 
-// eslint-disable-next-line @typescript-eslint/require-await -- Top-level await
 export default async function typescript({
   tsconfigPath,
 }: TypeScriptOptions): Promise<TypedFlatConfigItem[]> {

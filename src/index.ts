@@ -27,7 +27,6 @@ export function defineConfig(options: OptionsConfig): FlatConfigComposer<TypedFl
 
   const composer = new FlatConfigComposer<TypedFlatConfigItem>();
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any -- This is safe
   void composer.append(...configs, ...(userConfigs as any));
 
   return composer;
@@ -39,6 +38,5 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
   options: OptionsConfig,
   key: K,
 ): ResolvedOptions<OptionsConfig[K]> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any -- This is safe
   return typeof options[key] === 'boolean' ? ({} as any) : options[key] || {};
 }
