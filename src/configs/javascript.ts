@@ -3,6 +3,7 @@ import type { TypedFlatConfigItem } from '../types';
 // @ts-expect-error -- no types
 import babelEslintParser from '@babel/eslint-parser';
 import js from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import { mergeConfigs } from 'eslint-flat-config-utils';
 import globals from 'globals';
 
@@ -20,6 +21,7 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
   return [
     mergeConfigs(
       js.configs.recommended as TypedFlatConfigItem,
+      eslintConfigPrettier,
       bestPracticeConfig,
       importConfig,
       eslintCommentsConfig,
@@ -36,7 +38,6 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
         languageOptions: {
           ecmaVersion: ECMA_VERSION,
           sourceType: 'module',
-
           globals: {
             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- no types
             ...globals[`es${ECMA_VERSION}`],

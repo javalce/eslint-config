@@ -1,4 +1,4 @@
-import { TypedFlatConfigItem } from '../types';
+import { type TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
   rules: {

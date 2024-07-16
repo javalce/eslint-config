@@ -1,6 +1,6 @@
 import eslintPluginImport from 'eslint-plugin-import-x';
 
-import { TypedFlatConfigItem } from '../types';
+import { type TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
   plugins: {

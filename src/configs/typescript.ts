@@ -1,13 +1,12 @@
 import { resolve } from 'node:path';
 
-import { mergeConfigs } from 'eslint-flat-config-utils';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import tseslint from 'typescript-eslint';
 
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
-import { TypedFlatConfigItem, TypeScriptOptions } from '../types';
+import { type TypedFlatConfigItem, type TypeScriptOptions } from '../types';
 import { TYPESCRIPT_FILES } from '../utils/constants';
 
 export default async function typescript({
@@ -17,35 +16,32 @@ export default async function typescript({
     ? tsconfigPath.map((path) => resolveTsconfigPath(path))
     : resolveTsconfigPath(tsconfigPath);
 
-  const config = tseslint.config(
-    ...tseslint.configs.recommendedTypeChecked,
-    ...tseslint.configs.strictTypeChecked,
-    ...tseslint.configs.stylisticTypeChecked,
-    {
-      languageOptions: {
-        parserOptions: {
+  const config = tseslint.config({
+    files: TYPESCRIPT_FILES,
+    extends: [
+      ...tseslint.configs.recommendedTypeChecked,
+      ...tseslint.configs.strictTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+      eslintPluginImport.configs.typescript,
+      eslintTypescriptConfig,
+      eslintExtensionConfig,
+      eslintPluginImportConfig,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project,
+      },
+    },
+    settings: {
+      'import-x/resolver': {
+        typescript: {
           project,
         },
       },
     },
-  );
+  });
 
-  return [
-    mergeConfigs(...(config as TypedFlatConfigItem[]), {
-      files: TYPESCRIPT_FILES,
-      ...eslintPluginImport.configs.typescript,
-      ...eslintTypescriptConfig,
-      ...eslintExtensionConfig,
-      ...eslintPluginImportConfig,
-      settings: {
-        'import-x/resolver': {
-          typescript: {
-            project,
-          },
-        },
-      },
-    }),
-  ];
+  return config as TypedFlatConfigItem[];
 }
 
 function resolveTsconfigPath(tsconfigPath: string): string {

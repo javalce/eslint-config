@@ -1,5 +1,5 @@
-import { Linter } from 'eslint';
-import { Awaitable } from 'eslint-flat-config-utils';
+import { type Linter } from 'eslint';
+import { type Awaitable } from 'eslint-flat-config-utils';
 
 export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
   plugins?: Record<string, any>;

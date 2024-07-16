@@ -1,6 +1,6 @@
 import type { OptionsConfig, TypedFlatConfigItem } from './types';
 
-import { Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
+import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { javascript } from './configs/javascript';
 import typescript from './configs/typescript';
