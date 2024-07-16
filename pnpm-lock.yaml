@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  tsx: ~4.16.2
+
 importers:
 
   .:
@@ -48,9 +51,6 @@ importers:
       '@javalce/prettier-config':
         specifier: ^1.0.0
         version: 1.0.0(prettier@3.3.3)
-      '@types/eslint':
-        specifier: ^8.56.10
-        version: 8.56.10
       '@types/eslint__js':
         specifier: ^8.42.3
         version: 8.42.3
@@ -76,7 +76,7 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.5.3)
       tsx:
-        specifier: ^4.16.2
+        specifier: ~4.16.2
         version: 4.16.2
       typescript:
         specifier: ^5.5.3

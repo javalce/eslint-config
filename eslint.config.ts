@@ -1,9 +1,7 @@
 import { defineConfig } from './src/index';
 
 export default defineConfig({
-  typescript: {
-    tsconfigPath: 'tsconfig.json',
-  },
+  typescript: true,
   userConfigs: [
     {
       ignores: ['dist'],

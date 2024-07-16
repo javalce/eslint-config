@@ -11,6 +11,6 @@ export interface TypeScriptOptions {
 }
 
 export interface OptionsConfig {
-  typescript?: TypeScriptOptions;
+  typescript?: boolean | TypeScriptOptions;
   userConfigs?: Awaitable<TypedFlatConfigItem[] | Linter.FlatConfig[]>;
 }
