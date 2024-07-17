@@ -65,7 +65,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@eslint/config-inspector": "^0.5.1",
+    "@eslint/config-inspector": "^0.5.2",
     "@javalce/prettier-config": "^1.0.1",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
@@ -77,15 +77,15 @@
     "eslint-ts-patch": "9.5.0-0",
     "eslint-typegen": "^0.2.4",
     "esno": "^4.7.0",
-    "husky": "^9.0.11",
+    "husky": "^9.1.0",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
-    "tsup": "^8.1.0",
+    "tsup": "^8.1.2",
     "tsx": "~4.16.2",
     "typescript": "^5.5.3"
   },
   "peerDependencies": {
-    "eslint": "^8.0.0 || ^9.0.0",
+    "eslint": ">=8.40.0",
     "typescript": ">=4.8.0 <6"
   },
   "peerDependenciesMeta": {
