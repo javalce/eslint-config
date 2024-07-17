@@ -1,7 +1,8 @@
-# 0.1.0 (2024-07-16)
+# 0.1.0 (2024-07-17)
 
 ### Bug Fixes
 
+- configure correctly eslint for javascript and typescript ([a07fad2](https://github.com/javalce/eslint-config/commit/a07fad2c7b4cae00e8fef4b0ae8b195ff9d74fdc))
 - fix JavaScript ESLint configuration ([8f1dfc7](https://github.com/javalce/eslint-config/commit/8f1dfc7948691b85d1a81a7d208e2708004736d3))
 - update constants patterns ([18ec7f6](https://github.com/javalce/eslint-config/commit/18ec7f6aa50d3e869335436f98de528db7e0c811))
 - update eslint configuration for TypeScript ([f84743c](https://github.com/javalce/eslint-config/commit/f84743c6377a579b125c0cee89857e787b6fbe13))
