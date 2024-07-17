@@ -1,5 +1,5 @@
 {
-  "name": "javalce-eslint-config",
+  "name": "@javalce/eslint-config",
   "version": "0.1.0",
   "description": "Javier's eslint configuration",
   "keywords": [
