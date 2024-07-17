@@ -6,6 +6,7 @@ import variablesConfig from '../variables';
 const noUnusedVarsConfig = variablesConfig.rules?.['no-unused-vars'];
 
 const config: TypedFlatConfigItem = {
+  name: 'javalce/typescript/extension',
   rules: {
     /**
      * Require default parameters to be last.

@@ -4,6 +4,7 @@ import type { TypedFlatConfigItem } from '../types';
 import eslintPuginUnicorn from 'eslint-plugin-unicorn';
 
 const config: TypedFlatConfigItem = {
+  name: 'javalce/javascript/unicorn',
   plugins: {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- This rule is not yet typed.
     unicorn: eslintPuginUnicorn,

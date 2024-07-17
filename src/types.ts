@@ -1,7 +1,13 @@
 import { type Linter } from 'eslint';
-import { type Awaitable } from 'eslint-flat-config-utils';
+import { type Awaitable, type FlatConfigComposer } from 'eslint-flat-config-utils';
 
-export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
+import { type ConfigNames, type RuleOptions } from './typegen';
+
+export type Rules = RuleOptions;
+
+export type { ConfigNames };
+
+export type TypedFlatConfigItem = Omit<Linter.FlatConfig<Linter.RulesRecord & Rules>, 'plugins'> & {
   plugins?: Record<string, any>;
 };
 
@@ -11,5 +17,7 @@ export interface TypeScriptOptions {
 
 export interface OptionsConfig {
   typescript?: boolean | TypeScriptOptions;
-  userConfigs?: Awaitable<TypedFlatConfigItem[] | Linter.FlatConfig[]>;
+  userConfigs?: Awaitable<
+    TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]
+  >[];
 }

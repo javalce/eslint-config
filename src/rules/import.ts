@@ -1,11 +1,7 @@
-import eslintPluginImport from 'eslint-plugin-import-x';
-
 import { type TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
-  plugins: {
-    'import-x': eslintPluginImport,
-  },
+  name: 'javalce/javascript/import',
   rules: {
     /**
      * Disallow non-import statements appearing before import statements.

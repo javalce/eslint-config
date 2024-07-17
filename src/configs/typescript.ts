@@ -9,6 +9,8 @@ import eslintPluginImportConfig from '../rules/typescript/import';
 import { type TypedFlatConfigItem, type TypeScriptOptions } from '../types';
 import { TYPESCRIPT_FILES } from '../utils/constants';
 
+import { prettier } from './prettier';
+
 export async function typescript({
   tsconfigPath,
 }: TypeScriptOptions): Promise<TypedFlatConfigItem[]> {
@@ -22,7 +24,11 @@ export async function typescript({
       ...tseslint.configs.recommendedTypeChecked,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
-      eslintPluginImport.configs.typescript,
+      {
+        ...eslintPluginImport.configs.typescript,
+        name: 'import-x/typescript',
+      },
+      ...(await prettier()),
       eslintTypescriptConfig,
       eslintExtensionConfig,
       eslintPluginImportConfig,
@@ -39,6 +45,7 @@ export async function typescript({
         },
       },
     },
+    name: 'javalce/typescript/setup',
   });
 
   return config as TypedFlatConfigItem[];

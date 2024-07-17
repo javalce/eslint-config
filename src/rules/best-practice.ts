@@ -1,6 +1,7 @@
 import { type TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
+  name: 'javalce/javascript/best-practice',
   rules: {
     /**
      * Require return statements in array methods callbacks.

@@ -1,6 +1,7 @@
 import type { TypedFlatConfigItem } from '../../types';
 
 const config: TypedFlatConfigItem = {
+  name: 'javalce/typescript',
   rules: {
     /**
      * Require consistent usage of type exports.

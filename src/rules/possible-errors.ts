@@ -1,6 +1,7 @@
 import { type TypedFlatConfigItem } from '../types';
 
 const config: TypedFlatConfigItem = {
+  name: 'javalce/javascript/possible-errors',
   rules: {
     /**
      * Disallow the use of console.
