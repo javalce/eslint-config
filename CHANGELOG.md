@@ -1,3 +1,5 @@
+## [0.1.1](https://github.com/javalce/eslint-config/compare/v0.1.0...v0.1.1) (2024-07-17)
+
 # 0.1.0 (2024-07-17)
 
 ### Bug Fixes
