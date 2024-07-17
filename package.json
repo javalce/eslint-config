@@ -29,7 +29,6 @@
   ],
   "scripts": {
     "build": "pnpm typegen && tsup --format esm,cjs --clean --dts",
-    "build:inspector": "pnpm build && npx @eslint/config-inspector build",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -t v -p angular",
     "dev": "npx @eslint/config-inspector --config eslint.config.ts",
     "lint": "eslint .",
