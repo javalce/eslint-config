@@ -1,3 +1,10 @@
+## [0.1.2](https://github.com/javalce/eslint-config/compare/v0.1.1...v0.1.2) (2024-07-19)
+
+### Features
+
+- migrate stylistic deprecated rules ([7bbecf7](https://github.com/javalce/eslint-config/commit/7bbecf7e3b838777c62953bb7b52808e0be24bbc))
+- remove eslint-config-prettier as is unused and most rules are deprecated ([9078cc1](https://github.com/javalce/eslint-config/commit/9078cc11b6d7391f38c18d47e53454ad14584c96))
+
 ## [0.1.1](https://github.com/javalce/eslint-config/compare/v0.1.0...v0.1.1) (2024-07-17)
 
 # 0.1.0 (2024-07-17)
