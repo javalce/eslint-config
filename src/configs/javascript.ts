@@ -3,8 +3,9 @@ import type { TypedFlatConfigItem } from '../types';
 // @ts-expect-error -- no types
 import babelEslintParser from '@babel/eslint-parser';
 import js from '@eslint/js';
-import globals from 'globals';
+import stylistic from '@stylistic/eslint-plugin';
 import * as eslintPluginImport from 'eslint-plugin-import-x';
+import globals from 'globals';
 
 import bestPracticeConfig from '../rules/best-practice';
 import eslintCommentsConfig from '../rules/comments';
@@ -16,8 +17,6 @@ import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
 import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
 
-import { prettier } from './prettier';
-
 export async function javascript(): Promise<TypedFlatConfigItem[]> {
   return [
     {
@@ -27,10 +26,10 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
     {
       plugins: {
         'import-x': eslintPluginImport,
+        '@stylistic': stylistic,
       },
       name: 'import-x',
     },
-    ...(await prettier()),
     bestPracticeConfig,
     eslintCommentsConfig,
     es6Config,

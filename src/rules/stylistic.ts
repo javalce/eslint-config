@@ -4,6 +4,32 @@ const config: TypedFlatConfigItem = {
   name: 'javalce/javascript/stylistic',
   rules: {
     /**
+     * Disallow the omission of parentheses when invoking a constructor with
+     * no arguments.
+     *
+     * 🔧 Fixable - https://eslint.style/rules/js/new-parens
+     */
+    '@stylistic/new-parens': 'warn',
+    /**
+     * Disallow floating decimals.
+     *
+     * 🔧 Fixable - https://eslint.style/rules/js/no-floating-decimal
+     */
+    '@stylistic/no-floating-decimal': 'error',
+    /**
+     * Require padding lines between statements.
+     *
+     * 🔧 Fixable - https://eslint.style/rules/js/padding-line-between-statements
+     */
+    /* eslint-disable sort-keys -- prev should come before next for better readability */
+    '@stylistic/padding-line-between-statements': [
+      'warn',
+      { blankLine: 'always', prev: '*', next: ['return', 'export'] },
+      { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+      { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
+    ],
+    /* eslint-enable -- enable disabled rule */
+    /**
      * Require camel case names.
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/camelcase
@@ -21,13 +47,6 @@ const config: TypedFlatConfigItem = {
      * 🚫 Not fixable - https://eslint.org/docs/rules/new-cap
      */
     'new-cap': ['error', { capIsNew: false }],
-    /**
-     * Disallow the omission of parentheses when invoking a constructor with
-     * no arguments.
-     *
-     * 🔧 Fixable - https://eslint.org/docs/rules/new-parens
-     */
-    'new-parens': 'warn',
     /**
      * Disallow use of the Array constructor.
      *
@@ -64,19 +83,6 @@ const config: TypedFlatConfigItem = {
      * 🚫 Not fixable - https://eslint.org/docs/rules/no-unneeded-ternary
      */
     'no-unneeded-ternary': 'error',
-    /**
-     * Require padding lines between statements.
-     *
-     * 🔧 Fixable - https://eslint.org/docs/rules/padding-line-between-statements
-     */
-    /* eslint-disable sort-keys -- prev should come before next for better readability */
-    'padding-line-between-statements': [
-      'warn',
-      { blankLine: 'always', prev: '*', next: ['return', 'export'] },
-      { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
-      { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
-    ],
-    /* eslint-enable -- enable disabled rule */
     /**
      * Require use of an object spread over Object.assign.
      *
