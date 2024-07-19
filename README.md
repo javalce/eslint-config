@@ -7,14 +7,21 @@
   <img alt="" src="https://img.shields.io/npm/l/@javalce/eslint-config.svg?style=flat-square&labelColor=000000">
 </a>
 
+This configuration is opinionated and it may not fit your needs. You can extend it and override the rules that you don't like.
+
 ## Features
 
-- Designed to work with TypeScript
-- Some rules can be auto-fixed with `eslint --fix`
-- Some stylistic rules are disabled because they are intented to be used with Prettier. You can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config)
+> [!NOTE]
+> This configuration is designed to be used with Prettier. You can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config)
+
 - Supports ESLint v9 or v8.40.0+
 - [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files-new) file format
 - Does not lint `.gitignore` listed files
+- Designed to work with TypeScript
+- Some rules can be auto-fixed with `eslint --fix`
+- This config enables some stylistic rules that are not enabled by default in ESLint
+- Formatting rules are disabled because they are intented to be used with Prettier
+- Some stylistic rules are disabled because they are intented to be used with Prettier.
 
 ## Installation
 
