@@ -23,9 +23,15 @@ importers:
       '@eslint/js':
         specifier: ^9.7.0
         version: 9.7.0
+      '@stylistic/eslint-plugin':
+        specifier: ^2.3.0
+        version: 2.3.0(eslint-ts-patch@9.5.0-0)(typescript@5.5.3)
       eslint-config-flat-gitignore:
         specifier: ^0.1.8
         version: 0.1.8
+      eslint-flat-config-utils:
+        specifier: ^0.2.5
+        version: 0.2.5
       eslint-import-resolver-typescript:
         specifier: ^3.6.1
         version: 3.6.1(@typescript-eslint/parser@7.16.1(eslint-ts-patch@9.5.0-0)(typescript@5.5.3))(eslint-plugin-import@2.29.1)(eslint-ts-patch@9.5.0-0)
@@ -57,9 +63,6 @@ importers:
       '@javalce/prettier-config':
         specifier: ^1.0.1
         version: 1.0.1(prettier@3.3.3)
-      '@stylistic/eslint-plugin':
-        specifier: ^2.3.0
-        version: 2.3.0(eslint-ts-patch@9.5.0-0)(typescript@5.5.3)
       '@types/eslint__js':
         specifier: ^8.42.3
         version: 8.42.3
@@ -75,9 +78,6 @@ importers:
       eslint:
         specifier: npm:eslint-ts-patch@9.5.0-0
         version: eslint-ts-patch@9.5.0-0
-      eslint-flat-config-utils:
-        specifier: ^0.2.5
-        version: 0.2.5
       eslint-ts-patch:
         specifier: 9.5.0-0
         version: 9.5.0-0
