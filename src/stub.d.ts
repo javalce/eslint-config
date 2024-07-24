@@ -7,3 +7,9 @@ declare module 'eslint-plugin-react' {
     };
   };
 }
+
+declare module 'eslint-plugin-react-hooks' {
+  export const configs: {
+    recommended: any;
+  };
+}

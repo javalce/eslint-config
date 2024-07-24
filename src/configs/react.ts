@@ -1,6 +1,7 @@
 import { mergeConfigs } from 'eslint-flat-config-utils';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 import reactRules from '../rules/react';
 import { type TypedFlatConfigItem } from '../types';
@@ -10,14 +11,9 @@ export async function react(): Promise<TypedFlatConfigItem[]> {
     mergeConfigs(reactPlugin.configs.flat.recommended, {
       name: 'react',
     }),
-    {
-      settings: {
-        react: {
-          version: 'detect',
-        },
-      },
-      name: 'react/version',
-    },
+    mergeConfigs(reactHooksPlugin.configs.recommended, {
+      name: 'react-hooks',
+    }),
     {
       settings: eslintPluginImport.configs.react.settings,
       languageOptions: {
@@ -26,5 +22,13 @@ export async function react(): Promise<TypedFlatConfigItem[]> {
       name: 'import-x/react',
     },
     reactRules,
+    {
+      settings: {
+        react: {
+          version: 'detect',
+        },
+      },
+      name: 'react/version',
+    },
   ];
 }
