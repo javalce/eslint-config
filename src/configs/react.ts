@@ -1,8 +1,10 @@
 import { mergeConfigs } from 'eslint-flat-config-utils';
 import eslintPluginImport from 'eslint-plugin-import-x';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
+import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { type TypedFlatConfigItem } from '../types';
 
@@ -14,6 +16,7 @@ export async function react(): Promise<TypedFlatConfigItem[]> {
     mergeConfigs(reactHooksPlugin.configs.recommended, {
       name: 'react-hooks',
     }),
+    jsxA11yPlugin.configs.recommended,
     {
       settings: eslintPluginImport.configs.react.settings,
       languageOptions: {
@@ -22,6 +25,7 @@ export async function react(): Promise<TypedFlatConfigItem[]> {
       name: 'import-x/react',
     },
     reactRules,
+    jsxA11Rules,
     {
       settings: {
         react: {

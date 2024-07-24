@@ -13,3 +13,10 @@ declare module 'eslint-plugin-react-hooks' {
     recommended: any;
   };
 }
+
+declare module 'eslint-plugin-jsx-a11y' {
+  export const configs: {
+    recommended: any;
+    strict: any;
+  };
+}
