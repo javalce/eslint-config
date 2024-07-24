@@ -28,7 +28,11 @@ export function defineConfig(
   }
 
   if (enableReact) {
-    configs.push(react());
+    configs.push(
+      react({
+        typescript: Boolean(enableTypeScript),
+      }),
+    );
   }
 
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();

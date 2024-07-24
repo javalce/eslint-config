@@ -6,17 +6,22 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
+import reactTypescriptRules from '../rules/typescript/react';
 import { type TypedFlatConfigItem } from '../types';
 
-export async function react(): Promise<TypedFlatConfigItem[]> {
-  return [
-    mergeConfigs(reactPlugin.configs.flat.recommended, {
+export async function react({
+  typescript,
+}: {
+  typescript: boolean;
+}): Promise<TypedFlatConfigItem[]> {
+  const config: TypedFlatConfigItem[] = [
+    mergeConfigs(reactPlugin.configs.flat.recommended as TypedFlatConfigItem, {
       name: 'react',
     }),
-    mergeConfigs(reactHooksPlugin.configs.recommended, {
+    mergeConfigs(reactHooksPlugin.configs.recommended as TypedFlatConfigItem, {
       name: 'react-hooks',
     }),
-    jsxA11yPlugin.configs.recommended,
+    jsxA11yPlugin.configs.recommended as TypedFlatConfigItem,
     {
       settings: eslintPluginImport.configs.react.settings,
       languageOptions: {
@@ -35,4 +40,10 @@ export async function react(): Promise<TypedFlatConfigItem[]> {
       name: 'react/version',
     },
   ];
+
+  if (typescript) {
+    config.push(reactTypescriptRules);
+  }
+
+  return config;
 }
