@@ -19,4 +19,8 @@ declare module 'eslint-plugin-jsx-a11y' {
     recommended: any;
     strict: any;
   };
+  export const flatConfigs: {
+    recommended: any;
+    strict: any;
+  };
 }
