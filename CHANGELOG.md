@@ -1,3 +1,9 @@
+## [0.1.4](https://github.com/javalce/eslint-config/compare/v0.1.3...v0.1.4) (2024-07-24)
+
+### Bug Fixes
+
+- remove ignores property in javascript config ([dee297f](https://github.com/javalce/eslint-config/commit/dee297fdf7be42358e6b27eb39ce188ece5acaf8))
+
 ## [0.1.3](https://github.com/javalce/eslint-config/compare/v0.1.2...v0.1.3) (2024-07-22)
 
 ### Bug Fixes
