@@ -1,7 +1,5 @@
 import type { TypedFlatConfigItem } from '../types';
 
-// @ts-expect-error -- no types
-import babelEslintParser from '@babel/eslint-parser';
 import js from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import * as eslintPluginImport from 'eslint-plugin-import-x';
@@ -15,7 +13,7 @@ import posibleErrorsConfig from '../rules/possible-errors';
 import stylisticConfig from '../rules/stylistic';
 import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
-import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
+import { ECMA_VERSION } from '../utils/constants';
 
 export async function javascript(): Promise<TypedFlatConfigItem[]> {
   return [
@@ -54,17 +52,6 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
         },
       },
       name: 'javalce/javascript/setup',
-    },
-    {
-      files: JAVASCRIPT_FILES,
-      languageOptions: {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- no types
-        parser: babelEslintParser,
-        parserOptions: {
-          requireConfigFile: false,
-        },
-      },
-      name: 'javalce/javascript/parser',
     },
   ];
 }
