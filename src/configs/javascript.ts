@@ -37,7 +37,6 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
     unicornConfig,
     variablesConfig,
     {
-      ignores: ['!.*.js'],
       linterOptions: {
         reportUnusedDisableDirectives: true,
       },
