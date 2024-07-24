@@ -12,21 +12,17 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 ## Features
 
 > [!NOTE]
-> This configuration is designed to be used with Prettier. You can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config)
+> This configuration is designed to be used with Prettier for code formatting. You can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config).
 
 - Supports ESLint v9 or v8.40.0+
 - [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files-new) file format
-- Does not lint `.gitignore` listed files
-- Designed to work with TypeScript
+- Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
+- Designed to work with TypeScript, React, Next.js, Node.js, and more
 - Some rules can be auto-fixed with `eslint --fix`
-- This config enables some stylistic rules that are not enabled by default in ESLint
-- Formatting rules are disabled because they are intented to be used with Prettier
-- Some stylistic rules are disabled because they are intented to be used with Prettier.
+- Stylistic rules are disabled because they are intented to be used with Prettier (the formatter I like to use)
+- A few stylistic rules are enabled because they are not covered by Prettier
 
 ## Installation
-
-> [!IMPORTANT]
-> ESLint is a peer dependency of this package, and it must be installed separately.
 
 ```bash
 # If you use npm
@@ -98,7 +94,42 @@ export default defineConfig({
 });
 ```
 
+Instead of using the passing the path to the tsconfig file(s) in the configuration, you can only pass the filename(s) and let the configuration resolve the absolute path for you.
+
+## React
+
+Update your ESLint configuration file to enable the React config:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  react: true,
+});
+```
+
+### TypeScript + React
+
+To be able to use TypeScript with React, you need to enable both TypeScript and React configs:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  typescript: true,
+  react: true,
+});
+```
+
 > [!NOTE]
-> You can also simply pass the name of the tsconfig file(s) without the path, because it will resolve the absolute path for you.
->
-> It will resolve to the root of your project.
+> When you enable both TypeScript and React configs, it will automatically disable some TypeScript rules.
+
+#### TypeScript React Rules
+
+This configuration will turn off some rules that I think are a bit problematic when using TypeScript with React.
+
+- `@typescript-eslint/explicit-function-return-type`: This rule is turned off because it's troublesome to define the return type of custom React hooks, for example.
+- `@typescript-eslint/no-confusing-void-expression`: This rule is turned off because of jsx expressions that return `void` are common in React.
+- `@typescript-eslint/no-floating-promises`: This rule is turned off because it's common to use promises in React components.
+- `@typescript-eslint/no-non-null-assertion`: This rule is turned off because it's common to use non-null assertions in React components.
+- `@typescript-eslint/no-shadow`: This rule is turned off because it's common to shadow variables in React components. For example, when you destructure props or in a callback function.
