@@ -13,7 +13,7 @@ import posibleErrorsConfig from '../rules/possible-errors';
 import stylisticConfig from '../rules/stylistic';
 import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
-import { ECMA_VERSION } from '../utils/constants';
+import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
 
 export async function javascript(): Promise<TypedFlatConfigItem[]> {
   return [
@@ -24,9 +24,14 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
     {
       plugins: {
         'import-x': eslintPluginImport,
-        '@stylistic': stylistic,
       },
       name: 'import-x',
+    },
+    {
+      plugins: {
+        '@stylistic': stylistic,
+      },
+      name: 'stylistic',
     },
     bestPracticeConfig,
     eslintCommentsConfig,
@@ -51,6 +56,14 @@ export async function javascript(): Promise<TypedFlatConfigItem[]> {
         },
       },
       name: 'javalce/javascript/setup',
+    },
+    {
+      files: JAVASCRIPT_FILES,
+      languageOptions: {
+        // Use the default parser (espree, which handles JavaScript and JSX files)
+        parser: undefined,
+      },
+      name: 'javalce/javascript/parser',
     },
   ];
 }
