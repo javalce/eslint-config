@@ -1,3 +1,18 @@
+# [0.2.0-beta.1](https://github.com/javalce/eslint-config/compare/v0.1.4...v0.2.0-beta.1) (2024-07-26)
+
+### Bug Fixes
+
+- rebuild pnpm-lock.yaml after merge ([e3b6081](https://github.com/javalce/eslint-config/commit/e3b6081ed69820069ff064b522cfd71cb2316d8e))
+- update typegen script ([632e173](https://github.com/javalce/eslint-config/commit/632e173588891ebf61a019d4aa2c883b179b7f53))
+- use flat config instead of legacy config for eslint-plugin-jsx-a11y ([7d99195](https://github.com/javalce/eslint-config/commit/7d9919501fa564d01c6038d9e8943cd9aa31f7ed))
+
+### Features
+
+- add eslint-plugin-jsx-a11y ([b78b295](https://github.com/javalce/eslint-config/commit/b78b295db0b3cc6d7ae12db24a3c90f42e6022e7))
+- add eslint-plugin-react-hooks ([703f612](https://github.com/javalce/eslint-config/commit/703f612c76f2cfeaf6c567d264120d7d762b998c))
+- add React configuration to project ([1c61535](https://github.com/javalce/eslint-config/commit/1c615355d4dfd6486223a6c33123e3e23293464b))
+- add TypeScript support to React configuration ([c56fad1](https://github.com/javalce/eslint-config/commit/c56fad186d199f2f4060d97da421c7e06489dfdf))
+
 ## [0.1.4](https://github.com/javalce/eslint-config/compare/v0.1.3...v0.1.4) (2024-07-24)
 
 ### Bug Fixes
