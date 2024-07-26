@@ -1,3 +1,4 @@
+import { fixupPluginRules } from '@eslint/compat';
 import { mergeConfigs } from 'eslint-flat-config-utils';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
@@ -20,9 +21,11 @@ export async function react({
     }),
     {
       plugins: {
-        'react-hooks': reactHooksPlugin,
+        'react-hooks': fixupPluginRules(reactHooksPlugin),
       },
-      rules: reactHooksPlugin.configs.recommended.rules,
+      rules: {
+        ...reactHooksPlugin.configs.recommended.rules,
+      },
       name: 'react-hooks',
     },
     jsxA11yPlugin.flatConfigs.recommended as TypedFlatConfigItem,

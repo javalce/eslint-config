@@ -49,6 +49,7 @@
     "tsx": "~4.16.2"
   },
   "dependencies": {
+    "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.7.0",
     "@stylistic/eslint-plugin": "^2.3.0",
     "eslint-config-flat-gitignore": "^0.1.8",
