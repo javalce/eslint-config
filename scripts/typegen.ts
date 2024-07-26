@@ -16,7 +16,7 @@ const configs = await combine(
   },
   javascript(),
   typescript({ tsconfigPath: 'tsconfig.json' }),
-  react(),
+  react({ typescript: true }),
 );
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
