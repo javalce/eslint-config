@@ -10,7 +10,10 @@ declare module 'eslint-plugin-react' {
 
 declare module 'eslint-plugin-react-hooks' {
   export const configs: {
-    recommended: any;
+    recommended: {
+      plugins: string[];
+      rules: Record<string, any>;
+    };
   };
 }
 
@@ -19,6 +22,7 @@ declare module 'eslint-plugin-jsx-a11y' {
     recommended: any;
     strict: any;
   };
+
   export const flatConfigs: {
     recommended: any;
     strict: any;

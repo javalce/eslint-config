@@ -18,9 +18,13 @@ export async function react({
     mergeConfigs(reactPlugin.configs.flat.recommended as TypedFlatConfigItem, {
       name: 'react',
     }),
-    mergeConfigs(reactHooksPlugin.configs.recommended as TypedFlatConfigItem, {
+    {
+      plugins: {
+        'react-hooks': reactHooksPlugin,
+      },
+      rules: reactHooksPlugin.configs.recommended.rules,
       name: 'react-hooks',
-    }),
+    },
     jsxA11yPlugin.flatConfigs.recommended as TypedFlatConfigItem,
     {
       settings: eslintPluginImport.configs.react.settings,
