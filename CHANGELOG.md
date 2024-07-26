@@ -1,3 +1,9 @@
+# [0.2.0-beta.3](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.2...v0.2.0-beta.3) (2024-07-26)
+
+### Bug Fixes
+
+- configure correctly eslint-plugin-react-hooks ([9d6e321](https://github.com/javalce/eslint-config/commit/9d6e321ad1c50b926e33b7772a19c5895cba0d53))
+
 # [0.2.0-beta.2](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.1...v0.2.0-beta.2) (2024-07-26)
 
 # [0.2.0-beta.1](https://github.com/javalce/eslint-config/compare/v0.1.4...v0.2.0-beta.1) (2024-07-26)
