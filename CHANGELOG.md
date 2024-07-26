@@ -1,3 +1,9 @@
+# [0.2.0-beta.4](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.3...v0.2.0-beta.4) (2024-07-26)
+
+### Bug Fixes
+
+- use default eslint parser for javascript and jsx files ([9dbb2fc](https://github.com/javalce/eslint-config/commit/9dbb2fc3adaf5321891a0352c829ab278e4b23f6))
+
 # [0.2.0-beta.3](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.2...v0.2.0-beta.3) (2024-07-26)
 
 ### Bug Fixes
