@@ -1,3 +1,9 @@
+# [0.3.0](https://github.com/javalce/eslint-config/compare/v0.2.0...v0.3.0) (2024-07-30)
+
+### Features
+
+- add support for Next.js in eslint configuration ([8ee29b8](https://github.com/javalce/eslint-config/commit/8ee29b84a9fb879d1d47a5fcb5e2e7f5d4c0d8ac))
+
 # [0.2.0](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.5...v0.2.0) (2024-07-30)
 
 # [0.2.0-beta.5](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.4...v0.2.0-beta.5) (2024-07-26)
