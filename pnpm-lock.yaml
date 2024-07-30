@@ -14,9 +14,9 @@ importers:
       '@babel/core':
         specifier: ^7.25.2
         version: 7.25.2
-      '@babel/eslint-plugin':
+      '@babel/eslint-parser':
         specifier: ^7.25.1
-        version: 7.25.1(@babel/eslint-parser@7.25.1(@babel/core@7.25.2)(eslint-ts-patch@9.5.0-0))(eslint-ts-patch@9.5.0-0)
+        version: 7.25.1(@babel/core@7.25.2)(eslint-ts-patch@9.5.0-0)
       '@eslint/compat':
         specifier: ^1.1.1
         version: 1.1.1
@@ -145,13 +145,6 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
     peerDependencies:
       '@babel/core': ^7.11.0
-      eslint: ^7.5.0 || ^8.0.0 || ^9.0.0
-
-  '@babel/eslint-plugin@7.25.1':
-    resolution: {integrity: sha512-jF04YOsrCbEeQk4s+FwsuRddwBiAHooMDG9/nrV83HiYQwEuQppbXTeXyydxCoH5oEWmVBI51wHuZrcIXMkPfw==}
-    engines: {node: ^10.13.0 || ^12.13.0 || >=14.0.0}
-    peerDependencies:
-      '@babel/eslint-parser': ^7.11.0
       eslint: ^7.5.0 || ^8.0.0 || ^9.0.0
 
   '@babel/generator@7.25.0':
@@ -1685,10 +1678,6 @@ packages:
     engines: {node: '>=18.18'}
     peerDependencies:
       eslint: '>=8.56.0'
-
-  eslint-rule-composer@0.3.0:
-    resolution: {integrity: sha512-bt+Sh8CtDmn2OajxvNO+BX7Wn4CIWMpTRm3MaiKPCQcnnlm0CS2mhui6QaoeQugs+3Kj2ESKEEGJUdVafwhiCg==}
-    engines: {node: '>=4.0.0'}
 
   eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
@@ -3321,12 +3310,6 @@ snapshots:
       eslint: eslint-ts-patch@9.5.0-0
       eslint-visitor-keys: 2.1.0
       semver: 6.3.1
-
-  '@babel/eslint-plugin@7.25.1(@babel/eslint-parser@7.25.1(@babel/core@7.25.2)(eslint-ts-patch@9.5.0-0))(eslint-ts-patch@9.5.0-0)':
-    dependencies:
-      '@babel/eslint-parser': 7.25.1(@babel/core@7.25.2)(eslint-ts-patch@9.5.0-0)
-      eslint: eslint-ts-patch@9.5.0-0
-      eslint-rule-composer: 0.3.0
 
   '@babel/generator@7.25.0':
     dependencies:
@@ -5011,8 +4994,6 @@ snapshots:
       strip-indent: 3.0.0
     transitivePeerDependencies:
       - supports-color
-
-  eslint-rule-composer@0.3.0: {}
 
   eslint-scope@5.1.1:
     dependencies:

@@ -1,5 +1,5 @@
 // @ts-expect-error -- no types
-import babelParser from '@babel/eslint-plugin';
+import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import nextjsPlugin from '@next/eslint-plugin-next';
 
