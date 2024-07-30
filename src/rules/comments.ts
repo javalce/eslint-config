@@ -6,7 +6,6 @@ import { type TypedFlatConfigItem } from '../types';
 const config: TypedFlatConfigItem = {
   name: 'javalce/javascript/eslint-comments',
   plugins: {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- This is safe
     'eslint-comments': eslintCommentsPlugin,
   },
   rules: {

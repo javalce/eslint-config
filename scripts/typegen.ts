@@ -4,6 +4,7 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
 import { nextjs } from 'src/configs/nextjs';
+
 import { javascript, react, typescript } from '../src/configs';
 import { combine } from '../src/utils/combine';
 
