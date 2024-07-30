@@ -1,3 +1,9 @@
+# [0.2.0-beta.5](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.4...v0.2.0-beta.5) (2024-07-26)
+
+### Bug Fixes
+
+- update react-hooks plugin configuration to fix compatibility issues ([5182382](https://github.com/javalce/eslint-config/commit/5182382b9a0becb0a5d37c86ecfc7a8d5316bacb))
+
 # [0.2.0-beta.4](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.3...v0.2.0-beta.4) (2024-07-26)
 
 ### Bug Fixes
