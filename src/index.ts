@@ -3,12 +3,18 @@ import type { OptionsConfig, TypedFlatConfigItem } from './types';
 import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { ignores, javascript, react, typescript } from './configs';
+import { nextjs } from './configs/nextjs';
 import { type ConfigNames } from './typegen';
 
 export function defineConfig(
   options: OptionsConfig,
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
-  const { typescript: enableTypeScript, react: enableReact, userConfigs = [] } = options;
+  const {
+    typescript: enableTypeScript,
+    react: enableReact,
+    nextjs: enableNextjs,
+    userConfigs = [],
+  } = options;
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
 
@@ -33,6 +39,10 @@ export function defineConfig(
         typescript: Boolean(enableTypeScript),
       }),
     );
+  }
+
+  if (enableNextjs) {
+    configs.push(nextjs());
   }
 
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();

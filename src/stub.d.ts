@@ -28,3 +28,11 @@ declare module 'eslint-plugin-jsx-a11y' {
     strict: any;
   };
 }
+
+declare module '@next/eslint-plugin-next' {
+  export const configs: {
+    recommended: {
+      rules: Record<string, any>;
+    };
+  };
+}

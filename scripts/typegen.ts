@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
+import { nextjs } from 'src/configs/nextjs';
 import { javascript, react, typescript } from '../src/configs';
 import { combine } from '../src/utils/combine';
 
@@ -17,6 +18,7 @@ const configs = await combine(
   javascript(),
   typescript({ tsconfigPath: 'tsconfig.json' }),
   react({ typescript: true }),
+  nextjs(),
 );
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
