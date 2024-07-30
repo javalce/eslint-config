@@ -1,3 +1,5 @@
+# [0.2.0](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.5...v0.2.0) (2024-07-30)
+
 # [0.2.0-beta.5](https://github.com/javalce/eslint-config/compare/v0.2.0-beta.4...v0.2.0-beta.5) (2024-07-26)
 
 ### Bug Fixes
