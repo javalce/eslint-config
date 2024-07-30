@@ -133,3 +133,31 @@ This configuration will turn off some rules that I think are a bit problematic w
 - `@typescript-eslint/no-floating-promises`: This rule is turned off because it's common to use promises in React components.
 - `@typescript-eslint/no-non-null-assertion`: This rule is turned off because it's common to use non-null assertions in React components.
 - `@typescript-eslint/no-shadow`: This rule is turned off because it's common to shadow variables in React components. For example, when you destructure props or in a callback function.
+
+## Next.js
+
+To enable Next.js support, you need to install the `@next/eslint-plugin-next` package in a next.js project:
+
+```bash
+# If you use npm
+npm install --save-dev @next/eslint-plugin-next
+
+# If you use yarn
+yarn add --dev @next/eslint-plugin-next
+
+# If you use pnpm
+pnpm add --save-dev @next/eslint-plugin-next
+```
+
+Then, update your ESLint configuration file to enable the Next.js config:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  react: true,
+  next: true,
+});
+```
+
+The next.js config will only load the `@next/eslint-plugin-next` plugin and the recommended rules. To enable the react rules you must enable the react config.
