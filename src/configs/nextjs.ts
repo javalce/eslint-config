@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+
 // @ts-expect-error -- no types
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
@@ -10,7 +12,7 @@ export async function nextjs(): Promise<TypedFlatConfigItem[]> {
   const babelOptions = {
     presets: (() => {
       try {
-        require.resolve('next/babel');
+        join(process.cwd(), 'node_modules', 'next/babel');
 
         return ['next/babel'];
       } catch (e) {
