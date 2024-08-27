@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/javalce/eslint-config/compare/v0.3.1...v0.3.2) (2024-08-27)
+
+### Bug Fixes
+
+- check if can import babel from next ([c4f92ca](https://github.com/javalce/eslint-config/commit/c4f92caf910bd497ac74c0437bcb59e13e726bc2))
+- get correct babel opttions for nextjs config ([b6fc0cd](https://github.com/javalce/eslint-config/commit/b6fc0cd5c910ff9bbaa102d7b5a0e6a5d591f9c7))
+
 ## [0.3.1](https://github.com/javalce/eslint-config/compare/v0.3.0...v0.3.1) (2024-07-30)
 
 ### Bug Fixes
