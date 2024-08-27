@@ -1,18 +1,17 @@
-import { join } from 'node:path';
-
-// @ts-expect-error -- no types
+// @ts-expect-error -- no types available
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import nextjsPlugin from '@next/eslint-plugin-next';
 
-import { type TypedFlatConfigItem } from 'src/types';
-import { JAVASCRIPT_FILES } from 'src/utils/constants';
+import { type TypedFlatConfigItem } from '../types';
+import { JAVASCRIPT_FILES } from '../utils/constants';
 
 export async function nextjs(): Promise<TypedFlatConfigItem[]> {
   const babelOptions = {
     presets: (() => {
       try {
-        join(process.cwd(), 'node_modules', 'next/babel');
+        // eslint-disable-next-line no-new -- dynamic import
+        new URL('next/babel', import.meta.url);
 
         return ['next/babel'];
       } catch (e) {
@@ -26,7 +25,10 @@ export async function nextjs(): Promise<TypedFlatConfigItem[]> {
       plugins: {
         '@next/next': fixupPluginRules(nextjsPlugin),
       },
-      rules: nextjsPlugin.configs.recommended.rules,
+      rules: {
+        ...nextjsPlugin.configs.recommended.rules,
+      },
+      name: 'javalce/nextjs',
     },
     {
       files: JAVASCRIPT_FILES,
@@ -37,6 +39,7 @@ export async function nextjs(): Promise<TypedFlatConfigItem[]> {
           babelOptions,
         },
       },
+      name: 'javalce/nextjs/parser',
     },
   ];
 }
