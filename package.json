@@ -72,6 +72,7 @@
     "@eslint/config-inspector": "^0.5.2",
     "@javalce/prettier-config": "^1.0.1",
     "@types/eslint": "^8.56.11",
+    "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.14.13",
     "bumpp": "^9.4.1",
     "conventional-changelog-cli": "^5.0.0",
