@@ -8,15 +8,11 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import reactTypescriptRules from '../rules/typescript/react';
-import { type TypedFlatConfigItem } from '../types';
+import { type ConfigItem } from '../types';
 
-export async function react({
-  typescript,
-}: {
-  typescript: boolean;
-}): Promise<TypedFlatConfigItem[]> {
-  const config: TypedFlatConfigItem[] = [
-    mergeConfigs(reactPlugin.configs.flat.recommended as TypedFlatConfigItem, {
+export async function react({ typescript }: { typescript: boolean }): Promise<ConfigItem[]> {
+  const config: ConfigItem[] = [
+    mergeConfigs(reactPlugin.configs.flat.recommended as ConfigItem, {
       name: 'react',
     }),
     {
@@ -28,7 +24,7 @@ export async function react({
       },
       name: 'react-hooks',
     },
-    jsxA11yPlugin.flatConfigs.recommended as TypedFlatConfigItem,
+    jsxA11yPlugin.flatConfigs.recommended as ConfigItem,
     {
       settings: eslintPluginImport.configs.react.settings,
       languageOptions: {

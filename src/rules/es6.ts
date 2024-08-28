@@ -1,6 +1,6 @@
-import { type TypedFlatConfigItem } from '../types';
+import { type ConfigItem } from '../types';
 
-const config: TypedFlatConfigItem = {
+const config: ConfigItem = {
   name: 'javalce/javascript/es6',
   rules: {
     /**

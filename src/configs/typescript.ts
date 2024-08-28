@@ -6,12 +6,10 @@ import tseslint from 'typescript-eslint';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
-import { type TypedFlatConfigItem, type TypeScriptOptions } from '../types';
+import { type ConfigItem, type TypeScriptOptions } from '../types';
 import { TYPESCRIPT_FILES } from '../utils/constants';
 
-export async function typescript({
-  tsconfigPath,
-}: TypeScriptOptions): Promise<TypedFlatConfigItem[]> {
+export async function typescript({ tsconfigPath }: TypeScriptOptions): Promise<ConfigItem[]> {
   const project = Array.isArray(tsconfigPath)
     ? tsconfigPath.map((path) => resolveTsconfigPath(path))
     : resolveTsconfigPath(tsconfigPath);
@@ -45,7 +43,7 @@ export async function typescript({
     name: 'javalce/typescript/setup',
   });
 
-  return config as TypedFlatConfigItem[];
+  return config as ConfigItem[];
 }
 
 function resolveTsconfigPath(tsconfigPath: string): string {

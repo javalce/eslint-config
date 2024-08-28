@@ -1,9 +1,9 @@
 // @ts-expect-error - ESLint plugin import is not resolved correctly
 import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
 
-import { type TypedFlatConfigItem } from '../types';
+import { type ConfigItem } from '../types';
 
-const config: TypedFlatConfigItem = {
+const config: ConfigItem = {
   name: 'javalce/javascript/eslint-comments',
   plugins: {
     'eslint-comments': eslintCommentsPlugin,

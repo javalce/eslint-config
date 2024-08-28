@@ -3,10 +3,10 @@ import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import nextjsPlugin from '@next/eslint-plugin-next';
 
-import { type TypedFlatConfigItem } from '../types';
+import { type ConfigItem } from '../types';
 import { JAVASCRIPT_FILES } from '../utils/constants';
 
-export async function nextjs(): Promise<TypedFlatConfigItem[]> {
+export async function nextjs(): Promise<ConfigItem[]> {
   const babelOptions = {
     presets: (() => {
       try {
@@ -14,6 +14,7 @@ export async function nextjs(): Promise<TypedFlatConfigItem[]> {
         new URL('next/babel', import.meta.url);
 
         return ['next/babel'];
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars -- ignore
       } catch (e) {
         return [];
       }

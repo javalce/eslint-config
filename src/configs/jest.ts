@@ -3,13 +3,12 @@ import eslintPluginJest from 'eslint-plugin-jest';
 import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
 
-import { TESTING_FILES, TYPESCRIPT_TESTING_FILES } from 'src/utils/constants';
-
 import jestConfig from '../rules/jest';
-import { type TypedFlatConfigItem } from '../types';
+import { type ConfigItem } from '../types';
+import { TESTING_FILES, TYPESCRIPT_TESTING_FILES } from '../utils/constants';
 
-export async function jest({ react }: { react: boolean }): Promise<TypedFlatConfigItem[]> {
-  const config: TypedFlatConfigItem[] = [
+export async function jest({ react }: { react: boolean }): Promise<ConfigItem[]> {
+  const config: ConfigItem[] = [
     {
       files: TESTING_FILES,
       ...eslintPluginJest.configs['flat/recommended'],

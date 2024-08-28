@@ -1,6 +1,6 @@
 import { type Linter } from 'eslint';
 
-import { type TypedFlatConfigItem } from 'src/types';
+import { type ConfigItem } from '../types';
 
 /**
  * These are enabled by `react/recommended`, but we've made the decision to
@@ -14,7 +14,7 @@ const disabledRules: Linter.RulesRecord = {
   'react/react-in-jsx-scope': 'off',
 };
 
-const config: TypedFlatConfigItem = {
+const config: ConfigItem = {
   name: 'javalce/react',
   rules: {
     ...disabledRules,

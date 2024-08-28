@@ -1,9 +1,9 @@
-import type { TypedFlatConfigItem } from '../types';
+import type { ConfigItem } from '../types';
 
 // @ts-expect-error - This rule is not yet typed.
 import eslintPuginUnicorn from 'eslint-plugin-unicorn';
 
-const config: TypedFlatConfigItem = {
+const config: ConfigItem = {
   name: 'javalce/javascript/unicorn',
   plugins: {
     unicorn: eslintPuginUnicorn,

@@ -1,4 +1,4 @@
-import type { OptionsConfig, TypedFlatConfigItem } from './types';
+import type { ConfigItem, OptionsConfig } from './types';
 
 import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 
@@ -8,9 +8,7 @@ import { nextjs } from './configs/nextjs';
 import { vitest } from './configs/vitest';
 import { type ConfigNames } from './typegen';
 
-export function defineConfig(
-  options: OptionsConfig,
-): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
+export function defineConfig(options: OptionsConfig): FlatConfigComposer<ConfigItem, ConfigNames> {
   const {
     typescript: enableTypeScript,
     react: enableReact,
@@ -19,7 +17,7 @@ export function defineConfig(
     userConfigs = [],
   } = options;
 
-  const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
+  const configs: Awaitable<ConfigItem[]>[] = [];
 
   configs.push(ignores(), javascript());
 
@@ -64,7 +62,7 @@ export function defineConfig(
     );
   }
 
-  let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
+  let composer = new FlatConfigComposer<ConfigItem, ConfigNames>();
 
   composer = composer.append(...configs, ...(userConfigs as any));
 

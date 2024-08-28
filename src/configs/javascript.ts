@@ -1,4 +1,4 @@
-import type { TypedFlatConfigItem } from '../types';
+import type { ConfigItem } from '../types';
 
 import js from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
@@ -15,12 +15,12 @@ import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
 import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
 
-export async function javascript(): Promise<TypedFlatConfigItem[]> {
+export async function javascript(): Promise<ConfigItem[]> {
   return [
     {
       ...js.configs.recommended,
       name: 'eslint/recommended',
-    } as TypedFlatConfigItem,
+    } as ConfigItem,
     {
       plugins: {
         'import-x': eslintPluginImport,
