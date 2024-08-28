@@ -5,6 +5,7 @@ import { builtinRules } from 'eslint/use-at-your-own-risk';
 
 import { jest } from 'src/configs/jest';
 import { nextjs } from 'src/configs/nextjs';
+import { vitest } from 'src/configs/vitest';
 
 import { javascript, react, typescript } from '../src/configs';
 import { combine } from '../src/utils/combine';
@@ -22,6 +23,7 @@ const configs = await combine(
   react({ typescript: true }),
   nextjs(),
   jest({ react: true }),
+  vitest({ react: true }),
 );
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];

@@ -5,6 +5,7 @@ import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 import { ignores, javascript, react, typescript } from './configs';
 import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
+import { vitest } from './configs/vitest';
 import { type ConfigNames } from './typegen';
 
 export function defineConfig(
@@ -50,6 +51,14 @@ export function defineConfig(
   if (enableTesting === 'jest') {
     configs.push(
       jest({
+        react: Boolean(enableReact),
+      }),
+    );
+  }
+
+  if (enableTesting === 'vitest') {
+    configs.push(
+      vitest({
         react: Boolean(enableReact),
       }),
     );

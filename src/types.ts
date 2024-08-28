@@ -19,7 +19,7 @@ export interface OptionsConfig {
   typescript?: boolean | TypeScriptOptions;
   react?: boolean;
   next?: boolean;
-  testing?: 'jest';
+  testing?: 'jest' | 'vitest';
   userConfigs?: Awaitable<
     TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]
   >[];
