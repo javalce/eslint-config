@@ -1,7 +1,7 @@
-import { type ConfigItem } from '../types';
+import { type TypedConfigItem } from '../types';
 import { TESTING_FILES } from '../utils/constants';
 
-const config: ConfigItem = {
+const config: TypedConfigItem = {
   files: TESTING_FILES,
   name: 'javalce/jest',
   rules: {

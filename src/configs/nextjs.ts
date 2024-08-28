@@ -3,10 +3,10 @@ import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import nextjsPlugin from '@next/eslint-plugin-next';
 
-import { type ConfigItem } from '../types';
+import { type TypedConfigItem } from '../types';
 import { JAVASCRIPT_FILES } from '../utils/constants';
 
-export async function nextjs(): Promise<ConfigItem[]> {
+export async function nextjs(): Promise<TypedConfigItem[]> {
   const babelOptions = {
     presets: (() => {
       try {

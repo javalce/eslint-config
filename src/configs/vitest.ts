@@ -3,11 +3,11 @@ import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import eslintPluginVitest from 'eslint-plugin-vitest';
 
 import eslintConfigVitest from '../rules/vitest';
-import { type ConfigItem } from '../types';
+import { type TypedConfigItem } from '../types';
 import { TESTING_FILES } from '../utils/constants';
 
-export async function vitest({ react }: { react: boolean }): Promise<ConfigItem[]> {
-  const config: ConfigItem[] = [
+export async function vitest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
+  const config: TypedConfigItem[] = [
     {
       files: TESTING_FILES,
       plugins: {

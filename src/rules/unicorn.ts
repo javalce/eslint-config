@@ -1,9 +1,9 @@
-import type { ConfigItem } from '../types';
+import type { TypedConfigItem } from '../types';
 
 // @ts-expect-error - This rule is not yet typed.
 import eslintPuginUnicorn from 'eslint-plugin-unicorn';
 
-const config: ConfigItem = {
+const config: TypedConfigItem = {
   name: 'javalce/javascript/unicorn',
   plugins: {
     unicorn: eslintPuginUnicorn,

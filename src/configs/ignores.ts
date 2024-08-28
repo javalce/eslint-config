@@ -1,8 +1,8 @@
 import gitignore from 'eslint-config-flat-gitignore';
 
-import { type ConfigItem } from '../types';
+import { type TypedConfigItem } from '../types';
 
-export async function ignores(): Promise<ConfigItem[]> {
+export async function ignores(): Promise<TypedConfigItem[]> {
   return [
     {
       ...gitignore({ strict: false }),

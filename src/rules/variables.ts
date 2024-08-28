@@ -1,6 +1,6 @@
-import type { ConfigItem } from '../types';
+import type { TypedConfigItem } from '../types';
 
-const config: ConfigItem = {
+const config: TypedConfigItem = {
   name: 'javalce/javascript/variables',
   rules: {
     /**
