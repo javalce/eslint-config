@@ -1,4 +1,4 @@
-import type { TypedFlatConfigItem } from '../../types';
+import type { TypedConfigItem } from '../../types';
 
 import { type Linter } from 'eslint';
 
@@ -13,7 +13,7 @@ const disabledRules: Partial<Linter.RulesRecord> = {
   'import-x/no-unresolved': 'off',
 };
 
-const config: TypedFlatConfigItem = {
+const config: TypedConfigItem = {
   name: 'javalce/typescript/import',
   rules: {
     ...disabledRules,

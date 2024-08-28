@@ -7,7 +7,7 @@ export type Rules = RuleOptions;
 
 export type { ConfigNames };
 
-export type TypedFlatConfigItem = Omit<Linter.FlatConfig<Linter.RulesRecord & Rules>, 'plugins'> & {
+export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
   plugins?: Record<string, any>;
 };
 
@@ -18,8 +18,9 @@ export interface TypeScriptOptions {
 export interface OptionsConfig {
   typescript?: boolean | TypeScriptOptions;
   react?: boolean;
-  nextjs?: boolean;
+  next?: boolean;
+  testing?: 'jest' | 'vitest';
   userConfigs?: Awaitable<
-    TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.FlatConfig[]
+    TypedConfigItem | TypedConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]
   >[];
 }

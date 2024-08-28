@@ -36,3 +36,22 @@ declare module '@next/eslint-plugin-next' {
     };
   };
 }
+
+declare module 'eslint-plugin-jest' {
+  export const configs: {
+    all: any;
+    recommended: any;
+    style: any;
+    'flat/all': any;
+    'flat/recommended': any;
+    'flat/style': any;
+  };
+}
+
+declare module 'eslint-plugin-testing-library' {
+  export const configs: {
+    react: {
+      rules: Record<string, any>;
+    };
+  };
+}

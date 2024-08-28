@@ -1,6 +1,6 @@
 import { type Linter } from 'eslint';
 
-import { type TypedFlatConfigItem } from 'src/types';
+import { type TypedConfigItem } from '../../types';
 
 /**
  * These are enabled by `@typescript-eslint`, but we've made the decision to
@@ -19,7 +19,7 @@ const disabledRules: Linter.RulesRecord = {
   '@typescript-eslint/no-shadow': 'off',
 };
 
-const config: TypedFlatConfigItem = {
+const config: TypedConfigItem = {
   name: 'javalce/typescript/react',
   rules: {
     ...disabledRules,

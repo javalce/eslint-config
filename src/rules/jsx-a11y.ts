@@ -1,6 +1,6 @@
 import { type Linter } from 'eslint';
 
-import { type TypedFlatConfigItem } from 'src/types';
+import { type TypedConfigItem } from '../types';
 
 /**
  * These are enabled by `jsx-a11y/recommended`, but we've made the decision to
@@ -13,7 +13,7 @@ const disabledRules: Linter.RulesRecord = {
   'jsx-a11y/no-static-element-interactions': 'off',
 };
 
-const config: TypedFlatConfigItem = {
+const config: TypedConfigItem = {
   name: 'javalce/react/jsx-a11y',
   rules: {
     ...disabledRules,

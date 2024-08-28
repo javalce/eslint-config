@@ -1,6 +1,6 @@
-import { type TypedFlatConfigItem } from '../types';
+import { type TypedConfigItem } from '../types';
 
-const config: TypedFlatConfigItem = {
+const config: TypedConfigItem = {
   name: 'javalce/javascript/possible-errors',
   rules: {
     /**
