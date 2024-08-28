@@ -3,6 +3,7 @@ import type { OptionsConfig, TypedFlatConfigItem } from './types';
 import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { ignores, javascript, react, typescript } from './configs';
+import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
 import { type ConfigNames } from './typegen';
 
@@ -12,7 +13,8 @@ export function defineConfig(
   const {
     typescript: enableTypeScript,
     react: enableReact,
-    nextjs: enableNextjs,
+    next: enableNextjs,
+    testing: enableTesting,
     userConfigs = [],
   } = options;
 
@@ -43,6 +45,14 @@ export function defineConfig(
 
   if (enableNextjs) {
     configs.push(nextjs());
+  }
+
+  if (enableTesting === 'jest') {
+    configs.push(
+      jest({
+        react: Boolean(enableReact),
+      }),
+    );
   }
 
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
