@@ -1,3 +1,15 @@
+# [0.4.0](https://github.com/javalce/eslint-config/compare/v0.3.2...v0.4.0) (2024-09-03)
+
+### Bug Fixes
+
+- update typing errors ([3328406](https://github.com/javalce/eslint-config/commit/3328406a67e770d8bb91ec22f1f11161add16ed9))
+
+### Features
+
+- add testing option for jest ([c9f34d2](https://github.com/javalce/eslint-config/commit/c9f34d2309e4573a84da4a7b147b857d58b3fe24))
+- add testing option for vitest ([b7f2af2](https://github.com/javalce/eslint-config/commit/b7f2af236f632e9bef7c03511b6e5b1d8234b1e2))
+- enable TypeScript by default in defineConfig options ([025b00d](https://github.com/javalce/eslint-config/commit/025b00d8a54e4aa9ac18a3611595f1f20cc1aa1e))
+
 ## [0.3.2](https://github.com/javalce/eslint-config/compare/v0.3.1...v0.3.2) (2024-08-27)
 
 ### Bug Fixes
