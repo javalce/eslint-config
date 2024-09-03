@@ -12,3 +12,14 @@ export async function combine(
 
   return resolved.flat();
 }
+
+export function hasPackage(name: string): boolean {
+  try {
+    // eslint-disable-next-line no-new -- dynamic import
+    new URL(name, import.meta.url);
+
+    return true;
+  } catch {
+    return false;
+  }
+}

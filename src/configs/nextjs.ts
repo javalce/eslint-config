@@ -5,19 +5,16 @@ import nextjsPlugin from '@next/eslint-plugin-next';
 
 import { JAVASCRIPT_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
+import { hasPackage } from '../utils';
 
 export async function nextjs(): Promise<TypedConfigItem[]> {
   const babelOptions = {
     presets: (() => {
-      try {
-        // eslint-disable-next-line no-new -- dynamic import
-        new URL('next/babel', import.meta.url);
-
+      if (hasPackage('next/babel')) {
         return ['next/babel'];
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars -- ignore
-      } catch (e) {
-        return [];
       }
+
+      return [];
     })(),
   };
 
