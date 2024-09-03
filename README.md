@@ -47,7 +47,7 @@ export default defineConfig({});
 
 ## TypeScript
 
-To enable TypeScript support, first you need to install the `typescript` package:
+To enable TypeScript support, you only need to install the `typescript` package:
 
 ```bash
 # If you use npm
@@ -60,7 +60,9 @@ yarn add --dev typescript
 pnpm add --save-dev typescript
 ```
 
-Then, update your ESLint configuration file to enable the TypeScript config:
+By default, it will automatically load the typescript config and the configuration will look for a `tsconfig.json` file in the root of your project.
+
+If you want, you can enable explicitly the TypeScript config:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
@@ -70,7 +72,7 @@ export default defineConfig({
 });
 ```
 
-By default, the configuration will look for a `tsconfig.json` file in the root of your project. If you want to use a different file, you can specify it in the configuration:
+Also, if you want to use a different file, you can specify it in the configuration:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';

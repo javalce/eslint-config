@@ -7,12 +7,13 @@ import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
 import { vitest } from './configs/vitest';
 import { type ConfigNames } from './typegen';
+import { hasPackage } from './utils';
 
 export function defineConfig(
   options: OptionsConfig,
 ): FlatConfigComposer<TypedConfigItem, ConfigNames> {
   const {
-    typescript: enableTypeScript,
+    typescript: enableTypeScript = hasPackage('typescript'),
     react: enableReact,
     next: enableNextjs,
     testing: enableTesting,
