@@ -24,14 +24,11 @@ export function defineConfig(
 
   configs.push(ignores(), javascript());
 
-  const typescriptOptions = resolveSubOptions(options, 'typescript');
-  const tsconfigPath =
-    'tsconfigPath' in typescriptOptions ? typescriptOptions.tsconfigPath : 'tsconfig.json';
+  const tsconfigPath = typeof enableTypeScript !== 'boolean' ? enableTypeScript : 'tsconfig.json';
 
   if (enableTypeScript) {
     configs.push(
       typescript({
-        ...typescriptOptions,
         tsconfigPath,
       }),
     );
@@ -70,13 +67,4 @@ export function defineConfig(
   composer = composer.append(...configs, ...(userConfigs as any));
 
   return composer;
-}
-
-export type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
-
-export function resolveSubOptions<K extends keyof OptionsConfig>(
-  options: OptionsConfig,
-  key: K,
-): ResolvedOptions<OptionsConfig[K]> {
-  return typeof options[key] === 'boolean' ? ({} as any) : options[key] || {};
 }

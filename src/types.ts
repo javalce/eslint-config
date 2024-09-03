@@ -11,12 +11,8 @@ export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'p
   plugins?: Record<string, any>;
 };
 
-export interface TypeScriptOptions {
-  tsconfigPath: string | string[];
-}
-
 export interface OptionsConfig {
-  typescript?: boolean | TypeScriptOptions;
+  typescript?: boolean | string | string[];
   react?: boolean;
   next?: boolean;
   testing?: 'jest' | 'vitest';
