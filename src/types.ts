@@ -13,8 +13,7 @@ export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'p
 
 export interface OptionsConfig {
   typescript?: boolean | string | string[];
-  react?: boolean;
-  next?: boolean;
+  react?: boolean | 'next';
   testing?: 'jest' | 'vitest';
   userConfigs?: Awaitable<
     TypedConfigItem | TypedConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]

@@ -14,8 +14,7 @@ export function defineConfig(
 ): FlatConfigComposer<TypedConfigItem, ConfigNames> {
   const {
     typescript: enableTypeScript = hasPackage('typescript'),
-    react: enableReact,
-    next: enableNextjs,
+    react: reactFlag,
     testing: enableTesting,
     userConfigs = [],
   } = options;
@@ -25,6 +24,9 @@ export function defineConfig(
   configs.push(ignores(), javascript());
 
   const tsconfigPath = typeof enableTypeScript !== 'boolean' ? enableTypeScript : 'tsconfig.json';
+
+  const enableReact = Boolean(reactFlag);
+  const enableNext = reactFlag === 'next';
 
   if (enableTypeScript) {
     configs.push(
@@ -42,14 +44,14 @@ export function defineConfig(
     );
   }
 
-  if (enableNextjs) {
+  if (enableNext) {
     configs.push(nextjs());
   }
 
   if (enableTesting === 'jest') {
     configs.push(
       jest({
-        react: Boolean(enableReact),
+        react: enableReact,
       }),
     );
   }
@@ -57,7 +59,7 @@ export function defineConfig(
   if (enableTesting === 'vitest') {
     configs.push(
       vitest({
-        react: Boolean(enableReact),
+        react: enableReact,
       }),
     );
   }
