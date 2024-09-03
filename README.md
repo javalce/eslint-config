@@ -161,3 +161,44 @@ export default defineConfig({
 ```
 
 The next.js config will only load the `@next/eslint-plugin-next` plugin and the recommended rules. To enable the react rules you must enable the react config.
+
+## Testing
+
+To enable testing support, you must enable the `testing` option in the configuration. You can choose between `jest` or `vitest`:
+
+### Testing with Jest
+
+If you are using Jest, it will load the recommended and style rules for Jest:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  testing: 'jest',
+});
+```
+
+### Testing with Vitest
+
+If you are using Vitest, it will load the recommended rules for Vitest:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  testing: 'vitest',
+});
+```
+
+### Testing + React
+
+To enable testing with React, you need to enable both testing and react configs. It will load the recommended rules of the `@testing-library/react` plugin:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  react: true,
+  testing: 'jest', // or 'vitest'
+});
+```
