@@ -26,10 +26,7 @@ export async function react({ typescript }: { typescript: boolean }): Promise<Ty
     },
     jsxA11yPlugin.flatConfigs.recommended as TypedConfigItem,
     {
-      settings: eslintPluginImport.configs.react.settings,
-      languageOptions: {
-        parserOptions: eslintPluginImport.configs.react.parserOptions,
-      },
+      ...eslintPluginImport.flatConfigs.react,
       name: 'import-x/react',
     },
     reactRules,
