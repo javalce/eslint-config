@@ -78,9 +78,7 @@ Also, if you want to use a different file, you can specify it in the configurati
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  typescript: {
-    tsconfigPath: './path/to/tsconfig.json',
-  },
+  typescript: './path/to/tsconfig.custom.json',
 });
 ```
 
@@ -90,9 +88,7 @@ Or you can use multiple tsconfig files:
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  typescript: {
-    tsconfigPath: ['./path/to/tsconfig.json', './path/to/another/tsconfig.json'],
-  },
+  typescript: ['./path/to/tsconfig.json', './path/to/another/tsconfig.json'],
 });
 ```
 
@@ -112,23 +108,7 @@ export default defineConfig({
 
 ### TypeScript + React
 
-To be able to use TypeScript with React, you need to enable both TypeScript and React configs:
-
-```js
-import { defineConfig } from '@javalce/eslint-config';
-
-export default defineConfig({
-  typescript: true,
-  react: true,
-});
-```
-
-> [!NOTE]
-> When you enable both TypeScript and React configs, it will automatically disable some TypeScript rules.
-
-#### TypeScript React Rules
-
-This configuration will turn off some rules that I think are a bit problematic when using TypeScript with React.
+When you enable both TypeScript and React configs, it will turn off some rules that I think are a bit problematic when using TypeScript with React.
 
 - `@typescript-eslint/explicit-function-return-type`: This rule is turned off because it's troublesome to define the return type of custom React hooks, for example.
 - `@typescript-eslint/no-confusing-void-expression`: This rule is turned off because of jsx expressions that return `void` are common in React.
@@ -157,8 +137,7 @@ Then, update your ESLint configuration file to enable the Next.js config:
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  react: true,
-  next: true,
+  react: 'next',
 });
 ```
 
