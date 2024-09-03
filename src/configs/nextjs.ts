@@ -3,8 +3,8 @@ import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import nextjsPlugin from '@next/eslint-plugin-next';
 
+import { JAVASCRIPT_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
-import { JAVASCRIPT_FILES } from '../utils/constants';
 
 export async function nextjs(): Promise<TypedConfigItem[]> {
   const babelOptions = {

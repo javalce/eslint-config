@@ -7,7 +7,7 @@ import { javascript, react, typescript } from '../src/configs';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
 import { vitest } from '../src/configs/vitest';
-import { combine } from '../src/utils/combine';
+import { combine } from '../src/utils';
 
 const configs = await combine(
   {

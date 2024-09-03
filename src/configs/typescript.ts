@@ -3,11 +3,11 @@ import { resolve } from 'node:path';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import tseslint from 'typescript-eslint';
 
+import { TYPESCRIPT_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
 import { type TypedConfigItem, type TypeScriptOptions } from '../types';
-import { TYPESCRIPT_FILES } from '../utils/constants';
 
 export async function typescript({ tsconfigPath }: TypeScriptOptions): Promise<TypedConfigItem[]> {
   const project = Array.isArray(tsconfigPath)

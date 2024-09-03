@@ -1,5 +1,5 @@
+import { TESTING_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
-import { TESTING_FILES } from '../utils/constants';
 
 const config: TypedConfigItem = {
   files: TESTING_FILES,

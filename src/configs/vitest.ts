@@ -2,9 +2,9 @@ import { fixupPluginRules } from '@eslint/compat';
 import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import eslintPluginVitest from 'eslint-plugin-vitest';
 
+import { TESTING_FILES } from '../constants';
 import eslintConfigVitest from '../rules/vitest';
 import { type TypedConfigItem } from '../types';
-import { TESTING_FILES } from '../utils/constants';
 
 export async function vitest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
   const config: TypedConfigItem[] = [

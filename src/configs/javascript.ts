@@ -5,6 +5,7 @@ import stylistic from '@stylistic/eslint-plugin';
 import * as eslintPluginImport from 'eslint-plugin-import-x';
 import globals from 'globals';
 
+import { ECMA_VERSION, JAVASCRIPT_FILES } from '../constants';
 import bestPracticeConfig from '../rules/best-practice';
 import eslintCommentsConfig from '../rules/comments';
 import es6Config from '../rules/es6';
@@ -13,7 +14,6 @@ import posibleErrorsConfig from '../rules/possible-errors';
 import stylisticConfig from '../rules/stylistic';
 import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
-import { ECMA_VERSION, JAVASCRIPT_FILES } from '../utils/constants';
 
 export async function javascript(): Promise<TypedConfigItem[]> {
   return [

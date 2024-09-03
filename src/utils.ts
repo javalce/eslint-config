@@ -1,6 +1,6 @@
 import { type Awaitable } from 'eslint-flat-config-utils';
 
-import { type TypedConfigItem } from '../types';
+import { type TypedConfigItem } from './types';
 
 /**
  * Combine array and non-array configs into a single array.

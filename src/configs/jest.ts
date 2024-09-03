@@ -3,9 +3,9 @@ import eslintPluginJest from 'eslint-plugin-jest';
 import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
 
+import { TESTING_FILES, TYPESCRIPT_TESTING_FILES } from '../constants';
 import jestConfig from '../rules/jest';
 import { type TypedConfigItem } from '../types';
-import { TESTING_FILES, TYPESCRIPT_TESTING_FILES } from '../utils/constants';
 
 export async function jest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
   const config: TypedConfigItem[] = [
