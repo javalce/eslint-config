@@ -1,6 +1,5 @@
 import type { TypedConfigItem } from '../types';
 
-// @ts-expect-error - This rule is not yet typed.
 import eslintPuginUnicorn from 'eslint-plugin-unicorn';
 
 const config: TypedConfigItem = {

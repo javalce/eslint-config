@@ -7,9 +7,13 @@ import { TYPESCRIPT_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
-import { type TypedConfigItem, type TypeScriptOptions } from '../types';
+import { type TypedConfigItem } from '../types';
 
-export async function typescript({ tsconfigPath }: TypeScriptOptions): Promise<TypedConfigItem[]> {
+export async function typescript({
+  tsconfigPath,
+}: {
+  tsconfigPath: string | string[];
+}): Promise<TypedConfigItem[]> {
   const project = Array.isArray(tsconfigPath)
     ? tsconfigPath.map((path) => resolveTsconfigPath(path))
     : resolveTsconfigPath(tsconfigPath);
