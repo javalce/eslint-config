@@ -24,12 +24,7 @@ export async function vitest({ react }: { react: boolean }): Promise<TypedConfig
   if (react) {
     config.push({
       files: TESTING_FILES,
-      plugins: {
-        'testing-library': fixupPluginRules(eslintPluginTestingLibrary),
-      },
-      rules: {
-        ...eslintPluginTestingLibrary.configs.react.rules,
-      },
+      ...eslintPluginTestingLibrary.configs['flat/react'],
       name: 'testing-library',
     });
   }

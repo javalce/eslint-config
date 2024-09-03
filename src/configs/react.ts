@@ -1,5 +1,3 @@
-import { fixupPluginRules } from '@eslint/compat';
-import { mergeConfigs } from 'eslint-flat-config-utils';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
@@ -12,19 +10,20 @@ import { type TypedConfigItem } from '../types';
 
 export async function react({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
   const config: TypedConfigItem[] = [
-    mergeConfigs(reactPlugin.configs.flat.recommended as TypedConfigItem, {
+    {
+      ...reactPlugin.configs.flat.recommended,
       name: 'react',
-    }),
+    },
     {
       plugins: {
-        'react-hooks': fixupPluginRules(reactHooksPlugin),
+        'react-hooks': reactHooksPlugin,
       },
       rules: {
         ...reactHooksPlugin.configs.recommended.rules,
       },
       name: 'react-hooks',
     },
-    jsxA11yPlugin.flatConfigs.recommended as TypedConfigItem,
+    jsxA11yPlugin.flatConfigs.recommended,
     {
       ...eslintPluginImport.flatConfigs.react,
       name: 'import-x/react',

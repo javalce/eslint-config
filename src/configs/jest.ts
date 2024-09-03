@@ -1,4 +1,3 @@
-import { fixupPluginRules } from '@eslint/compat';
 import eslintPluginJest from 'eslint-plugin-jest';
 import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
@@ -36,12 +35,7 @@ export async function jest({ react }: { react: boolean }): Promise<TypedConfigIt
   if (react) {
     config.push({
       files: TESTING_FILES,
-      plugins: {
-        'testing-library': fixupPluginRules(eslintPluginTestingLibrary),
-      },
-      rules: {
-        ...eslintPluginTestingLibrary.configs.react.rules,
-      },
+      ...eslintPluginTestingLibrary.configs['flat/react'],
       name: 'testing-library',
     });
   }

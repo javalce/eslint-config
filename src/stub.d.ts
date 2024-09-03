@@ -50,8 +50,6 @@ declare module 'eslint-plugin-jest' {
 
 declare module 'eslint-plugin-testing-library' {
   export const configs: {
-    react: {
-      rules: Record<string, any>;
-    };
+    'flat/react': any;
   };
 }
