@@ -1,7 +1,8 @@
 import { type Linter } from 'eslint';
-import { type Awaitable, type FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { type ConfigNames, type RuleOptions } from './typegen';
+
+export type Awaitable<T> = T | Promise<T>;
 
 export type Rules = RuleOptions;
 
@@ -15,7 +16,5 @@ export interface OptionsConfig {
   typescript?: boolean | string | string[];
   react?: boolean | 'next';
   testing?: 'jest' | 'vitest';
-  userConfigs?: Awaitable<
-    TypedConfigItem | TypedConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]
-  >[];
+  overrides?: (TypedConfigItem | Linter.Config)[];
 }

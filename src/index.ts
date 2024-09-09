@@ -12,14 +12,12 @@ import { vitest } from './configs/vitest';
 import { type ConfigNames } from './typegen';
 import { hasPackage } from './utils';
 
-export function defineConfig(
-  options: OptionsConfig,
-): FlatConfigComposer<TypedConfigItem, ConfigNames> {
+export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
   const {
     typescript: enableTypeScript = hasPackage('typescript'),
     react: reactFlag,
     testing: enableTesting,
-    userConfigs = [],
+    overrides = [],
   } = options;
 
   const configs: Awaitable<TypedConfigItem[]>[] = [];
@@ -69,7 +67,7 @@ export function defineConfig(
 
   let composer = new FlatConfigComposer<TypedConfigItem, ConfigNames>();
 
-  composer = composer.append(...configs, ...(userConfigs as any));
+  composer = composer.append(...configs, ...overrides);
 
-  return composer;
+  return composer.toConfigs();
 }
