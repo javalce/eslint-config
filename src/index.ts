@@ -2,9 +2,12 @@ import type { OptionsConfig, TypedConfigItem } from './types';
 
 import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { ignores, javascript, react, typescript } from './configs';
+import { ignores } from './configs/ignores';
+import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
+import { react } from './configs/react';
+import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
 import { type ConfigNames } from './typegen';
 import { hasPackage } from './utils';

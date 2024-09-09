@@ -3,7 +3,10 @@ import fs from 'node:fs/promises';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
-import { javascript, react, typescript } from '../src/configs';
+import { javascript } from 'src/configs/javascript';
+import { react } from 'src/configs/react';
+import { typescript } from 'src/configs/typescript';
+
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
 import { vitest } from '../src/configs/vitest';
