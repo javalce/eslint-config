@@ -15,7 +15,7 @@ import stylisticConfig from '../rules/stylistic';
 import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
 
-export async function javascript(): Promise<TypedConfigItem[]> {
+export function javascript(): TypedConfigItem[] {
   return [
     {
       ...js.configs.recommended,

@@ -6,7 +6,7 @@ import { TESTING_FILES } from '../constants';
 import eslintConfigVitest from '../rules/vitest';
 import { type TypedConfigItem } from '../types';
 
-export async function vitest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
+export function vitest({ react }: { react: boolean }): TypedConfigItem[] {
   const config: TypedConfigItem[] = [
     {
       files: TESTING_FILES,
@@ -24,7 +24,7 @@ export async function vitest({ react }: { react: boolean }): Promise<TypedConfig
   if (react) {
     config.push({
       files: TESTING_FILES,
-      ...eslintPluginTestingLibrary.configs['flat/react'],
+      ...(eslintPluginTestingLibrary.configs['flat/react'] as TypedConfigItem),
       name: 'testing-library',
     });
   }

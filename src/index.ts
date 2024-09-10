@@ -1,7 +1,5 @@
 import type { OptionsConfig, TypedConfigItem } from './types';
 
-import { type Awaitable, FlatConfigComposer } from 'eslint-flat-config-utils';
-
 import { ignores } from './configs/ignores';
 import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
@@ -9,10 +7,9 @@ import { nextjs } from './configs/nextjs';
 import { react } from './configs/react';
 import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
-import { type ConfigNames } from './typegen';
 import { hasPackage } from './utils';
 
-export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
+export function defineConfig(options: OptionsConfig): TypedConfigItem[] {
   const {
     typescript: enableTypeScript = hasPackage('typescript'),
     react: reactFlag,
@@ -20,7 +17,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     overrides = [],
   } = options;
 
-  const configs: Awaitable<TypedConfigItem[]>[] = [];
+  const configs: TypedConfigItem[][] = [];
 
   configs.push(ignores(), javascript());
 
@@ -65,9 +62,5 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     );
   }
 
-  let composer = new FlatConfigComposer<TypedConfigItem, ConfigNames>();
-
-  composer = composer.append(...configs, ...overrides);
-
-  return composer.toConfigs();
+  return [...configs.flat(), ...overrides];
 }

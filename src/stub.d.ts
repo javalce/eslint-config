@@ -1,9 +1,9 @@
 declare module 'eslint-plugin-react' {
   export const configs: {
     flat: {
-      recommended: any;
-      all: any;
-      'jsx-runtime': any;
+      recommended: unknown;
+      all: unknown;
+      'jsx-runtime': unknown;
     };
   };
 }
@@ -12,44 +12,44 @@ declare module 'eslint-plugin-react-hooks' {
   export const configs: {
     recommended: {
       plugins: string[];
-      rules: Record<string, any>;
+      rules: Record<string, unknown>;
     };
   };
 }
 
 declare module 'eslint-plugin-jsx-a11y' {
   export const configs: {
-    recommended: any;
-    strict: any;
+    recommended: unknown;
+    strict: unknown;
   };
 
   export const flatConfigs: {
-    recommended: any;
-    strict: any;
+    recommended: unknown;
+    strict: unknown;
   };
 }
 
 declare module '@next/eslint-plugin-next' {
   export const configs: {
     recommended: {
-      rules: Record<string, any>;
+      rules: Record<string, unknown>;
     };
   };
 }
 
 declare module 'eslint-plugin-jest' {
   export const configs: {
-    all: any;
-    recommended: any;
-    style: any;
-    'flat/all': any;
-    'flat/recommended': any;
-    'flat/style': any;
+    all: unknown;
+    recommended: unknown;
+    style: unknown;
+    'flat/all': unknown;
+    'flat/recommended': unknown;
+    'flat/style': unknown;
   };
 }
 
 declare module 'eslint-plugin-testing-library' {
   export const configs: {
-    'flat/react': any;
+    'flat/react': unknown;
   };
 }

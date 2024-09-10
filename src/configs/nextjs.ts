@@ -2,12 +2,13 @@
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import nextjsPlugin from '@next/eslint-plugin-next';
+import { type Linter } from 'eslint';
 
 import { JAVASCRIPT_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
 import { hasPackage } from '../utils';
 
-export async function nextjs(): Promise<TypedConfigItem[]> {
+export function nextjs(): TypedConfigItem[] {
   const babelOptions = {
     presets: (() => {
       if (hasPackage('next/babel')) {
@@ -31,7 +32,7 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
     {
       files: JAVASCRIPT_FILES,
       languageOptions: {
-        parser: babelParser,
+        parser: babelParser as Linter.Parser,
         parserOptions: {
           requireConfigFile: false,
           babelOptions,

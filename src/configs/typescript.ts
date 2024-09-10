@@ -9,11 +9,11 @@ import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
 import { type TypedConfigItem } from '../types';
 
-export async function typescript({
+export function typescript({
   tsconfigPath,
 }: {
   tsconfigPath: string | string[];
-}): Promise<TypedConfigItem[]> {
+}): TypedConfigItem[] {
   const project = Array.isArray(tsconfigPath)
     ? tsconfigPath.map((path) => resolveTsconfigPath(path))
     : resolveTsconfigPath(tsconfigPath);

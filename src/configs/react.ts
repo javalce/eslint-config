@@ -8,10 +8,10 @@ import reactRules from '../rules/react';
 import reactTypescriptRules from '../rules/typescript/react';
 import { type TypedConfigItem } from '../types';
 
-export async function react({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+export function react({ typescript }: { typescript: boolean }): TypedConfigItem[] {
   const config: TypedConfigItem[] = [
     {
-      ...reactPlugin.configs.flat.recommended,
+      ...(reactPlugin.configs.flat.recommended as TypedConfigItem),
       name: 'react',
     },
     {
@@ -23,7 +23,7 @@ export async function react({ typescript }: { typescript: boolean }): Promise<Ty
       },
       name: 'react-hooks',
     },
-    jsxA11yPlugin.flatConfigs.recommended,
+    jsxA11yPlugin.flatConfigs.recommended as TypedConfigItem,
     {
       ...eslintPluginImport.flatConfigs.react,
       name: 'import-x/react',

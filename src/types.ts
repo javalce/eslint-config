@@ -9,7 +9,7 @@ export type Rules = RuleOptions;
 export type { ConfigNames };
 
 export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
-  plugins?: Record<string, any>;
+  plugins?: Record<string, unknown>;
 };
 
 export interface OptionsConfig {

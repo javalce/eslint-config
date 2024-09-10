@@ -6,12 +6,12 @@ import { TESTING_FILES, TYPESCRIPT_TESTING_FILES } from '../constants';
 import jestConfig from '../rules/jest';
 import { type TypedConfigItem } from '../types';
 
-export async function jest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
+export function jest({ react }: { react: boolean }): TypedConfigItem[] {
   const config: TypedConfigItem[] = [
     {
       files: TESTING_FILES,
-      ...eslintPluginJest.configs['flat/recommended'],
-      ...eslintPluginJest.configs['flat/style'],
+      ...(eslintPluginJest.configs['flat/recommended'] as TypedConfigItem),
+      ...(eslintPluginJest.configs['flat/style'] as TypedConfigItem),
       languageOptions: {
         globals: {
           ...globals.jest,
@@ -35,7 +35,7 @@ export async function jest({ react }: { react: boolean }): Promise<TypedConfigIt
   if (react) {
     config.push({
       files: TESTING_FILES,
-      ...eslintPluginTestingLibrary.configs['flat/react'],
+      ...(eslintPluginTestingLibrary.configs['flat/react'] as TypedConfigItem),
       name: 'testing-library',
     });
   }

@@ -1,3 +1,4 @@
+import { type ESLint } from 'eslint';
 // @ts-expect-error - ESLint plugin import is not resolved correctly
 import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
 
@@ -6,7 +7,7 @@ import { type TypedConfigItem } from '../types';
 const config: TypedConfigItem = {
   name: 'javalce/javascript/eslint-comments',
   plugins: {
-    'eslint-comments': eslintCommentsPlugin,
+    'eslint-comments': eslintCommentsPlugin as ESLint.Plugin,
   },
   rules: {
     /**
