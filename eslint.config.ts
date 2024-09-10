@@ -1,16 +1,7 @@
 import { defineConfig } from './src/index';
 
 export default defineConfig({
-  userConfigs: [
-    {
-      rules: {
-        '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-unsafe-return': 'off',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/require-await': 'off',
-      },
-    },
+  overrides: [
     {
       files: ['src/rules/**/*.ts'],
       rules: {
