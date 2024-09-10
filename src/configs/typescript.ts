@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 
+import { type Linter } from 'eslint';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import tseslint from 'typescript-eslint';
 
@@ -28,9 +29,9 @@ export function typescript({
         ...eslintPluginImport.configs.typescript,
         name: 'import-x/typescript',
       },
-      eslintTypescriptConfig,
-      eslintExtensionConfig,
-      eslintPluginImportConfig,
+      eslintTypescriptConfig as Linter.Config,
+      eslintExtensionConfig as Linter.Config,
+      eslintPluginImportConfig as Linter.Config,
     ],
     languageOptions: {
       parserOptions: {
