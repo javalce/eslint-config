@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 
+import { type Linter } from 'eslint';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
@@ -12,7 +13,7 @@ import { nextjs } from '../src/configs/nextjs';
 import { vitest } from '../src/configs/vitest';
 import { combine } from '../src/utils';
 
-const configs = await combine(
+const configs = (await combine(
   {
     plugins: {
       '': {
@@ -26,7 +27,7 @@ const configs = await combine(
   nextjs(),
   jest({ react: true }),
   vitest({ react: true }),
-);
+)) as Linter.Config[];
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
 
