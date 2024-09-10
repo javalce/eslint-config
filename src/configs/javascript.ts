@@ -5,7 +5,7 @@ import stylistic from '@stylistic/eslint-plugin';
 import * as eslintPluginImport from 'eslint-plugin-import-x';
 import globals from 'globals';
 
-import { ECMA_VERSION, JAVASCRIPT_FILES } from '../constants';
+import { CONFIG_FILES, ECMA_VERSION, JAVASCRIPT_FILES } from '../constants';
 import bestPracticeConfig from '../rules/best-practice';
 import eslintCommentsConfig from '../rules/comments';
 import es6Config from '../rules/es6';
@@ -64,6 +64,13 @@ export function javascript(): TypedConfigItem[] {
         parser: undefined,
       },
       name: 'javalce/javascript/parser',
+    },
+    {
+      files: CONFIG_FILES,
+      rules: {
+        'import-x/no-default-export': 'off',
+      },
+      name: 'javalce/import-x/no-default-export',
     },
   ];
 }
