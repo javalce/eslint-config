@@ -1,6 +1,6 @@
-import { type Awaitable } from 'eslint-flat-config-utils';
+import { createRequire } from 'node:module';
 
-import { type TypedConfigItem } from './types';
+import { type Awaitable, type TypedConfigItem } from './types';
 
 /**
  * Combine array and non-array configs into a single array.
@@ -13,10 +13,11 @@ export async function combine(
   return resolved.flat();
 }
 
+const require = createRequire(import.meta.url);
+
 export function hasPackage(name: string): boolean {
   try {
-    // eslint-disable-next-line no-new -- dynamic import
-    new URL(name, import.meta.url);
+    require.resolve(name);
 
     return true;
   } catch {
