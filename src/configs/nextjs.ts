@@ -1,3 +1,5 @@
+import { URL } from 'node:url';
+
 // @ts-expect-error -- no types available
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
@@ -6,16 +8,18 @@ import { type Linter } from 'eslint';
 
 import { JAVASCRIPT_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
-import { hasPackage } from '../utils';
 
 export function nextjs(): TypedConfigItem[] {
   const babelOptions = {
     presets: (() => {
-      if (hasPackage('next/babel')) {
-        return ['next/babel'];
-      }
+      try {
+        // eslint-disable-next-line no-new -- this is a valid use case
+        new URL('next/babel', import.meta.url);
 
-      return [];
+        return ['next/babel'];
+      } catch {
+        return [];
+      }
     })(),
   };
 
