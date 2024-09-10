@@ -1,3 +1,14 @@
+## [0.4.1](https://github.com/javalce/eslint-config/compare/v0.4.0...v0.4.1) (2024-09-10)
+
+### Bug Fixes
+
+- update types ([25de47c](https://github.com/javalce/eslint-config/commit/25de47c5d55bb6711df967359bff16729451174a))
+- update typing errors ([a9a3fa3](https://github.com/javalce/eslint-config/commit/a9a3fa36013126459aae7ceb8962ef1101437cfa))
+
+### Features
+
+- disable import-x/no-default-export for config files ([d311e0a](https://github.com/javalce/eslint-config/commit/d311e0a050afaf461841bb1c8bc0e44a3bfe6432))
+
 # [0.4.0](https://github.com/javalce/eslint-config/compare/v0.3.2...v0.4.0) (2024-09-03)
 
 ### Bug Fixes
