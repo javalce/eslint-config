@@ -1,11 +1,11 @@
-import type { TypedConfigItem } from '../types';
+import type { EcmaVersion, TypedConfigItem } from '../types';
 
 import js from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import * as eslintPluginImport from 'eslint-plugin-import-x';
 import globals from 'globals';
 
-import { CONFIG_FILES, ECMA_VERSION, JS_FILES, JSX_FILES } from '../constants';
+import { CONFIG_FILES, JS_FILES, JSX_FILES } from '../constants';
 import bestPracticeConfig from '../rules/best-practice';
 import eslintCommentsConfig from '../rules/comments';
 import es6Config from '../rules/es6';
@@ -15,7 +15,7 @@ import stylisticConfig from '../rules/stylistic';
 import unicornConfig from '../rules/unicorn';
 import variablesConfig from '../rules/variables';
 
-export function javascript(): TypedConfigItem[] {
+export function javascript({ ecmaVersion }: { ecmaVersion: EcmaVersion }): TypedConfigItem[] {
   return [
     {
       ...js.configs.recommended,
@@ -46,11 +46,11 @@ export function javascript(): TypedConfigItem[] {
         reportUnusedDisableDirectives: true,
       },
       languageOptions: {
-        ecmaVersion: ECMA_VERSION,
+        ecmaVersion,
         sourceType: 'module',
         globals: {
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- no types
-          ...globals[`es${ECMA_VERSION}`],
+          ...globals[`es${ecmaVersion}`],
           ...globals.browser,
           ...globals.node,
         },

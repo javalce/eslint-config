@@ -1,5 +1,3 @@
-export const ECMA_VERSION = 2021;
-
 export const JS_FILES = '**/*.?([cm])js';
 
 export const JSX_FILES = '**/*.?([cm])jsx';

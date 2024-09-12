@@ -11,6 +11,7 @@ import { hasPackage } from './utils';
 
 export function defineConfig(options: OptionsConfig): TypedConfigItem[] {
   const {
+    ecmaVersion = 2021,
     typescript: enableTypeScript = hasPackage('typescript'),
     react: reactFlag,
     testing: enableTesting,
@@ -19,7 +20,7 @@ export function defineConfig(options: OptionsConfig): TypedConfigItem[] {
 
   const configs: TypedConfigItem[][] = [];
 
-  configs.push(ignores(), javascript());
+  configs.push(ignores(), javascript({ ecmaVersion }));
 
   const tsconfigPath = typeof enableTypeScript !== 'boolean' ? enableTypeScript : 'tsconfig.json';
 
