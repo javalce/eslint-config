@@ -15,7 +15,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 > This configuration is designed to be used with Prettier for code formatting. You can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config).
 
 - Supports ESLint v9 or v8.40.0+
-- [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files-new) file format
+- [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files) file format
 - Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
 - Designed to work with TypeScript, React, Next.js, Node.js, and more
 - Some rules can be auto-fixed with `eslint --fix`
@@ -45,6 +45,16 @@ import { defineConfig } from '@javalce/eslint-config';
 export default defineConfig({});
 ```
 
+By default it uses the ecmaVersion `2021`. If you want to use a different version, you can specify it in the configuration:
+
+````js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  ecmaVersion: 2022,
+});
+```****
+
 ## TypeScript
 
 To enable TypeScript support, you only need to install the `typescript` package:
@@ -58,7 +68,7 @@ yarn add --dev typescript
 
 # If you use pnpm
 pnpm add --save-dev typescript
-```
+````
 
 By default, it will automatically load the typescript config and the configuration will look for a `tsconfig.json` file in the root of your project.
 
