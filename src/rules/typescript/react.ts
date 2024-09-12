@@ -1,5 +1,6 @@
 import { type Linter } from 'eslint';
 
+import { TS_FILES, TSX_FILES } from '../../constants';
 import { type TypedConfigItem } from '../../types';
 
 /**
@@ -20,6 +21,7 @@ const disabledRules: Linter.RulesRecord = {
 };
 
 const config: TypedConfigItem = {
+  files: [TS_FILES, TSX_FILES],
   name: 'javalce/typescript/react',
   rules: {
     ...disabledRules,

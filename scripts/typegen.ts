@@ -4,12 +4,11 @@ import { type Linter } from 'eslint';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
-import { javascript } from 'src/configs/javascript';
-import { react } from 'src/configs/react';
-import { typescript } from 'src/configs/typescript';
-
+import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
+import { react } from '../src/configs/react';
+import { typescript } from '../src/configs/typescript';
 import { vitest } from '../src/configs/vitest';
 import { combine } from '../src/utils';
 
