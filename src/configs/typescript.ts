@@ -4,7 +4,7 @@ import { type Linter } from 'eslint';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import tseslint from 'typescript-eslint';
 
-import { TYPESCRIPT_FILES } from '../constants';
+import { TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
@@ -20,7 +20,7 @@ export function typescript({
     : resolveTsconfigPath(tsconfigPath);
 
   const config = tseslint.config({
-    files: TYPESCRIPT_FILES,
+    files: [TS_FILES, TSX_FILES],
     extends: [
       ...tseslint.configs.recommendedTypeChecked,
       ...tseslint.configs.strictTypeChecked,

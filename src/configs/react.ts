@@ -1,3 +1,4 @@
+import { type Linter } from 'eslint';
 import eslintPluginImport from 'eslint-plugin-import-x';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
@@ -19,7 +20,7 @@ export function react({ typescript }: { typescript: boolean }): TypedConfigItem[
         'react-hooks': reactHooksPlugin,
       },
       rules: {
-        ...reactHooksPlugin.configs.recommended.rules,
+        ...(reactHooksPlugin.configs.recommended.rules as Linter.RulesRecord),
       },
       name: 'react-hooks',
     },

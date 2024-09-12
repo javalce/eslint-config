@@ -4,9 +4,9 @@ import { URL } from 'node:url';
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import nextjsPlugin from '@next/eslint-plugin-next';
-import { type Linter } from 'eslint';
+import { type ESLint, type Linter } from 'eslint';
 
-import { JAVASCRIPT_FILES } from '../constants';
+import { JS_FILES, JSX_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
 
 export function nextjs(): TypedConfigItem[] {
@@ -26,15 +26,15 @@ export function nextjs(): TypedConfigItem[] {
   return [
     {
       plugins: {
-        '@next/next': fixupPluginRules(nextjsPlugin),
+        '@next/next': fixupPluginRules(nextjsPlugin as ESLint.Plugin),
       },
       rules: {
-        ...nextjsPlugin.configs.recommended.rules,
+        ...(nextjsPlugin.configs.recommended.rules as Linter.RulesRecord),
       },
       name: 'javalce/nextjs',
     },
     {
-      files: JAVASCRIPT_FILES,
+      files: [JS_FILES, JSX_FILES],
       languageOptions: {
         parser: babelParser as Linter.Parser,
         parserOptions: {
@@ -44,5 +44,5 @@ export function nextjs(): TypedConfigItem[] {
       },
       name: 'javalce/nextjs/parser',
     },
-  ];
+  ] satisfies TypedConfigItem[];
 }

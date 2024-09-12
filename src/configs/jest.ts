@@ -2,7 +2,7 @@ import eslintPluginJest from 'eslint-plugin-jest';
 import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
 
-import { TESTING_FILES, TYPESCRIPT_TESTING_FILES } from '../constants';
+import { TESTING_FILES, TS_TESTING_FILES } from '../constants';
 import jestConfig from '../rules/jest';
 import { type TypedConfigItem } from '../types';
 
@@ -23,7 +23,7 @@ export function jest({ react }: { react: boolean }): TypedConfigItem[] {
     // Prefer the Jest version of this rule. This silently fails when type
     // information is not available.
     {
-      files: TYPESCRIPT_TESTING_FILES,
+      files: TS_TESTING_FILES,
       rules: {
         '@typescript-eslint/unbound-method': 'off',
         'jest/unbound-method': 'error',

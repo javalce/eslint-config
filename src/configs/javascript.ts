@@ -5,7 +5,7 @@ import stylistic from '@stylistic/eslint-plugin';
 import * as eslintPluginImport from 'eslint-plugin-import-x';
 import globals from 'globals';
 
-import { CONFIG_FILES, ECMA_VERSION, JAVASCRIPT_FILES } from '../constants';
+import { CONFIG_FILES, ECMA_VERSION, JS_FILES, JSX_FILES } from '../constants';
 import bestPracticeConfig from '../rules/best-practice';
 import eslintCommentsConfig from '../rules/comments';
 import es6Config from '../rules/es6';
@@ -58,7 +58,7 @@ export function javascript(): TypedConfigItem[] {
       name: 'javalce/javascript/setup',
     },
     {
-      files: JAVASCRIPT_FILES,
+      files: [JS_FILES, JSX_FILES],
       languageOptions: {
         // Use the default parser (espree, which handles JavaScript and JSX files)
         parser: undefined,
