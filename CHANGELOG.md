@@ -1,3 +1,13 @@
+## [0.4.2](https://github.com/javalce/eslint-config/compare/v0.4.1...v0.4.2) (2024-09-12)
+
+### Bug Fixes
+
+- restrict file paths for react configuration ([8b2d600](https://github.com/javalce/eslint-config/commit/8b2d600efb35eda194ceb61b589f35c6d59169d4))
+
+### Features
+
+- allow to choose ecma version instead of a fixed one ([ed6121f](https://github.com/javalce/eslint-config/commit/ed6121fc9e8d974f22df75ba734da466c3399532))
+
 ## [0.4.1](https://github.com/javalce/eslint-config/compare/v0.4.0...v0.4.1) (2024-09-10)
 
 ### Bug Fixes
