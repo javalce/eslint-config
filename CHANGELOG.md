@@ -1,3 +1,9 @@
+## [0.4.3](https://github.com/javalce/eslint-config/compare/v0.4.2...v0.4.3) (2024-09-16)
+
+### Features
+
+- enable lazy loading for Next.js ESLint plugin ([b9db418](https://github.com/javalce/eslint-config/commit/b9db418a72cfca717be278364263d0488c654136))
+
 ## [0.4.2](https://github.com/javalce/eslint-config/compare/v0.4.1...v0.4.2) (2024-09-12)
 
 ### Bug Fixes
