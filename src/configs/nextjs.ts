@@ -3,13 +3,15 @@ import { URL } from 'node:url';
 // @ts-expect-error -- no types available
 import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
-import nextjsPlugin from '@next/eslint-plugin-next';
 import { type ESLint, type Linter } from 'eslint';
 
 import { JS_FILES, JSX_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
+import { lazy } from '../utils';
 
-export function nextjs(): TypedConfigItem[] {
+export async function nextjs(): Promise<TypedConfigItem[]> {
+  const nextjsPlugin = await lazy(import('@next/eslint-plugin-next'));
+
   const babelOptions = {
     presets: (() => {
       try {

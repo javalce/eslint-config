@@ -9,7 +9,7 @@ import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
 import { hasPackage } from './utils';
 
-export function defineConfig(options: OptionsConfig): TypedConfigItem[] {
+export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = 2021,
     typescript: enableTypeScript = hasPackage('typescript'),
@@ -44,7 +44,7 @@ export function defineConfig(options: OptionsConfig): TypedConfigItem[] {
   }
 
   if (enableNext) {
-    configs.push(nextjs());
+    configs.push(await nextjs());
   }
 
   if (enableTesting === 'jest') {

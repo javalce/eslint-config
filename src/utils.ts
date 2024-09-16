@@ -24,3 +24,10 @@ export function hasPackage(name: string): boolean {
     return false;
   }
 }
+
+export async function lazy<T>(m: Awaitable<T>): Promise<T> {
+  const resolved = await m;
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any -- we're using dynamic import
+  return (resolved as any).default || resolved;
+}
