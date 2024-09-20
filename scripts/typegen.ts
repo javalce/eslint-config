@@ -4,6 +4,7 @@ import { type Linter } from 'eslint';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
+import { astro } from '../src/configs/astro';
 import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
@@ -24,6 +25,7 @@ const configs = (await combine(
   typescript({ tsconfigPath: 'tsconfig.json' }),
   react({ typescript: true }),
   nextjs(),
+  astro(),
   jest({ react: true }),
   vitest({ react: true }),
 )) as Linter.Config[];

@@ -1,8 +1,18 @@
 import type { TypedConfigItem } from '../../types';
 
+/**
+ * These rules are enabled by `@typescript-eslint`, but we've made the decision
+ * to disable them.
+ */
+const disabledRules: TypedConfigItem['rules'] = {
+  // Normally, it's used by frameworks like Astro or Next.js or bundlers like Vite to reference it's types in a env.d.ts file.
+  '@typescript-eslint/triple-slash-reference': 'off',
+};
+
 const config: TypedConfigItem = {
   name: 'javalce/typescript',
   rules: {
+    ...disabledRules,
     /**
      * Require consistent usage of type exports.
      *

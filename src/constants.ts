@@ -2,9 +2,13 @@ export const JS_FILES = '**/*.?([cm])js';
 
 export const JSX_FILES = '**/*.?([cm])jsx';
 
-export const TS_FILES = ['**/*.?([cm])ts'];
+export const TS_FILES = '**/*.?([cm])ts';
 
-export const TSX_FILES = ['**/*.?([cm])tsx'];
+export const TSX_FILES = '**/*.?([cm])tsx';
+
+export const ASTRO_FILES = '**/*.astro';
+
+export const ASTRO_TS_FILES = '**/*.astro/*.ts';
 
 export const SRC_FILES_EXT = '?([cm])[jt]s?(x)';
 

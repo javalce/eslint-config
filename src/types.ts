@@ -30,6 +30,7 @@ export interface OptionsConfig {
   ecmaVersion?: EcmaVersion;
   typescript?: boolean | string | string[];
   react?: boolean | 'next';
+  astro?: boolean;
   testing?: 'jest' | 'vitest';
   overrides?: (TypedConfigItem | Linter.Config)[];
 }

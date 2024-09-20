@@ -1,6 +1,5 @@
-import { fixupPluginRules } from '@eslint/compat';
+import eslintPluginVitest from '@vitest/eslint-plugin';
 import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
-import eslintPluginVitest from 'eslint-plugin-vitest';
 
 import { TESTING_FILES } from '../constants';
 import eslintConfigVitest from '../rules/vitest';
@@ -11,10 +10,20 @@ export function vitest({ react }: { react: boolean }): TypedConfigItem[] {
     {
       files: TESTING_FILES,
       plugins: {
-        vitest: fixupPluginRules(eslintPluginVitest),
+        vitest: eslintPluginVitest,
       },
       rules: {
         ...eslintPluginVitest.configs.recommended.rules,
+      },
+      settings: {
+        vitest: {
+          typecheck: true,
+        },
+      },
+      languageOptions: {
+        globals: {
+          ...eslintPluginVitest.environments.env.globals,
+        },
       },
       name: 'vitest',
     },
