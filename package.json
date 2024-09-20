@@ -56,6 +56,7 @@
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.10.0",
     "@stylistic/eslint-plugin": "^2.8.0",
+    "@vitest/eslint-plugin": "^1.1.4",
     "eslint-config-flat-gitignore": "^0.3.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-astro": "^1.2.4",
