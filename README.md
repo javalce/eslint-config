@@ -47,13 +47,13 @@ export default defineConfig({});
 
 By default it uses the ecmaVersion `2021`. If you want to use a different version, you can specify it in the configuration:
 
-````js
+```js
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
   ecmaVersion: 2022,
 });
-```****
+```
 
 ## TypeScript
 
@@ -68,7 +68,7 @@ yarn add --dev typescript
 
 # If you use pnpm
 pnpm add --save-dev typescript
-````
+```
 
 By default, it will automatically load the typescript config and the configuration will look for a `tsconfig.json` file in the root of your project.
 
@@ -152,6 +152,18 @@ export default defineConfig({
 ```
 
 The next.js config will only load the `@next/eslint-plugin-next` plugin and the recommended rules. To enable the react rules you must enable the react config.
+
+## Astro
+
+To enable Astro support, you need to create an astro project and enable the Astro config:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  astro: true,
+});
+```
 
 ## Testing
 
