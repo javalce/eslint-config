@@ -1,3 +1,11 @@
+# [0.5.0](https://github.com/javalce/eslint-config/compare/v0.4.3...v0.5.0) (2024-09-20)
+
+### Features
+
+- add Astro support to ESLint configuration ([6a02fa0](https://github.com/javalce/eslint-config/commit/6a02fa03559b1c3eab33858d72f29f36f7a3d53f))
+- disable specific TypeScript rules for better compatibility ([ca0dced](https://github.com/javalce/eslint-config/commit/ca0dcedb6ac18c967c414175394ce057dfca93cb))
+- use official vitest plugin for eslint ([eb4056b](https://github.com/javalce/eslint-config/commit/eb4056b27c35b8215eb1798900e4ff68f153916d))
+
 ## [0.4.3](https://github.com/javalce/eslint-config/compare/v0.4.2...v0.4.3) (2024-09-16)
 
 ### Features
