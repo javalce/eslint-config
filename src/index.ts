@@ -1,5 +1,6 @@
 import type { OptionsConfig, TypedConfigItem } from './types';
 
+import { astro } from './configs/astro';
 import { ignores } from './configs/ignores';
 import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
@@ -14,6 +15,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     ecmaVersion = 2021,
     typescript: enableTypeScript = hasPackage('typescript'),
     react: reactFlag,
+    astro: enableAstro,
     testing: enableTesting,
     overrides = [],
   } = options;
@@ -45,6 +47,10 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   if (enableNext) {
     configs.push(await nextjs());
+  }
+
+  if (enableAstro) {
+    configs.push(astro());
   }
 
   if (enableTesting === 'jest') {
