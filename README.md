@@ -205,3 +205,49 @@ export default defineConfig({
   testing: 'jest', // or 'vitest'
 });
 ```
+
+## Svelte
+
+To enable Svelte support, you need to enable the Svelte config:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  svelte: true,
+});
+```
+
+## Solidjs
+
+To enable Solidjs support, you need to enable the Solidjs config:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  solidjs: true,
+});
+```
+
+## Vue
+
+To enable Vue support, you need to enable the Vue config:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  vue: true,
+});
+```
+
+By default, it will automatically load the Vue config for version 3. If you want to use the version 2, you can specify it in the configuration:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  vue: 2, // or 3
+});
+```
