@@ -9,6 +9,7 @@ import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
 import { react } from '../src/configs/react';
+import { svelte } from '../src/configs/svelte';
 import { typescript } from '../src/configs/typescript';
 import { vitest } from '../src/configs/vitest';
 import { combine } from '../src/utils';
@@ -26,6 +27,7 @@ const configs = (await combine(
   react({ typescript: true }),
   nextjs(),
   astro(),
+  svelte({ typescript: true }),
   jest({ react: true }),
   vitest({ react: true }),
 )) as Linter.Config[];

@@ -6,6 +6,7 @@ import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
 import { react } from './configs/react';
+import { svelte } from './configs/svelte';
 import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
 import { hasPackage } from './utils';
@@ -16,6 +17,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     typescript: enableTypeScript = hasPackage('typescript'),
     react: reactFlag,
     astro: enableAstro,
+    svelte: enableSvelte,
     testing: enableTesting,
     overrides = [],
   } = options;
@@ -51,6 +53,14 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   if (enableAstro) {
     configs.push(astro());
+  }
+
+  if (enableSvelte) {
+    configs.push(
+      await svelte({
+        typescript: Boolean(enableTypeScript),
+      }),
+    );
   }
 
   if (enableTesting === 'jest') {

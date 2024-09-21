@@ -6,9 +6,7 @@ export const TS_FILES = '**/*.?([cm])ts';
 
 export const TSX_FILES = '**/*.?([cm])tsx';
 
-export const ASTRO_FILES = '**/*.astro';
-
-export const ASTRO_TS_FILES = '**/*.astro/*.ts';
+export const SVELTE_FILES = '**/*.svelte';
 
 export const SRC_FILES_EXT = '?([cm])[jt]s?(x)';
 

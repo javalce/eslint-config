@@ -31,6 +31,7 @@ export interface OptionsConfig {
   typescript?: boolean | string | string[];
   react?: boolean | 'next';
   astro?: boolean;
+  svelte?: boolean;
   testing?: 'jest' | 'vitest';
   overrides?: (TypedConfigItem | Linter.Config)[];
 }
