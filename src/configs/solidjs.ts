@@ -4,13 +4,13 @@ import { JSX_FILES, TSX_FILES } from '../constants';
 import { lazy } from '../utils';
 
 export async function solidjs({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
-  const eslintPluginSolid = await lazy(import('eslint-plugin-solid'));
+  const solidPlugin = await lazy(import('eslint-plugin-solid'));
 
   return [
     {
       name: 'javalce/solid/setup',
       plugins: {
-        solid: eslintPluginSolid,
+        solid: solidPlugin,
       },
     },
     {

@@ -1,5 +1,3 @@
-import tseslint from 'typescript-eslint';
-
 import { SVELTE_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
@@ -8,7 +6,7 @@ export async function svelte({ typescript }: { typescript: boolean }): Promise<T
   const [eslintPluginSvelte, svelteParser] = await Promise.all([
     lazy(import('eslint-plugin-svelte')),
     lazy(import('svelte-eslint-parser')),
-  ] as const);
+  ]);
 
   return [
     {
@@ -23,7 +21,7 @@ export async function svelte({ typescript }: { typescript: boolean }): Promise<T
         parser: svelteParser,
         parserOptions: {
           extraFileExtensions: ['.svelte'],
-          parser: typescript ? tseslint.parser : null,
+          parser: typescript ? (await lazy(import('typescript-eslint'))).parser : null,
         },
       },
       name: 'javalce/svelte/rules',

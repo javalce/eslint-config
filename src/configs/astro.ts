@@ -1,10 +1,11 @@
-import eslintPluginAstro from 'eslint-plugin-astro';
-
 import { type TypedConfigItem } from '../types';
+import { lazy } from '../utils';
 
-export function astro(): TypedConfigItem[] {
+export async function astro(): Promise<TypedConfigItem[]> {
+  const astroPlugin = await lazy(import('eslint-plugin-astro'));
+
   return [
-    ...eslintPluginAstro.configs['flat/recommended'],
-    ...eslintPluginAstro.configs['flat/jsx-a11y-recommended'],
+    ...astroPlugin.configs['flat/recommended'],
+    ...astroPlugin.configs['flat/jsx-a11y-recommended'],
   ];
 }

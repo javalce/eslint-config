@@ -37,6 +37,9 @@ importers:
       eslint-config-flat-gitignore:
         specifier: ^0.3.0
         version: 0.3.0(eslint@9.11.0(jiti@1.21.6))
+      eslint-flat-config-utils:
+        specifier: ^0.4.0
+        version: 0.4.0
       eslint-import-resolver-typescript:
         specifier: ^3.6.3
         version: 3.6.3(@typescript-eslint/parser@8.6.0(eslint@9.11.0(jiti@1.21.6))(typescript@5.6.2))(eslint-plugin-import-x@4.2.1(eslint@9.11.0(jiti@1.21.6))(typescript@5.6.2))(eslint-plugin-import@2.30.0)(eslint@9.11.0(jiti@1.21.6))
@@ -1565,6 +1568,9 @@ packages:
     resolution: {integrity: sha512-0Ndxo4qGhcewjTzw52TK06Mc00aDtHNTdeeW2JfONgDcLkRO/n/BteMRzNVpLQYxdCC/dFEilfM9fjjpGIJ9Og==}
     peerDependencies:
       eslint: ^9.9.1
+
+  eslint-flat-config-utils@0.4.0:
+    resolution: {integrity: sha512-kfd5kQZC+BMO0YwTol6zxjKX1zAsk8JfSAopbKjKqmENTJcew+yBejuvccAg37cvOrN0Mh+DVbeyznuNWEjt4A==}
 
   eslint-import-resolver-node@0.3.9:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
@@ -4989,6 +4995,10 @@ snapshots:
       '@eslint/compat': 1.1.1
       eslint: 9.11.0(jiti@1.21.6)
       find-up-simple: 1.0.0
+
+  eslint-flat-config-utils@0.4.0:
+    dependencies:
+      pathe: 1.1.2
 
   eslint-import-resolver-node@0.3.9:
     dependencies:

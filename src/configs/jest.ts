@@ -1,17 +1,18 @@
-import eslintPluginJest from 'eslint-plugin-jest';
-import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
 
 import { TESTING_FILES, TS_TESTING_FILES } from '../constants';
 import jestConfig from '../rules/jest';
 import { type TypedConfigItem } from '../types';
+import { lazy } from '../utils';
 
-export function jest({ react }: { react: boolean }): TypedConfigItem[] {
+export async function jest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
+  const jestPlugin = await lazy(import('eslint-plugin-jest'));
+
   const config: TypedConfigItem[] = [
     {
       files: TESTING_FILES,
-      ...(eslintPluginJest.configs['flat/recommended'] as TypedConfigItem),
-      ...(eslintPluginJest.configs['flat/style'] as TypedConfigItem),
+      ...(jestPlugin.configs['flat/recommended'] as TypedConfigItem),
+      ...(jestPlugin.configs['flat/style'] as TypedConfigItem),
       languageOptions: {
         globals: {
           ...globals.jest,
@@ -33,9 +34,11 @@ export function jest({ react }: { react: boolean }): TypedConfigItem[] {
   ];
 
   if (react) {
+    const testingLibraryPlugin = await lazy(import('eslint-plugin-testing-library'));
+
     config.push({
       files: TESTING_FILES,
-      ...(eslintPluginTestingLibrary.configs['flat/react'] as TypedConfigItem),
+      ...(testingLibraryPlugin.configs['flat/react'] as TypedConfigItem),
       name: 'testing-library',
     });
   }

@@ -1,3 +1,5 @@
+declare module '@babel/eslint-parser';
+
 declare module 'eslint-plugin-react' {
   export const configs: {
     flat: {

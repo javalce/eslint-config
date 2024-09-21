@@ -1,19 +1,22 @@
-import eslintPluginVitest from '@vitest/eslint-plugin';
-import eslintPluginTestingLibrary from 'eslint-plugin-testing-library';
-
 import { TESTING_FILES } from '../constants';
 import eslintConfigVitest from '../rules/vitest';
 import { type TypedConfigItem } from '../types';
+import { lazy } from '../utils';
 
-export function vitest({ react }: { react: boolean }): TypedConfigItem[] {
+export async function vitest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
+  const [vitestPlugin, testingLibraryPlugin] = await Promise.all([
+    lazy(import('@vitest/eslint-plugin')),
+    lazy(import('eslint-plugin-testing-library')),
+  ] as const);
+
   const config: TypedConfigItem[] = [
     {
       files: TESTING_FILES,
       plugins: {
-        vitest: eslintPluginVitest,
+        vitest: vitestPlugin,
       },
       rules: {
-        ...eslintPluginVitest.configs.recommended.rules,
+        ...vitestPlugin.configs.recommended.rules,
       },
       settings: {
         vitest: {
@@ -22,7 +25,7 @@ export function vitest({ react }: { react: boolean }): TypedConfigItem[] {
       },
       languageOptions: {
         globals: {
-          ...eslintPluginVitest.environments.env.globals,
+          ...vitestPlugin.environments.env.globals,
         },
       },
       name: 'vitest',
@@ -33,7 +36,7 @@ export function vitest({ react }: { react: boolean }): TypedConfigItem[] {
   if (react) {
     config.push({
       files: TESTING_FILES,
-      ...(eslintPluginTestingLibrary.configs['flat/react'] as TypedConfigItem),
+      ...(testingLibraryPlugin.configs['flat/react'] as TypedConfigItem),
       name: 'testing-library',
     });
   }

@@ -1,23 +1,27 @@
 import { resolve } from 'node:path';
 
 import { type Linter } from 'eslint';
-import eslintPluginImport from 'eslint-plugin-import-x';
-import tseslint from 'typescript-eslint';
 
 import { TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
 import { type TypedConfigItem } from '../types';
+import { lazy } from '../utils';
 
-export function typescript({
+export async function typescript({
   tsconfigPath,
 }: {
   tsconfigPath: string | string[];
-}): TypedConfigItem[] {
+}): Promise<TypedConfigItem[]> {
   const project = Array.isArray(tsconfigPath)
     ? tsconfigPath.map((path) => resolveTsconfigPath(path))
     : resolveTsconfigPath(tsconfigPath);
+
+  const [tseslint, importPlugin] = await Promise.all([
+    lazy(import('typescript-eslint')),
+    lazy(import('eslint-plugin-import-x')),
+  ]);
 
   const config = tseslint.config({
     files: [TS_FILES, TSX_FILES],
@@ -26,7 +30,7 @@ export function typescript({
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       {
-        ...eslintPluginImport.configs.typescript,
+        ...importPlugin.configs.typescript,
         name: 'import-x/typescript',
       },
       eslintTypescriptConfig as Linter.Config,

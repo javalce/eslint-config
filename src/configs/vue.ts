@@ -1,7 +1,5 @@
 import type { TypedConfigItem, VueVersion } from '../types';
 
-import tseslint from 'typescript-eslint';
-
 import { VUE_FILES } from '../constants';
 import { lazy } from '../utils';
 
@@ -21,6 +19,8 @@ export async function vue({
   ];
 
   if (typescript) {
+    const tseslint = await lazy(import('typescript-eslint'));
+
     config.push({
       name: 'javalce/vue/typescript',
       files: [VUE_FILES],

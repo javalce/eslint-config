@@ -1,4 +1,6 @@
-import type { OptionsConfig, TypedConfigItem } from './types';
+import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './types';
+
+import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { astro } from './configs/astro';
 import { ignores } from './configs/ignores';
@@ -26,7 +28,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     overrides = [],
   } = options;
 
-  const configs: TypedConfigItem[][] = [];
+  const configs: Awaitable<TypedConfigItem[]>[] = [];
 
   configs.push(ignores(), javascript({ ecmaVersion }));
 
@@ -52,7 +54,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   }
 
   if (enableNext) {
-    configs.push(await nextjs());
+    configs.push(nextjs());
   }
 
   if (enableAstro) {
@@ -61,7 +63,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   if (enableSvelte) {
     configs.push(
-      await svelte({
+      svelte({
         typescript: Boolean(enableTypeScript),
       }),
     );
@@ -69,7 +71,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   if (enableSolidjs) {
     configs.push(
-      await solidjs({
+      solidjs({
         typescript: Boolean(enableTypeScript),
       }),
     );
@@ -77,7 +79,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   if (enableVue) {
     configs.push(
-      await vue({
+      vue({
         ...resolveSubOptions(options, 'vue'),
         typescript: Boolean(enableTypeScript),
       }),
@@ -100,7 +102,11 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     );
   }
 
-  return [...configs.flat(), ...overrides];
+  let composer = new FlatConfigComposer<TypedConfigItem, ConfigNames>();
+
+  composer = composer.append(...configs, ...overrides);
+
+  return composer.toConfigs();
 }
 
 type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;

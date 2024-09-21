@@ -1,16 +1,20 @@
 import { type Linter } from 'eslint';
-import eslintPluginImport from 'eslint-plugin-import-x';
-import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 import { SRC_FILES } from '../constants';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import reactTypescriptRules from '../rules/typescript/react';
 import { type TypedConfigItem } from '../types';
+import { lazy } from '../utils';
 
-export function react({ typescript }: { typescript: boolean }): TypedConfigItem[] {
+export async function react({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+  const [reactPlugin, reactHooksPlugin, jsxA11yPlugin, eslintPluginImport] = await Promise.all([
+    lazy(import('eslint-plugin-react')),
+    lazy(import('eslint-plugin-react-hooks')),
+    lazy(import('eslint-plugin-jsx-a11y')),
+    lazy(import('eslint-plugin-import-x')),
+  ]);
+
   const config: TypedConfigItem[] = [
     ...[
       {

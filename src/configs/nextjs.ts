@@ -1,7 +1,5 @@
 import { URL } from 'node:url';
 
-// @ts-expect-error -- no types available
-import babelParser from '@babel/eslint-parser';
 import { fixupPluginRules } from '@eslint/compat';
 import { type ESLint, type Linter } from 'eslint';
 
@@ -10,7 +8,11 @@ import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
 export async function nextjs(): Promise<TypedConfigItem[]> {
-  const nextjsPlugin = await lazy(import('@next/eslint-plugin-next'));
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- this is a valid use case
+  const [nextjsPlugin, babelParser] = await Promise.all([
+    lazy(import('@next/eslint-plugin-next')),
+    lazy(import('@babel/eslint-parser')),
+  ]);
 
   const babelOptions = {
     presets: (() => {
