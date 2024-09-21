@@ -32,6 +32,7 @@ export interface OptionsConfig {
   react?: boolean | 'next';
   astro?: boolean;
   svelte?: boolean;
+  solidjs?: boolean;
   testing?: 'jest' | 'vitest';
   overrides?: (TypedConfigItem | Linter.Config)[];
 }

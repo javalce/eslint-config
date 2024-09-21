@@ -6,6 +6,7 @@ import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
 import { react } from './configs/react';
+import { solidjs } from './configs/solidjs';
 import { svelte } from './configs/svelte';
 import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
@@ -18,6 +19,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     react: reactFlag,
     astro: enableAstro,
     svelte: enableSvelte,
+    solidjs: enableSolidjs,
     testing: enableTesting,
     overrides = [],
   } = options;
@@ -58,6 +60,14 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   if (enableSvelte) {
     configs.push(
       await svelte({
+        typescript: Boolean(enableTypeScript),
+      }),
+    );
+  }
+
+  if (enableSolidjs) {
+    configs.push(
+      await solidjs({
         typescript: Boolean(enableTypeScript),
       }),
     );
