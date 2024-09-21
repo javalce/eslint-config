@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/javalce/eslint-config/compare/v0.5.0...v0.6.0) (2024-09-21)
+
+### Features
+
+- add SolidJS support with ESLint configuration and update type definitions ([db1c9f7](https://github.com/javalce/eslint-config/commit/db1c9f7bb20b4418e3f85bcb3e95f960fc9d9f39))
+- add Svelte support with ESLint configuration and update type definitions ([22c8239](https://github.com/javalce/eslint-config/commit/22c823961d9ae12759990d4cf06aa87549d24818))
+- add Vue support with ESLint configuration and update type definitions ([c890990](https://github.com/javalce/eslint-config/commit/c890990d98b478f974fdbdbbb5a43c6409f620ae))
+- update ESLint peer dependencies and make several plugins optional ([0938e01](https://github.com/javalce/eslint-config/commit/0938e01dca6c5be1b51b8634fba73d9849cf9bfa))
+
 # [0.5.0](https://github.com/javalce/eslint-config/compare/v0.4.3...v0.5.0) (2024-09-20)
 
 ### Features
