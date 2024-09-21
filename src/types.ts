@@ -26,6 +26,17 @@ export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'p
   plugins?: Record<string, unknown>;
 };
 
+export type VueVersion = 2 | 3;
+
+export interface VueOptions {
+  /**
+   * Vue version. Apply different rules set from `eslint-plugin-vue`.
+   *
+   * @default 3
+   */
+  vueVersion?: VueVersion;
+}
+
 export interface OptionsConfig {
   ecmaVersion?: EcmaVersion;
   typescript?: boolean | string | string[];
@@ -33,6 +44,7 @@ export interface OptionsConfig {
   astro?: boolean;
   svelte?: boolean;
   solidjs?: boolean;
+  vue?: boolean | VueOptions;
   testing?: 'jest' | 'vitest';
   overrides?: (TypedConfigItem | Linter.Config)[];
 }

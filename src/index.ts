@@ -10,6 +10,7 @@ import { solidjs } from './configs/solidjs';
 import { svelte } from './configs/svelte';
 import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
+import { vue } from './configs/vue';
 import { hasPackage } from './utils';
 
 export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
@@ -20,6 +21,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     astro: enableAstro,
     svelte: enableSvelte,
     solidjs: enableSolidjs,
+    vue: enableVue,
     testing: enableTesting,
     overrides = [],
   } = options;
@@ -73,6 +75,15 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     );
   }
 
+  if (enableVue) {
+    configs.push(
+      await vue({
+        ...resolveSubOptions(options, 'vue'),
+        typescript: Boolean(enableTypeScript),
+      }),
+    );
+  }
+
   if (enableTesting === 'jest') {
     configs.push(
       jest({
@@ -90,4 +101,15 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   }
 
   return [...configs.flat(), ...overrides];
+}
+
+type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
+
+function resolveSubOptions<K extends keyof OptionsConfig>(
+  options: OptionsConfig,
+  key: K,
+): ResolvedOptions<OptionsConfig[K]> {
+  return typeof options[key] === 'boolean'
+    ? ({} as ResolvedOptions<OptionsConfig[K]>)
+    : (options[key] as ResolvedOptions<OptionsConfig[K]>);
 }

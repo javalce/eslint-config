@@ -13,6 +13,7 @@ import { solidjs } from '../src/configs/solidjs';
 import { svelte } from '../src/configs/svelte';
 import { typescript } from '../src/configs/typescript';
 import { vitest } from '../src/configs/vitest';
+import { vue } from '../src/configs/vue';
 import { combine } from '../src/utils';
 
 const configs = (await combine(
@@ -30,6 +31,7 @@ const configs = (await combine(
   astro(),
   svelte({ typescript: true }),
   solidjs({ typescript: true }),
+  vue({ typescript: true }),
   jest({ react: true }),
   vitest({ react: true }),
 )) as Linter.Config[];

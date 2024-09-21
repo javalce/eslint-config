@@ -53,3 +53,10 @@ declare module 'eslint-plugin-testing-library' {
     'flat/react': unknown;
   };
 }
+
+declare module 'eslint-plugin-vue' {
+  export const configs: {
+    'flat/recommended': unknown;
+    'flat/vue2-recommended': unknown;
+  };
+}

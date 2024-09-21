@@ -8,6 +8,8 @@ export const TSX_FILES = '**/*.?([cm])tsx';
 
 export const SVELTE_FILES = '**/*.svelte';
 
+export const VUE_FILES = '**/*.vue';
+
 export const SRC_FILES_EXT = '?([cm])[jt]s?(x)';
 
 export const SRC_FILES = '**/*.?([cm])[jt]s?(x)';
