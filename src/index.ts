@@ -1,6 +1,7 @@
 import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './types';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
+import { isPackageExists } from 'local-pkg';
 
 import { astro } from './configs/astro';
 import { ignores } from './configs/ignores';
@@ -14,12 +15,11 @@ import { testingLibrary } from './configs/testing-library';
 import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
-import { hasPackage } from './utils';
 
 export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = 2021,
-    typescript: enableTypeScript = hasPackage('typescript'),
+    typescript: enableTypeScript = isPackageExists('typescript'),
     react: reactFlag,
     astro: enableAstro,
     svelte: enableSvelte,

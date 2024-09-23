@@ -10,20 +10,64 @@ export async function vue({
   typescript: boolean;
   version?: VueVersion;
 }): Promise<TypedConfigItem[]> {
-  const pluginVue = await lazy(import('eslint-plugin-vue'));
+  const [pluginVue, vueParser] = await Promise.all([
+    lazy(import('eslint-plugin-vue')),
+    lazy(import('vue-eslint-parser')),
+  ]);
 
-  const config: TypedConfigItem[] = [
-    ...((version === 3
-      ? pluginVue.configs['flat/recommended']
-      : pluginVue.configs['flat/vue2-recommended']) as TypedConfigItem[]),
+  return [
+    {
+      name: 'javalce/vue/setup',
+      languageOptions: {
+        globals: {
+          computed: 'readonly',
+          defineEmits: 'readonly',
+          defineExpose: 'readonly',
+          defineProps: 'readonly',
+          onMounted: 'readonly',
+          onUnmounted: 'readonly',
+          reactive: 'readonly',
+          ref: 'readonly',
+          shallowReactive: 'readonly',
+          shallowRef: 'readonly',
+          toRef: 'readonly',
+          toRefs: 'readonly',
+          watch: 'readonly',
+          watchEffect: 'readonly',
+        },
+      },
+      plugins: {
+        vue: pluginVue,
+      },
+    },
     {
       name: 'javalce/vue',
       files: [VUE_FILES],
       languageOptions: {
-        globals: {},
+        parser: vueParser,
+        parserOptions: {
+          ecmaFeatures: {
+            jsx: true,
+          },
+          extraFileExtensions: ['.vue'],
+          parser: typescript ? (await lazy(import('typescript-eslint'))).parser : null,
+          sourceType: 'module',
+        },
       },
       rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
+        ...pluginVue.configs.base.rules,
+        ...(version === 2
+          ? {
+              ...pluginVue.configs.essential.rules,
+              ...pluginVue.configs['strongly-recommended'].rules,
+              ...pluginVue.configs.recommended.rules,
+            }
+          : {
+              ...pluginVue.configs['vue3-essential'].rules,
+              ...pluginVue.configs['vue3-strongly-recommended'].rules,
+              ...pluginVue.configs['vue3-recommended'].rules,
+            }),
+        // '@typescript-eslint/explicit-function-return-type': 'off',
         'vue/block-order': [
           'error',
           {
@@ -92,22 +136,4 @@ export async function vue({
       },
     },
   ];
-
-  if (typescript) {
-    const tseslint = await lazy(import('typescript-eslint'));
-
-    config.push({
-      name: 'javalce/vue/typescript',
-      files: [VUE_FILES],
-      languageOptions: {
-        parserOptions: {
-          extraFileExtensions: ['.vue'],
-          parser: tseslint.parser,
-          sourceType: 'module',
-        },
-      },
-    } as TypedConfigItem);
-  }
-
-  return config;
 }

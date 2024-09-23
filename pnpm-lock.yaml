@@ -82,12 +82,18 @@ importers:
       globals:
         specifier: ^15.9.0
         version: 15.9.0
+      local-pkg:
+        specifier: ^0.5.0
+        version: 0.5.0
       svelte-eslint-parser:
         specifier: ^0.41.0
         version: 0.41.1(svelte@4.2.19)
       typescript-eslint:
-        specifier: ^8.6.0
+        specifier: ^8.3.0
         version: 8.6.0(eslint@9.11.0(jiti@1.21.6))(typescript@5.6.2)
+      vue-eslint-parser:
+        specifier: ^9.4.3
+        version: 9.4.3(eslint@9.11.0(jiti@1.21.6))
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.5.0
@@ -117,7 +123,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(conventional-commits-filter@5.0.0)
       eslint:
-        specifier: ^9.11.0
+        specifier: ^9.9.1
         version: 9.11.0(jiti@1.21.6)
       eslint-typegen:
         specifier: ^0.3.2
@@ -2393,6 +2399,10 @@ packages:
   load-tsconfig@0.2.5:
     resolution: {integrity: sha512-IXO6OCs9yg8tMKzfPZ1YmheJbZCiEsnBdcB03l0OcfK9prKnJb96siuHCr5Fl37/yo9DnKU+TLpxzTUspw9shg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
+  local-pkg@0.5.0:
+    resolution: {integrity: sha512-ok6z3qlYyCDS4ZEU27HaU6x/xZa9Whf8jD4ptH5UZTQYZVYeb9bnZ3ojVhiJNLiXK1Hfc0GNbLXcmZ5plLDDBg==}
+    engines: {node: '>=14'}
 
   locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
@@ -5947,6 +5957,11 @@ snapshots:
       wrap-ansi: 9.0.0
 
   load-tsconfig@0.2.5: {}
+
+  local-pkg@0.5.0:
+    dependencies:
+      mlly: 1.7.1
+      pkg-types: 1.2.0
 
   locate-character@3.0.0: {}
 

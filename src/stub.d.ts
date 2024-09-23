@@ -59,7 +59,26 @@ declare module 'eslint-plugin-testing-library' {
 
 declare module 'eslint-plugin-vue' {
   export const configs: {
-    'flat/recommended': unknown;
-    'flat/vue2-recommended': unknown;
+    base: {
+      rules: Record<string, unknown>;
+    };
+    essential: {
+      rules: Record<string, unknown>;
+    };
+    'strongly-recommended': {
+      rules: Record<string, unknown>;
+    };
+    recommended: {
+      rules: Record<string, unknown>;
+    };
+    'vue3-essential': {
+      rules: Record<string, unknown>;
+    };
+    'vue3-strongly-recommended': {
+      rules: Record<string, unknown>;
+    };
+    'vue3-recommended': {
+      rules: Record<string, unknown>;
+    };
   };
 }
