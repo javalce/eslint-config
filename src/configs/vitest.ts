@@ -15,11 +15,6 @@ export async function vitest(): Promise<TypedConfigItem[]> {
       rules: {
         ...vitestPlugin.configs.recommended.rules,
       },
-      settings: {
-        vitest: {
-          typecheck: true,
-        },
-      },
       languageOptions: {
         globals: {
           ...vitestPlugin.environments.env.globals,
