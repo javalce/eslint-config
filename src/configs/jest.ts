@@ -5,10 +5,10 @@ import jestConfig from '../rules/jest';
 import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
-export async function jest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
+export async function jest(): Promise<TypedConfigItem[]> {
   const jestPlugin = await lazy(import('eslint-plugin-jest'));
 
-  const config: TypedConfigItem[] = [
+  return [
     {
       files: TESTING_FILES,
       ...(jestPlugin.configs['flat/recommended'] as TypedConfigItem),
@@ -32,16 +32,4 @@ export async function jest({ react }: { react: boolean }): Promise<TypedConfigIt
       name: 'jest/unbound-method',
     },
   ];
-
-  if (react) {
-    const testingLibraryPlugin = await lazy(import('eslint-plugin-testing-library'));
-
-    config.push({
-      files: TESTING_FILES,
-      ...(testingLibraryPlugin.configs['flat/react'] as TypedConfigItem),
-      name: 'testing-library',
-    });
-  }
-
-  return config;
 }

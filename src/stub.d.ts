@@ -53,6 +53,7 @@ declare module 'eslint-plugin-jest' {
 declare module 'eslint-plugin-testing-library' {
   export const configs: {
     'flat/react': unknown;
+    'flat/vue': unknown;
   };
 }
 

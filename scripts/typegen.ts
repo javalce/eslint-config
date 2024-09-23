@@ -11,6 +11,7 @@ import { nextjs } from '../src/configs/nextjs';
 import { react } from '../src/configs/react';
 import { solidjs } from '../src/configs/solidjs';
 import { svelte } from '../src/configs/svelte';
+import { testingLibrary } from '../src/configs/testing-library';
 import { typescript } from '../src/configs/typescript';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
@@ -32,8 +33,9 @@ const configs = (await combine(
   svelte({ typescript: true }),
   solidjs({ typescript: true }),
   vue({ typescript: true }),
-  jest({ react: true }),
-  vitest({ react: true }),
+  jest(),
+  vitest(),
+  testingLibrary({ react: true, vue: true }),
 )) as Linter.Config[];
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];

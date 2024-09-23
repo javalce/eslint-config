@@ -10,6 +10,7 @@ import { nextjs } from './configs/nextjs';
 import { react } from './configs/react';
 import { solidjs } from './configs/solidjs';
 import { svelte } from './configs/svelte';
+import { testingLibrary } from './configs/testing-library';
 import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
@@ -86,18 +87,12 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     );
   }
 
-  if (enableTesting === 'jest') {
+  if (enableTesting) {
     configs.push(
-      jest({
+      enableTesting === 'jest' ? jest() : vitest(),
+      testingLibrary({
         react: enableReact,
-      }),
-    );
-  }
-
-  if (enableTesting === 'vitest') {
-    configs.push(
-      vitest({
-        react: enableReact,
+        vue: Boolean(enableVue),
       }),
     );
   }

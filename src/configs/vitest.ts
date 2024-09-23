@@ -3,13 +3,10 @@ import eslintConfigVitest from '../rules/vitest';
 import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
-export async function vitest({ react }: { react: boolean }): Promise<TypedConfigItem[]> {
-  const [vitestPlugin, testingLibraryPlugin] = await Promise.all([
-    lazy(import('@vitest/eslint-plugin')),
-    lazy(import('eslint-plugin-testing-library')),
-  ] as const);
+export async function vitest(): Promise<TypedConfigItem[]> {
+  const vitestPlugin = await lazy(import('@vitest/eslint-plugin'));
 
-  const config: TypedConfigItem[] = [
+  return [
     {
       files: TESTING_FILES,
       plugins: {
@@ -32,14 +29,4 @@ export async function vitest({ react }: { react: boolean }): Promise<TypedConfig
     },
     eslintConfigVitest,
   ];
-
-  if (react) {
-    config.push({
-      files: TESTING_FILES,
-      ...(testingLibraryPlugin.configs['flat/react'] as TypedConfigItem),
-      name: 'testing-library',
-    });
-  }
-
-  return config;
 }
