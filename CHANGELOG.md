@@ -1,3 +1,16 @@
+## [0.6.1](https://github.com/javalce/eslint-config/compare/v0.6.0...v0.6.1) (2024-09-23)
+
+### Bug Fixes
+
+- disable deprecated eslint rule in typegen script ([9ee2ec9](https://github.com/javalce/eslint-config/commit/9ee2ec9517852c349a72f1f972fe31d4026fc7fd))
+- update Vue config to use parserOptions and set sourceType to module ([efcd387](https://github.com/javalce/eslint-config/commit/efcd3878c389986a78336f0a8978d974cfe01f4a))
+
+### Features
+
+- add custom Vue rules and configuration for improved linting ([397da1c](https://github.com/javalce/eslint-config/commit/397da1cc0c1c3030e28e7aa938e370654c306d26))
+- add vue-eslint-parser and local-pkg for improved Vue linting support ([c056d89](https://github.com/javalce/eslint-config/commit/c056d891d04e5a7d0e9702d7c15a8b016d5fcd5f))
+- integrate testing-library configuration for Jest and Vitest ([4380072](https://github.com/javalce/eslint-config/commit/4380072105ad52bffbfa79f3ceeb9c0004769dd8))
+
 # [0.6.0](https://github.com/javalce/eslint-config/compare/v0.5.0...v0.6.0) (2024-09-21)
 
 ### Features
