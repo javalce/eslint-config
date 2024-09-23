@@ -21,6 +21,7 @@ const configs = (await combine(
   {
     plugins: {
       '': {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated -- eslint rules
         rules: Object.fromEntries(builtinRules.entries()),
       },
     },
