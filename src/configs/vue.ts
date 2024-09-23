@@ -25,8 +25,11 @@ export async function vue({
       name: 'javalce/vue/typescript',
       files: [VUE_FILES],
       languageOptions: {
-        extraFileExtension: ['.vue'],
-        parser: tseslint.parser,
+        parserOptions: {
+          extraFileExtensions: ['.vue'],
+          parser: tseslint.parser,
+          sourceType: 'module',
+        },
       },
     } as TypedConfigItem);
   }
