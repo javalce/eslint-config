@@ -87,9 +87,16 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     );
   }
 
-  if (enableTesting) {
+  if (enableTesting === 'jest') {
+    configs.push(jest());
+  }
+
+  if (enableTesting === 'vitest') {
+    configs.push(vitest());
+  }
+
+  if (enableTesting && (enableVue || enableReact)) {
     configs.push(
-      enableTesting === 'jest' ? jest() : vitest(),
       testingLibrary({
         react: enableReact,
         vue: Boolean(enableVue),
