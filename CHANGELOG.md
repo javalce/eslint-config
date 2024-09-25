@@ -1,3 +1,9 @@
+## [0.6.2](https://github.com/javalce/eslint-config/compare/v0.6.1...v0.6.2) (2024-09-25)
+
+### Bug Fixes
+
+- update testing configuration to handle jest and vitest separately ([6128691](https://github.com/javalce/eslint-config/commit/6128691fe0e7f5d212f9b6a4bd5623a8c499fefc))
+
 ## [0.6.1](https://github.com/javalce/eslint-config/compare/v0.6.0...v0.6.1) (2024-09-23)
 
 ### Bug Fixes
