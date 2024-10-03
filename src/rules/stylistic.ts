@@ -4,12 +4,35 @@ const config: TypedConfigItem = {
   name: 'javalce/javascript/stylistic',
   rules: {
     /**
+     * Improve readability by enforcing lines between class members.
+     *
+     * 🔧 Fixable - https://eslint.style/rules/js/lines-between-class-members
+     */
+    '@stylistic/lines-between-class-members': [
+      'warn',
+      {
+        /* eslint-disable sort-keys -- prev should come before next for better readability */
+        enforce: [
+          { blankLine: 'always', prev: 'field', next: 'method' },
+          { blankLine: 'always', prev: 'method', next: 'method' },
+          { blankLine: 'never', prev: 'field', next: 'field' },
+        ],
+        /* eslint-enable -- enable disabled rule */
+      },
+    ],
+    /**
      * Disallow the omission of parentheses when invoking a constructor with
      * no arguments.
      *
      * 🔧 Fixable - https://eslint.style/rules/js/new-parens
      */
     '@stylistic/new-parens': 'warn',
+    /**
+     * Disallow the use of extra semicolons.
+     *
+     * 🔧 Fixable - https://eslint.style/rules/js/no-extra-semi
+     */
+    '@stylistic/no-extra-semi': 'error',
     /**
      * Disallow floating decimals.
      *
