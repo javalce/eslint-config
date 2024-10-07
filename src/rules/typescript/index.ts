@@ -74,6 +74,14 @@ const config: TypedConfigItem = {
       },
     ],
     /**
+     * Do not wrap utility functions in an extra class, instead put them in a top level of an ECMAScript module.
+     *
+     * Allow empty classes to be used with a decorator. Angular and NestJS use this pattern.
+     *
+     * 🚫 Not fixable - https://typescript-eslint.io/rules/no-extraneous-class/
+     */
+    '@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
+    /**
      * Disallow members of unions and intersections that do nothing or override type information.
      *
      * 🚫 Not fixable - https://typescript-eslint.io/rules/no-redundant-type-constituents/
