@@ -1,3 +1,13 @@
+# [0.7.0](https://github.com/javalce/eslint-config/compare/v0.6.2...v0.7.0) (2024-10-08)
+
+### Features
+
+- add project type support and update TypeScript rules configuration ([8039d3b](https://github.com/javalce/eslint-config/commit/8039d3b8378c94a7879be02b9eb98d13e5719f34))
+- add rule to allow empty classes with decorators in TypeScript ([7825cc5](https://github.com/javalce/eslint-config/commit/7825cc5fee48228b1180d6a78513042ebf62ab54))
+- add stylistic rules for class member spacing and extra semicolons ([9b18876](https://github.com/javalce/eslint-config/commit/9b18876ba264e704ffe331d06944bad9ff3be434))
+- add support for project type in options configuration ([97be693](https://github.com/javalce/eslint-config/commit/97be6934a56d9c69c7983fcf9a92ec4fd62092a2))
+- remove TypeScript ESLint configuration for React rules ([90682c8](https://github.com/javalce/eslint-config/commit/90682c8f4f3471a12f4565494cc89a9dd88c9a52))
+
 ## [0.6.2](https://github.com/javalce/eslint-config/compare/v0.6.1...v0.6.2) (2024-09-25)
 
 ### Bug Fixes
