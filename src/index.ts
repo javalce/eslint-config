@@ -42,6 +42,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     configs.push(
       typescript({
         tsconfigPath,
+        type: options.type,
       }),
     );
   }

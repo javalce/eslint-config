@@ -37,6 +37,8 @@ export interface VueOptions {
   vueVersion?: VueVersion;
 }
 
+export type ProjectType = 'app' | 'lib';
+
 export interface OptionsConfig {
   ecmaVersion?: EcmaVersion;
   typescript?: boolean | string | string[];
@@ -46,5 +48,6 @@ export interface OptionsConfig {
   solidjs?: boolean;
   vue?: boolean | VueOptions;
   testing?: 'jest' | 'vitest';
+  type?: ProjectType;
   overrides?: (TypedConfigItem | Linter.Config)[];
 }
