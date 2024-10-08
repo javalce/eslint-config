@@ -3,7 +3,6 @@ import { type Linter } from 'eslint';
 import { SRC_FILES } from '../constants';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
-import reactTypescriptRules from '../rules/typescript/react';
 import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
@@ -15,7 +14,7 @@ export async function react({ typescript }: { typescript: boolean }): Promise<Ty
     lazy(import('eslint-plugin-import-x')),
   ]);
 
-  const config: TypedConfigItem[] = [
+  return [
     ...[
       {
         ...(reactPlugin.configs.flat.recommended as TypedConfigItem),
@@ -49,11 +48,5 @@ export async function react({ typescript }: { typescript: boolean }): Promise<Ty
       ...conf,
       files: [SRC_FILES],
     })),
-  ];
-
-  if (typescript) {
-    config.push(reactTypescriptRules);
-  }
-
-  return config;
+  ] satisfies TypedConfigItem[];
 }
