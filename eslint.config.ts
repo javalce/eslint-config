@@ -1,6 +1,7 @@
 import { defineConfig } from './src/index';
 
 export default defineConfig({
+  type: 'lib',
   overrides: [
     {
       files: ['src/rules/**/*.ts'],
