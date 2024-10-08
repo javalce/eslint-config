@@ -6,13 +6,15 @@ import { TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
-import { type TypedConfigItem } from '../types';
+import { type ProjectType, type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
 export async function typescript({
   tsconfigPath,
+  type = 'app',
 }: {
   tsconfigPath: string | string[];
+  type?: ProjectType;
 }): Promise<TypedConfigItem[]> {
   const project = Array.isArray(tsconfigPath)
     ? tsconfigPath.map((path) => resolveTsconfigPath(path))
@@ -48,6 +50,14 @@ export async function typescript({
           project,
         },
       },
+    },
+    rules: {
+      ...(type === 'app'
+        ? {
+            '@typescript-eslint/explicit-function-return-type': 'off',
+            '@typescript-eslint/no-floating-promises': 'off',
+          }
+        : {}),
     },
     name: 'javalce/typescript/setup',
   });

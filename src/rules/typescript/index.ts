@@ -5,6 +5,8 @@ import type { TypedConfigItem } from '../../types';
  * to disable them.
  */
 const disabledRules: TypedConfigItem['rules'] = {
+  // Allow the use of `!` for non-null assertions.
+  '@typescript-eslint/no-non-null-assertion': 'off',
   // Normally, it's used by frameworks like Astro or Next.js or bundlers like Vite to reference it's types in a env.d.ts file.
   '@typescript-eslint/triple-slash-reference': 'off',
 };

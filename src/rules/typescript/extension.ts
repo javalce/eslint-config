@@ -22,13 +22,6 @@ const config: TypedConfigItem = {
      */
     '@typescript-eslint/no-loop-func': 'error',
     /**
-     * Disallow variable declarations from shadowing variables declared in the
-     * outer scope.
-     *
-     * 🚫 Not fixable - https://typescript-eslint.io/rules/no-shadow/
-     */
-    '@typescript-eslint/no-shadow': 'error',
-    /**
      * Disallow unused variables.
      *
      * 🚫 Not fixable - https://typescript-eslint.io/rules/no-unused-vars/
