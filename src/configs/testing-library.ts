@@ -1,4 +1,7 @@
+import type { ESLint, Linter } from 'eslint';
 import type { TypedConfigItem } from '../types';
+
+import { fixupPluginRules } from '@eslint/compat';
 
 import { TESTING_FILES } from '../constants';
 import { lazy } from '../utils';
@@ -10,14 +13,22 @@ export async function testingLibrary({
   react: boolean;
   vue: boolean;
 }): Promise<TypedConfigItem[]> {
-  const config: TypedConfigItem[] = [];
-
   const testingLibraryPlugin = await lazy(import('eslint-plugin-testing-library'));
+  const config: TypedConfigItem[] = [
+    {
+      files: TESTING_FILES,
+      plugins: {
+        'testing-library': fixupPluginRules(testingLibraryPlugin as ESLint.Plugin),
+      },
+    },
+  ];
 
   if (react) {
     config.push({
       files: TESTING_FILES,
-      ...(testingLibraryPlugin.configs['flat/react'] as TypedConfigItem),
+      rules: {
+        ...(testingLibraryPlugin.configs.react.rules as Linter.RulesRecord),
+      },
       name: 'testing-library/react',
     });
   }
@@ -25,7 +36,9 @@ export async function testingLibrary({
   if (vue) {
     config.push({
       files: TESTING_FILES,
-      ...(testingLibraryPlugin.configs['flat/vue'] as TypedConfigItem),
+      rules: {
+        ...(testingLibraryPlugin.configs.vue.rules as Linter.RulesRecord),
+      },
       name: 'testing-library/vue',
     });
   }

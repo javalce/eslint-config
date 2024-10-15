@@ -52,8 +52,8 @@ declare module 'eslint-plugin-jest' {
 
 declare module 'eslint-plugin-testing-library' {
   export const configs: {
-    'flat/react': unknown;
-    'flat/vue': unknown;
+    react: { rules: Record<string, unknown> };
+    vue: { rules: Record<string, unknown> };
   };
 }
 
