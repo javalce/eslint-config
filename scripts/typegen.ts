@@ -28,7 +28,7 @@ const configs = (await combine(
   },
   javascript({ ecmaVersion: 2021 }),
   typescript({ tsconfigPath: 'tsconfig.json' }),
-  react({ typescript: true }),
+  react(),
   nextjs(),
   astro(),
   svelte({ typescript: true }),

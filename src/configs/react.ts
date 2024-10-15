@@ -6,7 +6,7 @@ import reactRules from '../rules/react';
 import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
-export async function react({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+export async function react(): Promise<TypedConfigItem[]> {
   const [reactPlugin, reactHooksPlugin, jsxA11yPlugin, eslintPluginImport] = await Promise.all([
     lazy(import('eslint-plugin-react')),
     lazy(import('eslint-plugin-react-hooks')),

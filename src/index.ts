@@ -48,11 +48,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   }
 
   if (enableReact) {
-    configs.push(
-      react({
-        typescript: Boolean(enableTypeScript),
-      }),
-    );
+    configs.push(react());
   }
 
   if (enableNext) {
