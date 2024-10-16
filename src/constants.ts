@@ -10,6 +10,12 @@ export const SVELTE_FILES = '**/*.svelte';
 
 export const VUE_FILES = '**/*.vue';
 
+export const ASTRO_FILES = '**/*.astro';
+
+export const ASTRO_JS_FILES = '**/*.astro/*.js';
+
+export const ASTRO_TS_FILES = '**/*.astro/*.ts';
+
 export const SRC_FILES_EXT = '?([cm])[jt]s?(x)';
 
 export const SRC_FILES = '**/*.?([cm])[jt]s?(x)';

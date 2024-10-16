@@ -56,7 +56,11 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   }
 
   if (enableAstro) {
-    configs.push(astro());
+    configs.push(
+      astro({
+        typescript: Boolean(enableTypeScript),
+      }),
+    );
   }
 
   if (enableSvelte) {

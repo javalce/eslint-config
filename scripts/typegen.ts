@@ -30,7 +30,7 @@ const configs = (await combine(
   typescript({ tsconfigPath: 'tsconfig.json' }),
   react(),
   nextjs(),
-  astro(),
+  astro({ typescript: true }),
   svelte({ typescript: true }),
   solidjs({ typescript: true }),
   vue({ typescript: true }),
