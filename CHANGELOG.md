@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/javalce/eslint-config/compare/v0.7.0...v0.7.1) (2024-10-16)
+
+### Bug Fixes
+
+- configurec correctly testing-library eslint plugin ([33b04a1](https://github.com/javalce/eslint-config/commit/33b04a1e8edc4395c638821bfb174445bcb014ec))
+- remove unused typescript option on react config ([a126cee](https://github.com/javalce/eslint-config/commit/a126ceefe1fe9ace9a2e1fb7c7cf9acaccf28699))
+
 # [0.7.0](https://github.com/javalce/eslint-config/compare/v0.6.2...v0.7.0) (2024-10-08)
 
 ### Features
