@@ -20,27 +20,26 @@ export async function testingLibrary({
       plugins: {
         'testing-library': fixupPluginRules(testingLibraryPlugin as ESLint.Plugin),
       },
+      name: 'testing-library/plugin',
     },
   ];
 
-  if (react) {
-    config.push({
+  function makeConfig(name: 'react' | 'vue'): TypedConfigItem {
+    return {
       files: TESTING_FILES,
       rules: {
-        ...(testingLibraryPlugin.configs.react.rules as Linter.RulesRecord),
+        ...(testingLibraryPlugin.configs[name].rules as Linter.RulesRecord),
       },
-      name: 'testing-library/react',
-    });
+      name: `testing-library/${name}`,
+    };
+  }
+
+  if (react) {
+    config.push(makeConfig('react'));
   }
 
   if (vue) {
-    config.push({
-      files: TESTING_FILES,
-      rules: {
-        ...(testingLibraryPlugin.configs.vue.rules as Linter.RulesRecord),
-      },
-      name: 'testing-library/vue',
-    });
+    config.push(makeConfig('vue'));
   }
 
   return config;
