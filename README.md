@@ -14,7 +14,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 > [!NOTE]
 > This configuration is designed to be used with Prettier for code formatting. You can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config).
 
-- Supports ESLint v9 or v8.40.0+
+- Supports ESLint v9
 - [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files) file format
 - Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
 - Designed to work with TypeScript, React, Next.js, Node.js, and more smoothly out of the box
@@ -120,16 +120,6 @@ export default defineConfig({
 });
 ```
 
-### TypeScript + React
-
-When you enable both TypeScript and React configs, it will turn off some rules that I think are a bit problematic when using TypeScript with React.
-
-- `@typescript-eslint/explicit-function-return-type`: This rule is turned off because it's troublesome to define the return type of custom React hooks, for example.
-- `@typescript-eslint/no-confusing-void-expression`: This rule is turned off because of jsx expressions that return `void` are common in React.
-- `@typescript-eslint/no-floating-promises`: This rule is turned off because it's common to use promises in React components.
-- `@typescript-eslint/no-non-null-assertion`: This rule is turned off because it's common to use non-null assertions in React components.
-- `@typescript-eslint/no-shadow`: This rule is turned off because it's common to shadow variables in React components. For example, when you destructure props or in a callback function.
-
 ## Next.js
 
 To enable Next.js support, you need to install all the react plugins and the `@next/eslint-plugin-next` package:
@@ -153,10 +143,10 @@ The next.js config will only load the `@next/eslint-plugin-next` plugin and the 
 
 ## Svelte
 
-To enable Svelte support, you need to install the `eslint-plugin-svelte` package:
+To enable Svelte support, you need to install the `eslint-plugin-svelte` and `svelte-eslint-parser` package:
 
 ```bash
-pnpm add --save-dev eslint-plugin-svelte
+pnpm add --save-dev eslint-plugin-svelte svelte-eslint-parser
 ```
 
 Then, update your ESLint configuration file to enable the Svelte config:
@@ -171,7 +161,13 @@ export default defineConfig({
 
 ## Solidjs
 
-To enable Solidjs support, you need to enable the Solidjs config:
+To enable Solidjs support, you need to install the `eslint-plugin-solid` package:
+
+```bash
+pnpm add --save-dev eslint-plugin-solid
+```
+
+Then, update your ESLint configuration file to enable the Solidjs config:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
@@ -183,10 +179,10 @@ export default defineConfig({
 
 ## Vue
 
-To enable Vue support, you need to install the `eslint-plugin-vue` package:
+To enable Vue support, you need to install the `eslint-plugin-vue` and `vue-eslint-parser` package:
 
 ```bash
-pnpm add --save-dev eslint-plugin-vue
+pnpm add --save-dev eslint-plugin-vue vue-eslint-parser
 ```
 
 Then, update your ESLint configuration file to enable the Vue config:
@@ -215,10 +211,10 @@ export default defineConfig({
 
 ## Astro
 
-To enable Astro support, you need to install the `astro-eslint-plugin` package:
+To enable Astro support, you need to install the `astro-eslint-plugin` and `astro-eslint-parser` package:
 
 ```bash
-pnpm add --save-dev astro-eslint-plugin
+pnpm add --save-dev astro-eslint-plugin astro-eslint-parser
 ```
 
 Then, update your ESLint configuration file to enable the Astro config:
@@ -273,21 +269,21 @@ export default defineConfig({
 });
 ```
 
-### Testing + React
+### Testing + React or Vue
 
-To enable testing with React, you need to enable both testing and react configs. Also, you need to install the `eslint-plugin-testing-library` package and the testing and react plugins:
-
-```bash
-pnpm add --save-dev eslint-plugin-testing-library
-```
-
-Then, update your ESLint configuration file to enable the React and Testing configs:
+To enable testing with React or Vue, you only need to enable the respective config and the testing config and it will load the recommended rules for the `@testing-library` package.
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  react: true,
-  testing: 'jest', // or 'vitest'
+  react: true, // or vue
+  testing: 'jest', // or vitest
 });
+```
+
+Also, you need to install the `eslint-plugin-testing-library` package:
+
+```bash
+pnpm add --save-dev eslint-plugin-testing-library
 ```
