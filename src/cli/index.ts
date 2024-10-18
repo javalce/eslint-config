@@ -3,6 +3,7 @@ import { getPackageInfo } from 'local-pkg';
 
 import { add } from './commands/add';
 import { init } from './commands/init';
+import { handleError } from './utils/handle-error';
 
 process.on('SIGINT', () => process.exit(0));
 process.on('SIGTERM', () => process.exit(0));
@@ -21,4 +22,6 @@ async function main(): Promise<void> {
   program.parse();
 }
 
-void main();
+export function runCli(): void {
+  main().catch(handleError);
+}
