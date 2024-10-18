@@ -1,25 +1,24 @@
 import { Command } from 'commander';
+import { getPackageInfo } from 'local-pkg';
 
 import { add } from './commands/add';
 import { init } from './commands/init';
-import { getPackageInfo } from './utils/get-package-info';
-import { logger } from './utils/logger';
 
 process.on('SIGINT', () => process.exit(0));
 process.on('SIGTERM', () => process.exit(0));
 
 async function main(): Promise<void> {
-  const packageInfo = getPackageInfo();
+  const packageInfo = await getPackageInfo('@javalce/eslint-config');
 
   const program = new Command()
-    .name(packageInfo.name ?? '')
+    .name(packageInfo?.name ?? '')
     .description('A CLI tool for managing your ESLint config')
     .helpOption('-h, --help', 'Display this help message')
-    .version(packageInfo.version ?? '', '-v, --version', 'Display the current version');
+    .version(packageInfo?.version ?? '', '-v, --version', 'Display the current version');
 
   program.addCommand(init).addCommand(add);
 
-  await program.parseAsync();
+  program.parse();
 }
 
-main().catch(logger.error);
+void main();

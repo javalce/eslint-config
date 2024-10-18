@@ -5,6 +5,7 @@ export interface Logger {
   warn: (...args: unknown[]) => void;
   info: (...args: unknown[]) => void;
   success: (...args: unknown[]) => void;
+  log: (...args: unknown[]) => void;
   break: () => void;
 }
 
@@ -13,7 +14,7 @@ export type Framework = (typeof FRAMEWORKS)[keyof typeof FRAMEWORKS];
 export type TestingFramework = (typeof TESTING_FRAMEWORKS)[keyof typeof TESTING_FRAMEWORKS];
 
 export interface Config {
-  frameworks?: Framework[];
-  testing?: TestingFramework;
-  projectType?: 'app' | 'lib';
+  framework: Framework | null;
+  testing: TestingFramework | null;
+  library: boolean;
 }

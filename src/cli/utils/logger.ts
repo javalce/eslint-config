@@ -17,6 +17,9 @@ export const logger: Logger = {
   success: (...args: unknown[]) => {
     console.log(chalk.green(...args));
   },
+  log: (...args: unknown[]) => {
+    console.log(...args);
+  },
   break: () => {
     console.log('');
   },

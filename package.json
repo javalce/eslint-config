@@ -46,6 +46,7 @@
   },
   "prettier": "@javalce/prettier-config",
   "dependencies": {
+    "@antfu/ni": "^0.23.0",
     "@babel/core": "^7.25.8",
     "@babel/eslint-parser": "^7.25.8",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
@@ -59,22 +60,22 @@
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import-x": "^4.3.1",
     "eslint-plugin-unicorn": "^56.0.0",
-    "fs-extra": "^11.2.0",
+    "execa": "^9.4.1",
     "globals": "^15.11.0",
     "local-pkg": "^0.5.0",
+    "ora": "^8.1.0",
     "prompts": "^2.4.2",
-    "typescript-eslint": "^8.9.0",
+    "typescript-eslint": "^8.10.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
-    "@eslint/config-inspector": "^0.5.4",
+    "@eslint/config-inspector": "^0.5.5",
     "@javalce/prettier-config": "^1.0.2",
     "@types/eslint": "^9.6.1",
     "@types/eslint__js": "^8.42.3",
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.7.5",
+    "@types/node": "^22.7.6",
     "@types/prompts": "^2.4.9",
     "bumpp": "^9.7.1",
     "conventional-changelog-cli": "^5.0.0",
@@ -88,7 +89,6 @@
     "svelte": "^4.2.19",
     "tsup": "^8.3.0",
     "tsx": "^4.19.1",
-    "type-fest": "^4.26.1",
     "typescript": "5.6.3"
   },
   "peerDependencies": {
