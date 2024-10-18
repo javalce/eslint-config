@@ -31,12 +31,6 @@ export const init = new Command()
           message: 'Select the testing framework you use',
           choices: TESTING_FRAMEWORK_OPTIONS,
         },
-        {
-          type: 'confirm',
-          name: 'library',
-          message: 'Are you creating a library?',
-          initial: false,
-        },
       ]);
 
       const { framework, testing } = options;
@@ -47,7 +41,7 @@ export const init = new Command()
       // Display the dependencies
       logger.info("The config that you've selected requires the following dependencies:");
       logger.break();
-      logger.log(chalk.white(deps.join(' ')));
+      logger.log(chalk.blue(deps.join(' ')));
       logger.break();
 
       const { confirm } = (await prompts({
@@ -70,7 +64,7 @@ export const init = new Command()
 
 function getDependencies(framework: Framework | null, testing: TestingFramework | null): string[] {
   const spinner = ora('Collecting dependencies...').start();
-  const deps = new Set<string>(['eslint']);
+  const deps = new Set<string>(['eslint', '@javalce/eslint-config']);
 
   if (framework) {
     DEPENDENCIES_MAP[framework].forEach((dep) => deps.add(dep));
@@ -105,7 +99,7 @@ async function installDependencies(deps: string[]): Promise<void> {
   }
 }
 
-async function writeEslintConfig({ framework, library, testing }: Config): Promise<void> {
+async function writeEslintConfig({ framework, testing }: Config): Promise<void> {
   const isESMModule = await isPackageTypeModule();
   const configFilename = isESMModule ? 'eslint.config.mjs' : 'eslint.config.js';
 
@@ -126,7 +120,7 @@ export default defineConfig({
     config += `  testing: '${testing}',\n`;
   }
 
-  if (library) {
+  if (framework === null) {
     config += `  type: 'lib',\n`;
   }
 
