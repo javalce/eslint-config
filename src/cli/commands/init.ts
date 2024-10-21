@@ -68,9 +68,6 @@ function getDependencies(framework: Framework | null, testing: TestingFramework 
 
   if (framework) {
     DEPENDENCIES_MAP[framework].forEach((dep) => deps.add(dep));
-    if (framework === 'next') {
-      DEPENDENCIES_MAP.react.forEach((dep) => deps.add(dep));
-    }
   }
 
   if (testing) {

@@ -68,7 +68,12 @@ export const DEPENDENCIES_MAP: Record<Framework | TestingFramework | 'testing-li
       'eslint-plugin-react-hooks',
       'eslint-plugin-jsx-a11y',
     ],
-    [FRAMEWORKS.NEXT]: ['@next/eslint-plugin-next'],
+    [FRAMEWORKS.NEXT]: [
+      'eslint-plugin-react',
+      'eslint-plugin-react-hooks',
+      'eslint-plugin-jsx-a11y',
+      '@next/eslint-plugin-next',
+    ],
     [FRAMEWORKS.VUE]: ['eslint-plugin-vue', 'vue-eslint-parser'],
     [FRAMEWORKS.SVELTE]: ['eslint-plugin-svelte', 'svelte-eslint-parser'],
     [FRAMEWORKS.SOLIDJS]: ['eslint-plugin-solid'],
