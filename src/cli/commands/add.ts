@@ -1,19 +1,16 @@
 import type { Framework, TestingFramework } from '../types';
 
 import fs from 'node:fs/promises';
-import path from 'node:path';
 
 import chalk from 'chalk';
 import { Command, createArgument } from 'commander';
-import { execa } from 'execa';
-import { loadPackageJSON } from 'local-pkg';
 import ora from 'ora';
 
 import { DEPENDENCIES_MAP, FRAMEWORKS, TESTING_FRAMEWORKS } from '../constants';
-import { findEslintConfigFile } from '../utils/get-eslint-config';
+import { getEslintConfigPath } from '../utils/get-eslint-config';
 import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
-import { getPackageManager } from '../utils/npm-utils';
+import { getPackageJson, installDependencies } from '../utils/npm-utils';
 
 export const add = new Command()
   .name('add')
@@ -27,15 +24,7 @@ export const add = new Command()
   .action(async (framework: Framework | TestingFramework) => {
     await ensureEslintIsInstalled();
 
-    const eslintConfigFile = findEslintConfigFile();
-
-    if (!eslintConfigFile) {
-      handleError('ESLint config file not found');
-
-      return;
-    }
-
-    await checkEslintConfigFile(eslintConfigFile, framework);
+    await checkEslintConfigFile(framework);
 
     const deps = getDependencies(framework);
 
@@ -50,12 +39,10 @@ export const add = new Command()
   })
   .showHelpAfterError();
 
-async function checkEslintConfigFile(
-  eslintConfigFile: string,
-  framework: Framework | TestingFramework,
-): Promise<void> {
+async function checkEslintConfigFile(framework: Framework | TestingFramework): Promise<void> {
   const spinner = ora('Checking ESLint config file...').start();
-  const content = await fs.readFile(path.resolve(process.cwd(), eslintConfigFile), 'utf-8');
+  const eslintConfigFile = getEslintConfigPath();
+  const content = await fs.readFile(eslintConfigFile, 'utf-8');
   const lines = content.split('\n');
 
   const configLine = lines.find((line) =>
@@ -78,27 +65,18 @@ async function checkEslintConfigFile(
 
 async function ensureEslintIsInstalled(): Promise<void> {
   const spinner = ora('Checking ESLint installation...').start();
-  const packageJson = await loadPackageJSON();
+  const packageJson = await getPackageJson();
 
-  if (!packageJson) {
-    spinner.fail();
-    handleError(`The ${chalk.redBright.bold('package.json')} file was not found`);
-
-    return;
-  }
-
-  if (!packageJson.devDependencies) {
-    spinner.fail();
-    handleError('Missing devDependencies in your package.json');
-
-    return;
-  }
-
-  const deps = Object.keys(packageJson.devDependencies);
+  const deps = Object.keys(packageJson.devDependencies ?? {});
 
   if (!deps.includes('eslint')) {
     spinner.fail();
     handleError('ESLint is not installed in your project');
+  }
+
+  if (!deps.includes('@javalce/eslint-config')) {
+    spinner.fail();
+    handleError('The config for the framework you want to add requires @javalce/eslint-config');
   }
 
   spinner.succeed();
@@ -117,17 +95,4 @@ function getDependencies(framework: Framework | TestingFramework): string[] {
   spinner.succeed();
 
   return Array.from(deps);
-}
-
-async function installDependencies(deps: string[]): Promise<void> {
-  const packageManager = await getPackageManager();
-  const spinner = ora('Installing dependencies...').start();
-
-  try {
-    await execa(packageManager, [packageManager === 'npm' ? 'install' : 'add', '-D', ...deps]);
-    spinner.succeed();
-  } catch (error) {
-    spinner.fail();
-    handleError(error);
-  }
 }

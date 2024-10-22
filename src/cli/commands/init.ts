@@ -4,14 +4,13 @@ import fs from 'node:fs/promises';
 
 import chalk from 'chalk';
 import { Command } from 'commander';
-import { execa } from 'execa';
 import ora from 'ora';
 import prompts from 'prompts';
 
 import { DEPENDENCIES_MAP, FRAMEWORK_OPTIONS, TESTING_FRAMEWORK_OPTIONS } from '../constants';
 import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
-import { getPackageManager, isPackageTypeModule } from '../utils/npm-utils';
+import { installDependencies, isPackageTypeModule } from '../utils/npm-utils';
 
 export const init = new Command()
   .name('init')
@@ -81,19 +80,6 @@ function getDependencies(framework: Framework | null, testing: TestingFramework 
   spinner.succeed();
 
   return Array.from(deps);
-}
-
-async function installDependencies(deps: string[]): Promise<void> {
-  const packageManager = await getPackageManager();
-  const spinner = ora('Installing dependencies...').start();
-
-  try {
-    await execa(packageManager, [packageManager === 'npm' ? 'install' : 'add', '-D', ...deps]);
-    spinner.succeed();
-  } catch (error) {
-    spinner.fail();
-    handleError(error);
-  }
 }
 
 async function writeEslintConfig({ framework, testing }: Config): Promise<void> {
