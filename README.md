@@ -19,26 +19,34 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 - Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
 - Designed to work with TypeScript, React, Next.js, Node.js, and more smoothly out of the box
 - Some rules can be auto-fixed with `eslint --fix`
-- Stylistic rules are disabled because they are intented to be used with Prettier (the formatter I like to use)
-- A few stylistic rules are enabled because they are not covered by Prettier
+- Stylistic rules that are not covered by Prettier are enabled by `@stylistic/eslint-plugin`
 
 > Thanks to [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and reference and [vercel/style-guide](https://github.com/vercel/style-guide) for the amazing eslint rules and config for JavaScript, TypeScript and React.
 
-## Installation
+> [!NOTE]
+> For the examples below, I'm using `pnpm` as the package manager, but you can use `npm`, `yarn` or `bun` as well.
+
+## Started Wizard
+
+It is provided CLI tool to help you setup your project with ESLint. It also supports adding new configurations to an existing project.
+
+### Initialize ESLint config
 
 ```bash
-# If you use npm
-npm install --save-dev eslint @javalce/eslint-config
-
-# If you use yarn
-yarn add --dev eslint @javalce/eslint-config
-
-# If you use pnpm
-pnpm add --save-dev eslint @javalce/eslint-config
+pnpx @javalce/eslint-config init
 ```
 
-> [!NOTE]
-> From now on, I will assume that you are using `pnpm` as your package manager in the examples.
+### Add new configuration
+
+```bash
+pnpx @javalce/eslint-config add react # or the config for the framework you want
+```
+
+## Manual installation
+
+```bash
+pnpm add --save-dev eslint @javalce/eslint-config
+```
 
 ## Basic Usage
 
