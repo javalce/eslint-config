@@ -1,3 +1,19 @@
+# [0.8.0-beta.1](https://github.com/javalce/eslint-config/compare/v0.7.1...v0.8.0-beta.1) (2024-10-22)
+
+### Bug Fixes
+
+- remove library option from CLI init and update dependency handling ([3ceb538](https://github.com/javalce/eslint-config/commit/3ceb538fe1ca59c55a08aae3b0fbdc9c3dc3d530))
+- update dependencies for Next.js framework and remove redundant dependency handling ([ae43f5f](https://github.com/javalce/eslint-config/commit/ae43f5fdd49323e4827c5c03f6b0cab768ea4fa1))
+
+### Features
+
+- add CLI commands for project initialization and config management, and update dependencies ([09bef79](https://github.com/javalce/eslint-config/commit/09bef7960ab536f352d54f88df0509e45516920d))
+- add CLI entry point and enhance CLI execution flow ([6f466c1](https://github.com/javalce/eslint-config/commit/6f466c151e686892714262a84286115df481556a))
+- add Zod validation for CLI init options and define frameworks/constants ([e16f971](https://github.com/javalce/eslint-config/commit/e16f97170311561008242962b8a5a1782c5c132e))
+- enhance CLI 'add' command with ESLint config checks and dependency installation ([29e9180](https://github.com/javalce/eslint-config/commit/29e9180b03ddcae8f56c60cecf6f7688d9de7778))
+- enhance CLI initialization with dynamic ESLint config generation and dependency management ([e22b2d6](https://github.com/javalce/eslint-config/commit/e22b2d6f6c86028c63c2944df3be7d7509bb9bc6))
+- implement CLI logger and basic signal handling ([b1ae12d](https://github.com/javalce/eslint-config/commit/b1ae12d943f83d0420a8d9fdac6d2cfc42a142d9))
+
 ## [0.7.1](https://github.com/javalce/eslint-config/compare/v0.7.0...v0.7.1) (2024-10-16)
 
 ### Bug Fixes
