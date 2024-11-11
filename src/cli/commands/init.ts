@@ -71,10 +71,10 @@ function getDependencies(framework: Framework | null, testing: TestingFramework 
 
   if (testing) {
     DEPENDENCIES_MAP[testing].forEach((dep) => deps.add(dep));
-  }
 
-  if (framework && ['react', 'next', 'vue'].includes(framework)) {
-    DEPENDENCIES_MAP['testing-library'].forEach((dep) => deps.add(dep));
+    if (framework && ['react', 'next', 'vue'].includes(framework)) {
+      DEPENDENCIES_MAP['testing-library'].forEach((dep) => deps.add(dep));
+    }
   }
 
   spinner.succeed();
@@ -84,7 +84,7 @@ function getDependencies(framework: Framework | null, testing: TestingFramework 
 
 async function writeEslintConfig({ framework, testing }: Config): Promise<void> {
   const isESMModule = await isPackageTypeModule();
-  const configFilename = isESMModule ? 'eslint.config.mjs' : 'eslint.config.js';
+  const configFilename = isESMModule ? 'eslint.config.js' : 'eslint.config.mjs';
 
   let config = `import { defineConfig } from '@javalce/eslint-config';
 
