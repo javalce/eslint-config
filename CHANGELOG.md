@@ -1,3 +1,9 @@
+# [0.8.0-beta.2](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.1...v0.8.0-beta.2) (2024-11-11)
+
+### Bug Fixes
+
+- correct dependency handling and adjust ESLint config filename order ([943ef85](https://github.com/javalce/eslint-config/commit/943ef852bdc0ca2019a06bf4a649d996ee55ce7a))
+
 # [0.8.0-beta.1](https://github.com/javalce/eslint-config/compare/v0.7.1...v0.8.0-beta.1) (2024-10-22)
 
 ### Bug Fixes
