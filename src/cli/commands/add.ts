@@ -24,23 +24,51 @@ export const add = new Command()
   .action(async (framework: Framework | TestingFramework) => {
     await ensureEslintIsInstalled();
 
-    await checkEslintConfigFile(framework);
-
     const deps = getDependencies(framework);
 
-    logger.info(`The ${chalk.magentaBright(framework)} config needs the following dependencies:`);
-    logger.break();
-    logger.log(chalk.blueBright(deps.join(' ')));
-    logger.break();
+    if (!(await validateDependenciesPresence(framework, deps))) {
+      logger.info(`The ${chalk.magentaBright(framework)} config needs the following dependencies:`);
+      logger.break();
+      logger.log(chalk.blueBright(deps.join(' ')));
+      logger.break();
 
-    await installDependencies(deps);
+      await installDependencies(deps);
 
-    logger.info('You can now enable the config in your ESLint configuration file.');
+      logger.info('You can now enable the config in your ESLint configuration file.');
+    }
+
+    await validateEslintConfig(framework);
   })
   .showHelpAfterError();
 
-async function checkEslintConfigFile(framework: Framework | TestingFramework): Promise<void> {
-  const spinner = ora('Checking ESLint config file...').start();
+async function validateDependenciesPresence(
+  framework: Framework | TestingFramework,
+  dependencies: string[],
+): Promise<boolean> {
+  const spinner = ora('Checking dependencies...').start();
+  const packageJson = await getPackageJson();
+  const deps = [
+    ...Object.keys(packageJson.devDependencies ?? {}),
+    ...Object.keys(packageJson.dependencies ?? {}),
+  ];
+
+  const missingDeps = dependencies.filter((dep) => !deps.includes(dep));
+
+  if (missingDeps.length === 0) {
+    spinner.succeed(
+      `All dependencies for the ${chalk.redBright(framework)} config are already installed.`,
+    );
+
+    return true;
+  }
+
+  spinner.succeed();
+
+  return true;
+}
+
+async function validateEslintConfig(framework: Framework | TestingFramework): Promise<void> {
+  const spinner = ora('Checking ESLint configuration...').start();
   const eslintConfigFile = getEslintConfigPath();
   const content = await fs.readFile(eslintConfigFile, 'utf-8');
   const lines = content.split('\n');
@@ -51,16 +79,17 @@ async function checkEslintConfigFile(framework: Framework | TestingFramework): P
       : line.includes(framework),
   );
 
-  if (configLine?.includes(framework) || !configLine?.includes(`${framework}: false`)) {
-    spinner.fail();
-    handleError(
-      `The config for ${chalk.redBright(framework)} is already enabled in your ESLint config.`,
+  if (configLine === undefined || configLine.includes(`${framework}: false`)) {
+    spinner.warn(
+      `The ${chalk.redBright(framework)} config is not enabled in your ESLint configuration file. Remember to enable it.`,
     );
 
     return;
   }
 
-  spinner.succeed();
+  spinner.succeed(
+    `The ${chalk.redBright(framework)} config is already enabled in your ESLint configuration file.`,
+  );
 }
 
 async function ensureEslintIsInstalled(): Promise<void> {
