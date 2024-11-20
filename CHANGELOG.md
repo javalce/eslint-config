@@ -1,3 +1,10 @@
+# [0.8.0-beta.3](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.2...v0.8.0-beta.3) (2024-11-20)
+
+### Features
+
+- add support for 'deno' as a package manager and fix typo in spinner message ([fd8695f](https://github.com/javalce/eslint-config/commit/fd8695f4f5889506262d988fdd0939ef8b06a371))
+- enhance dependency validation and ESLint configuration checks in add command ([ed423f8](https://github.com/javalce/eslint-config/commit/ed423f84817c787ad10300cf692e10cbaa0bed4d))
+
 # [0.8.0-beta.2](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.1...v0.8.0-beta.2) (2024-11-11)
 
 ### Bug Fixes
