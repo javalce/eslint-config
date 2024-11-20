@@ -13,19 +13,20 @@ export async function isPackageTypeModule(): Promise<boolean> {
   return packageJson.type === 'module';
 }
 
-export async function getPackageManager(): Promise<'npm' | 'yarn' | 'pnpm' | 'bun'> {
+export async function getPackageManager(): Promise<'npm' | 'yarn' | 'pnpm' | 'bun' | 'deno'> {
   const packageManager = await detect({ programmatic: true, cwd: process.cwd() });
 
   if (packageManager === 'yarn@berry') return 'yarn';
   if (packageManager === 'pnpm@6') return 'pnpm';
   if (packageManager === 'bun') return 'bun';
+  if (packageManager === 'deno') return 'deno';
 
   return packageManager ?? 'npm';
 }
 
 export async function installDependencies(deps: string[]): Promise<void> {
   const packageManager = await getPackageManager();
-  const spinner = ora('Installing dependencies...').start();
+  const spinner = ora('Installing missig dependencies...').start();
 
   try {
     await execa(packageManager, [packageManager === 'npm' ? 'install' : 'add', '-D', ...deps]);
