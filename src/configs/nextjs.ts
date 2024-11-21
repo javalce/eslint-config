@@ -3,7 +3,7 @@ import { URL } from 'node:url';
 import { fixupPluginRules } from '@eslint/compat';
 import { type ESLint, type Linter } from 'eslint';
 
-import { JS_FILES, JSX_FILES } from '../constants';
+import { JS_FILES, JSX_FILES, SRC_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
@@ -29,6 +29,7 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
 
   return [
     {
+      files: [SRC_FILES],
       plugins: {
         '@next/next': fixupPluginRules(nextjsPlugin as ESLint.Plugin),
       },
@@ -47,6 +48,13 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
         },
       },
       name: 'javalce/nextjs/parser',
+    },
+    {
+      files: [SRC_FILES],
+      rules: {
+        'import-x/no-default-export': 'off',
+      },
+      name: 'javalce/nextjs/default-export',
     },
   ] satisfies TypedConfigItem[];
 }
