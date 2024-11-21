@@ -1,3 +1,9 @@
+# [0.8.0-beta.4](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.3...v0.8.0-beta.4) (2024-11-21)
+
+### Bug Fixes
+
+- allow default exports on Next.js ([8bc1539](https://github.com/javalce/eslint-config/commit/8bc1539b63f9132a24cef583cdef3da86c6cb8d5))
+
 # [0.8.0-beta.3](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.2...v0.8.0-beta.3) (2024-11-20)
 
 ### Features
