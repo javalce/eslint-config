@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.4...v0.8.0) (2024-11-25)
+
+### Features
+
+- add project type selection to init command and update ESLint config generation ([2cb675f](https://github.com/javalce/eslint-config/commit/2cb675f696b9a7a99bd9344afcc932fe7a9fb4a8))
+- enhance init command with handle cancel ([8ef550e](https://github.com/javalce/eslint-config/commit/8ef550ee844a5eae4131f1b1801b77b4dcc6855f))
+
 # [0.8.0-beta.4](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.3...v0.8.0-beta.4) (2024-11-21)
 
 ### Bug Fixes
