@@ -17,29 +17,37 @@ export const init = new Command()
   .description('Create a new ESLint config in your project')
   .action(async () => {
     try {
-      const options: Config = await prompts([
+      const options: Config = await prompts(
+        [
+          {
+            type: 'select',
+            name: 'framework',
+            message: 'Select the framework want you use',
+            choices: FRAMEWORK_OPTIONS,
+          },
+          {
+            type: 'select',
+            name: 'testing',
+            message: 'Select the testing framework you use',
+            choices: TESTING_FRAMEWORK_OPTIONS,
+          },
+          {
+            type: 'select',
+            name: 'type',
+            message: 'Select the type of project',
+            choices: [
+              { title: 'Library', value: 'lib' },
+              { title: 'Application', value: 'app' },
+            ],
+          },
+        ],
         {
-          type: 'select',
-          name: 'framework',
-          message: 'Select the framework want you use',
-          choices: FRAMEWORK_OPTIONS,
+          onCancel: () => {
+            logger.error('Command aborted');
+            process.exit(1);
+          },
         },
-        {
-          type: 'select',
-          name: 'testing',
-          message: 'Select the testing framework you use',
-          choices: TESTING_FRAMEWORK_OPTIONS,
-        },
-        {
-          type: 'select',
-          name: 'type',
-          message: 'Select the type of project',
-          choices: [
-            { title: 'Library', value: 'lib' },
-            { title: 'Application', value: 'app' },
-          ],
-        },
-      ]);
+      );
 
       const { framework, testing } = options;
 
