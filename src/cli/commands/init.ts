@@ -30,6 +30,15 @@ export const init = new Command()
           message: 'Select the testing framework you use',
           choices: TESTING_FRAMEWORK_OPTIONS,
         },
+        {
+          type: 'select',
+          name: 'type',
+          message: 'Select the type of project',
+          choices: [
+            { title: 'Library', value: 'lib' },
+            { title: 'Application', value: 'app' },
+          ],
+        },
       ]);
 
       const { framework, testing } = options;
@@ -82,7 +91,7 @@ function getDependencies(framework: Framework | null, testing: TestingFramework 
   return Array.from(deps);
 }
 
-async function writeEslintConfig({ framework, testing }: Config): Promise<void> {
+async function writeEslintConfig({ framework, testing, type: projectType }: Config): Promise<void> {
   const isESMModule = await isPackageTypeModule();
   const configFilename = isESMModule ? 'eslint.config.js' : 'eslint.config.mjs';
 
@@ -103,11 +112,8 @@ export default defineConfig({
     config += `  testing: '${testing}',\n`;
   }
 
-  if (framework === null) {
-    config += `  type: 'lib',\n`;
-  }
-
-  config += `});`;
+  config += `  type: '${projectType}'
+});`;
 
   await fs.writeFile(configFilename, config);
 }
