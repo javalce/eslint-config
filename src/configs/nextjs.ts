@@ -49,12 +49,5 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
       },
       name: 'javalce/nextjs/parser',
     },
-    {
-      files: [SRC_FILES],
-      rules: {
-        'import-x/no-default-export': 'off',
-      },
-      name: 'javalce/nextjs/default-export',
-    },
   ] satisfies TypedConfigItem[];
 }

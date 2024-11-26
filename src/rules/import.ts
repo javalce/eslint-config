@@ -28,12 +28,6 @@ const config: TypedConfigItem = {
      */
     'import-x/no-cycle': 'error',
     /**
-     * Disallow default exports.
-     *
-     * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-default-export.md
-     */
-    'import-x/no-default-export': 'error',
-    /**
      * Disallow the use of extraneous packages.
      *
      * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-extraneous-dependencies.md
@@ -45,6 +39,12 @@ const config: TypedConfigItem = {
      * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-mutable-exports.md
      */
     'import-x/no-mutable-exports': 'error',
+    /**
+     * Reports use of a default export as a locally named import.
+     *
+     * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-named-default.md
+     */
+    'import-x/no-named-default': 'warn',
     /**
      * Disallow importing packages through relative paths.
      *
