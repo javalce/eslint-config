@@ -66,7 +66,7 @@
     "local-pkg": "^0.5.1",
     "ora": "^8.1.1",
     "prompts": "^2.4.2",
-    "typescript-eslint": "^8.15.0"
+    "typescript-eslint": "^8.16.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
@@ -75,7 +75,7 @@
     "@javalce/prettier-config": "^1.0.2",
     "@types/eslint": "^9.6.1",
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.9.1",
+    "@types/node": "^22.10.0",
     "@types/prompts": "^2.4.9",
     "bumpp": "^9.8.1",
     "conventional-changelog-cli": "^5.0.0",
@@ -85,11 +85,11 @@
     "husky": "^9.1.7",
     "jiti": "^2.4.0",
     "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3",
-    "svelte": "^5.2.7",
+    "prettier": "^3.4.0",
+    "svelte": "^5.2.8",
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
-    "typescript": "5.6.3"
+    "typescript": "5.7.2"
   },
   "peerDependencies": {
     "@next/eslint-plugin-next": ">=15.0.0",
@@ -103,7 +103,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-solid": "^0.14.4",
     "eslint-plugin-svelte": "^2.46.0",
-    "eslint-plugin-testing-library": "^6.5.0",
+    "eslint-plugin-testing-library": "^7.0.0",
     "eslint-plugin-vue": "^9.31.0",
     "svelte-eslint-parser": "^0.43.0",
     "typescript": ">=5.0.0 <6.0.0",
