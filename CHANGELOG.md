@@ -1,3 +1,9 @@
+## [0.8.2](https://github.com/javalce/eslint-config/compare/v0.8.1...v0.8.2) (2024-11-28)
+
+### Features
+
+- update default ECMAScript version to 2023 ([6f61b52](https://github.com/javalce/eslint-config/commit/6f61b520e43b05c0a800c0c8eb9f1c38b28eec93))
+
 ## [0.8.1](https://github.com/javalce/eslint-config/compare/v0.8.0...v0.8.1) (2024-11-26)
 
 # [0.8.0](https://github.com/javalce/eslint-config/compare/v0.8.0-beta.4...v0.8.0) (2024-11-25)
