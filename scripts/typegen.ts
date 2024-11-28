@@ -15,6 +15,7 @@ import { testingLibrary } from '../src/configs/testing-library';
 import { typescript } from '../src/configs/typescript';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
+import { DEFAULT_ECMA_VERSION } from '../src/constants';
 import { combine } from '../src/utils';
 
 const configs = (await combine(
@@ -26,7 +27,7 @@ const configs = (await combine(
       },
     },
   },
-  javascript({ ecmaVersion: 2021 }),
+  javascript({ ecmaVersion: DEFAULT_ECMA_VERSION }),
   typescript({ tsconfigPath: 'tsconfig.json' }),
   react(),
   nextjs(),

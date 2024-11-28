@@ -1,3 +1,7 @@
+import { type EcmaVersion } from './types';
+
+export const DEFAULT_ECMA_VERSION: EcmaVersion = 2023;
+
 export const JS_FILES = '**/*.?([cm])js';
 
 export const JSX_FILES = '**/*.?([cm])jsx';

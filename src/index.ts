@@ -15,10 +15,11 @@ import { testingLibrary } from './configs/testing-library';
 import { typescript } from './configs/typescript';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
+import { DEFAULT_ECMA_VERSION } from './constants';
 
 export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
   const {
-    ecmaVersion = 2021,
+    ecmaVersion = DEFAULT_ECMA_VERSION,
     typescript: enableTypeScript = isPackageExists('typescript'),
     react: reactFlag,
     astro: enableAstro,
