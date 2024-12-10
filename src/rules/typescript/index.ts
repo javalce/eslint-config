@@ -108,6 +108,22 @@ const config: TypedConfigItem = {
      */
     '@typescript-eslint/require-array-sort-compare': ['error', { ignoreStringArrays: true }],
     /**
+     * Enforce template literal expressions to be of string type. Number types are allowed because they are coerced to strings.
+     *
+     * 🔧 Fixable - https://typescript-eslint.io/rules/restrict-tem@typescript-eslint/restrict-template-expressions/
+     */
+    '@typescript-eslint/restrict-template-expressions': [
+      'error',
+      {
+        allowAny: false,
+        allowBoolean: false,
+        allowNever: false,
+        allowNullish: false,
+        allowNumber: true,
+        allowRegExp: false,
+      },
+    ],
+    /**
      * Require exhaustive checks when using union types in switch statements.
      *
      * This ensures cases are considered when items are later added to a union.
