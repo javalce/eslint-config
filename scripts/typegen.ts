@@ -36,7 +36,7 @@ const configs = (await combine(
   solidjs({ typescript: true }),
   vue({ typescript: true }),
   jest(),
-  vitest(),
+  vitest({ typescript: true }),
   testingLibrary({ react: true, vue: true }),
 )) as Linter.Config[];
 
