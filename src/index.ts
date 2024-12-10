@@ -94,7 +94,11 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   }
 
   if (enableTesting === 'vitest') {
-    configs.push(vitest());
+    configs.push(
+      vitest({
+        typescript: Boolean(enableTypeScript),
+      }),
+    );
   }
 
   if (enableTesting && (enableVue || enableReact)) {
