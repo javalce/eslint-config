@@ -1,3 +1,14 @@
+## [0.8.3](https://github.com/javalce/eslint-config/compare/v0.8.2...v0.8.3) (2024-12-10)
+
+### Bug Fixes
+
+- update typegen script ([159b172](https://github.com/javalce/eslint-config/commit/159b172b20da5ccc0fa62c4f129e09f57551d047))
+
+### Features
+
+- add rule to enforce template literal expressions to be of string type ([566b9da](https://github.com/javalce/eslint-config/commit/566b9da893b92b81a4503189476d5879871b97a1))
+- enhance vitest configuration to support TypeScript type checking ([e39dd0d](https://github.com/javalce/eslint-config/commit/e39dd0daf3b0e31fc9f33f2efd20d581220966f1))
+
 ## [0.8.2](https://github.com/javalce/eslint-config/compare/v0.8.1...v0.8.2) (2024-11-28)
 
 ### Features
