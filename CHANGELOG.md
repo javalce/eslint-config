@@ -1,3 +1,13 @@
+## [0.8.4](https://github.com/javalce/eslint-config/compare/v0.8.3...v0.8.4) (2024-12-30)
+
+### Bug Fixes
+
+- add typings for vitest eslint plugin and clean up javascript config ([dadfb50](https://github.com/javalce/eslint-config/commit/dadfb50e67054a708149c359e23720d54a6b6abc))
+
+### Features
+
+- enhance init command to include project type selection and improve prompts ([4638405](https://github.com/javalce/eslint-config/commit/4638405ed6d9034858f4e13a0441cacbce1cf1f4))
+
 ## [0.8.3](https://github.com/javalce/eslint-config/compare/v0.8.2...v0.8.3) (2024-12-10)
 
 ### Bug Fixes
