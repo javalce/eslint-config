@@ -82,3 +82,17 @@ declare module 'eslint-plugin-vue' {
     };
   };
 }
+
+declare module '@vitest/eslint-plugin' {
+  export const configs: {
+    recommended: {
+      rules: object;
+    };
+  };
+
+  export const environments: {
+    env: {
+      globals: Record<string, boolean>;
+    };
+  };
+}

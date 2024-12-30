@@ -49,7 +49,6 @@ export function javascript({ ecmaVersion }: { ecmaVersion: EcmaVersion }): Typed
         ecmaVersion,
         sourceType: 'module',
         globals: {
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- no types
           ...globals[`es${ecmaVersion}`],
           ...globals.browser,
           ...globals.node,
