@@ -17,28 +17,21 @@ export const init = new Command()
   .description('Create a new ESLint config in your project')
   .action(async () => {
     try {
-      const options: Config = await prompts(
+      const frameworkOptions: Omit<Config, 'type'> = await prompts(
         [
           {
             type: 'select',
             name: 'framework',
             message: 'Select the framework want you use',
             choices: FRAMEWORK_OPTIONS,
+            initial: 0,
           },
           {
             type: 'select',
             name: 'testing',
             message: 'Select the testing framework you use',
             choices: TESTING_FRAMEWORK_OPTIONS,
-          },
-          {
-            type: 'select',
-            name: 'type',
-            message: 'Select the type of project',
-            choices: [
-              { title: 'Library', value: 'lib' },
-              { title: 'Application', value: 'app' },
-            ],
+            initial: 0,
           },
         ],
         {
@@ -48,6 +41,30 @@ export const init = new Command()
           },
         },
       );
+
+      const typeOptions: Pick<Config, 'type'> = await prompts(
+        {
+          type: () => (frameworkOptions.framework === null ? 'select' : null),
+          name: 'type',
+          message: 'Select the type of project',
+          choices: [
+            { title: 'Library', value: 'lib' },
+            { title: 'Application', value: 'app' },
+          ],
+          initial: 1,
+        },
+        {
+          onCancel: () => {
+            logger.error('Command aborted');
+            process.exit(1);
+          },
+        },
+      );
+
+      const options = {
+        ...frameworkOptions,
+        ...typeOptions,
+      } as Config;
 
       const { framework, testing } = options;
 
@@ -109,7 +126,7 @@ export default defineConfig({
 `;
 
   if (framework) {
-    if (['react', 'vue', 'solid'].includes(framework)) {
+    if (['react', 'vue', 'solid'].includes(framework) && framework !== 'next') {
       config += `  typescript: ['tsconfig.node.json', 'tsconfig.app.json'],\n`;
     }
 
@@ -120,8 +137,10 @@ export default defineConfig({
     config += `  testing: '${testing}',\n`;
   }
 
-  config += `  type: '${projectType}'
-});`;
+  if (projectType === 'lib') {
+    config += `  type: '${projectType}'\n`;
+  }
+  config += '});';
 
   await fs.writeFile(configFilename, config);
 }
