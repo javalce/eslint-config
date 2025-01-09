@@ -42,7 +42,7 @@ export async function astro({ typescript }: { typescript: boolean }): Promise<Ty
     },
     {
       name: 'astro/base/javascript',
-      files: [ASTRO_JS_FILES],
+      files: [...ASTRO_JS_FILES],
       languageOptions: {
         globals: {
           ...globals.browser,
@@ -52,7 +52,7 @@ export async function astro({ typescript }: { typescript: boolean }): Promise<Ty
     },
     {
       name: 'astro/base/typescript',
-      files: [ASTRO_TS_FILES],
+      files: [...ASTRO_TS_FILES],
       languageOptions: {
         globals: {
           ...globals.browser,
