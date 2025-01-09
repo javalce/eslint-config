@@ -2,7 +2,7 @@ import { resolve } from 'node:path';
 
 import { type Linter } from 'eslint';
 
-import { TS_FILES, TSX_FILES } from '../constants';
+import { ASTRO_TS_FILES, TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
@@ -27,6 +27,7 @@ export async function typescript({
 
   const config = tseslint.config({
     files: [TS_FILES, TSX_FILES],
+    ignores: [...ASTRO_TS_FILES],
     extends: [
       ...tseslint.configs.recommendedTypeChecked,
       ...tseslint.configs.strictTypeChecked,
