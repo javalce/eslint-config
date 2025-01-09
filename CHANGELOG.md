@@ -1,3 +1,10 @@
+## [0.8.5](https://github.com/javalce/eslint-config/compare/v0.8.4...v0.8.5) (2025-01-09)
+
+### Bug Fixes
+
+- ignore Astro TS files in TypeScript ESLint configuration ([dc1d72d](https://github.com/javalce/eslint-config/commit/dc1d72d1679b5bd570522834ab2a8410a0fcd39f))
+- update file patterns for Astro JS and TS constants to include additional matches ([6b9f41c](https://github.com/javalce/eslint-config/commit/6b9f41ca037fe1fd1d384294c2359c7682609f4f))
+
 ## [0.8.4](https://github.com/javalce/eslint-config/compare/v0.8.3...v0.8.4) (2024-12-30)
 
 ### Bug Fixes
