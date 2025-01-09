@@ -1,7 +1,5 @@
 import { resolve } from 'node:path';
 
-import { type Linter } from 'eslint';
-
 import { ASTRO_TS_FILES, TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
@@ -17,7 +15,7 @@ export async function typescript({
   type?: ProjectType;
 }): Promise<TypedConfigItem[]> {
   const project = Array.isArray(tsconfigPath)
-    ? tsconfigPath.map((path) => resolveTsconfigPath(path))
+    ? tsconfigPath.map(resolveTsconfigPath)
     : resolveTsconfigPath(tsconfigPath);
 
   const [tseslint, importPlugin] = await Promise.all([
@@ -25,45 +23,46 @@ export async function typescript({
     lazy(import('eslint-plugin-import-x')),
   ]);
 
-  const config = tseslint.config({
-    files: [TS_FILES, TSX_FILES],
-    ignores: [...ASTRO_TS_FILES],
-    extends: [
-      ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.strictTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-      {
-        ...importPlugin.configs.typescript,
-        name: 'import-x/typescript',
-      },
-      eslintTypescriptConfig as Linter.Config,
-      eslintExtensionConfig as Linter.Config,
-      eslintPluginImportConfig as Linter.Config,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project,
-      },
+  const config = [
+    ...tseslint.configs.recommendedTypeChecked,
+    ...tseslint.configs.strictTypeChecked,
+    ...tseslint.configs.stylisticTypeChecked,
+    {
+      ...importPlugin.configs.typescript,
+      name: 'import-x/typescript',
     },
-    settings: {
-      'import-x/resolver': {
-        typescript: {
+    eslintTypescriptConfig,
+    eslintExtensionConfig,
+    eslintPluginImportConfig,
+    {
+      languageOptions: {
+        parserOptions: {
           project,
         },
       },
+      settings: {
+        'import-x/resolver': {
+          typescript: {
+            project,
+          },
+        },
+      },
+      rules:
+        type === 'app'
+          ? {
+              '@typescript-eslint/explicit-function-return-type': 'off',
+              '@typescript-eslint/no-floating-promises': 'off',
+            }
+          : {},
+      name: 'javalce/typescript/setup',
     },
-    rules: {
-      ...(type === 'app'
-        ? {
-            '@typescript-eslint/explicit-function-return-type': 'off',
-            '@typescript-eslint/no-floating-promises': 'off',
-          }
-        : {}),
-    },
-    name: 'javalce/typescript/setup',
-  });
+  ] as TypedConfigItem[];
 
-  return config as TypedConfigItem[];
+  return config.map((config) => ({
+    ...config,
+    files: [TS_FILES, TSX_FILES],
+    ignores: ASTRO_TS_FILES,
+  }));
 }
 
 function resolveTsconfigPath(tsconfigPath: string): string {
