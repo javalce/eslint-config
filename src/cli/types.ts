@@ -14,7 +14,7 @@ export type Framework = (typeof FRAMEWORKS)[keyof typeof FRAMEWORKS];
 export type TestingFramework = (typeof TESTING_FRAMEWORKS)[keyof typeof TESTING_FRAMEWORKS];
 
 export interface Config {
-  framework: Framework | null;
+  framework: Framework;
   testing: TestingFramework | null;
-  type: 'lib' | 'app';
+  lib: boolean;
 }

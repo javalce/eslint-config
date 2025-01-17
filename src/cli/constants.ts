@@ -2,18 +2,19 @@ import type { Choice } from 'prompts';
 import type { Framework, TestingFramework } from './types';
 
 export const FRAMEWORKS = {
+  NODE: 'node',
   REACT: 'react',
   NEXT: 'next',
   VUE: 'vue',
   SVELTE: 'svelte',
-  SOLIDJS: 'solidjs',
+  SOLID: 'solid',
   ASTRO: 'astro',
 } as const;
 
 export const FRAMEWORK_OPTIONS: Choice[] = [
   {
-    title: 'None',
-    value: null,
+    title: 'Node',
+    value: FRAMEWORKS.NODE,
   },
   {
     title: 'React',
@@ -33,7 +34,7 @@ export const FRAMEWORK_OPTIONS: Choice[] = [
   },
   {
     title: 'SolidJS',
-    value: FRAMEWORKS.SOLIDJS,
+    value: FRAMEWORKS.SOLID,
   },
   {
     title: 'Astro',
@@ -63,6 +64,7 @@ export const TESTING_FRAMEWORK_OPTIONS: Choice[] = [
 
 export const DEPENDENCIES_MAP: Record<Framework | TestingFramework | 'testing-library', string[]> =
   {
+    [FRAMEWORKS.NODE]: [],
     [FRAMEWORKS.REACT]: [
       'eslint-plugin-react',
       'eslint-plugin-react-hooks',
@@ -76,7 +78,7 @@ export const DEPENDENCIES_MAP: Record<Framework | TestingFramework | 'testing-li
     ],
     [FRAMEWORKS.VUE]: ['eslint-plugin-vue', 'vue-eslint-parser'],
     [FRAMEWORKS.SVELTE]: ['eslint-plugin-svelte', 'svelte-eslint-parser'],
-    [FRAMEWORKS.SOLIDJS]: ['eslint-plugin-solid'],
+    [FRAMEWORKS.SOLID]: ['eslint-plugin-solid'],
     [FRAMEWORKS.ASTRO]: ['eslint-plugin-astro', 'astro-eslint-parser', 'eslint-plugin-jsx-a11y'],
     [TESTING_FRAMEWORKS.JEST]: ['eslint-plugin-jest'],
     [TESTING_FRAMEWORKS.VITEST]: ['@vitest/eslint-plugin'],
