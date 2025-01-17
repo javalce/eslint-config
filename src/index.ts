@@ -9,7 +9,7 @@ import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
 import { react } from './configs/react';
-import { solidjs } from './configs/solidjs';
+import { solid } from './configs/solidjs';
 import { svelte } from './configs/svelte';
 import { testingLibrary } from './configs/testing-library';
 import { typescript } from './configs/typescript';
@@ -74,7 +74,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   if (enableSolidjs) {
     configs.push(
-      solidjs({
+      solid({
         typescript: Boolean(enableTypeScript),
       }),
     );
