@@ -2,8 +2,8 @@ import type { Framework, TestingFramework } from '../types';
 
 import fs from 'node:fs/promises';
 
+import { Command, createArgument } from '@commander-js/extra-typings';
 import chalk from 'chalk';
-import { Command, createArgument } from 'commander';
 import ora from 'ora';
 
 import { DEPENDENCIES_MAP, FRAMEWORKS, TESTING_FRAMEWORKS } from '../constants';
@@ -21,7 +21,7 @@ export const add = new Command()
       'The config for the framework you want to add to your project',
     ).choices(Object.values({ ...FRAMEWORKS, ...TESTING_FRAMEWORKS })),
   )
-  .action(async (framework: Framework | TestingFramework) => {
+  .action(async (framework) => {
     await ensureEslintIsInstalled();
 
     const deps = getDependencies(framework);
