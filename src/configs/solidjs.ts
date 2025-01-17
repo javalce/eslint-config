@@ -3,7 +3,7 @@ import type { TypedConfigItem } from '../types';
 import { JSX_FILES, TSX_FILES } from '../constants';
 import { lazy } from '../utils';
 
-export async function solidjs({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+export async function solid({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
   const solidPlugin = await lazy(import('eslint-plugin-solid'));
 
   return [

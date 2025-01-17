@@ -9,7 +9,7 @@ import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
 import { react } from '../src/configs/react';
-import { solidjs } from '../src/configs/solidjs';
+import { solid } from '../src/configs/solidjs';
 import { svelte } from '../src/configs/svelte';
 import { testingLibrary } from '../src/configs/testing-library';
 import { typescript } from '../src/configs/typescript';
@@ -33,7 +33,7 @@ const configs = (await combine(
   nextjs(),
   astro({ typescript: true }),
   svelte({ typescript: true }),
-  solidjs({ typescript: true }),
+  solid({ typescript: true }),
   vue({ typescript: true }),
   jest(),
   vitest({ typescript: true }),
