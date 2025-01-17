@@ -33,15 +33,15 @@ export const init = new Command()
   )
   .addOption(createOption('--no-testing', 'Skip the testing framework selection').default(false))
   .addOption(createOption('--lib', 'Create a config for a library project').default(false))
-  .action(async ({ framework, testing: enableTesting, lib }) => {
-    framework = framework ?? (await getFrameworkSelection());
+  .action(async (args) => {
+    const framework = args.framework ?? (await getFrameworkSelection());
     const testing =
-      enableTesting === false ? null : (enableTesting ?? (await getTestingFrameworkSelection()));
+      args.testing === false ? null : (args.testing ?? (await getTestingFrameworkSelection()));
 
     const options: Config = {
       framework,
       testing,
-      lib: lib,
+      lib: args.lib,
     } as Config;
 
     try {
@@ -71,7 +71,7 @@ export const init = new Command()
   });
 
 async function getTestingFrameworkSelection(): Promise<TestingFramework | null> {
-  const { testing } = await prompts(
+  const { testing } = (await prompts(
     {
       type: 'select',
       name: 'testing',
@@ -85,13 +85,13 @@ async function getTestingFrameworkSelection(): Promise<TestingFramework | null> 
         process.exit(1);
       },
     },
-  );
+  )) as { testing: TestingFramework | null };
 
   return testing;
 }
 
 async function getFrameworkSelection(): Promise<Framework> {
-  const { framework } = await prompts(
+  const { framework } = (await prompts(
     {
       type: 'select',
       name: 'framework',
@@ -105,7 +105,7 @@ async function getFrameworkSelection(): Promise<Framework> {
         process.exit(1);
       },
     },
-  );
+  )) as { framework: Framework };
 
   return framework;
 }
@@ -121,7 +121,7 @@ function getDependencies(framework: Framework, testing: TestingFramework | null)
   if (testing) {
     DEPENDENCIES_MAP[testing].forEach((dep) => deps.add(dep));
 
-    if (framework && ['react', 'next', 'vue'].includes(framework)) {
+    if (['react', 'next', 'vue'].includes(framework)) {
       DEPENDENCIES_MAP['testing-library'].forEach((dep) => deps.add(dep));
     }
   }
