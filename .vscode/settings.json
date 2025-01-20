@@ -8,6 +8,6 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "tsconfig.json": "tsconfig.*.json",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .gitignore, eslint.config.ts, bump.config.ts, tsup.config.ts, .editorconfig, .commitlintrc.cjs, .prettierignore"
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .gitignore, eslint.config.ts, bump.config.ts, tsup.config.ts, .editorconfig, .commitlintrc.cjs, .prettierignore, prettier.config.js"
   }
 }
