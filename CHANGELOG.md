@@ -1,3 +1,9 @@
+# [0.9.0](https://github.com/javalce/eslint-config/compare/v0.8.5...v0.9.0) (2025-01-20)
+
+### Bug Fixes
+
+- eslint errors ([6c4006f](https://github.com/javalce/eslint-config/commit/6c4006f14788ae909a424585daa8b74c8629c910))
+
 ## [0.8.5](https://github.com/javalce/eslint-config/compare/v0.8.4...v0.8.5) (2025-01-09)
 
 ### Bug Fixes
