@@ -27,22 +27,8 @@ module.exports = {
         'test',
         // Used for automated releases-only
         'release',
-      ],
-    ],
-    'scope-enum': [
-      2,
-      'always',
-      [
-        // Dependency-related changes
-        'deps',
-        // ESLint-related changes
-        'eslint',
-        // Prettier-related changes
-        'prettier',
-        // TypeScript-related changes
-        'typescript',
-        // Go-related changes
-        'golang',
+        // Other changes that do not belong to any of the above categories
+        'chore',
       ],
     ],
     'scope-empty': [1, 'never'],
