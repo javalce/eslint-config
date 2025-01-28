@@ -11,42 +11,46 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 
 ## Features
 
-> [!NOTE]
-> This configuration is designed to be used with Prettier for code formatting. You can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config).
-
 - Supports ESLint v9
 - [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files) file format
 - Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
 - Designed to work with TypeScript, React, Next.js, Node.js, and more smoothly out of the box
 - Some rules can be auto-fixed with `eslint --fix`
-- Stylistic rules that are not covered by Prettier are enabled by `@stylistic/eslint-plugin`
+- Uses some stylistic rules to make your code more readable and consistent
 
-> Thanks to [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and reference and [vercel/style-guide](https://github.com/vercel/style-guide) for the amazing eslint rules and config for JavaScript, TypeScript and React.
+> [!WARNING]
+> I like to use Prettier to format my code, so the enabled stylistic rules are the ones that Prettier doesn't format.
+>
+> If you want to use Prettier, you can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config).
 
-> [!NOTE]
-> For the examples below, I'm using `pnpm` as the package manager, but you can use `npm`, `yarn` or `bun` as well.
-
-## Started Wizard
+## Quickstart
 
 It is provided CLI tool to help you setup your project with ESLint. It also supports adding new configurations to an existing project.
 
 ### Initialize ESLint config
 
 ```bash
-pnpx @javalce/eslint-config init
+pnpm dlx @javalce/eslint-config init
 ```
 
 ### Add new configuration
 
 ```bash
-pnpx @javalce/eslint-config add react # or the config for the framework you want
+pnpm dlx @javalce/eslint-config add [framework]
 ```
 
+> [!NOTE]
+> You can access the CLI help by running `pnpm dlx @javalce/eslint-config --help`.
+
 ## Manual installation
+
+If you prefer to install it manually, you can do it by running:
 
 ```bash
 pnpm add --save-dev eslint @javalce/eslint-config
 ```
+
+The next sections will show you how to configure ESLint and adapt it to your project.
 
 ## Basic Usage
 
@@ -58,13 +62,13 @@ import { defineConfig } from '@javalce/eslint-config';
 export default defineConfig({});
 ```
 
-By default it uses the ecmaVersion `2021`. If you want to use a different version, you can specify it in the configuration:
+By default it uses the ecmaVersion `2023`. If you want to use a different version, you can specify it in the configuration:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  ecmaVersion: 2022,
+  ecmaVersion: 2021,
 });
 ```
 
@@ -77,6 +81,8 @@ pnpm add --save-dev typescript
 ```
 
 By default, it will automatically load the typescript config and the configuration will look for a `tsconfig.json` file in the root of your project.
+
+Some projects use a `tsconfig.eslint.json` file to specify the typescript configuration for ESLint. In that case, it will automatically load the `tsconfig.eslint.json` file if it exists, otherwise it will load the `tsconfig.json` file.
 
 If you want, you can enable explicitly the TypeScript config:
 
@@ -112,10 +118,10 @@ Instead of using the passing the path to the tsconfig file(s) in the configurati
 
 ## React
 
-To enable React support, you need to install the `eslint-plugin-react` and `eslint-plugin-react-hooks` packages:
+To enable React support, you need to install the `eslint-plugin-react`, `eslint-plugin-react-hooks` and `eslint-plugin-jsx-a11y` packages:
 
 ```bash
-pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks
+pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y
 ```
 
 Then, update your ESLint configuration file to enable the React config:
@@ -134,7 +140,7 @@ To enable Next.js support, you need to install all the react plugins and the `@n
 
 ```bash
 # If you use npm
-pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks @next/eslint-plugin-next
+pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y @next/eslint-plugin-next
 ```
 
 Then, update your ESLint configuration file to enable the Next.js config:
@@ -147,7 +153,7 @@ export default defineConfig({
 });
 ```
 
-The next.js config will only load the `@next/eslint-plugin-next` plugin and the recommended rules. To enable the react rules you must enable the react config.
+This will enable the react rules and the Next.js specific rules.
 
 ## Svelte
 
@@ -219,10 +225,10 @@ export default defineConfig({
 
 ## Astro
 
-To enable Astro support, you need to install the `astro-eslint-plugin` and `astro-eslint-parser` package:
+To enable Astro support, you need to install the `astro-eslint-plugin`, `astro-eslint-parser` and `eslint-plugin-jsx-a11y` package:
 
 ```bash
-pnpm add --save-dev astro-eslint-plugin astro-eslint-parser
+pnpm add --save-dev astro-eslint-plugin astro-eslint-parser eslint-plugin-jsx-a11y
 ```
 
 Then, update your ESLint configuration file to enable the Astro config:
