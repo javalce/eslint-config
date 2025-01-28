@@ -19,64 +19,95 @@ import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
 import { installDependencies, isPackageTypeModule } from '../utils/npm-utils';
 
+const frameworkOptions = Object.values(FRAMEWORKS);
+const testingFrameworkOptions = Object.values(TESTING_FRAMEWORKS);
+
+const frameworkOptionsSchema = Object.fromEntries(
+  frameworkOptions.map((framework) => [framework, z.boolean()]),
+) as Record<Framework, z.ZodBoolean>;
+
+const testingFrameworkOptionsSchema = Object.fromEntries(
+  testingFrameworkOptions.map((testing) => [testing, z.boolean()]),
+) as Record<TestingFramework, z.ZodBoolean>;
+
 const initOptionsSchema = z.object({
-  framework: z.nativeEnum(FRAMEWORKS).optional(),
-  testing: z.union([z.nativeEnum(TESTING_FRAMEWORKS).optional(), z.literal(false)]),
+  ...frameworkOptionsSchema,
+  ...testingFrameworkOptionsSchema,
+  skipTesting: z.boolean(),
   lib: z.boolean(),
 });
 
 export const init = new Command()
   .name('init')
-  .description('Create a new ESLint config in your project')
+  .description('Create a new ESLint config in your project');
+
+frameworkOptions.forEach((framework) => {
+  init.addOption(
+    createOption(`--${framework}`, `Create a config for a ${framework} project`)
+      .default(false)
+      .conflicts(frameworkOptions.filter((f) => f !== framework)),
+  );
+});
+
+testingFrameworkOptions.forEach((testing) => {
+  init.addOption(
+    createOption(`--${testing}`, `Create a config with ${testing} testing framework`)
+      .default(false)
+      .conflicts([...testingFrameworkOptions.filter((t) => t !== testing), 'skip-testing']),
+  );
+});
+
+init
   .addOption(
-    createOption('-f, --framework <framework>', 'The framework you want to use').choices(
-      Object.values(FRAMEWORKS),
-    ),
+    createOption('--skip-testing', 'Skip the testing framework selection')
+      .default(false)
+      .conflicts(testingFrameworkOptions),
   )
-  .addOption(
-    createOption('-t, --testing <testing>', 'The testing framework you want to use').choices(
-      Object.values(TESTING_FRAMEWORKS),
-    ),
-  )
-  .addOption(createOption('--no-testing', 'Skip the testing framework selection').default(false))
-  .addOption(createOption('--lib', 'Create a config for a library project').default(false))
-  .action(async (opts) => {
-    try {
-      const parsedInitOptions = initOptionsSchema.parse(opts);
+  .addOption(createOption('--lib', 'Create a config for a library project').default(false));
 
-      const options = {
-        framework: parsedInitOptions.framework ?? (await getFrameworkSelection()),
-        testing:
-          parsedInitOptions.testing === false
-            ? null
-            : (parsedInitOptions.testing ?? (await getTestingFrameworkSelection())),
-        lib: parsedInitOptions.lib,
-      } satisfies Config;
+init.action(async (opts) => {
+  try {
+    const parsedInitOptions = initOptionsSchema.parse(opts);
 
-      const deps = getDependencies(options.framework, options.testing);
+    const framework =
+      frameworkOptions.find((framework) => parsedInitOptions[framework]) ??
+      (await getFrameworkSelection());
 
-      logger.info("The config that you've selected requires the following dependencies:");
-      logger.break();
-      logger.log(chalk.blue(deps.join(' ')));
-      logger.break();
+    const testing = parsedInitOptions.skipTesting
+      ? null
+      : (testingFrameworkOptions.find((testing) => parsedInitOptions[testing]) ??
+        (await getTestingFrameworkSelection()));
 
-      const { confirm } = (await prompts({
-        type: 'confirm',
-        name: 'confirm',
-        message: 'Do you want to install these dependencies?',
-        initial: true,
-      })) as { confirm: boolean };
+    const options = {
+      framework,
+      testing,
+      lib: parsedInitOptions.lib,
+    } satisfies Config;
 
-      if (confirm) {
-        await installDependencies(deps);
-      }
+    const deps = getDependencies(framework, testing);
 
-      // Write the ESLint config
-      await writeEslintConfig(options);
-    } catch (error) {
-      handleError(error);
+    logger.info("The config that you've selected requires the following dependencies:");
+    logger.break();
+    logger.log(chalk.blue(deps.join(' ')));
+    logger.break();
+
+    const { confirm } = (await prompts({
+      type: 'confirm',
+      name: 'confirm',
+      message: 'Do you want to install these dependencies?',
+      initial: true,
+    })) as { confirm: boolean };
+
+    if (confirm) {
+      await installDependencies(deps);
     }
-  });
+
+    // Write the ESLint config
+    await writeEslintConfig(options);
+  } catch (error) {
+    handleError(error);
+  }
+});
 
 async function getTestingFrameworkSelection(): Promise<TestingFramework | null> {
   const { testing } = (await prompts(
