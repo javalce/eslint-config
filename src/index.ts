@@ -1,5 +1,7 @@
 import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './types';
 
+import fs from 'node:fs';
+
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
@@ -34,7 +36,17 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   configs.push(ignores(), javascript({ ecmaVersion }));
 
-  const tsconfigPath = typeof enableTypeScript !== 'boolean' ? enableTypeScript : 'tsconfig.json';
+  const tsconfigPath = (() => {
+    if (typeof enableTypeScript !== 'boolean') {
+      return enableTypeScript;
+    }
+
+    if (fs.existsSync('tsconfig.eslint.json')) {
+      return 'tsconfig.eslint.json';
+    }
+
+    return 'tsconfig.json';
+  })();
 
   const enableReact = Boolean(reactFlag);
   const enableNext = reactFlag === 'next';
