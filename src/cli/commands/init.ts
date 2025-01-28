@@ -6,6 +6,7 @@ import chalk from 'chalk';
 import { Command, createOption } from 'commander';
 import ora from 'ora';
 import prompts from 'prompts';
+import { z } from 'zod';
 
 import {
   DEPENDENCIES_MAP,
@@ -17,6 +18,12 @@ import {
 import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
 import { installDependencies, isPackageTypeModule } from '../utils/npm-utils';
+
+const initOptionsSchema = z.object({
+  framework: z.nativeEnum(FRAMEWORKS).optional(),
+  testing: z.union([z.nativeEnum(TESTING_FRAMEWORKS).optional(), z.literal(false)]),
+  lib: z.boolean(),
+});
 
 export const init = new Command()
   .name('init')
@@ -33,19 +40,20 @@ export const init = new Command()
   )
   .addOption(createOption('--no-testing', 'Skip the testing framework selection').default(false))
   .addOption(createOption('--lib', 'Create a config for a library project').default(false))
-  .action(async (args) => {
-    const framework = args.framework ?? (await getFrameworkSelection());
-    const testing =
-      args.testing === false ? null : (args.testing ?? (await getTestingFrameworkSelection()));
-
-    const options: Config = {
-      framework,
-      testing,
-      lib: args.lib,
-    } as Config;
-
+  .action(async (opts) => {
     try {
-      const deps = getDependencies(framework, testing);
+      const parsedInitOptions = initOptionsSchema.parse(opts);
+
+      const options = {
+        framework: parsedInitOptions.framework ?? (await getFrameworkSelection()),
+        testing:
+          parsedInitOptions.testing === false
+            ? null
+            : (parsedInitOptions.testing ?? (await getTestingFrameworkSelection())),
+        lib: parsedInitOptions.lib,
+      } satisfies Config;
+
+      const deps = getDependencies(options.framework, options.testing);
 
       logger.info("The config that you've selected requires the following dependencies:");
       logger.break();

@@ -5,12 +5,15 @@ import fs from 'node:fs/promises';
 import chalk from 'chalk';
 import { Command, createArgument } from 'commander';
 import ora from 'ora';
+import { z } from 'zod';
 
 import { DEPENDENCIES_MAP, FRAMEWORKS, TESTING_FRAMEWORKS } from '../constants';
 import { getEslintConfigPath } from '../utils/get-eslint-config';
 import { handleError } from '../utils/handle-error';
 import { logger } from '../utils/logger';
 import { getPackageJson, installDependencies } from '../utils/npm-utils';
+
+const addArgsSchema = z.nativeEnum({ ...FRAMEWORKS, ...TESTING_FRAMEWORKS });
 
 export const add = new Command()
   .name('add')
@@ -21,23 +24,31 @@ export const add = new Command()
       'The config for the framework you want to add to your project',
     ).choices(Object.values({ ...FRAMEWORKS, ...TESTING_FRAMEWORKS })),
   )
-  .action(async (framework) => {
-    await ensureEslintIsInstalled();
+  .action(async (args) => {
+    try {
+      const framework = addArgsSchema.parse(args);
 
-    const deps = getDependencies(framework);
+      await ensureEslintIsInstalled();
 
-    if (!(await validateDependenciesPresence(framework, deps))) {
-      logger.info(`The ${chalk.magentaBright(framework)} config needs the following dependencies:`);
-      logger.break();
-      logger.log(chalk.blueBright(deps.join(' ')));
-      logger.break();
+      const deps = getDependencies(framework);
 
-      await installDependencies(deps);
+      if (!(await validateDependenciesPresence(framework, deps))) {
+        logger.info(
+          `The ${chalk.magentaBright(framework)} config needs the following dependencies:`,
+        );
+        logger.break();
+        logger.log(chalk.blueBright(deps.join(' ')));
+        logger.break();
 
-      logger.info('You can now enable the config in your ESLint configuration file.');
+        await installDependencies(deps);
+
+        logger.info('You can now enable the config in your ESLint configuration file.');
+      }
+
+      await validateEslintConfig(framework);
+    } catch (error) {
+      handleError(error);
     }
-
-    await validateEslintConfig(framework);
   })
   .showHelpAfterError();
 
