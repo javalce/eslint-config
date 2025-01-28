@@ -2,8 +2,8 @@ import type { Config, Framework, TestingFramework } from '../types';
 
 import fs from 'node:fs/promises';
 
-import { Command, createOption } from '@commander-js/extra-typings';
 import chalk from 'chalk';
+import { Command, createOption } from 'commander';
 import ora from 'ora';
 import prompts from 'prompts';
 

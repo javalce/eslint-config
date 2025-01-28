@@ -1,4 +1,4 @@
-import { Command } from '@commander-js/extra-typings';
+import { Command } from 'commander';
 
 import packageJson from '../../package.json';
 

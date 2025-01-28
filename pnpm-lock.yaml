@@ -17,9 +17,6 @@ importers:
       '@babel/eslint-parser':
         specifier: ^7.26.5
         version: 7.26.5(@babel/core@7.26.0)(eslint@9.18.0(jiti@2.4.2))
-      '@commander-js/extra-typings':
-        specifier: ^13.0.0
-        version: 13.0.0(commander@13.0.0)
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: ^4.4.1
         version: 4.4.1(eslint@9.18.0(jiti@2.4.2))
@@ -264,11 +261,6 @@ packages:
   '@babel/types@7.26.5':
     resolution: {integrity: sha512-L6mZmwFDK6Cjh1nRCLXpa6no13ZIioJDz7mdkzHv399pThrTa/k0nUlNaenOeh2kWu/iaOQYElEpKPUswUa9Vg==}
     engines: {node: '>=6.9.0'}
-
-  '@commander-js/extra-typings@13.0.0':
-    resolution: {integrity: sha512-4or44L3saI49QRBvdSzfCtzqONlFg0/qy0Cfl+LRynDaxlGs7r2KRTLCELaAoKh4oQguICxRwQfm77/Up+0wTw==}
-    peerDependencies:
-      commander: ~13.0.0
 
   '@commitlint/cli@19.6.1':
     resolution: {integrity: sha512-8hcyA6ZoHwWXC76BoC8qVOSr8xHy00LZhZpauiD0iO0VYbVhMnED0da85lTfIULxl7Lj4c6vZgF0Wu/ed1+jlQ==}
@@ -3547,10 +3539,6 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
-
-  '@commander-js/extra-typings@13.0.0(commander@13.0.0)':
-    dependencies:
-      commander: 13.0.0
 
   '@commitlint/cli@19.6.1(@types/node@22.10.7)(typescript@5.7.3)':
     dependencies:
