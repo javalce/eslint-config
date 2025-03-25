@@ -72,6 +72,43 @@ export default defineConfig({
 });
 ```
 
+### Overriding rules
+
+You can override the rules by passing an array of ESLint configurations to the `overrides` option.
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  overrides: [
+    {
+      files: ['*.ts'],
+      rules: {
+        'no-undef': 'off',
+      },
+    },
+    {
+      files: ['*.js'],
+      rules: {
+        'no-undef': 'error',
+      },
+    },
+  ],
+});
+```
+
+### Ignore files
+
+By default, the ESLint configuration will ignore all files in the `.gitignore` file. If you want to ignore additional files, you can pass the `ignores` option to the configuration:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  ignores: ['src/types.d.ts'],
+});
+```
+
 ### TypeScript
 
 To enable TypeScript support, you only need to install the `typescript` package:
