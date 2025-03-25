@@ -41,6 +41,7 @@ export type ProjectType = 'app' | 'lib';
 
 export interface OptionsConfig {
   ecmaVersion?: EcmaVersion;
+  ignores?: string[];
   typescript?: boolean | string | string[];
   react?: boolean | 'next';
   astro?: boolean;

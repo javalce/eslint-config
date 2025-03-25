@@ -22,6 +22,7 @@ import { DEFAULT_ECMA_VERSION } from './constants';
 export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = DEFAULT_ECMA_VERSION,
+    ignores: ignoreFiles,
     typescript: enableTypeScript = isPackageExists('typescript'),
     react: reactFlag,
     astro: enableAstro,
@@ -34,7 +35,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   const configs: Awaitable<TypedConfigItem[]>[] = [];
 
-  configs.push(ignores(), javascript({ ecmaVersion }));
+  configs.push(ignores({ files: ignoreFiles }), javascript({ ecmaVersion }));
 
   const tsconfigPath = (() => {
     if (typeof enableTypeScript !== 'boolean') {
