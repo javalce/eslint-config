@@ -1,3 +1,19 @@
+# [0.10.0](https://github.com/javalce/eslint-config/compare/v0.9.0...v0.10.0) (2025-03-25)
+
+### Bug Fixes
+
+- update eslint-plugin-import-x config for react ([02aade9](https://github.com/javalce/eslint-config/commit/02aade9a4fa431d63065cd829e988c7a3f1d8f7b))
+- update Svelte ESLint configuration to use recommended rules ([a63d9c7](https://github.com/javalce/eslint-config/commit/a63d9c7dc2c18540ed6fa02ccc441d5c8a5169b9))
+- update Vue ESLint configurations ([5b8447f](https://github.com/javalce/eslint-config/commit/5b8447f57ff13445394b5416ec7ad5832fefc849))
+- use nullish coalescing operator for default export resolution in lazy function ([804dadf](https://github.com/javalce/eslint-config/commit/804dadfdfe3fb17f6fe23bbfc08b69e5cbe00baa))
+
+### Features
+
+- add option to ignore specific files ([09c5dc0](https://github.com/javalce/eslint-config/commit/09c5dc0f9738f4fae6ff30833451390ae4d9e768))
+- add zod for schema validation in CLI commands ([073a241](https://github.com/javalce/eslint-config/commit/073a24143bc8fca56dc24c742f4792e08fbfa5a6))
+- enhance init command with framework and testing options using zod validation ([96121a8](https://github.com/javalce/eslint-config/commit/96121a81fdf302830807076ad2f945b09ac4e5d9))
+- update TypeScript configuration resolution to check for tsconfig.eslint.json ([9a3a767](https://github.com/javalce/eslint-config/commit/9a3a7677ddc9e2ab7b3e19ff573ebedf8bce96d1))
+
 # [0.9.0](https://github.com/javalce/eslint-config/compare/v0.8.5...v0.9.0) (2025-01-20)
 
 ### Bug Fixes
