@@ -8,6 +8,10 @@ export async function svelte({ typescript }: { typescript: boolean }): Promise<T
     lazy(import('svelte-eslint-parser')),
   ]);
 
+  const recommendedRules = eslintPluginSvelte.configs['flat/recommended'].find(
+    (config) => config.name === 'svelte:recommended:rules',
+  )!;
+
   return [
     {
       name: 'javalce/svelte/setup',
@@ -26,7 +30,7 @@ export async function svelte({ typescript }: { typescript: boolean }): Promise<T
       },
       name: 'javalce/svelte/rules',
       rules: {
-        ...eslintPluginSvelte.configs.recommended.rules,
+        ...recommendedRules.rules,
       },
     },
   ];
