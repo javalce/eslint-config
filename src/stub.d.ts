@@ -71,13 +71,13 @@ declare module 'eslint-plugin-vue' {
     recommended: {
       rules: Record<string, unknown>;
     };
-    'vue3-essential': {
+    'vue2-essential': {
       rules: Record<string, unknown>;
     };
-    'vue3-strongly-recommended': {
+    'vue2-strongly-recommended': {
       rules: Record<string, unknown>;
     };
-    'vue3-recommended': {
+    'vue2-recommended': {
       rules: Record<string, unknown>;
     };
   };
