@@ -31,9 +31,10 @@ export async function react(): Promise<TypedConfigItem[]> {
       },
       jsxA11yPlugin.flatConfigs.recommended as TypedConfigItem,
       {
-        ...eslintPluginImport.flatConfigs.react,
-        name: 'import-x/react',
-      },
+        settings: eslintPluginImport.flatConfigs.react.settings,
+        languageOptions: eslintPluginImport.flatConfigs.react.languageOptions,
+        name: eslintPluginImport.flatConfigs.react.name,
+      } as TypedConfigItem,
       reactRules,
       jsxA11Rules,
       {
