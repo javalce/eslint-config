@@ -43,7 +43,8 @@ export interface OptionsConfig {
   ecmaVersion?: EcmaVersion;
   ignores?: string[];
   typescript?: boolean | string | string[];
-  react?: boolean | 'next';
+  react?: boolean;
+  next?: boolean;
   astro?: boolean;
   svelte?: boolean;
   solidjs?: boolean;

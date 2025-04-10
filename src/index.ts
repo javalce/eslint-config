@@ -3,6 +3,7 @@ import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './t
 import fs from 'node:fs';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
+import { isPackageExists } from 'local-pkg';
 
 import { astro } from './configs/astro';
 import { comments } from './configs/comments';
@@ -20,27 +21,19 @@ import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
-import {
-  ASTRO_PACKAGES,
-  DEFAULT_ECMA_VERSION,
-  NEXT_PACKAGES,
-  REACT_PACKAGES,
-  SOLID_PACKAGES,
-  SVELTE_PACKAGES,
-  VUE_PACKAGES,
-} from './constants';
-import { hasPackage } from './utils';
+import { DEFAULT_ECMA_VERSION } from './constants';
 
 export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = DEFAULT_ECMA_VERSION,
     ignores: ignoreFiles,
-    typescript: enableTypeScript = hasPackage('typescript'),
-    react: reactFlag = REACT_PACKAGES.some(hasPackage),
-    astro: enableAstro = ASTRO_PACKAGES.some(hasPackage),
-    svelte: enableSvelte = SVELTE_PACKAGES.some(hasPackage),
-    solidjs: enableSolidjs = SOLID_PACKAGES.some(hasPackage),
-    vue: enableVue = VUE_PACKAGES.some(hasPackage),
+    typescript: enableTypeScript = isPackageExists('typescript'),
+    react: enableReact,
+    next: enableNext,
+    astro: enableAstro,
+    svelte: enableSvelte,
+    solidjs: enableSolidjs,
+    vue: enableVue,
     testing: enableTesting,
     overrides = [],
   } = options;
@@ -67,9 +60,6 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
     return 'tsconfig.json';
   })();
-
-  const enableReact = Boolean(reactFlag);
-  const enableNext = reactFlag === 'next' || NEXT_PACKAGES.some(hasPackage);
 
   if (enableTypeScript) {
     configs.push(
@@ -136,7 +126,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   if (enableTesting && (enableVue || enableReact)) {
     configs.push(
       testingLibrary({
-        react: enableReact,
+        react: Boolean(enableReact),
         vue: Boolean(enableVue),
       }),
     );
