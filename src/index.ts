@@ -3,7 +3,6 @@ import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './t
 import fs from 'node:fs';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
-import { isPackageExists } from 'local-pkg';
 
 import { astro } from './configs/astro';
 import { comments } from './configs/comments';
@@ -22,12 +21,13 @@ import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
 import { DEFAULT_ECMA_VERSION } from './constants';
+import { hasPackage } from './utils';
 
 export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = DEFAULT_ECMA_VERSION,
     ignores: ignoreFiles,
-    typescript: enableTypeScript = isPackageExists('typescript'),
+    typescript: enableTypeScript = hasPackage('typescript'),
     react: reactFlag,
     astro: enableAstro,
     svelte: enableSvelte,
