@@ -23,6 +23,11 @@ export async function react(): Promise<TypedConfigItem[]> {
     },
     ...([
       {
+        settings: eslintPluginImport.flatConfigs.react.settings,
+        languageOptions: eslintPluginImport.flatConfigs.react.languageOptions,
+        name: 'react/import',
+      },
+      {
         settings: {
           react: {
             version: 'detect',
@@ -34,11 +39,6 @@ export async function react(): Promise<TypedConfigItem[]> {
           ...jsxA11yPlugin.flatConfigs.recommended.rules,
         },
         name: 'react/rules',
-      },
-      {
-        settings: eslintPluginImport.flatConfigs.react.settings,
-        languageOptions: eslintPluginImport.flatConfigs.react.languageOptions,
-        name: eslintPluginImport.flatConfigs.react.name,
       },
       reactRules,
       jsxA11Rules,
