@@ -46,13 +46,6 @@ export async function typescript({
             }),
           ],
         },
-        rules:
-          type === 'app'
-            ? {
-                '@typescript-eslint/explicit-function-return-type': 'off',
-                '@typescript-eslint/no-floating-promises': 'off',
-              }
-            : {},
         name: 'typescript/setup/project',
       },
       {
@@ -73,6 +66,17 @@ export async function typescript({
       },
       eslintTypescriptConfig,
       eslintExtensionConfig,
+      ...(type === 'app'
+        ? [
+            {
+              rules: {
+                '@typescript-eslint/explicit-function-return-type': 'off',
+                '@typescript-eslint/no-floating-promises': 'off',
+              },
+              name: 'typescript/rules/app',
+            },
+          ]
+        : []),
       {
         ...importPlugin.configs.typescript,
         name: 'typescript/import/setup',
