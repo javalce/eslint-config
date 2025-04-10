@@ -1,5 +1,3 @@
-import { createRequire } from 'node:module';
-
 import { type Awaitable, type TypedConfigItem } from './types';
 
 /**
@@ -11,18 +9,6 @@ export async function combine(
   const resolved = await Promise.all(configs);
 
   return resolved.flat();
-}
-
-const require = createRequire(import.meta.url);
-
-export function hasPackage(name: string): boolean {
-  try {
-    require.resolve(name);
-
-    return true;
-  } catch {
-    return false;
-  }
 }
 
 export async function lazy<T>(m: Awaitable<T>): Promise<T extends { default: infer U } ? U : T> {
