@@ -17,7 +17,7 @@ export async function vue({
 
   return [
     {
-      name: 'javalce/vue/setup',
+      name: 'vue/setup',
       languageOptions: {
         globals: {
           computed: 'readonly',
@@ -41,7 +41,7 @@ export async function vue({
       },
     },
     {
-      name: 'javalce/vue',
+      name: 'vue/rules',
       files: [VUE_FILES],
       languageOptions: {
         parser: vueParser,
@@ -63,11 +63,16 @@ export async function vue({
               ...pluginVue.configs['vue2-recommended'].rules,
             }
           : {
-              ...pluginVue.configs.essential.rules,
-              ...pluginVue.configs['strongly-recommended'].rules,
-              ...pluginVue.configs.recommended.rules,
+              ...pluginVue.configs['flat/essential']
+                .map((c) => c.rules)
+                .reduce((acc, c) => ({ ...acc, ...c }), {}),
+              ...pluginVue.configs['flat/strongly-recommended']
+                .map((c) => c.rules)
+                .reduce((acc, c) => ({ ...acc, ...c }), {}),
+              ...pluginVue.configs['flat/recommended']
+                .map((c) => c.rules)
+                .reduce((acc, c) => ({ ...acc, ...c }), {}),
             }),
-        // '@typescript-eslint/explicit-function-return-type': 'off',
         'vue/block-order': [
           'error',
           {
