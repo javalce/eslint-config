@@ -20,7 +20,15 @@ import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
-import { DEFAULT_ECMA_VERSION } from './constants';
+import {
+  ASTRO_PACKAGES,
+  DEFAULT_ECMA_VERSION,
+  NEXT_PACKAGES,
+  REACT_PACKAGES,
+  SOLID_PACKAGES,
+  SVELTE_PACKAGES,
+  VUE_PACKAGES,
+} from './constants';
 import { hasPackage } from './utils';
 
 export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
@@ -28,11 +36,11 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     ecmaVersion = DEFAULT_ECMA_VERSION,
     ignores: ignoreFiles,
     typescript: enableTypeScript = hasPackage('typescript'),
-    react: reactFlag,
-    astro: enableAstro,
-    svelte: enableSvelte,
-    solidjs: enableSolidjs,
-    vue: enableVue,
+    react: reactFlag = REACT_PACKAGES.some(hasPackage),
+    astro: enableAstro = ASTRO_PACKAGES.some(hasPackage),
+    svelte: enableSvelte = SVELTE_PACKAGES.some(hasPackage),
+    solidjs: enableSolidjs = SOLID_PACKAGES.some(hasPackage),
+    vue: enableVue = VUE_PACKAGES.some(hasPackage),
     testing: enableTesting,
     overrides = [],
   } = options;
@@ -61,7 +69,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
   })();
 
   const enableReact = Boolean(reactFlag);
-  const enableNext = reactFlag === 'next';
+  const enableNext = reactFlag === 'next' || NEXT_PACKAGES.some(hasPackage);
 
   if (enableTypeScript) {
     configs.push(
