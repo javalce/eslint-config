@@ -1,16 +1,8 @@
-import { SRC_FILES } from '../constants';
+import { NEXT_PACKAGES, REACT_ROUTER_PACKAGES, SRC_FILES } from '../constants';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { type TypedConfigItem } from '../types';
 import { hasPackage, lazy } from '../utils';
-
-const ReactRouterPackages = [
-  '@react-router/node',
-  '@react-router/react',
-  '@react-router/serve',
-  '@react-router/dev',
-];
-const NextJsPackages = ['next'];
 
 export async function react(): Promise<TypedConfigItem[]> {
   const [reactPlugin, reactHooksPlugin, reactRefreshPlugin, jsxA11yPlugin, eslintPluginImport] =
@@ -22,8 +14,8 @@ export async function react(): Promise<TypedConfigItem[]> {
       lazy(import('eslint-plugin-import-x')),
     ]);
 
-  const isUsingReactRouter = ReactRouterPackages.some((pkg) => hasPackage(pkg));
-  const isUsingNextJs = NextJsPackages.some((pkg) => hasPackage(pkg));
+  const isUsingReactRouter = REACT_ROUTER_PACKAGES.some(hasPackage);
+  const isUsingNextJs = NEXT_PACKAGES.some(hasPackage);
 
   return [
     {
