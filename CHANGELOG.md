@@ -1,3 +1,17 @@
+# [0.11.0](https://github.com/javalce/eslint-config/compare/v0.10.1...v0.11.0) (2025-04-10)
+
+### Bug Fixes
+
+- move app-specific TypeScript rules to a separate configuration ([b2e8d2e](https://github.com/javalce/eslint-config/commit/b2e8d2ec00808db31266d51ec3645a9539cf0954))
+- update vue configuration ([064c8ce](https://github.com/javalce/eslint-config/commit/064c8ce68a0e38a7dc818224cd321f0ce049cec1))
+
+### Features
+
+- add automatic configuration enable ([0cd8b97](https://github.com/javalce/eslint-config/commit/0cd8b97b9c6575c5499edf2ed59e4c3297d1b2da))
+- add eslint-plugin-react-refresh and integrate with react configuration ([56522dc](https://github.com/javalce/eslint-config/commit/56522dc6a3b4d51d3d7d69d233df054d1332a286))
+- add package constants ([8756861](https://github.com/javalce/eslint-config/commit/8756861c942d51e9e78d8b7e5182fb6c2ba02679))
+- add rule to prevent misuse of promises ([1ea645f](https://github.com/javalce/eslint-config/commit/1ea645f9c9b4301694ef9072e10aca55c628b66e))
+
 ## [0.10.1](https://github.com/javalce/eslint-config/compare/v0.10.0...v0.10.1) (2025-04-01)
 
 # [0.10.0](https://github.com/javalce/eslint-config/compare/v0.9.0...v0.10.0) (2025-03-25)
