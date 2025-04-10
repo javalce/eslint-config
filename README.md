@@ -15,6 +15,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 - [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files) file format
 - Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
 - Designed to work with TypeScript, React, Next.js, Node.js, and more smoothly out of the box
+- Actomatically loads the config for the framework you are using
 - Some rules can be auto-fixed with `eslint --fix`
 - Uses some stylistic rules to make your code more readable and consistent
 
@@ -71,6 +72,14 @@ export default defineConfig({
   ecmaVersion: 2021,
 });
 ```
+
+## Configuration
+
+For the framework configurations, they will be automatically loaded based on the packages installed in your project, but you still need to install the ESLint plugins for the framework you are using.
+
+For example, if you have React installed, it will automatically load the React config, but you still need to install the ESLint plugins for React.
+
+If you want, you can enable the config explicitly. On the specific framework sections, you will find the instructions to do it.
 
 ### Overriding rules
 
@@ -173,10 +182,9 @@ export default defineConfig({
 
 ## Next.js
 
-To enable Next.js support, you need to install all the react plugins and the `@next/eslint-plugin-next` package:
+To enable Next.js support, you need to install all the react plugins and the `@next/eslint-plugin-next` packages:
 
 ```bash
-# If you use npm
 pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y @next/eslint-plugin-next
 ```
 
@@ -194,7 +202,7 @@ This will enable the react rules and the Next.js specific rules.
 
 ## Svelte
 
-To enable Svelte support, you need to install the `eslint-plugin-svelte` and `svelte-eslint-parser` package:
+To enable Svelte support, you need to install the `eslint-plugin-svelte` and `svelte-eslint-parser` packages:
 
 ```bash
 pnpm add --save-dev eslint-plugin-svelte svelte-eslint-parser
