@@ -8,14 +8,14 @@ export async function solid({ typescript }: { typescript: boolean }): Promise<Ty
 
   return [
     {
-      name: 'javalce/solid/setup',
+      name: 'solid/setup',
       plugins: {
         solid: solidPlugin,
       },
     },
     {
       files: [JSX_FILES, TSX_FILES],
-      name: 'javalce/solid/rules',
+      name: 'solid/rules',
       rules: {
         // reactivity
         'solid/components-return-once': 'warn',

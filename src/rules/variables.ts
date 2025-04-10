@@ -1,7 +1,7 @@
 import type { TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  name: 'javalce/javascript/variables',
+  name: 'javascript/variables',
   rules: {
     /**
      * Disallow labels that share a name with a variable.

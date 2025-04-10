@@ -12,7 +12,7 @@ const disabledRules: TypedConfigItem['rules'] = {
 };
 
 const config: TypedConfigItem = {
-  name: 'javalce/typescript',
+  name: 'typescript/rules/strictest',
   rules: {
     ...disabledRules,
     /**

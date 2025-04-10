@@ -15,7 +15,7 @@ const disabledRules: Linter.RulesRecord = {
 };
 
 const config: TypedConfigItem = {
-  name: 'javalce/react',
+  name: 'react/rules/stylistic',
   rules: {
     ...disabledRules,
     /**

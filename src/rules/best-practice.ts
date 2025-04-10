@@ -1,7 +1,7 @@
 import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  name: 'javalce/javascript/best-practice',
+  name: 'javascript/best-practice',
   rules: {
     /**
      * Require return statements in array methods callbacks.

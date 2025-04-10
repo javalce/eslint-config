@@ -8,7 +8,6 @@ import { type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
 export async function nextjs(): Promise<TypedConfigItem[]> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- this is a valid use case
   const [nextjsPlugin, babelParser] = await Promise.all([
     lazy(import('@next/eslint-plugin-next')),
     lazy(import('@babel/eslint-parser')),
@@ -36,7 +35,7 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
       rules: {
         ...(nextjsPlugin.configs.recommended.rules as Linter.RulesRecord),
       },
-      name: 'javalce/nextjs',
+      name: 'nextjs/rules',
     },
     {
       files: [JS_FILES, JSX_FILES],
@@ -47,7 +46,7 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
           babelOptions,
         },
       },
-      name: 'javalce/nextjs/parser',
+      name: 'nextjs/parser',
     },
   ] satisfies TypedConfigItem[];
 }

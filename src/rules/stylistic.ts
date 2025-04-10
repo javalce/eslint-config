@@ -1,7 +1,7 @@
 import type { TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  name: 'javalce/javascript/stylistic',
+  name: 'stylistic/rules',
   rules: {
     /**
      * Improve readability by enforcing lines between class members.

@@ -14,7 +14,7 @@ export async function svelte({ typescript }: { typescript: boolean }): Promise<T
 
   return [
     {
-      name: 'javalce/svelte/setup',
+      name: 'svelte/setup',
       plugins: {
         svelte: eslintPluginSvelte,
       },
@@ -28,7 +28,7 @@ export async function svelte({ typescript }: { typescript: boolean }): Promise<T
           parser: typescript ? (await lazy(import('typescript-eslint'))).parser : null,
         },
       },
-      name: 'javalce/svelte/rules',
+      name: 'svelte/rules',
       rules: {
         ...recommendedRules.rules,
       },

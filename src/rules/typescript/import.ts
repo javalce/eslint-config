@@ -14,7 +14,7 @@ const disabledRules: Partial<Linter.RulesRecord> = {
 };
 
 const config: TypedConfigItem = {
-  name: 'javalce/typescript/import',
+  name: 'typescript/import/rules',
   rules: {
     ...disabledRules,
     'import-x/order': [

@@ -3,7 +3,7 @@ import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
   files: TESTING_FILES,
-  name: 'javalce/vitest',
+  name: 'vitest/rules/stylistic',
   rules: {
     /**
      * It's not important to know the return type of functions in tests.

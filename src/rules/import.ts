@@ -1,7 +1,7 @@
 import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  name: 'javalce/javascript/import',
+  name: 'javascript/import/rules',
   rules: {
     /**
      * Disallow non-import statements appearing before import statements.

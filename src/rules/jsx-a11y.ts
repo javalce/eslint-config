@@ -14,7 +14,7 @@ const disabledRules: Linter.RulesRecord = {
 };
 
 const config: TypedConfigItem = {
-  name: 'javalce/react/jsx-a11y',
+  name: 'react/rules/jsx-a11y',
   rules: {
     ...disabledRules,
   },

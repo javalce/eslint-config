@@ -3,7 +3,7 @@ import type { TypedConfigItem } from '../types';
 import eslintPuginUnicorn from 'eslint-plugin-unicorn';
 
 const config: TypedConfigItem = {
-  name: 'javalce/javascript/unicorn',
+  name: 'unicorn/rules',
   plugins: {
     unicorn: eslintPuginUnicorn,
   },

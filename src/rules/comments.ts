@@ -5,7 +5,7 @@ import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comment
 import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  name: 'javalce/javascript/eslint-comments',
+  name: 'javascript/eslint-comments/rules',
   plugins: {
     'eslint-comments': eslintCommentsPlugin as ESLint.Plugin,
   },

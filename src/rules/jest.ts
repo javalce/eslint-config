@@ -3,7 +3,7 @@ import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
   files: TESTING_FILES,
-  name: 'javalce/jest',
+  name: 'jest/rules/stylistic',
   rules: {
     /**
      * Disallow duplicate setup and teardown hooks.

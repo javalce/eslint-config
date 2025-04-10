@@ -21,7 +21,7 @@ export async function astro({ typescript }: { typescript: boolean }): Promise<Ty
 
   return [
     {
-      name: 'astro/base/plugin',
+      name: 'astro/setup',
       plugins: {
         astro: pluginAstro,
       },
@@ -41,7 +41,7 @@ export async function astro({ typescript }: { typescript: boolean }): Promise<Ty
       processor: typescript ? 'astro/client-side-ts' : 'astro/astro',
     },
     {
-      name: 'astro/base/javascript',
+      name: 'astro/javascript',
       files: [...ASTRO_JS_FILES],
       languageOptions: {
         globals: {
@@ -51,7 +51,7 @@ export async function astro({ typescript }: { typescript: boolean }): Promise<Ty
       },
     },
     {
-      name: 'astro/base/typescript',
+      name: 'astro/typescript',
       files: [...ASTRO_TS_FILES],
       languageOptions: {
         globals: {

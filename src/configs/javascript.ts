@@ -19,19 +19,19 @@ export function javascript({ ecmaVersion }: { ecmaVersion: EcmaVersion }): Typed
   return [
     {
       ...js.configs.recommended,
-      name: 'eslint/recommended',
+      name: 'javascript/rules',
     } as TypedConfigItem,
     {
       plugins: {
         'import-x': eslintPluginImport,
       },
-      name: 'import-x',
+      name: 'javascript/import/setup',
     },
     {
       plugins: {
         '@stylistic': stylistic,
       },
-      name: 'stylistic',
+      name: 'javascript/stylistic/setup',
     },
     bestPracticeConfig,
     eslintCommentsConfig,
@@ -54,7 +54,7 @@ export function javascript({ ecmaVersion }: { ecmaVersion: EcmaVersion }): Typed
           ...globals.node,
         },
       },
-      name: 'javalce/javascript/setup',
+      name: 'javascript/setup',
     },
     {
       files: [JS_FILES, JSX_FILES],
@@ -62,14 +62,14 @@ export function javascript({ ecmaVersion }: { ecmaVersion: EcmaVersion }): Typed
         // Use the default parser (espree, which handles JavaScript and JSX files)
         parser: undefined,
       },
-      name: 'javalce/javascript/parser',
+      name: 'javascript/parser',
     },
     {
       files: CONFIG_FILES,
       rules: {
         'import-x/no-default-export': 'off',
       },
-      name: 'javalce/import-x/no-default-export',
+      name: 'import/rules/no-default-export',
     },
   ];
 }
