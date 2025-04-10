@@ -8,7 +8,9 @@ export async function vitest({ typescript }: { typescript: boolean }): Promise<T
 
   return [
     {
-      files: TESTING_FILES,
+      plugins: {
+        vitest: vitestPlugin,
+      },
       ...(typescript
         ? {
             settings: {
@@ -23,13 +25,14 @@ export async function vitest({ typescript }: { typescript: boolean }): Promise<T
           ...vitestPlugin.environments.env.globals,
         },
       },
-      plugins: {
-        vitest: vitestPlugin,
-      },
+      name: 'vitest/setup',
+    },
+    {
+      files: TESTING_FILES,
       rules: {
         ...vitestPlugin.configs.recommended.rules,
       },
-      name: 'vitest',
+      name: 'vitest/rules',
     },
     eslintConfigVitest,
   ];

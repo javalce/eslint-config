@@ -10,15 +10,23 @@ export async function jest(): Promise<TypedConfigItem[]> {
 
   return [
     {
-      files: TESTING_FILES,
-      ...(jestPlugin.configs['flat/recommended'] as TypedConfigItem),
-      ...(jestPlugin.configs['flat/style'] as TypedConfigItem),
+      plugins: {
+        jest: jestPlugin,
+      },
       languageOptions: {
         globals: {
           ...globals.jest,
         },
       },
-      name: 'jest',
+      name: 'jest/setup',
+    },
+    {
+      files: TESTING_FILES,
+      rules: {
+        ...jestPlugin.configs['flat/recommended'].rules,
+        ...jestPlugin.configs['flat/style'].rules,
+      },
+      name: 'jest/rules',
     },
     jestConfig,
     // Prefer the Jest version of this rule. This silently fails when type
@@ -29,7 +37,7 @@ export async function jest(): Promise<TypedConfigItem[]> {
         '@typescript-eslint/unbound-method': 'off',
         'jest/unbound-method': 'error',
       },
-      name: 'jest/unbound-method',
+      name: 'jest/rules/unbound-method',
     },
   ];
 }

@@ -1,5 +1,3 @@
-import { type Linter } from 'eslint';
-
 import { SRC_FILES } from '../constants';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
@@ -15,39 +13,38 @@ export async function react(): Promise<TypedConfigItem[]> {
   ]);
 
   return [
-    ...[
-      {
-        ...(reactPlugin.configs.flat.recommended as TypedConfigItem),
-        name: 'react',
+    {
+      plugins: {
+        react: reactPlugin,
+        'react-hooks': reactHooksPlugin,
+        'jsx-a11y': jsxA11yPlugin,
       },
-      {
-        plugins: {
-          'react-hooks': reactHooksPlugin,
-        },
-        rules: {
-          ...(reactHooksPlugin.configs.recommended.rules as Linter.RulesRecord),
-        },
-        name: 'react-hooks',
-      },
-      jsxA11yPlugin.flatConfigs.recommended as TypedConfigItem,
-      {
-        settings: eslintPluginImport.flatConfigs.react.settings,
-        languageOptions: eslintPluginImport.flatConfigs.react.languageOptions,
-        name: eslintPluginImport.flatConfigs.react.name,
-      } as TypedConfigItem,
-      reactRules,
-      jsxA11Rules,
+      name: 'react/setup',
+    },
+    ...([
       {
         settings: {
           react: {
             version: 'detect',
           },
         },
-        name: 'react/version',
+        rules: {
+          ...reactPlugin.configs.flat.recommended.rules,
+          ...reactHooksPlugin.configs.recommended.rules,
+          ...jsxA11yPlugin.flatConfigs.recommended.rules,
+        },
+        name: 'react/rules',
       },
-    ].map((conf) => ({
-      ...conf,
+      {
+        settings: eslintPluginImport.flatConfigs.react.settings,
+        languageOptions: eslintPluginImport.flatConfigs.react.languageOptions,
+        name: eslintPluginImport.flatConfigs.react.name,
+      },
+      reactRules,
+      jsxA11Rules,
+    ].map((config) => ({
+      ...config,
       files: [SRC_FILES],
-    })),
-  ] satisfies TypedConfigItem[];
+    })) as TypedConfigItem[]),
+  ];
 }
