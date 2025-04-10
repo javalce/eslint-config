@@ -5,14 +5,18 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
 import { astro } from '../src/configs/astro';
+import { comments } from '../src/configs/comments';
+import { imports } from '../src/configs/imports';
 import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
 import { react } from '../src/configs/react';
 import { solid } from '../src/configs/solidjs';
+import { stylistic } from '../src/configs/stylistic';
 import { svelte } from '../src/configs/svelte';
 import { testingLibrary } from '../src/configs/testing-library';
 import { typescript } from '../src/configs/typescript';
+import { unicorn } from '../src/configs/unicorn';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
 import { DEFAULT_ECMA_VERSION } from '../src/constants';
@@ -28,6 +32,10 @@ const configs = (await combine(
     },
   },
   javascript({ ecmaVersion: DEFAULT_ECMA_VERSION }),
+  comments(),
+  imports(),
+  stylistic(),
+  unicorn(),
   typescript({ tsconfigPath: 'tsconfig.json' }),
   react(),
   nextjs(),

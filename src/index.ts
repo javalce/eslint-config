@@ -6,15 +6,19 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
 import { astro } from './configs/astro';
+import { comments } from './configs/comments';
 import { ignores } from './configs/ignores';
+import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
 import { react } from './configs/react';
 import { solid } from './configs/solidjs';
+import { stylistic } from './configs/stylistic';
 import { svelte } from './configs/svelte';
 import { testingLibrary } from './configs/testing-library';
 import { typescript } from './configs/typescript';
+import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
 import { DEFAULT_ECMA_VERSION } from './constants';
@@ -35,7 +39,14 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   const configs: Awaitable<TypedConfigItem[]>[] = [];
 
-  configs.push(ignores({ files: ignoreFiles }), javascript({ ecmaVersion }));
+  configs.push(
+    ignores({ files: ignoreFiles }),
+    javascript({ ecmaVersion }),
+    comments(),
+    imports(),
+    stylistic(),
+    unicorn(),
+  );
 
   const tsconfigPath = (() => {
     if (typeof enableTypeScript !== 'boolean') {
