@@ -65,6 +65,7 @@
     "eslint-plugin-unicorn": "^58.0.0",
     "execa": "^9.5.2",
     "globals": "^16.0.0",
+    "local-pkg": "^1.1.1",
     "ora": "^8.2.0",
     "prompts": "^2.4.2",
     "typescript-eslint": "^8.29.1",
