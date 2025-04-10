@@ -84,6 +84,17 @@ const config: TypedConfigItem = {
      */
     '@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
     /**
+     * Prevents the misuse of promises in contexts expecting synchronous functions, such as event handlers or boolean conditions.
+     *
+     * Only allows `Promise<void>` in JSX attributes, such as the common `form.handleSubmit(onSubmit)` from react-hook-form library.
+     *
+     * 🚫 Not fixable - https://typescript-eslint.io/rules/no-misused-promises/
+     */
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      { checksVoidReturn: { attributes: false } },
+    ],
+    /**
      * Disallow members of unions and intersections that do nothing or override type information.
      *
      * 🚫 Not fixable - https://typescript-eslint.io/rules/no-redundant-type-constituents/
