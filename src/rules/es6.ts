@@ -1,7 +1,7 @@
 import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  name: 'javascript/es6',
+  name: 'javascript/rules/es6',
   rules: {
     /**
      * Disallow useless computed property keys.

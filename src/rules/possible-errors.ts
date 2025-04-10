@@ -1,7 +1,7 @@
 import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  name: 'javascript/possible-errors',
+  name: 'javascript/rules/possible-errors',
   rules: {
     /**
      * Disallow the use of console.
