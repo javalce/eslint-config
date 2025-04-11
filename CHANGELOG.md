@@ -1,3 +1,11 @@
+## [0.11.1](https://github.com/javalce/eslint-config/compare/v0.11.0...v0.11.1) (2025-04-11)
+
+### Bug Fixes
+
+- add ensureInstalled function to validate required ESLint plugins across configurations ([5d51aef](https://github.com/javalce/eslint-config/commit/5d51aef4e26cbd92d8775144b85f62d7667dd6cf))
+- update CLI commands ([450ce09](https://github.com/javalce/eslint-config/commit/450ce098f0b2c6395d3e93931da569e445fa6e80))
+- update ESLint configuration to use local-pkg for package existence checks ([c0a4f8c](https://github.com/javalce/eslint-config/commit/c0a4f8c267a3a4b057a850b50254e2083e750d68))
+
 # [0.11.0](https://github.com/javalce/eslint-config/compare/v0.10.1...v0.11.0) (2025-04-10)
 
 ### Bug Fixes
