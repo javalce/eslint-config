@@ -3,9 +3,11 @@ import globals from 'globals';
 import { TESTING_FILES, TS_TESTING_FILES } from '../constants';
 import jestConfig from '../rules/jest';
 import { type TypedConfigItem } from '../types';
-import { lazy } from '../utils';
+import { ensureInstalled, lazy } from '../utils';
 
 export async function jest(): Promise<TypedConfigItem[]> {
+  ensureInstalled('eslint-plugin-jest');
+
   const jestPlugin = await lazy(import('eslint-plugin-jest'));
 
   return [

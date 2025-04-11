@@ -1,7 +1,7 @@
 import type { TypedConfigItem } from '../types';
 
 import { TESTING_FILES } from '../constants';
-import { lazy } from '../utils';
+import { ensureInstalled, lazy } from '../utils';
 
 export async function testingLibrary({
   react,
@@ -10,6 +10,8 @@ export async function testingLibrary({
   react: boolean;
   vue: boolean;
 }): Promise<TypedConfigItem[]> {
+  ensureInstalled('eslint-plugin-testing-library');
+
   const testingLibraryPlugin = await lazy(import('eslint-plugin-testing-library'));
 
   function makeConfig(name: 'react' | 'vue'): TypedConfigItem {

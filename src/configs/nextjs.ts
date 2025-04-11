@@ -4,11 +4,13 @@ import { type Linter } from 'eslint';
 
 import { JS_FILES, JSX_FILES, SRC_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
-import { lazy } from '../utils';
+import { ensureInstalled, lazy } from '../utils';
 
 const require = createRequire(process.cwd());
 
 export async function nextjs(): Promise<TypedConfigItem[]> {
+  ensureInstalled('@next/eslint-plugin-next');
+
   const [nextjsPlugin, babelParser] = await Promise.all([
     lazy(import('@next/eslint-plugin-next')),
     lazy(import('@babel/eslint-parser')),

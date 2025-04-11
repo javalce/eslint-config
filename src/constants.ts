@@ -44,10 +44,6 @@ export const TS_TESTING_FILES = [
 
 export const CONFIG_FILES = ['**/*.+(config|conf).?([cm])[jt]s', '**/.*rc.?([cm])[jt]s'];
 
-export const REACT_PACKAGES = ['react', 'react-dom', 'preact'];
-
-export const NEXT_PACKAGES = ['next'];
-
 export const REACT_ROUTER_PACKAGES = [
   '@react-router/node',
   '@react-router/react',
@@ -55,10 +51,4 @@ export const REACT_ROUTER_PACKAGES = [
   '@react-router/dev',
 ];
 
-export const ASTRO_PACKAGES = ['astro'];
-
-export const SVELTE_PACKAGES = ['svelte'];
-
-export const SOLID_PACKAGES = ['solid-js'];
-
-export const VUE_PACKAGES = ['vue', 'nuxt', 'vitepress', '@slidev/cli'];
+export const NEXT_PACKAGES = ['next'];

@@ -1,7 +1,7 @@
 import type { TypedConfigItem, VueVersion } from '../types';
 
 import { VUE_FILES } from '../constants';
-import { lazy } from '../utils';
+import { ensureInstalled, lazy } from '../utils';
 
 export async function vue({
   typescript,
@@ -10,6 +10,8 @@ export async function vue({
   typescript: boolean;
   version?: VueVersion;
 }): Promise<TypedConfigItem[]> {
+  ensureInstalled('eslint-plugin-vue', 'vue-eslint-parser');
+
   const [pluginVue, vueParser] = await Promise.all([
     lazy(import('eslint-plugin-vue')),
     lazy(import('vue-eslint-parser')),

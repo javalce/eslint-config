@@ -1,8 +1,10 @@
 import { SVELTE_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
-import { lazy } from '../utils';
+import { ensureInstalled, lazy } from '../utils';
 
 export async function svelte({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+  ensureInstalled('eslint-plugin-svelte', 'svelte-eslint-parser');
+
   const [eslintPluginSvelte, svelteParser] = await Promise.all([
     lazy(import('eslint-plugin-svelte')),
     lazy(import('svelte-eslint-parser')),

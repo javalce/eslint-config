@@ -4,9 +4,11 @@ import globals from 'globals';
 
 import { ASTRO_FILES, ASTRO_JS_FILES, ASTRO_TS_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';
-import { lazy } from '../utils';
+import { ensureInstalled, lazy } from '../utils';
 
 export async function astro({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+  ensureInstalled('eslint-plugin-astro', 'astro-eslint-parser');
+
   const [pluginAstro, parserAstro, tseslint] = await Promise.all([
     lazy(import('eslint-plugin-astro')),
     lazy(import('astro-eslint-parser')),

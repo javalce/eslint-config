@@ -4,9 +4,15 @@ import { NEXT_PACKAGES, REACT_ROUTER_PACKAGES, SRC_FILES } from '../constants';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { type TypedConfigItem } from '../types';
-import { lazy } from '../utils';
+import { ensureInstalled, lazy } from '../utils';
 
 export async function react(): Promise<TypedConfigItem[]> {
+  ensureInstalled(
+    'eslint-plugin-react',
+    'eslint-plugin-react-hooks',
+    'eslint-plugin-react-refresh',
+  );
+
   const [reactPlugin, reactHooksPlugin, reactRefreshPlugin, jsxA11yPlugin, eslintPluginImport] =
     await Promise.all([
       lazy(import('eslint-plugin-react')),
