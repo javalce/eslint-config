@@ -1,9 +1,8 @@
 import type { Framework, TestingFramework } from '../types';
 
-import fs from 'node:fs/promises';
-
 import chalk from 'chalk';
 import { Command, createArgument } from 'commander';
+import fs from 'fs-extra';
 import ora from 'ora';
 import { z } from 'zod';
 
@@ -125,6 +124,10 @@ async function ensureEslintIsInstalled(): Promise<void> {
 function getDependencies(framework: Framework | TestingFramework): string[] {
   const spinner = ora('Collecting dependencies...').start();
   const deps = new Set<string>();
+
+  if (framework === 'next') {
+    DEPENDENCIES_MAP.react.forEach((dep) => deps.add(dep));
+  }
 
   DEPENDENCIES_MAP[framework].forEach((dep) => deps.add(dep));
 
