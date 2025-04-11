@@ -75,11 +75,13 @@ export default defineConfig({
 
 ## Configuration
 
-For the framework configurations, they will be automatically loaded based on the packages installed in your project, but you still need to install the ESLint plugins for the framework you are using.
+To configure ESLint, you have to use the `defineConfig` function, as shown in the previous section. This function will return the ESLint configuration object.
 
-For example, if you have React installed, it will automatically load the React config, but you still need to install the ESLint plugins for React.
+T, you have to enable each framework configuration explicitly, otherwise it will not be loaded except for the typescript config, which is loaded automatically.
 
-If you want, you can enable the config explicitly. On the specific framework sections, you will find the instructions to do it.
+After you enable a framework, if you don't have the required ESLint plugins for this framework installed, ESLint will throw an error when you run it showing you the missing plugins.
+
+For more information about each configuration option, check the respective section.
 
 ### Overriding rules
 
@@ -167,7 +169,7 @@ Instead of using the passing the path to the tsconfig file(s) in the configurati
 To enable React support, you need to install the `eslint-plugin-react`, `eslint-plugin-react-hooks` and `eslint-plugin-jsx-a11y` packages:
 
 ```bash
-pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y
+pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y
 ```
 
 Then, update your ESLint configuration file to enable the React config:
@@ -185,16 +187,17 @@ export default defineConfig({
 To enable Next.js support, you need to install all the react plugins and the `@next/eslint-plugin-next` packages:
 
 ```bash
-pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y @next/eslint-plugin-next
+pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y @next/eslint-plugin-next
 ```
 
-Then, update your ESLint configuration file to enable the Next.js config:
+Then, update your ESLint configuration file to enable the react and Next.js config:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  react: 'next',
+  react: true,
+  next: true,
 });
 ```
 
@@ -337,7 +340,7 @@ import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
   react: true, // or vue
-  testing: 'jest', // or vitest
+  testing: 'vitest', // or vitest
 });
 ```
 
