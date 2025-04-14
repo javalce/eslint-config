@@ -1,8 +1,7 @@
 import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './types';
 
-import fs from 'node:fs';
-
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
+import fs from 'fs-extra';
 import { isPackageExists } from 'local-pkg';
 
 import { astro } from './configs/astro';
