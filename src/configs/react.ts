@@ -11,6 +11,7 @@ export async function react(): Promise<TypedConfigItem[]> {
     'eslint-plugin-react',
     'eslint-plugin-react-hooks',
     'eslint-plugin-react-refresh',
+    'eslint-plugin-jsx-a11y',
   );
 
   const [reactPlugin, reactHooksPlugin, reactRefreshPlugin, jsxA11yPlugin, eslintPluginImport] =
