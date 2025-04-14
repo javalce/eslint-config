@@ -22,6 +22,14 @@ export function unicorn(): TypedConfigItem[] {
           'error',
           {
             case: 'kebabCase',
+            ignore: [
+              /**
+               * Ignore routing file conventions for React Router and TanStack Router
+               *
+               * @see https://tanstack.com/router/latest/docs/framework/react/routing/file-naming-conventions
+               */
+              '^\\$[a-zA-Z0-9]+\\.[jt]s?(x)$',
+            ],
           },
         ],
         /**
