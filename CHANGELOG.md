@@ -1,3 +1,11 @@
+## [0.11.2](https://github.com/javalce/eslint-config/compare/v0.11.1...v0.11.2) (2025-04-15)
+
+### Bug Fixes
+
+- add 'eslint-plugin-jsx-a11y' to ensureInstalled function in react config ([c41c45b](https://github.com/javalce/eslint-config/commit/c41c45b6e17aab09acb7e335b8de13f56a56a837))
+- add ignore pattern for routing file conventions in unicorn filename case rule ([277dc00](https://github.com/javalce/eslint-config/commit/277dc0045063dbe6de14f68ad802e1f8beef88b0))
+- replace 'node:fs' with 'fs-extra' for improved file system operations ([5e7eb29](https://github.com/javalce/eslint-config/commit/5e7eb298dff6989a95a164baac640a6327c2e18d))
+
 ## [0.11.1](https://github.com/javalce/eslint-config/compare/v0.11.0...v0.11.1) (2025-04-11)
 
 ### Bug Fixes
