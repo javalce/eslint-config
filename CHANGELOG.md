@@ -1,3 +1,9 @@
+## [0.11.3](https://github.com/javalce/eslint-config/compare/v0.11.2...v0.11.3) (2025-05-06)
+
+### Features
+
+- add no-default-export rule to imports and react configurations ([907043c](https://github.com/javalce/eslint-config/commit/907043c12d411de5e309c52e03d0429e07c6a5a0))
+
 ## [0.11.2](https://github.com/javalce/eslint-config/compare/v0.11.1...v0.11.2) (2025-04-15)
 
 ### Bug Fixes
