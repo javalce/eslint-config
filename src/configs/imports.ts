@@ -40,6 +40,12 @@ export function imports(): TypedConfigItem[] {
          */
         'import-x/no-cycle': 'error',
         /**
+         * Disallow default exports.
+         *
+         * 🚫 Not fixable - https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md
+         */
+        'import-x/no-default-export': 'error',
+        /**
          * Disallow the use of extraneous packages.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-extraneous-dependencies.md

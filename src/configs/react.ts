@@ -93,5 +93,16 @@ export async function react(): Promise<TypedConfigItem[]> {
       ...config,
       files: [SRC_FILES],
     })) as TypedConfigItem[]),
+    ...(isUsingReactRouter
+      ? ([
+          {
+            files: ['**/routes/**/*.{js,jsx,tsx}', '**/routes.{js,ts}', '**/root.{js,jsx,tsx}'],
+            rules: {
+              'import-x/no-default-export': 'off',
+            },
+            name: 'react/rules/no-default-export',
+          },
+        ] satisfies TypedConfigItem[])
+      : []),
   ];
 }
