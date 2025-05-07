@@ -95,8 +95,9 @@ export async function react(): Promise<TypedConfigItem[]> {
     })) as TypedConfigItem[]),
     ...(isUsingReactRouter
       ? ([
+          // React router requires default exports for routes and layouts.
           {
-            files: ['**/routes/**/*.{js,jsx,tsx}', '**/routes.{js,ts}', '**/root.{js,jsx,tsx}'],
+            files: ['**/*.[jt]sx', '*/routes.[jt]s'],
             rules: {
               'import-x/no-default-export': 'off',
             },
