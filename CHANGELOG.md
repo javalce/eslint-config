@@ -1,3 +1,9 @@
+## [0.11.4](https://github.com/javalce/eslint-config/compare/v0.11.3...v0.11.4) (2025-05-07)
+
+### Bug Fixes
+
+- update no-default-export rule for React Router ([cc9ecea](https://github.com/javalce/eslint-config/commit/cc9eceaaed3e268792a8a8cb63f3454309f85ef7))
+
 ## [0.11.3](https://github.com/javalce/eslint-config/compare/v0.11.2...v0.11.3) (2025-05-06)
 
 ### Features
