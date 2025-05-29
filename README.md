@@ -1,13 +1,29 @@
 # @javalce/eslint-config
 
-<a aria-label="NPM version" href="https://www.npmjs.com/package/@javalce/eslint-config">
-  <img alt="" src="https://img.shields.io/npm/v/@javalce/eslint-config.svg?style=flat-square&labelColor=000000">
-</a>
-<a aria-label="License" href="https://github.com/javalce/eslint-config/blob/main/LICENSE">
-  <img alt="" src="https://img.shields.io/npm/l/@javalce/eslint-config.svg?style=flat-square&labelColor=000000">
-</a>
+[![NPM version](https://img.shields.io/npm/v/@javalce/eslint-config.svg?style=flat-square&labelColor=000000)](https://www.npmjs.com/package/@javalce/eslint-config)
+[![License](https://img.shields.io/npm/l/@javalce/eslint-config.svg?style=flat-square&labelColor=000000)](https://github.com/javalce/eslint-config/blob/main/LICENSE)
 
 This configuration is opinionated and it may not fit your needs. You can extend it and override the rules that you don't like.
+
+- [@javalce/eslint-config](#javalceeslint-config)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Basic Usage](#basic-usage)
+  - [Configuration](#configuration)
+    - [Overriding rules](#overriding-rules)
+    - [Ignore files](#ignore-files)
+    - [TypeScript](#typescript)
+  - [React](#react)
+  - [Next.js](#nextjs)
+  - [Svelte](#svelte)
+  - [Solidjs](#solidjs)
+  - [Vue](#vue)
+    - [Vue 2](#vue-2)
+  - [Astro](#astro)
+  - [Testing](#testing)
+    - [Testing with Jest](#testing-with-jest)
+    - [Testing with Vitest](#testing-with-vitest)
+    - [Testing + React or Vue](#testing--react-or-vue)
 
 ## Features
 
@@ -15,7 +31,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 - [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files) file format
 - Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
 - Designed to work with TypeScript, React, Next.js, Node.js, and more smoothly out of the box
-- Actomatically loads the config for the framework you are using
+- Automatically loads the config for the framework you are using
 - Some rules can be auto-fixed with `eslint --fix`
 - Uses some stylistic rules to make your code more readable and consistent
 
@@ -24,34 +40,13 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 >
 > If you want to use Prettier, you can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config).
 
-## Quickstart
+## Installation
 
-It is provided CLI tool to help you setup your project with ESLint. It also supports adding new configurations to an existing project.
-
-### Initialize ESLint config
-
-```bash
-pnpm dlx @javalce/eslint-config init
-```
-
-### Add new configuration
-
-```bash
-pnpm dlx @javalce/eslint-config add [framework]
-```
-
-> [!NOTE]
-> You can access the CLI help by running `pnpm dlx @javalce/eslint-config --help`.
-
-## Manual installation
-
-If you prefer to install it manually, you can do it by running:
+Install ESLint and this config as dev dependencies:
 
 ```bash
 pnpm add --save-dev eslint @javalce/eslint-config
 ```
-
-The next sections will show you how to configure ESLint and adapt it to your project.
 
 ## Basic Usage
 
