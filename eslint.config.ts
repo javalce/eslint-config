@@ -1,7 +1,6 @@
 import { defineConfig } from './src/index';
 
 export default defineConfig({
-  react: true,
   type: 'lib',
   overrides: [
     {
