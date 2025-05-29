@@ -2,7 +2,7 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import { type Linter } from 'eslint';
-import fs from 'fs-extra';
+import fs from 'node:fs';
 
 import { JS_FILES, JSX_FILES, SRC_FILES } from '../constants';
 import { type TypedConfigItem } from '../types';

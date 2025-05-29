@@ -1,7 +1,6 @@
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
-import chalk from 'chalk';
 import { isPackageExists } from 'local-pkg';
 
 import { type Awaitable, type TypedConfigItem } from './types';
@@ -40,6 +39,6 @@ export function ensureInstalled(...packages: string[]): void {
   const message = `The following packages are missing: ${packageList}. Please install them to proceed.`;
 
   // eslint-disable-next-line no-console -- we're using console.error to log missing packages
-  console.error(chalk.red(message));
+  console.error(message);
   process.exit(1);
 }
