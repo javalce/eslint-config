@@ -1,3 +1,15 @@
+# [0.12.0](https://github.com/javalce/eslint-config/compare/v0.11.4...v0.12.0) (2025-05-29)
+
+### Bug Fixes
+
+- replace fs-extra with node:fs and remove chalk dependency ([7aef54b](https://github.com/javalce/eslint-config/commit/7aef54b498caa6e1f1f5ddecc9cf7793041211f9))
+- update exports structure in package.json for better module resolution ([7b8082b](https://github.com/javalce/eslint-config/commit/7b8082be37b00dc09b3b65f6f91aca9565530359))
+- update prettier configuration for TypeScript support ([c7dc551](https://github.com/javalce/eslint-config/commit/c7dc551504123c8c7d050d52a6b88e2d71f6a54a))
+
+### Features
+
+- remove CLI ([03587d1](https://github.com/javalce/eslint-config/commit/03587d1dc9df9f2bb7ac7b25ad31b200f2d12472))
+
 ## [0.11.4](https://github.com/javalce/eslint-config/compare/v0.11.3...v0.11.4) (2025-05-07)
 
 ### Bug Fixes
