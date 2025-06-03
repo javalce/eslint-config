@@ -1,3 +1,9 @@
+## [0.12.1](https://github.com/javalce/eslint-config/compare/v0.12.0...v0.12.1) (2025-06-03)
+
+### Bug Fixes
+
+- update no-misused-promises rule configuration for better promise handling ([5c735eb](https://github.com/javalce/eslint-config/commit/5c735eb811b7e23d0e7d948db34469707732dcff))
+
 # [0.12.0](https://github.com/javalce/eslint-config/compare/v0.11.4...v0.12.0) (2025-05-29)
 
 ### Bug Fixes
