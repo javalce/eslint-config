@@ -92,7 +92,11 @@ const config: TypedConfigItem = {
      */
     '@typescript-eslint/no-misused-promises': [
       'error',
-      { checksVoidReturn: { attributes: false } },
+      {
+        checksConditionals: true,
+        checksSpreads: true,
+        checksVoidReturn: false,
+      },
     ],
     /**
      * Disallow members of unions and intersections that do nothing or override type information.
