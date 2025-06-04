@@ -6,6 +6,7 @@ import { ASTRO_TS_FILES, TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
+import eslintStylisticConfig from '../rules/typescript/stylistic';
 import { type ProjectType, type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
@@ -60,11 +61,12 @@ export async function typescript({
         ...tseslint.configs.strictTypeChecked.at(-1),
         name: 'typescript/rules/strict-type-checked',
       },
+      eslintTypescriptConfig,
       {
         ...tseslint.configs.stylisticTypeChecked.at(-1),
         name: 'typescript/rules/stylistic-type-checked',
       },
-      eslintTypescriptConfig,
+      eslintStylisticConfig,
       eslintExtensionConfig,
       ...(type === 'app'
         ? [
