@@ -1,3 +1,9 @@
+## [0.12.2](https://github.com/javalce/eslint-config/compare/v0.12.1...v0.12.2) (2025-06-04)
+
+### Features
+
+- add stylistic-plus rule configuration for TypeScript ([6569d72](https://github.com/javalce/eslint-config/commit/6569d7291b4fc117be91b6b2d758a5a8bc2ad81d))
+
 ## [0.12.1](https://github.com/javalce/eslint-config/compare/v0.12.0...v0.12.1) (2025-06-03)
 
 ### Bug Fixes
