@@ -1,3 +1,9 @@
+## [0.12.3](https://github.com/javalce/eslint-config/compare/v0.12.2...v0.12.3) (2025-06-16)
+
+### Features
+
+- update 'prefer-lowercase-title' rule configuration to include options for jest and vitest ([f971d96](https://github.com/javalce/eslint-config/commit/f971d9646014238558eeca5f6aacbea15edaa033))
+
 ## [0.12.2](https://github.com/javalce/eslint-config/compare/v0.12.1...v0.12.2) (2025-06-04)
 
 ### Features
