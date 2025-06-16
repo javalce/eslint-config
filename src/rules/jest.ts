@@ -16,7 +16,7 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/prefer-lowercase-title.md
      */
-    'jest/prefer-lowercase-title': 'warn',
+    'jest/prefer-lowercase-title': ['warn', { ignoreTopLevelDescribe: true }],
   },
 };
 

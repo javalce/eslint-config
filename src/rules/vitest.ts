@@ -34,7 +34,7 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://github.com/vitest-dev/eslint-plugin-vitest/blob/HEAD/docs/rules/prefer-lowercase-title.md
      */
-    'vitest/prefer-lowercase-title': 'warn',
+    'vitest/prefer-lowercase-title': ['warn', { ignoreTopLevelDescribe: true }],
   },
 };
 
