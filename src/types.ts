@@ -39,10 +39,22 @@ export interface VueOptions {
 
 export type ProjectType = 'app' | 'lib';
 
-export interface OptionsConfig {
+export interface OptionsTypescript {
+  tsconfigPath: string | string[];
+}
+
+export interface OptionsHasTypescript {
+  typescript?: boolean;
+}
+
+export interface OptionsProjectType {
+  type?: ProjectType;
+}
+
+export interface OptionsConfig extends OptionsProjectType {
   ecmaVersion?: EcmaVersion;
   ignores?: string[];
-  typescript?: boolean | string | string[];
+  typescript?: boolean | OptionsTypescript;
   react?: boolean;
   next?: boolean;
   astro?: boolean;
@@ -50,6 +62,5 @@ export interface OptionsConfig {
   solidjs?: boolean;
   vue?: boolean | VueOptions;
   testing?: 'jest' | 'vitest';
-  type?: ProjectType;
   overrides?: Array<TypedConfigItem | Linter.Config>;
 }
