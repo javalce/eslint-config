@@ -1,9 +1,9 @@
-import type { TypedConfigItem } from '../types';
+import type { OptionsHasTypescript, TypedConfigItem } from '../types';
 
 import { JSX_FILES, TSX_FILES } from '../constants';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function solid({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+export async function solid({ typescript }: OptionsHasTypescript): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-solid');
 
   const solidPlugin = await lazy(import('eslint-plugin-solid'));

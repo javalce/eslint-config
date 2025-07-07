@@ -1,9 +1,9 @@
 import { TESTING_FILES } from '../constants';
 import eslintConfigVitest from '../rules/vitest';
-import { type TypedConfigItem } from '../types';
+import { type OptionsHasTypescript, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function vitest({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+export async function vitest({ typescript }: OptionsHasTypescript): Promise<TypedConfigItem[]> {
   ensureInstalled('@vitest/eslint-plugin');
 
   const vitestPlugin = await lazy(import('@vitest/eslint-plugin'));

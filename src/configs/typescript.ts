@@ -7,16 +7,13 @@ import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import eslintPluginImportConfig from '../rules/typescript/import';
 import eslintStylisticConfig from '../rules/typescript/stylistic';
-import { type ProjectType, type TypedConfigItem } from '../types';
+import { type OptionsProjectType, type OptionsTypescript, type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
 export async function typescript({
   tsconfigPath,
-  type = 'app',
-}: {
-  tsconfigPath: string | string[];
-  type?: ProjectType;
-}): Promise<TypedConfigItem[]> {
+  type,
+}: OptionsTypescript & OptionsProjectType): Promise<TypedConfigItem[]> {
   const project = Array.isArray(tsconfigPath)
     ? tsconfigPath.map(resolveTsconfigPath)
     : resolveTsconfigPath(tsconfigPath);

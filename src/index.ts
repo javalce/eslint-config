@@ -23,7 +23,7 @@ import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
 import { DEFAULT_ECMA_VERSION } from './constants';
 
-export async function defineConfig(options: OptionsConfig): Promise<TypedConfigItem[]> {
+export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = DEFAULT_ECMA_VERSION,
     ignores: ignoreFiles,
@@ -35,6 +35,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     solidjs: enableSolidjs,
     vue: enableVue,
     testing: enableTesting,
+    type: projectType = 'app',
     overrides = [],
   } = options;
 
@@ -51,7 +52,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
   const tsconfigPath = (() => {
     if (typeof enableTypeScript !== 'boolean') {
-      return enableTypeScript;
+      return resolveSubOptions(enableTypeScript, 'tsconfigPath');
     }
 
     if (fs.existsSync('tsconfig.eslint.json')) {
@@ -65,7 +66,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     configs.push(
       typescript({
         tsconfigPath,
-        type: options.type,
+        type: projectType,
       }),
     );
   }
@@ -141,11 +142,8 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
 
 type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
 
-function resolveSubOptions<K extends keyof OptionsConfig>(
-  options: OptionsConfig,
-  key: K,
-): ResolvedOptions<OptionsConfig[K]> {
+function resolveSubOptions<T, K extends keyof T>(options: T, key: K): ResolvedOptions<T[K]> {
   return typeof options[key] === 'boolean'
-    ? ({} as ResolvedOptions<OptionsConfig[K]>)
-    : (options[key] as ResolvedOptions<OptionsConfig[K]>);
+    ? ({} as ResolvedOptions<T[K]>)
+    : (options[key] as ResolvedOptions<T[K]>);
 }

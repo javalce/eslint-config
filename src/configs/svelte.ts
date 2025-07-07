@@ -1,8 +1,8 @@
 import { SVELTE_FILES } from '../constants';
-import { type TypedConfigItem } from '../types';
+import { type OptionsHasTypescript, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function svelte({ typescript }: { typescript: boolean }): Promise<TypedConfigItem[]> {
+export async function svelte({ typescript }: OptionsHasTypescript): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-svelte', 'svelte-eslint-parser');
 
   const [eslintPluginSvelte, svelteParser] = await Promise.all([
