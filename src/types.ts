@@ -23,6 +23,12 @@ export type EcmaVersion =
   | 2025;
 
 export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
+  // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+  /**
+   * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+   *
+   * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+   */
   plugins?: Record<string, unknown>;
 };
 
@@ -40,6 +46,11 @@ export interface VueOptions {
 export type ProjectType = 'app' | 'lib';
 
 export interface OptionsTypescript {
+  /**
+   * Provides the path(s) to the TypeScript configuration file(s) for type linting
+   *
+   * @see https://typescript-eslint.io/linting/typed-linting/
+   */
   tsconfigPath: string | string[];
 }
 
@@ -48,19 +59,111 @@ export interface OptionsHasTypescript {
 }
 
 export interface OptionsProjectType {
+  /**
+   * The type of the project, either 'app' or 'lib'.
+   *
+   * @default 'app'
+   */
   type?: ProjectType;
 }
 
 export interface OptionsConfig extends OptionsProjectType {
+  /**
+   * La versión de ECMAScript a usar para el parsing.
+   *
+   * @default DEFAULT_ECMA_VERSION (2023)
+   */
   ecmaVersion?: EcmaVersion;
+  /**
+   * List of glob patterns for files/directories to ignore.
+   *
+   * @default []
+   * @see https://eslint.org/docs/latest/use/configure/ignore
+   */
   ignores?: string[];
+  /**
+   * Enable TypeScript support.
+   *
+   * @default auto-detect based on the dependencies
+   * @see {@link OptionsTypescript}
+   */
   typescript?: boolean | OptionsTypescript;
+  /**
+   * Enable React support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-react`
+   * - `eslint-plugin-react-hooks`
+   * - `eslint-plugin-react-refresh`
+   * - `eslint-plugin-jsx-a11y`
+   *
+   * @default false
+   */
   react?: boolean;
+  /**
+   * Enable Next.js support.
+   *
+   * Requires enabling `react` support as well.
+   *
+   * Requires installing:
+   * - `@next/eslint-plugin-next`
+   *
+   * @default false
+   */
   next?: boolean;
+  /**
+   * Enable Astro support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-astro`
+   *
+   * Requires installing for formatting .astro with prettier:
+   * - `prettier-plugin-astro`
+   *
+   * @default false
+   */
   astro?: boolean;
+  /**
+   * Enable Svelte support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-svelte`
+   *
+   * @default false
+   */
   svelte?: boolean;
+  /**
+   * Enable SolidJS support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-solid`
+   *
+   * @default false
+   */
   solidjs?: boolean;
+  /**
+   * Enable Vue support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-vue`
+   *
+   * @default false
+   */
   vue?: boolean | VueOptions;
+  /**
+   * Enable testing framework support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-jest` (for Jest)
+   * - `@vitest/eslint-plugin` (for Vitest)
+   *
+   * @default undefined
+   */
   testing?: 'jest' | 'vitest';
+  /**
+   * Provide additional overrides for the ESLint configuration.
+   *
+   * @default []
+   */
   overrides?: Array<TypedConfigItem | Linter.Config>;
 }

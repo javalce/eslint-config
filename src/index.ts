@@ -23,6 +23,13 @@ import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
 import { DEFAULT_ECMA_VERSION } from './constants';
 
+/**
+ * Generates a custom ESLint configuration based on the provided options.
+ *
+ * @param {OptionsConfig} options - Options to customize the generated configuration.
+ *
+ * @returns {Promise<TypedConfigItem[]>} ESLint configuration ready to be used.
+ */
 export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = DEFAULT_ECMA_VERSION,
