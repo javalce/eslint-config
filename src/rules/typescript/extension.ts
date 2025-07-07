@@ -16,6 +16,13 @@ const config: TypedConfigItem = {
      */
     '@typescript-eslint/default-param-last': 'error',
     /**
+     * Disallow using the `empty object` type.
+     * Allow interfaces to be empty, as they are often used as a base for other interfaces.
+     *
+     * 🔧 Fixable - https://typescript-eslint.io/rules/no-empty-object-type/
+     */
+    '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'always' }],
+    /**
      * Disallow creation of functions within loops.
      *
      * 🚫 Not fixable - https://typescript-eslint.io/rules/no-loop-func/
