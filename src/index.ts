@@ -38,7 +38,7 @@ export async function defineConfig(options: OptionsConfig): Promise<TypedConfigI
     overrides = [],
   } = options;
 
-  const configs: Awaitable<TypedConfigItem[]>[] = [];
+  const configs: Array<Awaitable<TypedConfigItem[]>> = [];
 
   configs.push(
     ignores({ files: ignoreFiles }),

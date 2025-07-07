@@ -4,7 +4,7 @@ import { type ConfigNames, type RuleOptions } from './typegen';
 
 export type Awaitable<T> = T | Promise<T>;
 
-export type Rules = RuleOptions;
+export interface Rules extends RuleOptions {}
 
 export type { ConfigNames };
 
@@ -51,5 +51,5 @@ export interface OptionsConfig {
   vue?: boolean | VueOptions;
   testing?: 'jest' | 'vitest';
   type?: ProjectType;
-  overrides?: (TypedConfigItem | Linter.Config)[];
+  overrides?: Array<TypedConfigItem | Linter.Config>;
 }

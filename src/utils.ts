@@ -12,7 +12,7 @@ const isCwdInScope = isPackageExists('@javalce/eslint-config');
  * Combine array and non-array configs into a single array.
  */
 export async function combine(
-  ...configs: Awaitable<TypedConfigItem | TypedConfigItem[]>[]
+  ...configs: Array<Awaitable<TypedConfigItem | TypedConfigItem[]>>
 ): Promise<TypedConfigItem[]> {
   const resolved = await Promise.all(configs);
 
