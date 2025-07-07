@@ -1,3 +1,13 @@
+## 0.13.0 (2025-07-07)
+
+- docs: improve JSDoc comments for defineConfig and OptionsConfig interfaces ([3f7f772](https://github.com/javalce/eslint-config/commit/3f7f772))
+- docs: remove unnecessary empty object from defineConfig export ([512a841](https://github.com/javalce/eslint-config/commit/512a841))
+- refactor: replace shorthand array syntax with Array<T> for better readability ([0c56896](https://github.com/javalce/eslint-config/commit/0c56896))
+- refactor: update function signatures for improved type safety ([13abd8c](https://github.com/javalce/eslint-config/commit/13abd8c))
+- feat: add rule to disable use of empty object type in TypeScript unless it's an interface ([423dea4](https://github.com/javalce/eslint-config/commit/423dea4))
+- feat: reorganize TypeScript options interfaces for improved clarity and structure ([bdf0636](https://github.com/javalce/eslint-config/commit/bdf0636))
+- build: update dependencies ([061119f](https://github.com/javalce/eslint-config/commit/061119f))
+
 ## [0.12.3](https://github.com/javalce/eslint-config/compare/v0.12.2...v0.12.3) (2025-06-16)
 
 ### Features
