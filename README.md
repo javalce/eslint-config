@@ -55,7 +55,7 @@ Create an `eslint.config.mjs` file in the root of your project with the followin
 ```js
 import { defineConfig } from '@javalce/eslint-config';
 
-export default defineConfig({});
+export default defineConfig();
 ```
 
 By default it uses the ecmaVersion `2023`. If you want to use a different version, you can specify it in the configuration:
