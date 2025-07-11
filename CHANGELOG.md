@@ -1,3 +1,12 @@
+## 0.14.0 (2025-07-11)
+
+- build: update dependescies ([8d4e46a](https://github.com/javalce/eslint-config/commit/8d4e46a))
+- fix: add custom path aliases to imports in type generation script ([8719d1a](https://github.com/javalce/eslint-config/commit/8719d1a))
+- docs: update documentation for custom path aliases in ESLint configuration ([6c636b0](https://github.com/javalce/eslint-config/commit/6c636b0))
+- feat: add normalizeStringArray function for string array normalization ([fbf97f3](https://github.com/javalce/eslint-config/commit/fbf97f3))
+- feat: add support for custom path aliases in ESLint configuration ([a7ff2c4](https://github.com/javalce/eslint-config/commit/a7ff2c4))
+- feat: remove ESLint rule for lines between class members ([3adb0a3](https://github.com/javalce/eslint-config/commit/3adb0a3))
+
 ## 0.13.0 (2025-07-07)
 
 - docs: improve JSDoc comments for defineConfig and OptionsConfig interfaces ([3f7f772](https://github.com/javalce/eslint-config/commit/3f7f772))
