@@ -42,3 +42,19 @@ export function ensureInstalled(...packages: string[]): void {
   console.error(message);
   process.exit(1);
 }
+
+/**
+ * Normalizes a value to a string array and optionally applies a callback to each element.
+ *
+ * @param value - The string or array of strings to normalize.
+ * @param callback - Optional. A function to apply to each string in the array.
+ * @returns An array of strings, with the callback applied if provided.
+ */
+export function normalizeStringArray(
+  value: string | string[],
+  callback?: (value: string) => string,
+): string[] {
+  const array = Array.isArray(value) ? value : [value];
+
+  return callback ? array.map(callback) : array;
+}
