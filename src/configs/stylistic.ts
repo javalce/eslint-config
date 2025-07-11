@@ -14,21 +14,6 @@ export function stylistic(): TypedConfigItem[] {
       name: 'stylistic/rules',
       rules: {
         /**
-         * Improve readability by enforcing lines between class members.
-         *
-         * 🔧 Fixable - https://eslint.style/rules/js/lines-between-class-members
-         */
-        '@stylistic/lines-between-class-members': [
-          'warn',
-          {
-            enforce: [
-              { blankLine: 'always', prev: 'field', next: 'method' },
-              { blankLine: 'always', prev: 'method', next: 'method' },
-              { blankLine: 'never', prev: 'field', next: 'field' },
-            ],
-          },
-        ],
-        /**
          * Disallow the omission of parentheses when invoking a constructor with
          * no arguments.
          *
@@ -59,7 +44,6 @@ export function stylistic(): TypedConfigItem[] {
           { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
           { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
         ],
-
         /**
          * Require camel case names.
          *
