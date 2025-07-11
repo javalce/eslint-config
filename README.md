@@ -12,6 +12,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
   - [Configuration](#configuration)
     - [Overriding rules](#overriding-rules)
     - [Ignore files](#ignore-files)
+    - [Custom path aliases](#custom-path-aliases)
     - [TypeScript](#typescript)
   - [React](#react)
   - [Next.js](#nextjs)
@@ -114,6 +115,25 @@ export default defineConfig({
   ignores: ['src/types.d.ts'],
 });
 ```
+
+### Custom path aliases
+
+By default, the configuration sets up two path alias patterns: `@/**` and `~/**`. These aliases are used to group and automatically order imports in your project, making it easier to organize internal modules.
+
+You can customize these aliases using the `import.pathAliases` option in your configuration:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  import: {
+    // You can use a string or an array of strings
+    pathAliases: ['@/**', '#/**'],
+  },
+});
+```
+
+This will affect the "internal" import group and the order in which they appear according to the `import-x/order` rule. If you don't configure this option, the default aliases will be `@/**` and `~/**`.
 
 ### TypeScript
 
