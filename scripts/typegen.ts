@@ -19,7 +19,7 @@ import { typescript } from '../src/configs/typescript';
 import { unicorn } from '../src/configs/unicorn';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
-import { DEFAULT_ECMA_VERSION } from '../src/constants';
+import { CUSTOM_PATH_ALIASES, DEFAULT_ECMA_VERSION } from '../src/constants';
 import { combine } from '../src/utils';
 
 const configs = (await combine(
@@ -33,10 +33,10 @@ const configs = (await combine(
   },
   javascript({ ecmaVersion: DEFAULT_ECMA_VERSION }),
   comments(),
-  imports(),
+  imports({ pathAliases: CUSTOM_PATH_ALIASES }),
   stylistic(),
   unicorn(),
-  typescript({ tsconfigPath: 'tsconfig.json' }),
+  typescript({ pathAliases: CUSTOM_PATH_ALIASES, tsconfigPath: 'tsconfig.json' }),
   react(),
   nextjs(),
   astro({ typescript: true }),
