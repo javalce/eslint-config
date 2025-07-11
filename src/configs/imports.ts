@@ -1,10 +1,13 @@
-import type { TypedConfigItem } from '../types';
+import type { OptionsPathAliases, TypedConfigItem } from '../types';
 
 import eslintPluginImport from 'eslint-plugin-import-x';
 
 import { CONFIG_FILES } from '../constants';
+import { normalizeStringArray } from '../utils';
 
-export function imports(): TypedConfigItem[] {
+export function imports({ pathAliases }: OptionsPathAliases): TypedConfigItem[] {
+  const customPathAliases = normalizeStringArray(pathAliases);
+
   return [
     {
       plugins: {
@@ -98,13 +101,11 @@ export function imports(): TypedConfigItem[] {
               'index', // Relative index
             ],
             'newlines-between': 'always',
-            pathGroups: [
-              {
-                group: 'external',
-                pattern: '~/**',
-                position: 'after',
-              },
-            ],
+            pathGroups: customPathAliases.map((pattern) => ({
+              group: 'external',
+              pattern,
+              position: 'after',
+            })),
           },
         ],
       },

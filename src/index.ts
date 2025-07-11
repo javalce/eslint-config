@@ -21,7 +21,7 @@ import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
-import { DEFAULT_ECMA_VERSION } from './constants';
+import { CUSTOM_PATH_ALIASES, DEFAULT_ECMA_VERSION } from './constants';
 
 /**
  * Generates a custom ESLint configuration based on the provided options.
@@ -33,6 +33,7 @@ import { DEFAULT_ECMA_VERSION } from './constants';
 export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
   const {
     ecmaVersion = DEFAULT_ECMA_VERSION,
+    import: importOptions,
     ignores: ignoreFiles,
     typescript: enableTypeScript = isPackageExists('typescript'),
     react: enableReact,
@@ -46,13 +47,15 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     overrides = [],
   } = options;
 
+  const pathAliases = importOptions?.pathAliases ?? CUSTOM_PATH_ALIASES;
+
   const configs: Array<Awaitable<TypedConfigItem[]>> = [];
 
   configs.push(
     ignores({ files: ignoreFiles }),
     javascript({ ecmaVersion }),
     comments(),
-    imports(),
+    imports({ pathAliases }),
     stylistic(),
     unicorn(),
   );
@@ -72,6 +75,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   if (enableTypeScript) {
     configs.push(
       typescript({
+        pathAliases,
         tsconfigPath,
         type: projectType,
       }),

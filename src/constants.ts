@@ -52,3 +52,5 @@ export const REACT_ROUTER_PACKAGES = [
 ];
 
 export const NEXT_PACKAGES = ['next'];
+
+export const CUSTOM_PATH_ALIASES = ['@/**', '~/**'];

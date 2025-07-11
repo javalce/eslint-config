@@ -67,6 +67,13 @@ export interface OptionsProjectType {
   type?: ProjectType;
 }
 
+export interface OptionsPathAliases {
+  /**
+   * Custom path aliases to use in the project.
+   **/
+  pathAliases: string | string[];
+}
+
 export interface OptionsConfig extends OptionsProjectType {
   /**
    * La versión de ECMAScript a usar para el parsing.
@@ -81,6 +88,10 @@ export interface OptionsConfig extends OptionsProjectType {
    * @see https://eslint.org/docs/latest/use/configure/ignore
    */
   ignores?: string[];
+  /**
+   * Configure the path aliases for the import plugin.
+   */
+  import?: OptionsPathAliases;
   /**
    * Enable TypeScript support.
    *

@@ -5,18 +5,22 @@ import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescrip
 import { ASTRO_TS_FILES, TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
-import eslintPluginImportConfig from '../rules/typescript/import';
+import { createImportRules } from '../rules/typescript/import';
 import eslintStylisticConfig from '../rules/typescript/stylistic';
-import { type OptionsProjectType, type OptionsTypescript, type TypedConfigItem } from '../types';
-import { lazy } from '../utils';
+import {
+  type OptionsPathAliases,
+  type OptionsProjectType,
+  type OptionsTypescript,
+  type TypedConfigItem,
+} from '../types';
+import { lazy, normalizeStringArray } from '../utils';
 
 export async function typescript({
+  pathAliases,
   tsconfigPath,
   type,
-}: OptionsTypescript & OptionsProjectType): Promise<TypedConfigItem[]> {
-  const project = Array.isArray(tsconfigPath)
-    ? tsconfigPath.map(resolveTsconfigPath)
-    : resolveTsconfigPath(tsconfigPath);
+}: OptionsPathAliases & OptionsTypescript & OptionsProjectType): Promise<TypedConfigItem[]> {
+  const project = normalizeStringArray(tsconfigPath, resolveTsconfigPath);
 
   const [tseslint, importPlugin] = await Promise.all([
     lazy(import('typescript-eslint')),
@@ -80,7 +84,7 @@ export async function typescript({
         ...importPlugin.configs.typescript,
         name: 'typescript/import/setup',
       },
-      eslintPluginImportConfig,
+      createImportRules({ pathAliases }),
     ].map((config) => ({
       ...config,
       files: [TS_FILES, TSX_FILES],
