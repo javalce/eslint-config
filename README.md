@@ -14,6 +14,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
     - [Ignore files](#ignore-files)
     - [Custom path aliases](#custom-path-aliases)
     - [TypeScript](#typescript)
+    - [Angular](#angular)
   - [React](#react)
   - [Next.js](#nextjs)
   - [Svelte](#svelte)
@@ -73,7 +74,7 @@ export default defineConfig({
 
 To configure ESLint, you have to use the `defineConfig` function, as shown in the previous section. This function will return the ESLint configuration object.
 
-T, you have to enable each framework configuration explicitly, otherwise it will not be loaded except for the typescript config, which is loaded automatically.
+You have to enable each framework configuration explicitly, otherwise it will not be loaded except for the TypeScript config, which is loaded automatically.
 
 After you enable a framework, if you don't have the required ESLint plugins for this framework installed, ESLint will throw an error when you run it showing you the missing plugins.
 
@@ -163,7 +164,9 @@ Also, if you want to use a different file, you can specify it in the configurati
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  typescript: './path/to/tsconfig.custom.json',
+  typescript: {
+    tsconfigPath: './path/to/tsconfig.custom.json',
+  },
 });
 ```
 
@@ -173,11 +176,33 @@ Or you can use multiple tsconfig files:
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  typescript: ['./path/to/tsconfig.json', './path/to/another/tsconfig.json'],
+  typescript: {
+    tsconfigPath: ['./path/to/tsconfig.json', './path/to/another/tsconfig.json'],
+  },
 });
 ```
 
 Instead of using the passing the path to the tsconfig file(s) in the configuration, you can only pass the filename(s) and let the configuration resolve the absolute path for you.
+
+### Angular
+
+To enable Angular support, install the following packages:
+
+```bash
+pnpm add --save-dev angular-eslint
+```
+
+Then, update your ESLint configuration file to enable Angular:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  angular: true,
+});
+```
+
+This enables the recommended rules for Angular and its template parser.
 
 ## React
 
