@@ -83,6 +83,7 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
       files: [SRC_FILES],
       rules: {
         ...(nextjsPlugin.configs.recommended.rules as Linter.RulesRecord),
+        ...(nextjsPlugin.configs['core-web-vitals'].rules as Linter.RulesRecord),
       },
       name: 'next/rules',
     },
