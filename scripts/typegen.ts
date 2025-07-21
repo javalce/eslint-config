@@ -4,6 +4,7 @@ import { type Linter } from 'eslint';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 
+import { angular } from '../src/configs/angular';
 import { astro } from '../src/configs/astro';
 import { comments } from '../src/configs/comments';
 import { imports } from '../src/configs/imports';
@@ -37,6 +38,7 @@ const configs = (await combine(
   stylistic(),
   unicorn(),
   typescript({ pathAliases: CUSTOM_PATH_ALIASES, tsconfigPath: 'tsconfig.json' }),
+  angular(),
   react(),
   nextjs(),
   astro({ typescript: true }),

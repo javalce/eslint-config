@@ -20,6 +20,8 @@ export const ASTRO_JS_FILES = ['**/*.astro/*.js', '*.astro/*.js'];
 
 export const ASTRO_TS_FILES = ['**/*.astro/*.ts', '*.astro/*.ts'];
 
+export const HTML_FILES = '**/*.html';
+
 export const SRC_FILES_EXT = '?([cm])[jt]s?(x)';
 
 export const SRC_FILES = '**/*.?([cm])[jt]s?(x)';

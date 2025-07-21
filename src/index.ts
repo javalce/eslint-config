@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
+import { angular } from './configs/angular';
 import { astro } from './configs/astro';
 import { comments } from './configs/comments';
 import { ignores } from './configs/ignores';
@@ -36,6 +37,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     import: importOptions,
     ignores: ignoreFiles,
     typescript: enableTypeScript = isPackageExists('typescript'),
+    angular: enableAngular = false,
     react: enableReact,
     next: enableNext,
     astro: enableAstro,
@@ -80,6 +82,10 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
         type: projectType,
       }),
     );
+  }
+
+  if (enableAngular) {
+    configs.push(angular());
   }
 
   if (enableReact) {

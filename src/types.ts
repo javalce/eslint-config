@@ -100,6 +100,15 @@ export interface OptionsConfig extends OptionsProjectType {
    */
   typescript?: boolean | OptionsTypescript;
   /**
+   * Enable Angular support.
+   *
+   * Requires installing:
+   * - `angular-eslint`
+   *
+   * @default false
+   */
+  angular?: boolean;
+  /**
    * Enable React support.
    *
    * Requires installing:
