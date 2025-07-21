@@ -75,7 +75,17 @@ export async function react(): Promise<TypedConfigItem[]> {
                   }
 
                   if (isUsingReactRouter) {
-                    return ['meta', 'links', 'headers', 'loader', 'action'];
+                    return [
+                      'meta',
+                      'links',
+                      'headers',
+                      'loader',
+                      'action',
+                      'clientLoader',
+                      'clientAction',
+                      'handle',
+                      'shouldRevalidate',
+                    ];
                   }
 
                   return [];
