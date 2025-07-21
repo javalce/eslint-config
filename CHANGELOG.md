@@ -1,3 +1,16 @@
+# [0.15.0](https://github.com/javalce/eslint-config/compare/v0.14.0...v0.15.0) (2025-07-21)
+
+### Bug Fixes
+
+- add core-web-vitals rules to nextjs ESLint configuration and remove unused stub declaration ([2098e88](https://github.com/javalce/eslint-config/commit/2098e88b7d45eb56667429fafd4d88f0088e748f))
+- remove .npmrc and update file nesting patterns in VSCode settings ([9dc777d](https://github.com/javalce/eslint-config/commit/9dc777dad8e46e2f2501a1ff8a62aaeb20f13482))
+
+### Features
+
+- add additional return values for React Router configuration ([407beae](https://github.com/javalce/eslint-config/commit/407beaea9a3136ae839981ea4d7b4e1142173756))
+- add Angular support to ESLint configuration and update related files ([e473678](https://github.com/javalce/eslint-config/commit/e47367824a74cd4c53a3d739689187e7ff2ef1c0))
+- add stylistic and accessibility rules to Vue ESLint configuration ([c789444](https://github.com/javalce/eslint-config/commit/c78944442de4514e20f5f9c517196f0f1273e459))
+
 ## 0.14.0 (2025-07-11)
 
 - build: update dependescies ([8d4e46a](https://github.com/javalce/eslint-config/commit/8d4e46a))
