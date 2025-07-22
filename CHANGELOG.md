@@ -1,3 +1,13 @@
+## [0.15.1](https://github.com/javalce/eslint-config/compare/v0.15.0...v0.15.1) (2025-07-22)
+
+### Bug Fixes
+
+- set angular-eslint dependency as optional ([cb83f6e](https://github.com/javalce/eslint-config/commit/cb83f6e191d54ce990550b6229d2051e9077342a))
+
+### Features
+
+- add Angular options for selector, directive, and component customization ([133deed](https://github.com/javalce/eslint-config/commit/133deed34fa3a186c47e301cb660e3ecd1bda629))
+
 # [0.15.0](https://github.com/javalce/eslint-config/compare/v0.14.0...v0.15.0) (2025-07-21)
 
 ### Bug Fixes
