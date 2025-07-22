@@ -46,6 +46,8 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
         ...angularPlugin.configs.tsRecommended
           .map((i) => i.rules)
           .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
+        '@angular-eslint/directive-selector': ['error', directive],
+        '@angular-eslint/component-selector': ['error', component],
       },
     },
     {
@@ -61,8 +63,6 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
         ...angularPlugin.configs.templateAccessibility
           .map((i) => i.rules)
           .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
-        '@angular-eslint/directive-selector': ['error', directive],
-        '@angular-eslint/component-selector': ['error', component],
       },
     },
   ];
