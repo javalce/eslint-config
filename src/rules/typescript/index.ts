@@ -146,6 +146,12 @@ const config: TypedConfigItem = {
      * 🚫 Not fixable - https://typescript-eslint.io/rules/switch-exhaustiveness-check/
      */
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
+    /**
+     * Prevents loss of `this` context when using class methods as callbacks. Allow static methods to be used as callbacks because they do not rely on `this`.
+     *
+     * 🔧 Fixable - https://typescript-eslint.io/rules/unbound-method/
+     */
+    '@typescript-eslint/unbound-method': ['error', { ignoreStatic: true }],
   },
 };
 

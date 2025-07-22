@@ -1,11 +1,25 @@
 import { type Linter } from 'eslint';
 
 import { HTML_FILES, TS_FILES } from '../constants';
-import { type TypedConfigItem } from '../types';
+import { type OptionsAngular, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function angular(): Promise<TypedConfigItem[]> {
+export async function angular(options: OptionsAngular = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('angular-eslint');
+
+  const selector = options.selector ?? 'app';
+  const directive: OptionsAngular['directive'] = {
+    type: 'attribute',
+    prefix: selector,
+    style: 'camelCase',
+    ...options.directive,
+  };
+  const component: OptionsAngular['component'] = {
+    type: 'element',
+    prefix: selector,
+    style: 'kebab-case',
+    ...options.component,
+  };
 
   const [angularPlugin, tseslint] = await Promise.all([
     lazy(import('angular-eslint')),
@@ -47,6 +61,8 @@ export async function angular(): Promise<TypedConfigItem[]> {
         ...angularPlugin.configs.templateAccessibility
           .map((i) => i.rules)
           .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
+        '@angular-eslint/directive-selector': ['error', directive],
+        '@angular-eslint/component-selector': ['error', component],
       },
     },
   ];

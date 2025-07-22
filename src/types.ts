@@ -45,6 +45,40 @@ export interface VueOptions {
 
 export type ProjectType = 'app' | 'lib';
 
+export interface OptionsAngularSelector {
+  /**
+   * The selector type for Angular directives or components.
+   */
+  type?: string | Array<'element' | 'attribute'>;
+  /**
+   * The prefix for the selector, which can be a string or an array of strings.
+   */
+  prefix?: string | unknown[];
+  /**
+   * The style of the selector, which can be either 'camelCase' or 'kebab-case'.
+   * This determines how the selector is formatted.
+   */
+  style?: 'camelCase' | 'kebab-case';
+}
+
+export interface OptionsAngular {
+  /**
+   * The prefix for Angular selectors, which can be a string or an array of strings.
+   * This prefix is used for both directives and components.
+   */
+  selector?: OptionsAngularSelector['prefix'];
+  /**
+   * The options for Angular directives.
+   * This allows customization of the selector type, prefix, and style for directives.
+   */
+  directive?: OptionsAngularSelector;
+  /**
+   * The options for Angular components.
+   * This allows customization of the selector type, prefix, and style for components.
+   */
+  component?: OptionsAngularSelector;
+}
+
 export interface OptionsTypescript {
   /**
    * Provides the path(s) to the TypeScript configuration file(s) for type linting
@@ -107,7 +141,7 @@ export interface OptionsConfig extends OptionsProjectType {
    *
    * @default false
    */
-  angular?: boolean;
+  angular?: boolean | OptionsAngular;
   /**
    * Enable React support.
    *
