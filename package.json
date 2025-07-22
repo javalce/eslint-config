@@ -114,6 +114,9 @@
     "@vitest/eslint-plugin": {
       "optional": true
     },
+    "angular-eslint": {
+      "optional": true
+    },
     "astro-eslint-parser": {
       "optional": true
     },
