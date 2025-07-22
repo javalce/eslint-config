@@ -1,3 +1,9 @@
+## [0.15.2](https://github.com/javalce/eslint-config/compare/v0.15.1...v0.15.2) (2025-07-22)
+
+### Bug Fixes
+
+- move directive and component selector rules to the correct location in angular config ([11aa513](https://github.com/javalce/eslint-config/commit/11aa513b953dbad923d6301aad37d190d1c8e1ce))
+
 ## [0.15.1](https://github.com/javalce/eslint-config/compare/v0.15.0...v0.15.1) (2025-07-22)
 
 ### Bug Fixes
