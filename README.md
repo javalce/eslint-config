@@ -16,17 +16,17 @@ This configuration is opinionated and it may not fit your needs. You can extend 
     - [TypeScript](#typescript)
     - [Angular](#angular)
       - [Customizing selectors](#customizing-selectors)
-  - [React](#react)
-  - [Next.js](#nextjs)
-  - [Svelte](#svelte)
-  - [Solidjs](#solidjs)
-  - [Vue](#vue)
-    - [Vue 2](#vue-2)
-  - [Astro](#astro)
-  - [Testing](#testing)
-    - [Testing with Jest](#testing-with-jest)
-    - [Testing with Vitest](#testing-with-vitest)
-    - [Testing + React or Vue](#testing--react-or-vue)
+    - [React](#react)
+    - [Next.js](#nextjs)
+    - [Svelte](#svelte)
+    - [Solidjs](#solidjs)
+    - [Vue](#vue)
+      - [Vue 2](#vue-2)
+    - [Astro](#astro)
+    - [Testing](#testing)
+      - [Testing with Jest](#testing-with-jest)
+      - [Testing with Vitest](#testing-with-vitest)
+      - [Testing + React or Vue](#testing--react-or-vue)
 
 ## Features
 
@@ -240,7 +240,7 @@ export default defineConfig({
 
 This will set the prefix for both directives and components to `custom` and use the default styles and types.
 
-## React
+### React
 
 To enable React support, you need to install the `eslint-plugin-react`, `eslint-plugin-react-hooks` and `eslint-plugin-jsx-a11y` packages:
 
@@ -258,7 +258,7 @@ export default defineConfig({
 });
 ```
 
-## Next.js
+### Next.js
 
 To enable Next.js support, you need to install all the react plugins and the `@next/eslint-plugin-next` packages:
 
@@ -279,7 +279,7 @@ export default defineConfig({
 
 This will enable the react rules and the Next.js specific rules.
 
-## Svelte
+### Svelte
 
 To enable Svelte support, you need to install the `eslint-plugin-svelte` and `svelte-eslint-parser` packages:
 
@@ -297,7 +297,7 @@ export default defineConfig({
 });
 ```
 
-## Solidjs
+### Solidjs
 
 To enable Solidjs support, you need to install the `eslint-plugin-solid` package:
 
@@ -315,7 +315,7 @@ export default defineConfig({
 });
 ```
 
-## Vue
+### Vue
 
 To enable Vue support, you need to install the `eslint-plugin-vue` and `vue-eslint-parser` package:
 
@@ -333,7 +333,7 @@ export default defineConfig({
 });
 ```
 
-### Vue 2
+#### Vue 2
 
 Vue 2 has [reached EOL](https://v2.vuejs.org/eol/) and it's not recommended to use it. However, if you still want to use it, you can enable the Vue 2 config:
 
@@ -347,7 +347,7 @@ export default defineConfig({
 });
 ```
 
-## Astro
+### Astro
 
 To enable Astro support, you need to install the `astro-eslint-plugin`, `astro-eslint-parser` and `eslint-plugin-jsx-a11y` package:
 
@@ -367,11 +367,11 @@ export default defineConfig({
 
 Astro can be integrated with other frameworks like React, Vue, Svelte, Solidjs, etc. You can enable the respective configs to lint the code of the framework.
 
-## Testing
+### Testing
 
 To enable testing support, you must enable the `testing` option in the configuration. You can choose between `jest` or `vitest` and it will load the recommended rules for each testing library.
 
-### Testing with Jest
+#### Testing with Jest
 
 If you are using Jest, install the `eslint-plugin-jest` package:
 
@@ -389,7 +389,7 @@ export default defineConfig({
 });
 ```
 
-### Testing with Vitest
+#### Testing with Vitest
 
 If you are using Vitest, install the `eslint-plugin-vitest` package:
 
@@ -407,7 +407,7 @@ export default defineConfig({
 });
 ```
 
-### Testing + React or Vue
+#### Testing + React or Vue
 
 To enable testing with React or Vue, you only need to enable the respective config and the testing config and it will load the recommended rules for the `@testing-library` package.
 
