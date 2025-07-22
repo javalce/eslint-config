@@ -15,6 +15,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
     - [Custom path aliases](#custom-path-aliases)
     - [TypeScript](#typescript)
     - [Angular](#angular)
+      - [Customizing selectors](#customizing-selectors)
   - [React](#react)
   - [Next.js](#nextjs)
   - [Svelte](#svelte)
@@ -186,7 +187,7 @@ Instead of using the passing the path to the tsconfig file(s) in the configurati
 
 ### Angular
 
-To enable Angular support, install the following packages:
+To enable Angular support, install the following package:
 
 ```bash
 pnpm add --save-dev angular-eslint
@@ -203,6 +204,41 @@ export default defineConfig({
 ```
 
 This enables the recommended rules for Angular and its template parser.
+
+#### Customizing selectors
+
+You can customize Angular component and directive selectors using the `angular` option as an object:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  angular: {
+    directive: {
+      type: 'attribute',
+      prefix: 'custom',
+      style: 'camelCase',
+    },
+    component: {
+      type: 'element',
+      prefix: 'custom',
+      style: 'kebab-case',
+    },
+  },
+});
+```
+
+If not specified, the default prefix is `app` and the recommended styles are `camelCase` for directives and `kebab-case` for components.
+
+```js
+export default defineConfig({
+  angular: {
+    selector: 'custom',
+  },
+});
+```
+
+This will set the prefix for both directives and components to `custom` and use the default styles and types.
 
 ## React
 
