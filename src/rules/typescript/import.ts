@@ -2,7 +2,7 @@ import type { OptionsPathAliases, TypedConfigItem } from '../../types';
 
 import { type Linter } from 'eslint';
 
-import { normalizeStringArray } from '../../utils';
+import { createPathAliases } from '../../utils';
 
 /**
  * These are enabled by `import-x/recommended`, but are better handled by
@@ -15,8 +15,8 @@ const disabledRules: Partial<Linter.RulesRecord> = {
   'import-x/no-unresolved': 'off',
 };
 
-export function createImportRules({ pathAliases }: OptionsPathAliases): TypedConfigItem {
-  const customPathAliases = normalizeStringArray(pathAliases);
+export function createTypescriptImportRules(options: OptionsPathAliases): TypedConfigItem {
+  const pathAliases = createPathAliases(options);
 
   return {
     name: 'typescript/import/rules',
@@ -36,7 +36,7 @@ export function createImportRules({ pathAliases }: OptionsPathAliases): TypedCon
             'index', // Relative index
           ],
           'newlines-between': 'always',
-          pathGroups: customPathAliases.map((pattern) => ({
+          pathGroups: pathAliases.map((pattern) => ({
             group: 'external',
             pattern,
             position: 'after',

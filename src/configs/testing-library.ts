@@ -1,15 +1,16 @@
-import type { TypedConfigItem } from '../types';
+import type { OptionsTestingLibrary, TypedConfigItem } from '../types';
 
 import { TESTING_FILES } from '../constants';
 import { ensureInstalled, lazy } from '../utils';
 
 export async function testingLibrary({
-  react,
-  vue,
+  react = false,
+  vue = false,
+  overrides,
 }: {
-  react: boolean;
-  vue: boolean;
-}): Promise<TypedConfigItem[]> {
+  react?: boolean;
+  vue?: boolean;
+} & OptionsTestingLibrary = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-testing-library');
 
   const testingLibraryPlugin = await lazy(import('eslint-plugin-testing-library'));
@@ -33,5 +34,12 @@ export async function testingLibrary({
     },
     react ? makeConfig('react') : {},
     vue ? makeConfig('vue') : {},
+    {
+      files: TESTING_FILES,
+      rules: {
+        ...overrides,
+      },
+      name: 'testing-library/rules/overrides',
+    },
   ];
 }

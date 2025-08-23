@@ -1,9 +1,12 @@
 import { TESTING_FILES } from '../constants';
 import eslintConfigVitest from '../rules/vitest';
-import { type OptionsHasTypescript, type TypedConfigItem } from '../types';
+import { type OptionsVitest, type OptionsHasTypescript, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function vitest({ typescript }: OptionsHasTypescript): Promise<TypedConfigItem[]> {
+export async function vitest({
+  typescript,
+  overrides,
+}: OptionsHasTypescript & OptionsVitest = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('@vitest/eslint-plugin');
 
   const vitestPlugin = await lazy(import('@vitest/eslint-plugin'));
@@ -37,5 +40,12 @@ export async function vitest({ typescript }: OptionsHasTypescript): Promise<Type
       name: 'vitest/rules',
     },
     eslintConfigVitest,
+    {
+      files: TESTING_FILES,
+      rules: {
+        ...overrides,
+      },
+      name: 'vitest/rules/overrides',
+    },
   ];
 }

@@ -1,4 +1,4 @@
-import type { TypedConfigItem, VueVersion } from '../types';
+import type { OptionsHasTypescript, OptionsVue, TypedConfigItem } from '../types';
 
 import { VUE_FILES } from '../constants';
 import { ensureInstalled, lazy } from '../utils';
@@ -6,10 +6,8 @@ import { ensureInstalled, lazy } from '../utils';
 export async function vue({
   typescript,
   version = 3,
-}: {
-  typescript: boolean;
-  version?: VueVersion;
-}): Promise<TypedConfigItem[]> {
+  overrides,
+}: OptionsHasTypescript & OptionsVue = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-vue', 'vue-eslint-parser');
 
   const [pluginVue, vueParser] = await Promise.all([
@@ -196,6 +194,13 @@ export async function vue({
         'vue-a11y/no-static-element-interactions': 'error',
         'vue-a11y/role-has-required-aria-props': 'error',
         'vue-a11y/tabindex-no-positive': 'warn',
+      },
+    },
+    {
+      name: 'vue/rules/overrides',
+      files: [VUE_FILES],
+      rules: {
+        ...overrides,
       },
     },
   ];

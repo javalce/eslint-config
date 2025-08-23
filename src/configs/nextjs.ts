@@ -5,12 +5,12 @@ import path from 'node:path';
 import { type Linter } from 'eslint';
 
 import { JS_FILES, JSX_FILES, SRC_FILES } from '../constants';
-import { type TypedConfigItem } from '../types';
+import { type OptionsNext, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
 const require = createRequire(process.cwd());
 
-export async function nextjs(): Promise<TypedConfigItem[]> {
+export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('@next/eslint-plugin-next');
 
   const rootPath = process.cwd();
@@ -86,6 +86,13 @@ export async function nextjs(): Promise<TypedConfigItem[]> {
         ...(nextjsPlugin.configs['core-web-vitals'].rules as Linter.RulesRecord),
       },
       name: 'next/rules',
+    },
+    {
+      files: [SRC_FILES],
+      rules: {
+        ...overrides,
+      },
+      name: 'next/rules/overrides',
     },
     {
       files: defaultExportRuleFiles,

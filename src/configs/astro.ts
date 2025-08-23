@@ -3,10 +3,13 @@ import type { Linter } from 'eslint';
 import globals from 'globals';
 
 import { ASTRO_FILES, ASTRO_JS_FILES, ASTRO_TS_FILES } from '../constants';
-import { type OptionsHasTypescript, type TypedConfigItem } from '../types';
+import { type OptionsAstro, type OptionsHasTypescript, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function astro({ typescript }: OptionsHasTypescript): Promise<TypedConfigItem[]> {
+export async function astro({
+  typescript,
+  overrides,
+}: OptionsHasTypescript & OptionsAstro = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-astro', 'astro-eslint-parser');
 
   const [pluginAstro, parserAstro, tseslint] = await Promise.all([
@@ -84,6 +87,13 @@ export async function astro({ typescript }: OptionsHasTypescript): Promise<Typed
       name: 'astro/jsx-a11y-recommended',
       files: [ASTRO_FILES],
       ...astroJsxA11yConfig,
+    },
+    {
+      name: 'astro/rules/overrides',
+      files: [ASTRO_FILES],
+      rules: {
+        ...overrides,
+      },
     },
   ];
 }

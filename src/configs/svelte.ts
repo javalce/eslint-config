@@ -1,8 +1,11 @@
 import { SVELTE_FILES } from '../constants';
-import { type OptionsHasTypescript, type TypedConfigItem } from '../types';
+import { type OptionsSvelte, type OptionsHasTypescript, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function svelte({ typescript }: OptionsHasTypescript): Promise<TypedConfigItem[]> {
+export async function svelte({
+  typescript,
+  overrides,
+}: OptionsHasTypescript & OptionsSvelte = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-svelte', 'svelte-eslint-parser');
 
   const [eslintPluginSvelte, svelteParser] = await Promise.all([
@@ -33,6 +36,13 @@ export async function svelte({ typescript }: OptionsHasTypescript): Promise<Type
       name: 'svelte/rules',
       rules: {
         ...recommendedRules.rules,
+      },
+    },
+    {
+      name: 'svelte/rules/overrides',
+      files: [SVELTE_FILES],
+      rules: {
+        ...overrides,
       },
     },
   ];

@@ -3,10 +3,10 @@ import { isPackageExists } from 'local-pkg';
 import { NEXT_PACKAGES, REACT_ROUTER_PACKAGES, SRC_FILES } from '../constants';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
-import { type TypedConfigItem } from '../types';
+import { type OptionsReact, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function react(): Promise<TypedConfigItem[]> {
+export async function react({ overrides }: OptionsReact = {}): Promise<TypedConfigItem[]> {
   ensureInstalled(
     'eslint-plugin-react',
     'eslint-plugin-react-hooks',
@@ -99,6 +99,12 @@ export async function react(): Promise<TypedConfigItem[]> {
       },
       reactRules,
       jsxA11Rules,
+      {
+        name: 'react/rules/overrides',
+        rules: {
+          ...overrides,
+        },
+      },
     ].map((config) => ({
       ...config,
       files: [SRC_FILES],

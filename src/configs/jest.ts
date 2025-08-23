@@ -2,10 +2,10 @@ import globals from 'globals';
 
 import { TESTING_FILES, TS_TESTING_FILES } from '../constants';
 import jestConfig from '../rules/jest';
-import { type TypedConfigItem } from '../types';
+import { type OptionsJest, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function jest(): Promise<TypedConfigItem[]> {
+export async function jest({ overrides }: OptionsJest = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-jest');
 
   const jestPlugin = await lazy(import('eslint-plugin-jest'));
@@ -40,6 +40,13 @@ export async function jest(): Promise<TypedConfigItem[]> {
         'jest/unbound-method': 'error',
       },
       name: 'jest/rules/unbound-method',
+    },
+    {
+      files: TESTING_FILES,
+      rules: {
+        ...overrides,
+      },
+      name: 'jest/rules/overrides',
     },
   ];
 }

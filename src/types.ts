@@ -4,6 +4,65 @@ import { type ConfigNames, type RuleOptions } from './typegen';
 
 export type Awaitable<T> = T | Promise<T>;
 
+type RuleKeys =
+  | '@angular-eslint'
+  | '@angular-eslint/template'
+  | '@next/next'
+  | '@stylistic'
+  | '@typescript-eslint'
+  | 'astro'
+  | 'eslint'
+  | 'eslint-comments'
+  | 'import-x'
+  | 'jest'
+  | 'jsx-a11y'
+  | 'react'
+  | 'react-hooks'
+  | 'react-refresh'
+  | 'solid'
+  | 'svelte'
+  | 'testing-library'
+  | 'unicorn'
+  | 'vitest'
+  | 'vue';
+
+/**
+ * Produce the key when `K` must be a top-level rule name (no plugin/namespace).
+ * Returns the key or `never` when it contains a slash.
+ */
+type TopLevelRule<K extends string> = K extends `${string}/${string}` ? never : K;
+
+/** If `K` starts with `${Prefix}/...` returns the full key, otherwise `never`. */
+type RuleWithPrefix<Prefix extends string, K extends string> = K extends `${Prefix}/${string}`
+  ? K
+  : never;
+
+/** Exclude a specific sub-namespace (e.g. `${Prefix}/template/...`). */
+type ExcludeSubnamespace<
+  K extends string,
+  Prefix extends string,
+  Sub extends string,
+> = K extends `${Prefix}/${Sub}/${string}` ? never : K;
+
+/**
+ * Decide the mapped key for a given `Prefix`:
+ * - for 'eslint' return only top-level keys (no slash)
+ * - if `Prefix` contains a subpath (like '@angular-eslint/template') match keys with that exact prefix
+ * - otherwise (base prefix) match keys starting with `${Prefix}/`;
+ *   when `Prefix` is '@angular-eslint' exclude the 'template' sub-namespace
+ */
+type KeyForPrefix<Prefix extends RuleKeys, K extends string> = Prefix extends 'eslint'
+  ? TopLevelRule<K>
+  : Prefix extends `${string}/${string}`
+    ? RuleWithPrefix<Prefix, K>
+    : Prefix extends '@angular-eslint'
+      ? ExcludeSubnamespace<RuleWithPrefix<Prefix, K>, Prefix, 'template'>
+      : RuleWithPrefix<Prefix, K>;
+
+type ExtractRules<Prefix extends RuleKeys, AllRules extends RuleOptions = RuleOptions> = {
+  [K in keyof AllRules as K extends string ? KeyForPrefix<Prefix, K> : never]: AllRules[K];
+};
+
 export interface Rules extends RuleOptions {}
 
 export type { ConfigNames };
@@ -32,18 +91,66 @@ export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'p
   plugins?: Record<string, unknown>;
 };
 
-export type VueVersion = 2 | 3;
-
-export interface VueOptions {
+export interface OptionsEcmaVersion {
   /**
-   * Vue version. Apply different rules set from `eslint-plugin-vue`.
+   * La versión de ECMAScript a usar para el parsing.
    *
-   * @default 3
+   * @default DEFAULT_ECMA_VERSION (2023)
    */
-  vueVersion?: VueVersion;
+  ecmaVersion?: EcmaVersion;
 }
 
 export type ProjectType = 'app' | 'lib';
+
+export interface OptionsProjectType {
+  /**
+   * The type of the project, either 'app' or 'lib'.
+   *
+   * @default 'app'
+   */
+  type?: ProjectType;
+}
+
+export interface OptionsJavascript {
+  overrides?: ExtractRules<'eslint'>;
+}
+
+export interface OptionsEslintComments {
+  overrides?: ExtractRules<'eslint-comments'>;
+}
+
+export interface OptionsStylistic {
+  overrides?: ExtractRules<'@stylistic'>;
+}
+
+export interface OptionsUnicorn {
+  overrides?: ExtractRules<'unicorn'>;
+}
+
+export interface OptionsPathAliases {
+  /**
+   * Custom path aliases to use in the project.
+   **/
+  pathAliases?: string | string[];
+}
+
+export interface OptionsImport extends OptionsPathAliases {
+  overrides?: ExtractRules<'import-x'>;
+}
+
+export interface OptionsTypescript {
+  /**
+   * Provides the path(s) to the TypeScript configuration file(s) for type linting
+   *
+   * @see https://typescript-eslint.io/linting/typed-linting/
+   */
+  tsconfigPath?: string | string[];
+  overrides?: ExtractRules<'@typescript-eslint'>;
+}
+
+export interface OptionsHasTypescript {
+  typescript?: boolean;
+}
 
 export interface OptionsAngularSelector {
   /**
@@ -77,44 +184,85 @@ export interface OptionsAngular {
    * This allows customization of the selector type, prefix, and style for components.
    */
   component?: OptionsAngularSelector;
+  overrides?: {
+    typescript?: ExtractRules<'@typescript-eslint'>;
+    template?: ExtractRules<'@angular-eslint/template'>;
+  };
 }
 
-export interface OptionsTypescript {
+export interface OptionsReact {
+  overrides?: ExtractRules<'react' | 'react-hooks' | 'react-refresh' | 'jsx-a11y'>;
+}
+
+export interface OptionsNext {
+  overrides?: ExtractRules<'@next/next'>;
+}
+
+export interface OptionsAstro {
+  overrides?: ExtractRules<'astro' | 'jsx-a11y'>;
+}
+
+export interface OptionsSvelte {
+  overrides?: ExtractRules<'svelte'>;
+}
+
+export interface OptionsSolid {
+  overrides?: ExtractRules<'solid'>;
+}
+
+export type VueVersion = 2 | 3;
+
+export interface OptionsVue {
   /**
-   * Provides the path(s) to the TypeScript configuration file(s) for type linting
+   * Vue version. Apply different rules set from `eslint-plugin-vue`.
    *
-   * @see https://typescript-eslint.io/linting/typed-linting/
+   * @default 3
    */
-  tsconfigPath: string | string[];
+  version?: VueVersion;
+  overrides?: ExtractRules<'vue'>;
 }
 
-export interface OptionsHasTypescript {
-  typescript?: boolean;
+export interface OptionsJest {
+  overrides?: ExtractRules<'jest'>;
 }
 
-export interface OptionsProjectType {
+export interface OptionsVitest {
+  overrides?: ExtractRules<'vitest'>;
+}
+
+export interface OptionsTestingLibrary {
+  overrides?: ExtractRules<'testing-library'>;
+}
+
+export interface OptionsTest {
   /**
-   * The type of the project, either 'app' or 'lib'.
+   * Enable Jest testing framework support.
    *
-   * @default 'app'
+   * Requires:
+   *  - `eslint-plugin-jest`
    */
-  type?: ProjectType;
-}
-
-export interface OptionsPathAliases {
+  jest?: boolean | OptionsJest;
   /**
-   * Custom path aliases to use in the project.
-   **/
-  pathAliases: string | string[];
-}
-
-export interface OptionsConfig extends OptionsProjectType {
-  /**
-   * La versión de ECMAScript a usar para el parsing.
+   * Enable Vitest testing framework support.
    *
-   * @default DEFAULT_ECMA_VERSION (2023)
+   * Requires:
+   *  - `@vitest/eslint-plugin`
    */
-  ecmaVersion?: EcmaVersion;
+  vitest?: boolean | OptionsVitest;
+  /**
+   * Enable Testing Library support.
+   *
+   * Requires:
+   *  - `eslint-plugin-testing-library`
+   */
+  testingLibrary?: boolean | OptionsTestingLibrary;
+}
+
+export interface OptionsConfig extends OptionsEcmaVersion, OptionsProjectType {
+  /**
+   * Core rules.
+   */
+  javascript?: OptionsJavascript;
   /**
    * List of glob patterns for files/directories to ignore.
    *
@@ -123,9 +271,21 @@ export interface OptionsConfig extends OptionsProjectType {
    */
   ignores?: string[];
   /**
+   * ESLint comments plugin options.
+   */
+  comments?: OptionsEslintComments;
+  /**
    * Configure the path aliases for the import plugin.
    */
-  import?: OptionsPathAliases;
+  import?: OptionsImport;
+  /**
+   * Stylistic plugin options.
+   */
+  stylistic?: OptionsStylistic;
+  /**
+   * Unicorn plugin options.
+   */
+  unicorn?: OptionsUnicorn;
   /**
    * Enable TypeScript support.
    *
@@ -153,7 +313,7 @@ export interface OptionsConfig extends OptionsProjectType {
    *
    * @default false
    */
-  react?: boolean;
+  react?: boolean | OptionsReact;
   /**
    * Enable Next.js support.
    *
@@ -164,7 +324,7 @@ export interface OptionsConfig extends OptionsProjectType {
    *
    * @default false
    */
-  next?: boolean;
+  next?: boolean | OptionsNext;
   /**
    * Enable Astro support.
    *
@@ -176,7 +336,7 @@ export interface OptionsConfig extends OptionsProjectType {
    *
    * @default false
    */
-  astro?: boolean;
+  astro?: boolean | OptionsAstro;
   /**
    * Enable Svelte support.
    *
@@ -185,7 +345,7 @@ export interface OptionsConfig extends OptionsProjectType {
    *
    * @default false
    */
-  svelte?: boolean;
+  svelte?: boolean | OptionsSvelte;
   /**
    * Enable SolidJS support.
    *
@@ -194,7 +354,7 @@ export interface OptionsConfig extends OptionsProjectType {
    *
    * @default false
    */
-  solidjs?: boolean;
+  solid?: boolean | OptionsSolid;
   /**
    * Enable Vue support.
    *
@@ -203,21 +363,17 @@ export interface OptionsConfig extends OptionsProjectType {
    *
    * @default false
    */
-  vue?: boolean | VueOptions;
+  vue?: boolean | OptionsVue;
   /**
    * Enable testing framework support.
    *
-   * Requires installing:
-   * - `eslint-plugin-jest` (for Jest)
-   * - `@vitest/eslint-plugin` (for Vitest)
-   *
    * @default undefined
    */
-  testing?: 'jest' | 'vitest';
+  test?: OptionsTest;
   /**
-   * Provide additional overrides for the ESLint configuration.
+   * Provides additional configuration objects for the ESLint configuration.
    *
    * @default []
    */
-  overrides?: Array<TypedConfigItem | Linter.Config>;
+  extends?: Linter.Config[];
 }

@@ -1,12 +1,12 @@
-import type { OptionsPathAliases, TypedConfigItem } from '../types';
+import type { OptionsImport, TypedConfigItem } from '../types';
 
 import eslintPluginImport from 'eslint-plugin-import-x';
 
 import { CONFIG_FILES } from '../constants';
-import { normalizeStringArray } from '../utils';
+import { createPathAliases } from '../utils';
 
-export function imports({ pathAliases }: OptionsPathAliases): TypedConfigItem[] {
-  const customPathAliases = normalizeStringArray(pathAliases);
+export function imports({ pathAliases, overrides }: OptionsImport = {}): TypedConfigItem[] {
+  const customPathAliases = createPathAliases({ pathAliases });
 
   return [
     {
@@ -121,6 +121,12 @@ export function imports({ pathAliases }: OptionsPathAliases): TypedConfigItem[] 
         'import-x/no-default-export': 'off',
       },
       name: 'import/rules/no-default-export',
+    },
+    {
+      name: 'import-x/rules/overrides',
+      rules: {
+        ...overrides,
+      },
     },
   ];
 }

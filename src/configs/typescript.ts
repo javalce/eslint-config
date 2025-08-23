@@ -1,14 +1,15 @@
 import { resolve } from 'node:path';
+import fs from 'node:fs';
 
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 
 import { ASTRO_TS_FILES, TS_FILES, TSX_FILES } from '../constants';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
-import { createImportRules } from '../rules/typescript/import';
+import { createTypescriptImportRules } from '../rules/typescript/import';
 import eslintStylisticConfig from '../rules/typescript/stylistic';
 import {
-  type OptionsPathAliases,
+  type OptionsImport,
   type OptionsProjectType,
   type OptionsTypescript,
   type TypedConfigItem,
@@ -19,8 +20,19 @@ export async function typescript({
   pathAliases,
   tsconfigPath,
   type,
-}: OptionsPathAliases & OptionsTypescript & OptionsProjectType): Promise<TypedConfigItem[]> {
-  const project = normalizeStringArray(tsconfigPath, resolveTsconfigPath);
+  overrides,
+}: OptionsImport & OptionsTypescript & OptionsProjectType = {}): Promise<TypedConfigItem[]> {
+  const project = (() => {
+    if (tsconfigPath) {
+      return normalizeStringArray(tsconfigPath, resolveTsconfigPath);
+    }
+
+    if (fs.existsSync('tsconfig.eslint.json')) {
+      return resolveTsconfigPath('tsconfig.eslint.json');
+    }
+
+    return resolveTsconfigPath('tsconfig.json');
+  })();
 
   const [tseslint, importPlugin] = await Promise.all([
     lazy(import('typescript-eslint')),
@@ -84,7 +96,13 @@ export async function typescript({
         ...importPlugin.configs.typescript,
         name: 'typescript/import/setup',
       },
-      createImportRules({ pathAliases }),
+      createTypescriptImportRules({ pathAliases }),
+      {
+        name: 'typescript/rules/overrides',
+        rules: {
+          ...overrides,
+        },
+      },
     ].map((config) => ({
       ...config,
       files: [TS_FILES, TSX_FILES],

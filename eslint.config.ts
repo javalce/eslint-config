@@ -2,7 +2,7 @@ import { defineConfig } from './src/index';
 
 export default defineConfig({
   type: 'lib',
-  overrides: [
+  extends: [
     {
       files: ['src/rules/**/*.ts'],
       rules: {

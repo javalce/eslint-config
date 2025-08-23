@@ -1,7 +1,5 @@
 import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './types';
 
-import fs from 'node:fs';
-
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
@@ -22,7 +20,6 @@ import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
-import { CUSTOM_PATH_ALIASES, DEFAULT_ECMA_VERSION } from './constants';
 
 /**
  * Generates a custom ESLint configuration based on the provided options.
@@ -33,8 +30,7 @@ import { CUSTOM_PATH_ALIASES, DEFAULT_ECMA_VERSION } from './constants';
  */
 export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
   const {
-    ecmaVersion = DEFAULT_ECMA_VERSION,
-    import: importOptions,
+    ecmaVersion,
     ignores: ignoreFiles,
     typescript: enableTypeScript = isPackageExists('typescript'),
     angular: enableAngular = false,
@@ -42,64 +38,51 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     next: enableNext,
     astro: enableAstro,
     svelte: enableSvelte,
-    solidjs: enableSolidjs,
+    solid: enableSolid,
     vue: enableVue,
-    testing: enableTesting,
+    test: enableTesting,
     type: projectType = 'app',
-    overrides = [],
+    extends: additionalConfig = [],
   } = options;
-
-  const pathAliases = importOptions?.pathAliases ?? CUSTOM_PATH_ALIASES;
 
   const configs: Array<Awaitable<TypedConfigItem[]>> = [];
 
   configs.push(
     ignores({ files: ignoreFiles }),
-    javascript({ ecmaVersion }),
-    comments(),
-    imports({ pathAliases }),
-    stylistic(),
-    unicorn(),
+    javascript({ ecmaVersion, ...resolveSubOptions(options, 'javascript') }),
+    comments(resolveSubOptions(options, 'comments')),
+    imports(resolveSubOptions(options, 'import')),
+    stylistic(resolveSubOptions(options, 'stylistic')),
+    unicorn(resolveSubOptions(options, 'unicorn')),
   );
-
-  const tsconfigPath = (() => {
-    if (typeof enableTypeScript !== 'boolean') {
-      return resolveSubOptions(enableTypeScript, 'tsconfigPath');
-    }
-
-    if (fs.existsSync('tsconfig.eslint.json')) {
-      return 'tsconfig.eslint.json';
-    }
-
-    return 'tsconfig.json';
-  })();
 
   if (enableTypeScript) {
     configs.push(
       typescript({
-        pathAliases,
-        tsconfigPath,
+        pathAliases: options.import?.pathAliases,
         type: projectType,
+        ...resolveSubOptions(options, 'typescript'),
       }),
     );
   }
 
   if (enableAngular) {
-    configs.push(angular());
+    configs.push(angular(resolveSubOptions(options, 'angular')));
   }
 
   if (enableReact) {
-    configs.push(react());
+    configs.push(react(resolveSubOptions(options, 'react')));
   }
 
   if (enableNext) {
-    configs.push(nextjs());
+    configs.push(nextjs(resolveSubOptions(options, 'next')));
   }
 
   if (enableAstro) {
     configs.push(
       astro({
         typescript: Boolean(enableTypeScript),
+        ...resolveSubOptions(options, 'astro'),
       }),
     );
   }
@@ -108,14 +91,16 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     configs.push(
       svelte({
         typescript: Boolean(enableTypeScript),
+        ...resolveSubOptions(options, 'svelte'),
       }),
     );
   }
 
-  if (enableSolidjs) {
+  if (enableSolid) {
     configs.push(
       solid({
         typescript: Boolean(enableTypeScript),
+        ...resolveSubOptions(options, 'solid'),
       }),
     );
   }
@@ -123,36 +108,51 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   if (enableVue) {
     configs.push(
       vue({
+        typescript: Boolean(enableTypeScript),
         ...resolveSubOptions(options, 'vue'),
-        typescript: Boolean(enableTypeScript),
       }),
     );
   }
 
-  if (enableTesting === 'jest') {
-    configs.push(jest());
-  }
+  if (enableTesting) {
+    const testOptions = resolveSubOptions(options, 'test');
+    const {
+      jest: enableJest,
+      vitest: enableVitest,
+      testingLibrary: enableTestingLibrary,
+    } = testOptions;
 
-  if (enableTesting === 'vitest') {
-    configs.push(
-      vitest({
-        typescript: Boolean(enableTypeScript),
-      }),
-    );
-  }
+    if (enableJest) {
+      configs.push(
+        jest({
+          ...resolveSubOptions(testOptions, 'jest'),
+        }),
+      );
+    }
 
-  if (enableTesting && (enableVue || enableReact)) {
-    configs.push(
-      testingLibrary({
-        react: Boolean(enableReact),
-        vue: Boolean(enableVue),
-      }),
-    );
+    if (enableVitest) {
+      configs.push(
+        vitest({
+          typescript: Boolean(enableTypeScript),
+          ...resolveSubOptions(testOptions, 'vitest'),
+        }),
+      );
+    }
+
+    if (enableTestingLibrary) {
+      configs.push(
+        testingLibrary({
+          react: Boolean(enableReact),
+          vue: Boolean(enableVue),
+          ...resolveSubOptions(testOptions, 'testingLibrary'),
+        }),
+      );
+    }
   }
 
   let composer = new FlatConfigComposer<TypedConfigItem, ConfigNames>();
 
-  composer = composer.append(...configs, ...overrides);
+  composer = composer.append(...configs, ...additionalConfig);
 
   return composer.toConfigs();
 }

@@ -1,8 +1,8 @@
-import type { TypedConfigItem } from '../types';
+import type { OptionsStylistic, TypedConfigItem } from '../types';
 
 import stylisticPlugin from '@stylistic/eslint-plugin';
 
-export function stylistic(): TypedConfigItem[] {
+export function stylistic({ overrides }: OptionsStylistic = {}): TypedConfigItem[] {
   return [
     {
       plugins: {
@@ -107,6 +107,12 @@ export function stylistic(): TypedConfigItem[] {
          * 🔧 Fixable - https://eslint.org/docs/rules/prefer-object-spread
          */
         'prefer-object-spread': 'warn',
+      },
+    },
+    {
+      name: 'stylistic/rules/overrides',
+      rules: {
+        ...overrides,
       },
     },
   ];

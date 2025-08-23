@@ -1,8 +1,8 @@
-import type { TypedConfigItem } from '../types';
+import type { OptionsUnicorn, TypedConfigItem } from '../types';
 
 import unicornPlugin from 'eslint-plugin-unicorn';
 
-export function unicorn(): TypedConfigItem[] {
+export function unicorn({ overrides }: OptionsUnicorn = {}): TypedConfigItem[] {
   return [
     {
       name: 'unicorn/setup',
@@ -38,6 +38,12 @@ export function unicorn(): TypedConfigItem[] {
          * 🔧 Fixable - https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-node-protocol.md
          */
         'unicorn/prefer-node-protocol': 'warn',
+      },
+    },
+    {
+      name: 'unicorn/rules/overrides',
+      rules: {
+        ...overrides,
       },
     },
   ];

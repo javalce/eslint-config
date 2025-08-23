@@ -1,9 +1,12 @@
-import type { OptionsHasTypescript, TypedConfigItem } from '../types';
+import type { OptionsHasTypescript, OptionsSolid, TypedConfigItem } from '../types';
 
 import { JSX_FILES, TSX_FILES } from '../constants';
 import { ensureInstalled, lazy } from '../utils';
 
-export async function solid({ typescript }: OptionsHasTypescript): Promise<TypedConfigItem[]> {
+export async function solid({
+  typescript,
+  overrides,
+}: OptionsHasTypescript & OptionsSolid = {}): Promise<TypedConfigItem[]> {
   ensureInstalled('eslint-plugin-solid');
 
   const solidPlugin = await lazy(import('eslint-plugin-solid'));
@@ -53,6 +56,13 @@ export async function solid({ typescript }: OptionsHasTypescript): Promise<Typed
               'solid/no-unknown-namespaces': 'off',
             }
           : {}),
+      },
+    },
+    {
+      name: 'solid/rules/overrides',
+      files: [JSX_FILES, TSX_FILES],
+      rules: {
+        ...overrides,
       },
     },
   ];

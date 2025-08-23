@@ -3,7 +3,8 @@ import { fileURLToPath } from 'node:url';
 
 import { isPackageExists } from 'local-pkg';
 
-import { type Awaitable, type TypedConfigItem } from './types';
+import { CUSTOM_PATH_ALIASES } from './constants';
+import { type OptionsPathAliases, type Awaitable, type TypedConfigItem } from './types';
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
 const isCwdInScope = isPackageExists('@javalce/eslint-config');
@@ -57,4 +58,12 @@ export function normalizeStringArray(
   const array = Array.isArray(value) ? value : [value];
 
   return callback ? array.map(callback) : array;
+}
+
+export function createPathAliases({ pathAliases }: OptionsPathAliases): string[] {
+  if (!pathAliases) {
+    return CUSTOM_PATH_ALIASES;
+  }
+
+  return [...CUSTOM_PATH_ALIASES, ...normalizeStringArray(pathAliases)];
 }

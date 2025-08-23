@@ -20,7 +20,6 @@ import { typescript } from '../src/configs/typescript';
 import { unicorn } from '../src/configs/unicorn';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
-import { CUSTOM_PATH_ALIASES, DEFAULT_ECMA_VERSION } from '../src/constants';
 import { combine } from '../src/utils';
 
 const configs = (await combine(
@@ -32,22 +31,22 @@ const configs = (await combine(
       },
     },
   },
-  javascript({ ecmaVersion: DEFAULT_ECMA_VERSION }),
+  javascript(),
   comments(),
-  imports({ pathAliases: CUSTOM_PATH_ALIASES }),
+  imports(),
   stylistic(),
   unicorn(),
-  typescript({ pathAliases: CUSTOM_PATH_ALIASES, tsconfigPath: 'tsconfig.json' }),
+  typescript(),
   angular(),
   react(),
   nextjs(),
-  astro({ typescript: true }),
-  svelte({ typescript: true }),
-  solid({ typescript: true }),
-  vue({ typescript: true }),
+  astro(),
+  svelte(),
+  solid(),
+  vue(),
   jest(),
-  vitest({ typescript: true }),
-  testingLibrary({ react: true, vue: true }),
+  vitest(),
+  testingLibrary(),
 )) as Linter.Config[];
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
