@@ -31,7 +31,6 @@ import { vue } from './configs/vue';
  */
 export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
   const {
-    ecmaVersion,
     ignores: ignoreFiles,
     typescript: enableTypeScript = isPackageExists('typescript'),
     angular: enableAngular,
@@ -51,7 +50,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
 
   configs.push(
     ignores({ files: ignoreFiles }),
-    javascript({ ecmaVersion, ...resolveSubOptions(options, 'javascript') }),
+    javascript(resolveSubOptions(options, 'javascript')),
     comments(resolveSubOptions(options, 'comments')),
     imports(resolveSubOptions(options, 'import')),
     stylistic(resolveSubOptions(options, 'stylistic')),

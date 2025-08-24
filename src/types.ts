@@ -92,15 +92,6 @@ export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'p
   plugins?: Record<string, unknown>;
 };
 
-export interface OptionsEcmaVersion {
-  /**
-   * La versión de ECMAScript a usar para el parsing.
-   *
-   * @default DEFAULT_ECMA_VERSION (2023)
-   */
-  ecmaVersion?: EcmaVersion;
-}
-
 type ProjectType = 'app' | 'lib';
 
 export interface OptionsProjectType {
@@ -116,7 +107,14 @@ interface OptionsOverrides<T extends RuleKeys> {
   overrides?: ExtractRules<T>;
 }
 
-export interface OptionsJavascript extends OptionsOverrides<'eslint'> {}
+export interface OptionsJavascript extends OptionsOverrides<'eslint'> {
+  /**
+   * La versión de ECMAScript a usar para el parsing.
+   *
+   * @default 2023
+   */
+  ecmaVersion?: EcmaVersion;
+}
 
 export interface OptionsEslintComments extends OptionsOverrides<'eslint-comments'> {}
 
@@ -235,7 +233,7 @@ interface OptionsHasVitest extends OptionsVitest, OptionsHasTestingLibrary {
 
 type OptionsTest = OptionsHasJest | OptionsHasVitest;
 
-export interface OptionsConfig extends OptionsEcmaVersion, OptionsProjectType {
+export interface OptionsConfig extends OptionsProjectType {
   /**
    * Core rules.
    */
