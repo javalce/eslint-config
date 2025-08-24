@@ -33,7 +33,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     ecmaVersion,
     ignores: ignoreFiles,
     typescript: enableTypeScript = isPackageExists('typescript'),
-    angular: enableAngular = false,
+    angular: enableAngular,
     react: enableReact,
     next: enableNext,
     astro: enableAstro,
@@ -79,9 +79,11 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (enableAstro) {
+    const newLocal = Boolean(enableTypeScript);
+
     configs.push(
       astro({
-        typescript: Boolean(enableTypeScript),
+        typescript: newLocal,
         ...resolveSubOptions(options, 'astro'),
       }),
     );
@@ -144,7 +146,9 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     if (enableTestingLibrary) {
       configs.push(
         testingLibrary({
+          angular: Boolean(enableAngular),
           react: Boolean(enableReact),
+          svelte: Boolean(enableSvelte),
           vue: Boolean(enableVue),
           ...resolveSubOptions(testOptions, 'testingLibrary'),
         }),
