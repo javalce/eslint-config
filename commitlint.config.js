@@ -31,6 +31,6 @@ export default {
         'chore',
       ],
     ],
-    'scope-empty': [1, 'never'],
+    'scope-empty': [2, 'always'],
   },
 };
