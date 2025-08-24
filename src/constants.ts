@@ -45,14 +45,3 @@ export const TS_TESTING_FILES = [
 ];
 
 export const CONFIG_FILES = ['**/*.+(config|conf).?([cm])[jt]s', '**/.*rc.?([cm])[jt]s'];
-
-export const REACT_ROUTER_PACKAGES = [
-  '@react-router/node',
-  '@react-router/react',
-  '@react-router/serve',
-  '@react-router/dev',
-];
-
-export const NEXT_PACKAGES = ['next'];
-
-export const CUSTOM_PATH_ALIASES = ['@/**', '~/**'];

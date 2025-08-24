@@ -1,10 +1,18 @@
 import { isPackageExists } from 'local-pkg';
 
-import { NEXT_PACKAGES, REACT_ROUTER_PACKAGES, SRC_FILES } from '../constants';
+import { SRC_FILES } from '../constants';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { type OptionsReact, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
+
+const REACT_ROUTER_PACKAGES = [
+  '@react-router/node',
+  '@react-router/react',
+  '@react-router/serve',
+  '@react-router/dev',
+];
+const NEXT_PACKAGES = ['next'];
 
 export async function react({ overrides }: OptionsReact = {}): Promise<TypedConfigItem[]> {
   ensureInstalled(
