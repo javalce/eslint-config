@@ -63,7 +63,7 @@ type ExtractRules<Prefix extends RuleKeys, AllRules extends RuleOptions = RuleOp
   [K in keyof AllRules as K extends string ? KeyForPrefix<Prefix, K> : never]: AllRules[K];
 };
 
-export interface Rules extends RuleOptions {}
+interface Rules extends RuleOptions {}
 
 export type { ConfigNames };
 
@@ -100,7 +100,7 @@ export interface OptionsEcmaVersion {
   ecmaVersion?: EcmaVersion;
 }
 
-export type ProjectType = 'app' | 'lib';
+type ProjectType = 'app' | 'lib';
 
 export interface OptionsProjectType {
   /**
@@ -111,21 +111,17 @@ export interface OptionsProjectType {
   type?: ProjectType;
 }
 
-export interface OptionsJavascript {
-  overrides?: ExtractRules<'eslint'>;
+interface OptionsOverrides<T extends RuleKeys> {
+  overrides?: ExtractRules<T>;
 }
 
-export interface OptionsEslintComments {
-  overrides?: ExtractRules<'eslint-comments'>;
-}
+export interface OptionsJavascript extends OptionsOverrides<'eslint'> {}
 
-export interface OptionsStylistic {
-  overrides?: ExtractRules<'@stylistic'>;
-}
+export interface OptionsEslintComments extends OptionsOverrides<'eslint-comments'> {}
 
-export interface OptionsUnicorn {
-  overrides?: ExtractRules<'unicorn'>;
-}
+export interface OptionsStylistic extends OptionsOverrides<'@stylistic'> {}
+
+export interface OptionsUnicorn extends OptionsOverrides<'unicorn'> {}
 
 export interface OptionsPathAliases {
   /**
@@ -134,9 +130,7 @@ export interface OptionsPathAliases {
   pathAliases?: string | string[];
 }
 
-export interface OptionsImport extends OptionsPathAliases {
-  overrides?: ExtractRules<'import-x'>;
-}
+export interface OptionsImport extends OptionsPathAliases, OptionsOverrides<'import-x'> {}
 
 export interface OptionsTypescript {
   /**
@@ -152,7 +146,7 @@ export interface OptionsHasTypescript {
   typescript?: boolean;
 }
 
-export interface OptionsAngularSelector {
+interface OptionsAngularSelector {
   /**
    * The selector type for Angular directives or components.
    */
@@ -190,73 +184,47 @@ export interface OptionsAngular {
   };
 }
 
-export interface OptionsReact {
-  overrides?: ExtractRules<'react' | 'react-hooks' | 'react-refresh' | 'jsx-a11y'>;
-}
+export interface OptionsReact
+  extends OptionsOverrides<'react' | 'react-hooks' | 'react-refresh' | 'jsx-a11y'> {}
 
-export interface OptionsNext {
-  overrides?: ExtractRules<'@next/next'>;
-}
+export interface OptionsNext extends OptionsOverrides<'@next/next'> {}
 
-export interface OptionsAstro {
-  overrides?: ExtractRules<'astro' | 'jsx-a11y'>;
-}
+export interface OptionsAstro extends OptionsOverrides<'astro' | 'jsx-a11y'> {}
 
-export interface OptionsSvelte {
-  overrides?: ExtractRules<'svelte'>;
-}
+export interface OptionsSvelte extends OptionsOverrides<'svelte'> {}
 
-export interface OptionsSolid {
-  overrides?: ExtractRules<'solid'>;
-}
+export interface OptionsSolid extends OptionsOverrides<'solid'> {}
 
-export type VueVersion = 2 | 3;
+type VueVersion = 2 | 3;
 
-export interface OptionsVue {
+export interface OptionsVue extends OptionsOverrides<'vue'> {
   /**
    * Vue version. Apply different rules set from `eslint-plugin-vue`.
    *
    * @default 3
    */
   version?: VueVersion;
-  overrides?: ExtractRules<'vue'>;
 }
 
-export interface OptionsJest {
-  overrides?: ExtractRules<'jest'>;
-}
+export interface OptionsTestingLibrary extends OptionsOverrides<'testing-library'> {}
 
-export interface OptionsVitest {
-  overrides?: ExtractRules<'vitest'>;
-}
-
-export interface OptionsTestingLibrary {
-  overrides?: ExtractRules<'testing-library'>;
-}
-
-export interface OptionsTest {
-  /**
-   * Enable Jest testing framework support.
-   *
-   * Requires:
-   *  - `eslint-plugin-jest`
-   */
-  jest?: boolean | OptionsJest;
-  /**
-   * Enable Vitest testing framework support.
-   *
-   * Requires:
-   *  - `@vitest/eslint-plugin`
-   */
-  vitest?: boolean | OptionsVitest;
-  /**
-   * Enable Testing Library support.
-   *
-   * Requires:
-   *  - `eslint-plugin-testing-library`
-   */
+interface OptionsHasTestingLibrary {
   testingLibrary?: boolean | OptionsTestingLibrary;
 }
+
+export interface OptionsJest extends OptionsOverrides<'jest'> {}
+
+interface OptionsHasJest extends OptionsJest, OptionsHasTestingLibrary {
+  framework: 'jest';
+}
+
+export interface OptionsVitest extends OptionsOverrides<'vitest'> {}
+
+interface OptionsHasVitest extends OptionsVitest, OptionsHasTestingLibrary {
+  framework: 'vitest';
+}
+
+type OptionsTest = OptionsHasJest | OptionsHasVitest;
 
 export interface OptionsConfig extends OptionsEcmaVersion, OptionsProjectType {
   /**

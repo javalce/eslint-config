@@ -117,15 +117,17 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   if (enableTesting) {
     const testOptions = resolveSubOptions(options, 'test');
     const {
-      jest: enableJest,
-      vitest: enableVitest,
+      framework: testingFramework,
       testingLibrary: enableTestingLibrary,
+      overrides,
     } = testOptions;
+    const enableJest = testingFramework === 'jest';
+    const enableVitest = testingFramework === 'vitest';
 
     if (enableJest) {
       configs.push(
         jest({
-          ...resolveSubOptions(testOptions, 'jest'),
+          overrides,
         }),
       );
     }
@@ -134,7 +136,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
       configs.push(
         vitest({
           typescript: Boolean(enableTypeScript),
-          ...resolveSubOptions(testOptions, 'vitest'),
+          ...overrides,
         }),
       );
     }
