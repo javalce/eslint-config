@@ -7,6 +7,7 @@ export type Awaitable<T> = T | Promise<T>;
 type RuleKeys =
   | '@angular-eslint'
   | '@angular-eslint/template'
+  | '@ngrx'
   | '@next/next'
   | '@stylistic'
   | '@typescript-eslint'
@@ -184,6 +185,14 @@ export interface OptionsAngular {
   };
 }
 
+export interface OptionsNgrx extends OptionsOverrides<'@ngrx'> {
+  store?: boolean;
+  effects?: boolean;
+  componentStore?: boolean;
+  operators?: boolean;
+  signals?: boolean;
+}
+
 export interface OptionsReact
   extends OptionsOverrides<'react' | 'react-hooks' | 'react-refresh' | 'jsx-a11y'> {}
 
@@ -270,6 +279,15 @@ export interface OptionsConfig extends OptionsEcmaVersion, OptionsProjectType {
    * @default false
    */
   angular?: boolean | OptionsAngular;
+  /**
+   * Enable NgRx support.
+   *
+   * Requires installing:
+   * - `@ngrx/eslint-plugin`
+   *
+   * @default false
+   */
+  ngrx?: OptionsNgrx;
   /**
    * Enable React support.
    *

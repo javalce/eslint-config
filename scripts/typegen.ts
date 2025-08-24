@@ -11,6 +11,7 @@ import { imports } from '../src/configs/imports';
 import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
+import { ngrx } from '../src/configs/ngrx';
 import { react } from '../src/configs/react';
 import { solid } from '../src/configs/solidjs';
 import { stylistic } from '../src/configs/stylistic';
@@ -38,6 +39,7 @@ const configs = (await combine(
   unicorn(),
   typescript(),
   angular(),
+  ngrx(),
   react(),
   nextjs(),
   astro(),

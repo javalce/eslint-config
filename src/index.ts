@@ -11,6 +11,7 @@ import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
 import { nextjs } from './configs/nextjs';
+import { ngrx } from './configs/ngrx';
 import { react } from './configs/react';
 import { solid } from './configs/solidjs';
 import { stylistic } from './configs/stylistic';
@@ -34,6 +35,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     ignores: ignoreFiles,
     typescript: enableTypeScript = isPackageExists('typescript'),
     angular: enableAngular,
+    ngrx: enableNgrx,
     react: enableReact,
     next: enableNext,
     astro: enableAstro,
@@ -68,6 +70,10 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
 
   if (enableAngular) {
     configs.push(angular(resolveSubOptions(options, 'angular')));
+  }
+
+  if (enableNgrx) {
+    configs.push(ngrx(resolveSubOptions(options, 'ngrx')));
   }
 
   if (enableReact) {
