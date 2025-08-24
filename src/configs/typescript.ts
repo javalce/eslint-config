@@ -1,9 +1,9 @@
-import { resolve } from 'node:path';
 import fs from 'node:fs';
+import { resolve } from 'node:path';
 
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 
-import { ASTRO_TS_FILES, TS_FILES, TSX_FILES } from '../constants';
+import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import { createTypescriptImportRules } from '../rules/typescript/import';
@@ -105,8 +105,8 @@ export async function typescript({
       },
     ].map((config) => ({
       ...config,
-      files: [TS_FILES, TSX_FILES],
-      ignores: ASTRO_TS_FILES,
+      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+      ignores: GLOB_ASTRO_TS_FILES,
     })) as TypedConfigItem[]),
   ];
 }

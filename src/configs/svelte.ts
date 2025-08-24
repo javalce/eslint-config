@@ -1,5 +1,5 @@
-import { SVELTE_FILES } from '../constants';
-import { type OptionsSvelte, type OptionsHasTypescript, type TypedConfigItem } from '../types';
+import { GLOB_SVELTE_FILES } from '../globs';
+import { type OptionsHasTypescript, type OptionsSvelte, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
 export async function svelte({
@@ -25,7 +25,7 @@ export async function svelte({
       },
     },
     {
-      files: [SVELTE_FILES],
+      files: [GLOB_SVELTE_FILES],
       languageOptions: {
         parser: svelteParser,
         parserOptions: {
@@ -40,7 +40,7 @@ export async function svelte({
     },
     {
       name: 'svelte/rules/overrides',
-      files: [SVELTE_FILES],
+      files: [GLOB_SVELTE_FILES],
       rules: {
         ...overrides,
       },

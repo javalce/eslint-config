@@ -1,6 +1,6 @@
 import type { OptionsHasTypescript, OptionsSolid, TypedConfigItem } from '../types';
 
-import { JSX_FILES, TSX_FILES } from '../constants';
+import { GLOB_JSX_FILES, GLOB_TSX_FILES } from '../globs';
 import { ensureInstalled, lazy } from '../utils';
 
 export async function solid({
@@ -19,7 +19,7 @@ export async function solid({
       },
     },
     {
-      files: [JSX_FILES, TSX_FILES],
+      files: [GLOB_JSX_FILES, GLOB_TSX_FILES],
       name: 'solid/rules',
       rules: {
         // reactivity
@@ -60,7 +60,7 @@ export async function solid({
     },
     {
       name: 'solid/rules/overrides',
-      files: [JSX_FILES, TSX_FILES],
+      files: [GLOB_JSX_FILES, GLOB_TSX_FILES],
       rules: {
         ...overrides,
       },

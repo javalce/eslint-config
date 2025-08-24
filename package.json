@@ -28,6 +28,16 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
+    },
+    "./globs": {
+      "import": {
+        "types": "./dist/globs.d.ts",
+        "default": "./dist/globs.js"
+      },
+      "require": {
+        "types": "./dist/globs.d.cts",
+        "default": "./dist/globs.cjs"
+      }
     }
   },
   "files": [

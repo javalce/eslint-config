@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import { type Linter } from 'eslint';
 
-import { JS_FILES, JSX_FILES, SRC_FILES } from '../constants';
+import { GLOB_JS_FILES, GLOB_JSX_FILES, GLOB_SRC_FILES } from '../globs';
 import { type OptionsNext, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
@@ -69,7 +69,7 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConf
       name: 'next/setup',
     },
     {
-      files: [JS_FILES, JSX_FILES],
+      files: [GLOB_JS_FILES, GLOB_JSX_FILES],
       languageOptions: {
         parser: babelParser,
         parserOptions: {
@@ -80,7 +80,7 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConf
       name: 'next/parser',
     },
     {
-      files: [SRC_FILES],
+      files: [GLOB_SRC_FILES],
       rules: {
         ...(nextjsPlugin.configs.recommended.rules as Linter.RulesRecord),
         ...(nextjsPlugin.configs['core-web-vitals'].rules as Linter.RulesRecord),
@@ -88,7 +88,7 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConf
       name: 'next/rules',
     },
     {
-      files: [SRC_FILES],
+      files: [GLOB_SRC_FILES],
       rules: {
         ...overrides,
       },

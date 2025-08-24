@@ -1,6 +1,6 @@
 import { isPackageExists } from 'local-pkg';
 
-import { SRC_FILES } from '../constants';
+import { GLOB_SRC_FILES } from '../globs';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { type OptionsReact, type TypedConfigItem } from '../types';
@@ -115,7 +115,7 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
       },
     ].map((config) => ({
       ...config,
-      files: [SRC_FILES],
+      files: [GLOB_SRC_FILES],
     })) as TypedConfigItem[]),
     ...(isUsingReactRouter
       ? ([

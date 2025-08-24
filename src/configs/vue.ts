@@ -1,6 +1,6 @@
 import type { OptionsHasTypescript, OptionsVue, TypedConfigItem } from '../types';
 
-import { VUE_FILES } from '../constants';
+import { GLOB_VUE_FILES } from '../globs';
 import { ensureInstalled, lazy } from '../utils';
 
 export async function vue({
@@ -42,7 +42,7 @@ export async function vue({
     },
     {
       name: 'vue/rules',
-      files: [VUE_FILES],
+      files: [GLOB_VUE_FILES],
       languageOptions: {
         parser: vueParser,
         parserOptions: {
@@ -198,7 +198,7 @@ export async function vue({
     },
     {
       name: 'vue/rules/overrides',
-      files: [VUE_FILES],
+      files: [GLOB_VUE_FILES],
       rules: {
         ...overrides,
       },

@@ -2,7 +2,7 @@ import type { OptionsImport, TypedConfigItem } from '../types';
 
 import eslintPluginImport from 'eslint-plugin-import-x';
 
-import { CONFIG_FILES } from '../constants';
+import { GLOB_CONFIG_FILES } from '../globs';
 import { createPathAliases } from '../utils';
 
 export function imports({ pathAliases, overrides }: OptionsImport = {}): TypedConfigItem[] {
@@ -116,7 +116,7 @@ export function imports({ pathAliases, overrides }: OptionsImport = {}): TypedCo
       },
     },
     {
-      files: CONFIG_FILES,
+      files: GLOB_CONFIG_FILES,
       rules: {
         'import-x/no-default-export': 'off',
       },

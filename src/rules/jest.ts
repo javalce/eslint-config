@@ -1,8 +1,8 @@
-import { TESTING_FILES } from '../constants';
+import { GLOB_TEST_FILES } from '../globs';
 import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
-  files: TESTING_FILES,
+  files: GLOB_TEST_FILES,
   name: 'jest/rules/stylistic',
   rules: {
     /**

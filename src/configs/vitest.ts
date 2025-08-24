@@ -1,6 +1,6 @@
-import { TESTING_FILES } from '../constants';
+import { GLOB_TEST_FILES } from '../globs';
 import eslintConfigVitest from '../rules/vitest';
-import { type OptionsVitest, type OptionsHasTypescript, type TypedConfigItem } from '../types';
+import { type OptionsHasTypescript, type OptionsVitest, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
 export async function vitest({
@@ -33,7 +33,7 @@ export async function vitest({
       name: 'vitest/setup',
     },
     {
-      files: TESTING_FILES,
+      files: GLOB_TEST_FILES,
       rules: {
         ...vitestPlugin.configs.recommended.rules,
       },
@@ -41,7 +41,7 @@ export async function vitest({
     },
     eslintConfigVitest,
     {
-      files: TESTING_FILES,
+      files: GLOB_TEST_FILES,
       rules: {
         ...overrides,
       },

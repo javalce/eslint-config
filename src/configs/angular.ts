@@ -1,6 +1,6 @@
 import { type Linter } from 'eslint';
 
-import { HTML_FILES, TS_FILES } from '../constants';
+import { GLOB_HTML_FILES, GLOB_TS_FILES } from '../globs';
 import { type OptionsAngular, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
 
@@ -31,7 +31,7 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
   function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
     return {
       name,
-      files: [TS_FILES],
+      files: [GLOB_TS_FILES],
       languageOptions: {
         parser: tseslint.parser as Linter.Parser,
         sourceType: 'module',
@@ -47,7 +47,7 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
   ): TypedConfigItem {
     return {
       name,
-      files: [HTML_FILES],
+      files: [GLOB_HTML_FILES],
       languageOptions: {
         parser: angularPlugin.templateParser as Linter.Parser,
       },

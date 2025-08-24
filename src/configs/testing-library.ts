@@ -1,6 +1,6 @@
 import type { OptionsTestingLibrary, TypedConfigItem } from '../types';
 
-import { TESTING_FILES } from '../constants';
+import { GLOB_TEST_FILES } from '../globs';
 import { ensureInstalled, lazy } from '../utils';
 
 export async function testingLibrary({
@@ -21,7 +21,7 @@ export async function testingLibrary({
 
   function makeConfig(name: 'angular' | 'react' | 'vue' | 'svelte'): TypedConfigItem {
     return {
-      files: TESTING_FILES,
+      files: GLOB_TEST_FILES,
       rules: {
         ...testingLibraryPlugin.configs[name].rules,
       },
@@ -41,7 +41,7 @@ export async function testingLibrary({
     svelte ? makeConfig('svelte') : {},
     vue ? makeConfig('vue') : {},
     {
-      files: TESTING_FILES,
+      files: GLOB_TEST_FILES,
       rules: {
         ...overrides,
       },

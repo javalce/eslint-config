@@ -1,6 +1,6 @@
 import globals from 'globals';
 
-import { TESTING_FILES, TS_TESTING_FILES } from '../constants';
+import { GLOB_TEST_FILES, GLOB_TS_TEST_FILES } from '../globs';
 import jestConfig from '../rules/jest';
 import { type OptionsJest, type TypedConfigItem } from '../types';
 import { ensureInstalled, lazy } from '../utils';
@@ -23,7 +23,7 @@ export async function jest({ overrides }: OptionsJest = {}): Promise<TypedConfig
       name: 'jest/setup',
     },
     {
-      files: TESTING_FILES,
+      files: GLOB_TEST_FILES,
       rules: {
         ...jestPlugin.configs['flat/recommended'].rules,
         ...jestPlugin.configs['flat/style'].rules,
@@ -34,7 +34,7 @@ export async function jest({ overrides }: OptionsJest = {}): Promise<TypedConfig
     // Prefer the Jest version of this rule. This silently fails when type
     // information is not available.
     {
-      files: TS_TESTING_FILES,
+      files: GLOB_TS_TEST_FILES,
       rules: {
         '@typescript-eslint/unbound-method': 'off',
         'jest/unbound-method': 'error',
@@ -42,7 +42,7 @@ export async function jest({ overrides }: OptionsJest = {}): Promise<TypedConfig
       name: 'jest/rules/unbound-method',
     },
     {
-      files: TESTING_FILES,
+      files: GLOB_TEST_FILES,
       rules: {
         ...overrides,
       },

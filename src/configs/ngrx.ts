@@ -1,4 +1,4 @@
-import { TS_FILES } from '../constants';
+import { GLOB_TS_FILES } from '../globs';
 import { type OptionsNgrx, type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
@@ -18,7 +18,7 @@ export async function ngrx({
   function makeConfig(name: keyof typeof ngrxConfig.configs): TypedConfigItem {
     return {
       name: `ngrx/${name}`,
-      files: [TS_FILES],
+      files: [GLOB_TS_FILES],
       rules: {
         ...ngrxConfig.configs[name].at(-1)?.rules,
       },
@@ -41,7 +41,7 @@ export async function ngrx({
     signals ? makeConfig('signals') : {},
     {
       name: 'ngrx/rules/overrides',
-      files: [TS_FILES],
+      files: [GLOB_TS_FILES],
       rules: {
         ...overrides,
       },
