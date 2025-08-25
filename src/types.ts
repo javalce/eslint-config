@@ -351,6 +351,10 @@ export interface OptionsConfig extends OptionsProjectType {
   /**
    * Enable testing framework support.
    *
+   * Requires installing:
+   * - `eslint-plugin-jest` (for Jest)
+   * - `@vitest/eslint-plugin` (for Vitest)
+   *
    * @default undefined
    */
   test?: OptionsTest;
