@@ -3,11 +3,11 @@ import { type OptionsNgrx, type TypedConfigItem } from '../types';
 import { lazy } from '../utils';
 
 export async function ngrx({
-  store,
-  effects,
-  componentStore,
-  operators,
-  signals,
+  store = false,
+  effects = false,
+  componentStore = false,
+  operators = false,
+  signals = false,
   overrides,
 }: OptionsNgrx = {}): Promise<TypedConfigItem[]> {
   const [ngrxPlugin, ngrxConfig] = await Promise.all([
@@ -15,17 +15,15 @@ export async function ngrx({
     lazy(import('@ngrx/eslint-plugin/v9')),
   ]);
 
-  function makeConfig(name: keyof typeof ngrxConfig.configs): TypedConfigItem {
-    return {
-      name: `ngrx/${name}`,
-      files: [GLOB_TS_FILES],
-      rules: {
-        ...ngrxConfig.configs[name].at(-1)?.rules,
-      },
-    };
-  }
+  const configs: Array<[keyof typeof ngrxConfig.configs, boolean]> = [
+    ['store', store],
+    ['effects', effects],
+    ['componentStore', componentStore],
+    ['operators', operators],
+    ['signals', signals],
+  ];
 
-  return [
+  const result: TypedConfigItem[] = [
     {
       name: 'ngrx/setup',
       plugins: {
@@ -34,11 +32,15 @@ export async function ngrx({
         },
       },
     },
-    store ? makeConfig('store') : {},
-    effects ? makeConfig('effects') : {},
-    componentStore ? makeConfig('componentStore') : {},
-    operators ? makeConfig('operators') : {},
-    signals ? makeConfig('signals') : {},
+    ...configs
+      .filter(([, enable]) => enable)
+      .map(([name]) => ({
+        name: `ngrx/${name}`,
+        files: [GLOB_TS_FILES],
+        rules: {
+          ...ngrxConfig.configs[name].at(-1)?.rules,
+        },
+      })),
     {
       name: 'ngrx/rules/overrides',
       files: [GLOB_TS_FILES],
@@ -47,4 +49,6 @@ export async function ngrx({
       },
     },
   ];
+
+  return result;
 }
