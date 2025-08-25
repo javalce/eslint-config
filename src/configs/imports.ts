@@ -123,7 +123,7 @@ export function imports({ pathAliases, overrides }: OptionsImport = {}): TypedCo
       name: 'import/rules/no-default-export',
     },
     {
-      name: 'import-x/rules/overrides',
+      name: 'import/rules/overrides',
       rules: {
         ...overrides,
       },
