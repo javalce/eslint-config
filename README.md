@@ -10,12 +10,13 @@ This configuration is opinionated and it may not fit your needs. You can extend 
   - [Installation](#installation)
   - [Basic Usage](#basic-usage)
   - [Configuration](#configuration)
-    - [Overriding rules](#overriding-rules)
+    - [Overriding rules and extended config](#overriding-rules-and-extended-config)
     - [Ignore files](#ignore-files)
     - [Custom path aliases](#custom-path-aliases)
     - [TypeScript](#typescript)
     - [Angular](#angular)
       - [Customizing selectors](#customizing-selectors)
+    - [NgRx](#ngrx)
     - [React](#react)
     - [Next.js](#nextjs)
     - [Svelte](#svelte)
@@ -26,7 +27,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
     - [Testing](#testing)
       - [Testing with Jest](#testing-with-jest)
       - [Testing with Vitest](#testing-with-vitest)
-      - [Testing + React or Vue](#testing--react-or-vue)
+      - [Testing Library](#testing-library)
 
 ## Features
 
@@ -38,7 +39,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 - Some rules can be auto-fixed with `eslint --fix`
 - Uses some stylistic rules to make your code more readable and consistent
 
-> [!WARNING]
+> [!IMPORTANT]
 > I like to use Prettier to format my code, so the enabled stylistic rules are the ones that Prettier doesn't format.
 >
 > If you want to use Prettier, you can use my personal config [@javalce/prettier-config](https://www.npmjs.com/package/@javalce/prettier-config).
@@ -67,7 +68,9 @@ By default it uses the ecmaVersion `2023`. If you want to use a different versio
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  ecmaVersion: 2021,
+  javascript: {
+    ecmaVersion: 2022,
+  },
 });
 ```
 
@@ -81,30 +84,37 @@ After you enable a framework, if you don't have the required ESLint plugins for 
 
 For more information about each configuration option, check the respective section.
 
-### Overriding rules
+### Overriding rules and extended config
 
-You can override the rules by passing an array of ESLint configurations to the `overrides` option.
+Some rules are only enabled when you enable specific framework configurations. For example, in TypeScript rules (see [TypeScript](#typescript) for more information) if you want to force functions and methods to have a return type, you can enable the `@typescript-eslint/explicit-function-return-type` rule:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  overrides: [
-    {
-      files: ['*.ts'],
-      rules: {
-        'no-undef': 'off',
-      },
+  typescript: {
+    overrides: {
+      '@typescript-eslint/explicit-function-return-type': 'error',
     },
-    {
-      files: ['*.js'],
-      rules: {
-        'no-undef': 'error',
-      },
-    },
+  },
+});
+```
+
+You can also extends the config by adding a plugin that it was not previously included in the preset:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+import { GLOBS_TS_FILES } from '@javalce/eslint-config/globs';
+import perfectionist from 'eslint-plugin-perfectionist'
+
+export default defineConfig({
+  extends: [
+    perfectionist.configs.['recommended-natural'],
   ],
 });
 ```
+
+This way we added a Perfectionist plugin configuration.
 
 ### Ignore files
 
@@ -240,6 +250,40 @@ export default defineConfig({
 
 This will set the prefix for both directives and components to `custom` and use the default styles and types.
 
+### NgRx
+
+NgRx is a Reactive State Management library for Angular applications and it provides an ESLint plugin to enforce best practices while using it.
+
+NgRx has rules for:
+
+- Store: RxJS powered global state management for Angular apps, inspired by Redux
+- Effects: Side effect model for @ngrx/store
+- ComponentStore: Standalone library for managing local/component state
+- Operators: Shared RxJS operators for NgRx libraries
+- Signals: Reactive store and set of utilities for Angular Signals
+
+To enable NgRx support, you need to install the `eslint-plugin-ngrx` package:
+
+```bash
+pnpm add --save-dev eslint-plugin-ngrx
+```
+
+Then enable the rules you want:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  ngrx: {
+    store: true,
+    effects: true,
+    componentStore: true,
+    operators: true,
+    signals: true,
+  },
+});
+```
+
 ### React
 
 To enable React support, you need to install the `eslint-plugin-react`, `eslint-plugin-react-hooks` and `eslint-plugin-jsx-a11y` packages:
@@ -369,7 +413,7 @@ Astro can be integrated with other frameworks like React, Vue, Svelte, Solidjs, 
 
 ### Testing
 
-To enable testing support, you must enable the `testing` option in the configuration. You can choose between `jest` or `vitest` and it will load the recommended rules for each testing library.
+To enable testing support, you must enable the `test` option in the configuration. You can choose between `jest` or `vitest` and it will load the recommended rules for each testing library.
 
 #### Testing with Jest
 
@@ -385,7 +429,9 @@ Then, update your ESLint configuration file to enable the Jest config:
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  testing: 'jest',
+  test: {
+    framework: 'jest',
+  },
 });
 ```
 
@@ -403,25 +449,35 @@ Then, update your ESLint configuration file to enable the Vitest config:
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  testing: 'vitest',
+  test: {
+    framework: 'vitest',
+  },
 });
 ```
 
-#### Testing + React or Vue
+#### Testing Library
 
-To enable testing with React or Vue, you only need to enable the respective config and the testing config and it will load the recommended rules for the `@testing-library` package.
+Testing Library helps you to test UI components, so to enable it you need to install the `eslint-plugin-testing-library` package:
+
+```bash
+pnpm add --save-dev eslint-plugin-testing-library
+```
+
+Then, enable the testing library:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  react: true, // or vue
-  testing: 'vitest', // or vitest
+  angular: true,
+  react: true,
+  vue: true,
+  svelte: true,
+  test: {
+    framework: 'vitest',
+    testingLibrary: true,
+  },
 });
 ```
 
-Also, you need to install the `eslint-plugin-testing-library` package:
-
-```bash
-pnpm add --save-dev eslint-plugin-testing-library
-```
+Testing Library will enable the recommended rules for the specific framework you are using.
