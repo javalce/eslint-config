@@ -1,3 +1,13 @@
+# [0.16.0](https://github.com/javalce/eslint-config/compare/v0.15.2...v0.16.0) (2025-08-25)
+
+### Features
+
+- add NgRx support to ESLint configuration ([a7033da](https://github.com/javalce/eslint-config/commit/a7033da12bea83be8e844fd5a2c836db3a24f1f7))
+- add support for angular and svelte options in testing library configuration ([d25487b](https://github.com/javalce/eslint-config/commit/d25487babf0e8603afbe28504b265c3e228ed2ec))
+- add support for rule overrides in ESLint configurations ([1748f70](https://github.com/javalce/eslint-config/commit/1748f70b8f94fd065bcd7c33d746923915da0df3))
+- add support for testing framework overrides in ESLint configuration ([81f58a6](https://github.com/javalce/eslint-config/commit/81f58a6a1f43ea6901f01ac62d7bb35f90d5046b))
+- drop commonjs compatibility ([07eec8f](https://github.com/javalce/eslint-config/commit/07eec8f98ec4d1bbee551af9cb023dbc608518f7))
+
 ## [0.15.2](https://github.com/javalce/eslint-config/compare/v0.15.1...v0.15.2) (2025-07-22)
 
 ### Bug Fixes
