@@ -1,3 +1,5 @@
+## [0.16.1](https://github.com/javalce/eslint-config/compare/v0.16.0...v0.16.1) (2025-08-25)
+
 # [0.16.0](https://github.com/javalce/eslint-config/compare/v0.15.2...v0.16.0) (2025-08-25)
 
 ### Features
