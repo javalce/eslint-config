@@ -52,7 +52,10 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     ignores({ files: ignoreFiles }),
     javascript(resolveSubOptions(options, 'javascript')),
     comments(resolveSubOptions(options, 'comments')),
-    imports(resolveSubOptions(options, 'import')),
+    imports({
+      typescript: Boolean(enableTypeScript),
+      ...resolveSubOptions(options, 'import'),
+    }),
     stylistic(resolveSubOptions(options, 'stylistic')),
     unicorn(resolveSubOptions(options, 'unicorn')),
   );

@@ -1,8 +1,6 @@
 import fs from 'node:fs';
 import { resolve } from 'node:path';
 
-import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
-
 import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
@@ -51,16 +49,7 @@ export async function typescript({
             project,
           },
         },
-        settings: {
-          'import-x/resolver-next': [
-            createTypeScriptImportResolver({
-              alwaysTryTypes: true,
-              bun: true,
-              project,
-            }),
-          ],
-        },
-        name: 'typescript/setup/project',
+        name: 'typescript/parser',
       },
       {
         ...tseslint.configs.eslintRecommended,

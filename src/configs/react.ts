@@ -22,14 +22,12 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
     'eslint-plugin-jsx-a11y',
   );
 
-  const [reactPlugin, reactHooksPlugin, reactRefreshPlugin, jsxA11yPlugin, eslintPluginImport] =
-    await Promise.all([
-      lazy(import('eslint-plugin-react')),
-      lazy(import('eslint-plugin-react-hooks')),
-      lazy(import('eslint-plugin-react-refresh')),
-      lazy(import('eslint-plugin-jsx-a11y')),
-      lazy(import('eslint-plugin-import-x')),
-    ]);
+  const [reactPlugin, reactHooksPlugin, reactRefreshPlugin, jsxA11yPlugin] = await Promise.all([
+    lazy(import('eslint-plugin-react')),
+    lazy(import('eslint-plugin-react-hooks')),
+    lazy(import('eslint-plugin-react-refresh')),
+    lazy(import('eslint-plugin-jsx-a11y')),
+  ]);
 
   const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
   const isUsingNextJs = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
@@ -45,11 +43,6 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
       name: 'react/setup',
     },
     ...([
-      {
-        settings: eslintPluginImport.flatConfigs.react.settings,
-        languageOptions: eslintPluginImport.flatConfigs.react.languageOptions,
-        name: 'react/import',
-      },
       {
         settings: {
           react: {
