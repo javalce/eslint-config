@@ -21,7 +21,10 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://typescript-eslint.io/rules/no-empty-object-type/
      */
-    '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'always' }],
+    '@typescript-eslint/no-empty-object-type': [
+      'error',
+      { allowInterfaces: 'with-single-extends' },
+    ],
     /**
      * Disallow creation of functions within loops.
      *
