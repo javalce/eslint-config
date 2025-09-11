@@ -10,7 +10,7 @@ export const GLOB_SVELTE_FILES = '**/*.svelte';
 
 export const GLOB_VUE_FILES = '**/*.vue';
 
-export const GLOB_ASTRO_FILES = '**/*.astro';
+export const GLOB_ASTRO_FILES = ['*.astro', '**/*.astro'];
 
 export const GLOB_ASTRO_JS_FILES = ['**/*.astro/*.js', '*.astro/*.js'];
 

@@ -1,5 +1,3 @@
-import type { Linter } from 'eslint';
-
 import globals from 'globals';
 
 import { GLOB_ASTRO_FILES, GLOB_ASTRO_JS_FILES, GLOB_ASTRO_TS_FILES } from '../globs';
@@ -33,9 +31,12 @@ export async function astro({
     },
     {
       name: 'astro/base',
-      files: [GLOB_ASTRO_FILES],
+      files: [...GLOB_ASTRO_FILES],
       languageOptions: {
-        globals: pluginAstro.environments.astro.globals,
+        globals: {
+          ...globals.node,
+          ...pluginAstro.environments.astro.globals,
+        },
         parser: parserAstro,
         sourceType: 'module',
         parserOptions: {
@@ -62,7 +63,7 @@ export async function astro({
         globals: {
           ...globals.browser,
         },
-        parser: tseslint.parser as Linter.Parser,
+        parser: typescript ? tseslint.parser : undefined,
         sourceType: 'module',
         parserOptions: {
           project: null,
@@ -71,7 +72,7 @@ export async function astro({
     },
     {
       name: 'astro/recommended',
-      files: [GLOB_ASTRO_FILES],
+      files: [...GLOB_ASTRO_FILES],
       rules: {
         'astro/missing-client-only-directive-value': 'error',
         'astro/no-conflict-set-directives': 'error',
@@ -85,12 +86,12 @@ export async function astro({
     },
     {
       name: 'astro/jsx-a11y-recommended',
-      files: [GLOB_ASTRO_FILES],
+      files: [...GLOB_ASTRO_FILES],
       ...astroJsxA11yConfig,
     },
     {
       name: 'astro/rules/overrides',
-      files: [GLOB_ASTRO_FILES],
+      files: [...GLOB_ASTRO_FILES],
       rules: {
         ...overrides,
       },
