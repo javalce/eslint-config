@@ -32,7 +32,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm typegen && tsup",
+    "build": "pnpm typegen && tsdown",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -t v -p angular",
     "dev": "npx @eslint/config-inspector --config eslint.config.ts",
     "format": "prettier --write .",
@@ -81,7 +81,7 @@
     "lint-staged": "^16.1.6",
     "prettier": "^3.6.2",
     "svelte": "^5.38.10",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.15.0",
     "tsx": "^4.20.5",
     "typescript": "5.9.2"
   },
