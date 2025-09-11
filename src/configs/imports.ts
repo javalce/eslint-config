@@ -1,18 +1,22 @@
-import type { OptionsHasTypescript, OptionsImport, TypedConfigItem } from '../types';
-
-import path from 'node:path';
+import type {
+  OptionsHasTypescript,
+  OptionsImport,
+  OptionsTsconfigPath,
+  TypedConfigItem,
+} from '../types';
 
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver, importX } from 'eslint-plugin-import-x';
 
 import { GLOB_CONFIG_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
-import { createPathAliases } from '../utils';
+import { createPathAliases, resolveRelativePath, resolveTsconfig } from '../utils';
 
 export function imports({
   typescript,
+  tsconfigPath,
   pathAliases,
   overrides,
-}: OptionsHasTypescript & OptionsImport = {}): TypedConfigItem[] {
+}: OptionsHasTypescript & OptionsTsconfigPath & OptionsImport = {}): TypedConfigItem[] {
   const customPathAliases = createPathAliases({ pathAliases });
 
   return [
@@ -31,7 +35,7 @@ export function imports({
                 createTypeScriptImportResolver({
                   alwaysTryTypes: true,
                   bun: true,
-                  project: path.join(process.cwd(), 'tsconfig.json'),
+                  project: resolveRelativePath(resolveTsconfig(tsconfigPath)),
                 }),
               ]
             : []),
@@ -39,6 +43,26 @@ export function imports({
         ],
       },
     },
+    {
+      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+      settings: {
+        ...importX.flatConfigs.typescript.settings,
+      },
+      rules: {
+        ...importX.flatConfigs.typescript.rules,
+      },
+      name: 'import/typescript',
+    },
+    {
+      files: [GLOB_SRC_FILES],
+      settings: {
+        ...importX.flatConfigs.react.settings,
+      },
+      languageOptions: {
+        ...importX.flatConfigs.react.languageOptions,
+      },
+      name: 'import/jsx',
+    } as TypedConfigItem,
     {
       name: 'import/rules',
       rules: {
@@ -134,26 +158,6 @@ export function imports({
         ],
       },
     },
-    {
-      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
-      settings: {
-        ...importX.flatConfigs.typescript.settings,
-      },
-      rules: {
-        ...importX.flatConfigs.typescript.rules,
-      },
-      name: 'import/typescript',
-    },
-    {
-      files: [GLOB_SRC_FILES],
-      settings: {
-        ...importX.flatConfigs.react.settings,
-      },
-      languageOptions: {
-        ...importX.flatConfigs.react.languageOptions,
-      },
-      name: 'import/jsx',
-    } as TypedConfigItem,
     {
       files: GLOB_CONFIG_FILES,
       rules: {

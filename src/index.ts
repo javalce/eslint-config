@@ -48,12 +48,17 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
 
   const configs: Array<Awaitable<TypedConfigItem[]>> = [];
 
+  const typescriptOptions = resolveSubOptions(options, 'typescript');
+  const tsconfigPath =
+    'tsconfigPath' in typescriptOptions ? typescriptOptions.tsconfigPath : undefined;
+
   configs.push(
     ignores({ files: ignoreFiles }),
     javascript(resolveSubOptions(options, 'javascript')),
     comments(resolveSubOptions(options, 'comments')),
     imports({
       typescript: Boolean(enableTypeScript),
+      tsconfigPath,
       ...resolveSubOptions(options, 'import'),
     }),
     stylistic(resolveSubOptions(options, 'stylistic')),
@@ -65,7 +70,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
       typescript({
         pathAliases: options.import?.pathAliases,
         type: projectType,
-        ...resolveSubOptions(options, 'typescript'),
+        ...typescriptOptions,
       }),
     );
   }
@@ -87,11 +92,9 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (enableAstro) {
-    const newLocal = Boolean(enableTypeScript);
-
     configs.push(
       astro({
-        typescript: newLocal,
+        typescript: Boolean(enableTypeScript),
         ...resolveSubOptions(options, 'astro'),
       }),
     );
@@ -176,5 +179,5 @@ type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
 function resolveSubOptions<T, K extends keyof T>(options: T, key: K): ResolvedOptions<T[K]> {
   return typeof options[key] === 'boolean'
     ? ({} as ResolvedOptions<T[K]>)
-    : (options[key] as ResolvedOptions<T[K]>);
+    : ((options[key] ?? {}) as ResolvedOptions<T[K]>);
 }

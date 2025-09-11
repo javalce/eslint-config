@@ -75,6 +75,6 @@ export function resolveTsconfig(path?: string): string {
   return 'tsconfig.json';
 }
 
-export function normalizePath(path: string): string {
-  return resolve(process.cwd(), path);
+export function resolveRelativePath(relativePath: string): string {
+  return resolve(process.cwd(), relativePath);
 }
