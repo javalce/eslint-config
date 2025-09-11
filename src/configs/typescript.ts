@@ -1,6 +1,3 @@
-import fs from 'node:fs';
-import { resolve } from 'node:path';
-
 import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
@@ -12,7 +9,7 @@ import {
   type OptionsTypescript,
   type TypedConfigItem,
 } from '../types';
-import { lazy, normalizeStringArray } from '../utils';
+import { lazy, resolveTsconfig } from '../utils';
 
 export async function typescript({
   pathAliases,
@@ -20,44 +17,43 @@ export async function typescript({
   type,
   overrides,
 }: OptionsImport & OptionsTypescript & OptionsProjectType = {}): Promise<TypedConfigItem[]> {
-  const project = (() => {
-    if (tsconfigPath) {
-      return normalizeStringArray(tsconfigPath, resolveTsconfigPath);
-    }
+  const [tseslint] = await Promise.all([lazy(import('typescript-eslint'))]);
 
-    if (fs.existsSync('tsconfig.eslint.json')) {
-      return resolveTsconfigPath('tsconfig.eslint.json');
-    }
-
-    return resolveTsconfigPath('tsconfig.json');
-  })();
-
-  const [tseslint, importPlugin] = await Promise.all([
-    lazy(import('typescript-eslint')),
-    lazy(import('eslint-plugin-import-x')),
-  ]);
+  function makeParser(types: boolean, files: string[], ignores?: string[]): TypedConfigItem {
+    return {
+      files,
+      ...(ignores ? { ignores } : {}),
+      languageOptions: {
+        parser: tseslint.parser,
+        parserOptions: {
+          sourceType: 'module',
+          ...(types
+            ? {
+                projectService: {
+                  allowDefaultProject: ['./*.js'],
+                  defaultProject: resolveTsconfig(tsconfigPath),
+                },
+              }
+            : {}),
+        },
+      },
+      name: `typescript/${types ? 'parser/types' : 'parser'}`,
+    };
+  }
 
   return [
     {
-      ...(tseslint.configs.base as TypedConfigItem),
+      plugins: {
+        '@typescript-eslint': tseslint.plugin,
+      },
       name: 'typescript/setup',
     },
+    makeParser(false, [GLOB_TS_FILES, GLOB_TSX_FILES]),
+    makeParser(true, [GLOB_TS_FILES, GLOB_TSX_FILES], GLOB_ASTRO_TS_FILES),
     ...([
       {
-        languageOptions: {
-          parserOptions: {
-            project,
-          },
-        },
-        name: 'typescript/parser',
-      },
-      {
         ...tseslint.configs.eslintRecommended,
-        name: 'typescript/rules/recommended',
-      },
-      {
-        ...tseslint.configs.recommendedTypeChecked.at(-1),
-        name: 'typescript/rules/recommended-type-checked',
+        name: 'typescript/rules/eslint-recommended',
       },
       {
         ...tseslint.configs.strictTypeChecked.at(-1),
@@ -81,10 +77,6 @@ export async function typescript({
             },
           ]
         : []),
-      {
-        ...importPlugin.configs.typescript,
-        name: 'typescript/import/setup',
-      },
       createTypescriptImportRules({ pathAliases }),
       {
         name: 'typescript/rules/overrides',
@@ -98,8 +90,4 @@ export async function typescript({
       ignores: GLOB_ASTRO_TS_FILES,
     })) as TypedConfigItem[]),
   ];
-}
-
-function resolveTsconfigPath(tsconfigPath: string): string {
-  return resolve(process.cwd(), tsconfigPath);
 }

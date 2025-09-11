@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import { resolve } from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
@@ -63,4 +65,16 @@ export function createPathAliases({ pathAliases }: OptionsPathAliases): string[]
   const merged = ['@/**', '~/**', ...normalizeStringArray(pathAliases ?? [])];
 
   return Array.from(new Set(merged));
+}
+
+export function resolveTsconfig(path?: string): string {
+  if (path !== undefined) return path;
+
+  if (fs.existsSync('tsconfig.eslint.json')) return 'tsconfig.eslint.json';
+
+  return 'tsconfig.json';
+}
+
+export function normalizePath(path: string): string {
+  return resolve(process.cwd(), path);
 }

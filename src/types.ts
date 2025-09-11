@@ -131,15 +131,18 @@ export interface OptionsPathAliases {
 
 export interface OptionsImport extends OptionsPathAliases, OptionsOverrides<'import-x'> {}
 
-export interface OptionsTypescript {
+export interface OptionsTsconfigPath {
   /**
    * Provides the path(s) to the TypeScript configuration file(s) for type linting
    *
    * @see https://typescript-eslint.io/linting/typed-linting/
    */
-  tsconfigPath?: string | string[];
-  overrides?: ExtractRules<'@typescript-eslint'>;
+  tsconfigPath?: string;
 }
+
+export interface OptionsTypescript
+  extends OptionsTsconfigPath,
+    OptionsOverrides<'@typescript-eslint'> {}
 
 export interface OptionsHasTypescript {
   typescript?: boolean;
