@@ -1,24 +1,24 @@
+import tseslint from 'typescript-eslint';
+
 import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import { createTypescriptImportRules } from '../rules/typescript/import';
 import eslintStylisticConfig from '../rules/typescript/stylistic';
 import {
-  type OptionsImport,
+  type OptionsPathAliases,
   type OptionsProjectType,
   type OptionsTypescript,
   type TypedConfigItem,
 } from '../types';
-import { lazy, resolveTsconfig } from '../utils';
+import { resolveTsconfig } from '../utils';
 
-export async function typescript({
+export function typescript({
   pathAliases,
   tsconfigPath,
   type,
   overrides,
-}: OptionsImport & OptionsTypescript & OptionsProjectType = {}): Promise<TypedConfigItem[]> {
-  const [tseslint] = await Promise.all([lazy(import('typescript-eslint'))]);
-
+}: OptionsPathAliases & OptionsTypescript & OptionsProjectType = {}): TypedConfigItem[] {
   function makeParser(types: boolean, files: string[], ignores?: string[]): TypedConfigItem {
     return {
       files,

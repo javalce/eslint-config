@@ -3,26 +3,20 @@ import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import { type Linter } from 'eslint';
+import babelParser from '@babel/eslint-parser';
+import nextjsPlugin from '@next/eslint-plugin-next';
 
 import { GLOB_JS_FILES, GLOB_JSX_FILES, GLOB_SRC_FILES } from '../globs';
 import { type OptionsNext, type TypedConfigItem } from '../types';
-import { ensureInstalled, lazy } from '../utils';
 
 const require = createRequire(process.cwd());
 
-export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConfigItem[]> {
-  ensureInstalled('@next/eslint-plugin-next');
-
+export function nextjs({ overrides }: OptionsNext = {}): TypedConfigItem[] {
   const rootPath = process.cwd();
 
   const isAppDir =
     fs.existsSync(path.resolve(rootPath, 'src', 'app')) ||
     fs.existsSync(path.resolve(rootPath, 'app'));
-
-  const [nextjsPlugin, babelParser] = await Promise.all([
-    lazy(import('@next/eslint-plugin-next')),
-    lazy(import('@babel/eslint-parser')),
-  ]);
 
   const babelOptions = {
     presets: (() => {

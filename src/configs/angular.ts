@@ -1,12 +1,11 @@
+import angularEslint from 'angular-eslint';
 import { type Linter } from 'eslint';
+import { parser as tsParser } from 'typescript-eslint';
 
 import { GLOB_HTML_FILES, GLOB_TS_FILES } from '../globs';
 import { type OptionsAngular, type TypedConfigItem } from '../types';
-import { ensureInstalled, lazy } from '../utils';
 
-export async function angular(options: OptionsAngular = {}): Promise<TypedConfigItem[]> {
-  ensureInstalled('angular-eslint');
-
+export function angular(options: OptionsAngular = {}): TypedConfigItem[] {
   const selector = options.selector ?? 'app';
   const directive: OptionsAngular['directive'] = {
     type: 'attribute',
@@ -23,20 +22,15 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
   const overridesTypescript = options.overrides?.typescript;
   const overridesTemplate = options.overrides?.template;
 
-  const [angularPlugin, tseslint] = await Promise.all([
-    lazy(import('angular-eslint')),
-    lazy(import('typescript-eslint')),
-  ]);
-
   function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
     return {
       name,
       files: [GLOB_TS_FILES],
       languageOptions: {
-        parser: tseslint.parser as Linter.Parser,
+        parser: tsParser,
         sourceType: 'module',
       },
-      processor: angularPlugin.processInlineTemplates,
+      processor: angularEslint.processInlineTemplates,
       rules,
     };
   }
@@ -49,7 +43,7 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
       name,
       files: [GLOB_HTML_FILES],
       languageOptions: {
-        parser: angularPlugin.templateParser as Linter.Parser,
+        parser: angularEslint.templateParser as Linter.Parser,
       },
       rules,
     };
@@ -59,12 +53,12 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
     {
       name: 'angular/setup',
       plugins: {
-        '@angular-eslint': angularPlugin.tsPlugin,
-        '@angular-eslint/template': angularPlugin.templatePlugin,
+        '@angular-eslint': angularEslint.tsPlugin,
+        '@angular-eslint/template': angularEslint.templatePlugin,
       },
     },
     createAngularConfig('angular/typescript/rules', {
-      ...angularPlugin.configs.tsRecommended
+      ...angularEslint.configs.tsRecommended
         .map((i) => i.rules)
         .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
       '@angular-eslint/directive-selector': ['error', directive],
@@ -72,10 +66,10 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
     }),
     createAngularConfig('angular/typescript/rules/overrides', { ...overridesTypescript }),
     createAngularTemplateConfig('angular/template/rules', {
-      ...angularPlugin.configs.templateRecommended
+      ...angularEslint.configs.templateRecommended
         .map((i) => i.rules)
         .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
-      ...angularPlugin.configs.templateAccessibility
+      ...angularEslint.configs.templateAccessibility
         .map((i) => i.rules)
         .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
       ...overridesTemplate,

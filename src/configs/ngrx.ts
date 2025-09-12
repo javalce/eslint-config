@@ -1,20 +1,17 @@
+import ngrxPlugin from '@ngrx/eslint-plugin';
+import ngrxConfig from '@ngrx/eslint-plugin/v9';
+
 import { GLOB_TS_FILES } from '../globs';
 import { type OptionsNgrx, type TypedConfigItem } from '../types';
-import { lazy } from '../utils';
 
-export async function ngrx({
+export function ngrx({
   store = false,
   effects = false,
   componentStore = false,
   operators = false,
   signals = false,
   overrides,
-}: OptionsNgrx = {}): Promise<TypedConfigItem[]> {
-  const [ngrxPlugin, ngrxConfig] = await Promise.all([
-    lazy(import('@ngrx/eslint-plugin')),
-    lazy(import('@ngrx/eslint-plugin/v9')),
-  ]);
-
+}: OptionsNgrx = {}): TypedConfigItem[] {
   const configs: Array<[keyof typeof ngrxConfig.configs, boolean]> = [
     ['store', store],
     ['effects', effects],

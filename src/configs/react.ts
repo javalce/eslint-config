@@ -1,10 +1,13 @@
 import { isPackageExists } from 'local-pkg';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 
 import { GLOB_SRC_FILES } from '../globs';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { type OptionsReact, type TypedConfigItem } from '../types';
-import { ensureInstalled, lazy } from '../utils';
 
 const REACT_ROUTER_PACKAGES = [
   '@react-router/node',
@@ -14,21 +17,7 @@ const REACT_ROUTER_PACKAGES = [
 ];
 const NEXT_PACKAGES = ['next'];
 
-export async function react({ overrides }: OptionsReact = {}): Promise<TypedConfigItem[]> {
-  ensureInstalled(
-    'eslint-plugin-react',
-    'eslint-plugin-react-hooks',
-    'eslint-plugin-react-refresh',
-    'eslint-plugin-jsx-a11y',
-  );
-
-  const [reactPlugin, reactHooksPlugin, reactRefreshPlugin, jsxA11yPlugin] = await Promise.all([
-    lazy(import('eslint-plugin-react')),
-    lazy(import('eslint-plugin-react-hooks')),
-    lazy(import('eslint-plugin-react-refresh')),
-    lazy(import('eslint-plugin-jsx-a11y')),
-  ]);
-
+export function react({ overrides }: OptionsReact = {}): TypedConfigItem[] {
   const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
   const isUsingNextJs = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
 

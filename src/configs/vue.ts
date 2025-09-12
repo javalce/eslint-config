@@ -1,20 +1,16 @@
 import type { OptionsHasTypescript, OptionsVue, TypedConfigItem } from '../types';
 
-import { GLOB_VUE_FILES } from '../globs';
-import { ensureInstalled, lazy } from '../utils';
+import pluginVue from 'eslint-plugin-vue';
+import tseslint from 'typescript-eslint';
+import vueParser from 'vue-eslint-parser';
 
-export async function vue({
+import { GLOB_VUE_FILES } from '../globs';
+
+export function vue({
   typescript,
   version = 3,
   overrides,
-}: OptionsHasTypescript & OptionsVue = {}): Promise<TypedConfigItem[]> {
-  ensureInstalled('eslint-plugin-vue', 'vue-eslint-parser');
-
-  const [pluginVue, vueParser] = await Promise.all([
-    lazy(import('eslint-plugin-vue')),
-    lazy(import('vue-eslint-parser')),
-  ]);
-
+}: OptionsHasTypescript & OptionsVue = {}): TypedConfigItem[] {
   return [
     {
       name: 'vue/setup',
@@ -50,7 +46,7 @@ export async function vue({
             jsx: true,
           },
           extraFileExtensions: ['.vue'],
-          parser: typescript ? (await lazy(import('typescript-eslint'))).parser : null,
+          parser: typescript ? tseslint.parser : null,
           sourceType: 'module',
         },
       },

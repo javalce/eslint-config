@@ -1,16 +1,13 @@
+import vitestPlugin from '@vitest/eslint-plugin';
+
 import { GLOB_TEST_FILES } from '../globs';
 import eslintConfigVitest from '../rules/vitest';
 import { type OptionsHasTypescript, type OptionsVitest, type TypedConfigItem } from '../types';
-import { ensureInstalled, lazy } from '../utils';
 
-export async function vitest({
+export function vitest({
   typescript,
   overrides,
-}: OptionsHasTypescript & OptionsVitest = {}): Promise<TypedConfigItem[]> {
-  ensureInstalled('@vitest/eslint-plugin');
-
-  const vitestPlugin = await lazy(import('@vitest/eslint-plugin'));
-
+}: OptionsHasTypescript & OptionsVitest = {}): TypedConfigItem[] {
   return [
     {
       plugins: {

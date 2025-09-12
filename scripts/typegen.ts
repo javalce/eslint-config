@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 
-import { type Linter } from 'eslint';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
+import { type Linter } from 'eslint';
 
 import { angular } from '../src/configs/angular';
 import { astro } from '../src/configs/astro';
@@ -21,9 +21,13 @@ import { typescript } from '../src/configs/typescript';
 import { unicorn } from '../src/configs/unicorn';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
-import { combine } from '../src/utils';
+import { type TypedConfigItem } from '../src/types';
 
-const configs = (await combine(
+function combine(...configs: Array<TypedConfigItem | TypedConfigItem[]>): TypedConfigItem[] {
+  return configs.flat();
+}
+
+const configs = combine(
   {
     plugins: {
       '': {
@@ -48,18 +52,16 @@ const configs = (await combine(
   vue(),
   jest(),
   vitest(),
-  testingLibrary(),
-)) as Linter.Config[];
+  testingLibrary({
+    angular: true,
+    react: true,
+    svelte: true,
+    vue: true,
+  }),
+) as Linter.Config[];
 
-const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
-
-let dts = await flatConfigsToRulesDTS(configs, {
+const dts = await flatConfigsToRulesDTS(configs, {
   includeAugmentation: false,
 });
-
-dts += `
-// Names of all the configs
-export type ConfigNames = ${configNames.map((i) => `'${i}'`).join(' | ')}
-`;
 
 await fs.writeFile('src/typegen.d.ts', dts);

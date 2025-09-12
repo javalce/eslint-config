@@ -1,8 +1,6 @@
 import { type Linter } from 'eslint';
 
-import { type ConfigNames, type RuleOptions } from './typegen';
-
-export type Awaitable<T> = T | Promise<T>;
+import { type RuleOptions } from './typegen';
 
 type RuleKeys =
   | '@angular-eslint'
@@ -65,8 +63,6 @@ type ExtractRules<Prefix extends RuleKeys, AllRules extends RuleOptions = RuleOp
 };
 
 interface Rules extends RuleOptions {}
-
-export type { ConfigNames };
 
 export type EcmaVersion =
   | 5
