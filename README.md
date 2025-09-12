@@ -205,7 +205,24 @@ This enables the recommended rules for Angular and its template parser.
 
 #### Customizing selectors
 
-You can customize Angular component and directive selectors using the `angular` option as an object:
+The eslint plugin for Angular provides two rules to enforce a consistent style for Angular component and directive selectors: `@angular-eslint/directive-selector` and `@angular-eslint/component-selector`.
+
+By default, the configuration enforces the use of `app` as the prefix for both Angular component and directive selectors. It also recommends using an `attribute` selector type with `camelCase` style for directives, and an `element` selector type with `kebab-case` style for components.
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  angular: true,
+});
+```
+
+This will enforce the following conventions:
+
+- Directives: `<div appMyDirective></div>` (attribute selector, camelCase style)
+- Components: `<app-my-component></app-my-component>` (element selector, kebab-case style)
+
+If you want to use a different prefix, selector type, or style, you can customize it using the `angular` option.
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
@@ -214,29 +231,22 @@ export default defineConfig({
   angular: {
     directive: {
       type: 'attribute',
-      prefix: 'custom',
+      prefix: 'ng',
       style: 'camelCase',
     },
     component: {
       type: 'element',
-      prefix: 'custom',
+      prefix: 'ng',
       style: 'kebab-case',
     },
   },
 });
 ```
 
-If not specified, the default prefix is `app` and the recommended styles are `camelCase` for directives and `kebab-case` for components.
+This will enforce the following conventions:
 
-```js
-export default defineConfig({
-  angular: {
-    selector: 'custom',
-  },
-});
-```
-
-This will set the prefix for both directives and components to `custom` and use the default styles and types.
+- Directives: `<div ngMyDirective></div>` (attribute selector, camelCase style)
+- Components: `<ng-my-component></ng-my-component>` (element selector, kebab-case style)
 
 ### NgRx
 
