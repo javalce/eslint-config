@@ -1,4 +1,11 @@
-import type { Awaitable, ConfigNames, OptionsConfig, TypedConfigItem } from './types';
+import type {
+  Awaitable,
+  ConfigNames,
+  OptionsConfig,
+  OptionsPathAliases,
+  OptionsTsconfigPath,
+  TypedConfigItem,
+} from './types';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
@@ -30,117 +37,130 @@ import { vue } from './configs/vue';
  * @returns {Promise<TypedConfigItem[]>} ESLint configuration ready to be used.
  */
 export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
-  const {
-    ignores: ignoreFiles,
-    typescript: enableTypeScript = isPackageExists('typescript'),
-    angular: enableAngular,
-    ngrx: enableNgrx,
-    react: enableReact,
-    next: enableNext,
-    astro: enableAstro,
-    svelte: enableSvelte,
-    solid: enableSolid,
-    vue: enableVue,
-    test: enableTesting,
-    type: projectType = 'app',
-    extends: additionalConfig = [],
-  } = options;
-
   const configs: Array<Awaitable<TypedConfigItem[]>> = [];
 
-  const typescriptOptions = resolveSubOptions(options, 'typescript');
-  const tsconfigPath =
-    'tsconfigPath' in typescriptOptions ? typescriptOptions.tsconfigPath : undefined;
+  const projectType = options.type ?? 'app';
+
+  const tsconfigPath = (resolveSubOptions(options, 'typescript') as OptionsTsconfigPath | undefined)
+    ?.tsconfigPath;
+  const pathAliases = (resolveSubOptions(options, 'import') as OptionsPathAliases | undefined)
+    ?.pathAliases;
+
+  const tsEnabled = isEnabled(options, 'typescript', isPackageExists('typescript'));
+  const angularEnabled = isEnabled(options, 'angular');
+  const ngrxEnabled = isEnabled(options, 'ngrx');
+  const reactEnabled = isEnabled(options, 'react');
+  const nextEnabled = isEnabled(options, 'next');
+  const vueEnabled = isEnabled(options, 'vue');
+  const svelteEnabled = isEnabled(options, 'svelte');
+  const solidEnabled = isEnabled(options, 'solid');
+  const astroEnabled = isEnabled(options, 'astro');
+  const testEnabled = isEnabled(options, 'test');
 
   configs.push(
-    ignores({ files: ignoreFiles }),
+    ignores({ files: options.ignores }),
     javascript(resolveSubOptions(options, 'javascript')),
     comments(resolveSubOptions(options, 'comments')),
     imports({
-      typescript: Boolean(enableTypeScript),
-      tsconfigPath,
       ...resolveSubOptions(options, 'import'),
+      typescript: tsEnabled,
+      tsconfigPath,
     }),
     stylistic(resolveSubOptions(options, 'stylistic')),
     unicorn(resolveSubOptions(options, 'unicorn')),
   );
 
-  if (enableTypeScript) {
+  if (tsEnabled) {
     configs.push(
       typescript({
-        pathAliases: options.import?.pathAliases,
+        ...resolveSubOptions(options, 'typescript'),
+        pathAliases,
         type: projectType,
-        ...typescriptOptions,
       }),
     );
   }
 
-  if (enableAngular) {
-    configs.push(angular(resolveSubOptions(options, 'angular')));
+  if (angularEnabled) {
+    configs.push(
+      angular({
+        ...resolveSubOptions(options, 'angular'),
+      }),
+    );
   }
 
-  if (enableNgrx) {
-    configs.push(ngrx(resolveSubOptions(options, 'ngrx')));
+  if (ngrxEnabled) {
+    configs.push(
+      ngrx({
+        ...resolveSubOptions(options, 'ngrx'),
+      }),
+    );
   }
 
-  if (enableReact) {
-    configs.push(react(resolveSubOptions(options, 'react')));
+  if (reactEnabled) {
+    configs.push(
+      react({
+        ...resolveSubOptions(options, 'react'),
+      }),
+    );
   }
 
-  if (enableNext) {
-    configs.push(nextjs(resolveSubOptions(options, 'next')));
+  if (nextEnabled) {
+    configs.push(
+      nextjs({
+        ...resolveSubOptions(options, 'next'),
+      }),
+    );
   }
 
-  if (enableAstro) {
+  if (astroEnabled) {
     configs.push(
       astro({
-        typescript: Boolean(enableTypeScript),
+        typescript: tsEnabled,
         ...resolveSubOptions(options, 'astro'),
       }),
     );
   }
 
-  if (enableSvelte) {
+  if (svelteEnabled) {
     configs.push(
       svelte({
-        typescript: Boolean(enableTypeScript),
         ...resolveSubOptions(options, 'svelte'),
+        typescript: tsEnabled,
       }),
     );
   }
 
-  if (enableSolid) {
+  if (solidEnabled) {
     configs.push(
       solid({
-        typescript: Boolean(enableTypeScript),
         ...resolveSubOptions(options, 'solid'),
+        typescript: tsEnabled,
       }),
     );
   }
 
-  if (enableVue) {
+  if (vueEnabled) {
     configs.push(
       vue({
-        typescript: Boolean(enableTypeScript),
         ...resolveSubOptions(options, 'vue'),
+        typescript: tsEnabled,
       }),
     );
   }
 
-  if (enableTesting) {
+  if (testEnabled) {
     const testOptions = resolveSubOptions(options, 'test');
-    const {
-      framework: testingFramework,
-      testingLibrary: enableTestingLibrary,
-      overrides,
-    } = testOptions;
+
+    const testingFramework = testOptions.framework;
     const enableJest = testingFramework === 'jest';
     const enableVitest = testingFramework === 'vitest';
+
+    const testingLibraryEnabled = Boolean(testOptions.testingLibrary);
 
     if (enableJest) {
       configs.push(
         jest({
-          overrides,
+          overrides: testOptions.overrides,
         }),
       );
     }
@@ -148,30 +168,30 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     if (enableVitest) {
       configs.push(
         vitest({
-          typescript: Boolean(enableTypeScript),
-          ...overrides,
+          typescript: tsEnabled,
+          overrides: testOptions.overrides,
         }),
       );
     }
 
-    if (enableTestingLibrary) {
+    if (testingLibraryEnabled) {
       configs.push(
         testingLibrary({
-          angular: Boolean(enableAngular),
-          react: Boolean(enableReact),
-          svelte: Boolean(enableSvelte),
-          vue: Boolean(enableVue),
           ...resolveSubOptions(testOptions, 'testingLibrary'),
+          angular: angularEnabled,
+          react: reactEnabled,
+          svelte: svelteEnabled,
+          vue: vueEnabled,
         }),
       );
     }
   }
 
-  let composer = new FlatConfigComposer<TypedConfigItem, ConfigNames>();
+  const additionalConfig = options.extends ?? [];
 
-  composer = composer.append(...configs, ...additionalConfig);
-
-  return composer.toConfigs();
+  return new FlatConfigComposer<TypedConfigItem, ConfigNames>()
+    .append(...configs, ...additionalConfig)
+    .toConfigs();
 }
 
 type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
@@ -180,4 +200,13 @@ function resolveSubOptions<T, K extends keyof T>(options: T, key: K): ResolvedOp
   return typeof options[key] === 'boolean'
     ? ({} as ResolvedOptions<T[K]>)
     : ((options[key] ?? {}) as ResolvedOptions<T[K]>);
+}
+
+function isEnabled<T>(options: T, key: keyof T, defaultValue = false): boolean {
+  const option = options[key];
+
+  if (option === undefined) return defaultValue;
+  if (typeof option === 'boolean') return option;
+
+  return true;
 }
