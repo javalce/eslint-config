@@ -162,11 +162,6 @@ interface OptionsAngularSelector {
 
 export interface OptionsAngular {
   /**
-   * The prefix for Angular selectors, which can be a string or an array of strings.
-   * This prefix is used for both directives and components.
-   */
-  selector?: OptionsAngularSelector['prefix'];
-  /**
    * The options for Angular directives.
    * This allows customization of the selector type, prefix, and style for directives.
    */

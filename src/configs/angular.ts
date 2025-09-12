@@ -5,49 +5,48 @@ import { parser as tsParser } from 'typescript-eslint';
 import { GLOB_HTML_FILES, GLOB_TS_FILES } from '../globs';
 import { type OptionsAngular, type TypedConfigItem } from '../types';
 
+function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
+  return {
+    name,
+    files: [GLOB_TS_FILES],
+    languageOptions: {
+      parser: tsParser,
+      sourceType: 'module',
+    },
+    processor: angularEslint.processInlineTemplates,
+    rules,
+  };
+}
+
+function createAngularTemplateConfig(
+  name: string,
+  rules: TypedConfigItem['rules'],
+): TypedConfigItem {
+  return {
+    name,
+    files: [GLOB_HTML_FILES],
+    languageOptions: {
+      parser: angularEslint.templateParser as Linter.Parser,
+    },
+    rules,
+  };
+}
+
 export function angular(options: OptionsAngular = {}): TypedConfigItem[] {
-  const selector = options.selector ?? 'app';
   const directive: OptionsAngular['directive'] = {
     type: 'attribute',
-    prefix: selector,
+    prefix: 'app',
     style: 'camelCase',
     ...options.directive,
   };
   const component: OptionsAngular['component'] = {
     type: 'element',
-    prefix: selector,
+    prefix: 'app',
     style: 'kebab-case',
     ...options.component,
   };
   const overridesTypescript = options.overrides?.typescript;
   const overridesTemplate = options.overrides?.template;
-
-  function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
-    return {
-      name,
-      files: [GLOB_TS_FILES],
-      languageOptions: {
-        parser: tsParser,
-        sourceType: 'module',
-      },
-      processor: angularEslint.processInlineTemplates,
-      rules,
-    };
-  }
-
-  function createAngularTemplateConfig(
-    name: string,
-    rules: TypedConfigItem['rules'],
-  ): TypedConfigItem {
-    return {
-      name,
-      files: [GLOB_HTML_FILES],
-      languageOptions: {
-        parser: angularEslint.templateParser as Linter.Parser,
-      },
-      rules,
-    };
-  }
 
   return [
     {
