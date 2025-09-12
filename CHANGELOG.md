@@ -1,3 +1,16 @@
+# [0.17.0](https://github.com/javalce/eslint-config/compare/v0.16.1...v0.17.0) (2025-09-12)
+
+### Bug Fixes
+
+- update astro glob patterns to support array format for better file matching ([827885e](https://github.com/javalce/eslint-config/commit/827885e6142f7c16349ed6d9343fea6d4ab93b3b))
+- update configuration for no-empty-object-type rule to allow interfaces with single extends ([eb60b66](https://github.com/javalce/eslint-config/commit/eb60b664c27e64c4a83326f119cdb27b10c63dab))
+
+### Features
+
+- add tsconfigPath support and enhance path resolution in imports configuration ([4d97db1](https://github.com/javalce/eslint-config/commit/4d97db13cc19b60313f2125a9645cd2712f3e091))
+- enhance import configuration with TypeScript support and improve resolver settings ([910b841](https://github.com/javalce/eslint-config/commit/910b8418b3797a135d1dbc87692a5bb8458ce55c))
+- remove selector option from angular config ([02af506](https://github.com/javalce/eslint-config/commit/02af506dc761931a44daa8ee5d2343cdf44bf37e))
+
 ## [0.16.1](https://github.com/javalce/eslint-config/compare/v0.16.0...v0.16.1) (2025-08-25)
 
 # [0.16.0](https://github.com/javalce/eslint-config/compare/v0.15.2...v0.16.0) (2025-08-25)
