@@ -181,19 +181,7 @@ export default defineConfig({
 });
 ```
 
-Or you can use multiple tsconfig files:
-
-```js
-import { defineConfig } from '@javalce/eslint-config';
-
-export default defineConfig({
-  typescript: {
-    tsconfigPath: ['./path/to/tsconfig.json', './path/to/another/tsconfig.json'],
-  },
-});
-```
-
-Instead of using the passing the path to the tsconfig file(s) in the configuration, you can only pass the filename(s) and let the configuration resolve the absolute path for you.
+Instead of using the absolute path to the tsconfig file(s) in the configuration, you can only pass the filename(s) and let the configuration resolve the absolute path for you.
 
 ### Angular
 
