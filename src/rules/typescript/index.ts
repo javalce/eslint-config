@@ -33,7 +33,7 @@ const config: TypedConfigItem = {
       'warn',
       {
         disallowTypeAnnotations: true,
-        fixStyle: 'inline-type-imports',
+        fixStyle: 'separate-type-imports',
         prefer: 'type-imports',
       },
     ],
@@ -83,6 +83,12 @@ const config: TypedConfigItem = {
      * 🚫 Not fixable - https://typescript-eslint.io/rules/no-extraneous-class/
      */
     '@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
+    /**
+     * Enforce the use of top-level import type qualifier when an import only has specifiers with inline type qualifiers.
+     *
+     * 🔧 Fixable - https://typescript-eslint.io/rules/no-import-type-side-effects/
+     */
+    '@typescript-eslint/no-import-type-side-effects': 'warn',
     /**
      * Prevents the misuse of promises in contexts expecting synchronous functions, such as event handlers or boolean conditions.
      *
