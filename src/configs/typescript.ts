@@ -1,3 +1,10 @@
+import type {
+  OptionsPathAliases,
+  OptionsProjectType,
+  OptionsTypescript,
+  TypedConfigItem,
+} from '../types';
+
 import tseslint from 'typescript-eslint';
 
 import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
@@ -5,12 +12,6 @@ import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import { createTypescriptImportRules } from '../rules/typescript/import';
 import eslintStylisticConfig from '../rules/typescript/stylistic';
-import {
-  type OptionsPathAliases,
-  type OptionsProjectType,
-  type OptionsTypescript,
-  type TypedConfigItem,
-} from '../types';
 import { resolveTsconfig } from '../utils';
 
 export function typescript({

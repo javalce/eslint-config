@@ -1,8 +1,9 @@
+import type { OptionsNgrx, TypedConfigItem } from '../types';
+
 import ngrxPlugin from '@ngrx/eslint-plugin';
 import ngrxConfig from '@ngrx/eslint-plugin/v9';
 
 import { GLOB_TS_FILES } from '../globs';
-import { type OptionsNgrx, type TypedConfigItem } from '../types';
 
 export function ngrx({
   store = false,

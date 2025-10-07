@@ -1,8 +1,10 @@
+import type { Linter } from 'eslint';
+import type { TypedConfigItem } from '../src/types';
+
 import fs from 'node:fs/promises';
 
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
-import { type Linter } from 'eslint';
 
 import { angular } from '../src/configs/angular';
 import { astro } from '../src/configs/astro';
@@ -21,7 +23,6 @@ import { typescript } from '../src/configs/typescript';
 import { unicorn } from '../src/configs/unicorn';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
-import { type TypedConfigItem } from '../src/types';
 
 function combine(...configs: Array<TypedConfigItem | TypedConfigItem[]>): TypedConfigItem[] {
   return configs.flat();

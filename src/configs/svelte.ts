@@ -1,9 +1,10 @@
+import type { OptionsHasTypescript, OptionsSvelte, TypedConfigItem } from '../types';
+
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import svelteParser from 'svelte-eslint-parser';
 import tseslint from 'typescript-eslint';
 
 import { GLOB_SVELTE_FILES } from '../globs';
-import { type OptionsHasTypescript, type OptionsSvelte, type TypedConfigItem } from '../types';
 
 export function svelte({
   typescript,

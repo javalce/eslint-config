@@ -1,6 +1,5 @@
 import type { OptionsPathAliases, TypedConfigItem } from '../../types';
-
-import { type Linter } from 'eslint';
+import type { Linter } from 'eslint';
 
 import { createPathAliases } from '../../utils';
 

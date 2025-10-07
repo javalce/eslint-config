@@ -1,6 +1,5 @@
-import { type Linter } from 'eslint';
-
-import { type TypedConfigItem } from '../types';
+import type { Linter } from 'eslint';
+import type { TypedConfigItem } from '../types';
 
 /**
  * These are enabled by `react/recommended`, but we've made the decision to

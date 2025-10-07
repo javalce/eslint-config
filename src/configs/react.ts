@@ -1,3 +1,5 @@
+import type { OptionsReact, TypedConfigItem } from '../types';
+
 import { isPackageExists } from 'local-pkg';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
@@ -7,7 +9,6 @@ import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import { GLOB_SRC_FILES } from '../globs';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
-import { type OptionsReact, type TypedConfigItem } from '../types';
 
 const REACT_ROUTER_PACKAGES = [
   '@react-router/node',

@@ -1,13 +1,14 @@
+import type { Linter } from 'eslint';
+import type { OptionsNext, TypedConfigItem } from '../types';
+
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import { type Linter } from 'eslint';
 import babelParser from '@babel/eslint-parser';
 import nextjsPlugin from '@next/eslint-plugin-next';
 
 import { GLOB_JS_FILES, GLOB_JSX_FILES, GLOB_SRC_FILES } from '../globs';
-import { type OptionsNext, type TypedConfigItem } from '../types';
 
 const require = createRequire(process.cwd());
 

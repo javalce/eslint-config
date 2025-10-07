@@ -1,9 +1,10 @@
+import type { Linter } from 'eslint';
+import type { OptionsAngular, TypedConfigItem } from '../types';
+
 import angularEslint from 'angular-eslint';
-import { type Linter } from 'eslint';
 import { parser as tsParser } from 'typescript-eslint';
 
 import { GLOB_HTML_FILES, GLOB_TS_FILES } from '../globs';
-import { type OptionsAngular, type TypedConfigItem } from '../types';
 
 function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
   return {

@@ -1,8 +1,8 @@
+import type { OptionsPathAliases } from './types';
+
 import fs from 'node:fs';
 import { resolve } from 'node:path';
 import process from 'node:process';
-
-import { type OptionsPathAliases } from './types';
 
 /**
  * Normalizes a value to a string array and optionally applies a callback to each element.

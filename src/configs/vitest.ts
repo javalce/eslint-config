@@ -1,8 +1,9 @@
+import type { OptionsHasTypescript, OptionsVitest, TypedConfigItem } from '../types';
+
 import vitestPlugin from '@vitest/eslint-plugin';
 
 import { GLOB_TEST_FILES } from '../globs';
 import eslintConfigVitest from '../rules/vitest';
-import { type OptionsHasTypescript, type OptionsVitest, type TypedConfigItem } from '../types';
 
 export function vitest({
   typescript,

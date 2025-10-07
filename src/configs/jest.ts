@@ -1,9 +1,10 @@
+import type { OptionsJest, TypedConfigItem } from '../types';
+
 import globals from 'globals';
 import jestPlugin from 'eslint-plugin-jest';
 
 import { GLOB_TEST_FILES, GLOB_TS_TEST_FILES } from '../globs';
 import jestConfig from '../rules/jest';
-import { type OptionsJest, type TypedConfigItem } from '../types';
 
 export function jest({ overrides }: OptionsJest = {}): TypedConfigItem[] {
   return [

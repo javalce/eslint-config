@@ -1,5 +1,6 @@
+import type { TypedConfigItem } from '../types';
+
 import { GLOB_TEST_FILES } from '../globs';
-import { type TypedConfigItem } from '../types';
 
 const config: TypedConfigItem = {
   files: GLOB_TEST_FILES,
