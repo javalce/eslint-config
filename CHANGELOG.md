@@ -1,3 +1,9 @@
+## [0.17.1](https://github.com/javalce/eslint-config/compare/v0.17.0...v0.17.1) (2025-10-08)
+
+### Features
+
+- enforce separate type imports and add warning for import type side effects ([5849993](https://github.com/javalce/eslint-config/commit/5849993386a495f9bb0f24612cfff58305406176))
+
 # [0.17.0](https://github.com/javalce/eslint-config/compare/v0.16.1...v0.17.0) (2025-09-12)
 
 ### Bug Fixes
