@@ -2,7 +2,7 @@ import type { OptionsPerfectionist, TypedConfigItem } from '../types';
 
 import pluginPerfectionist from 'eslint-plugin-perfectionist';
 
-export function perfectionist({ overrides }: OptionsPerfectionist): TypedConfigItem[] {
+export function perfectionist({ overrides }: OptionsPerfectionist = {}): TypedConfigItem[] {
   return [
     {
       name: 'perfectionist/setup',
