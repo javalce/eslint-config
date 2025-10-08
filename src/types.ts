@@ -1,4 +1,5 @@
 import type { Linter } from 'eslint';
+
 import type { RuleOptions } from './typegen';
 
 type RuleKeys =
@@ -14,6 +15,7 @@ type RuleKeys =
   | 'import-x'
   | 'jest'
   | 'jsx-a11y'
+  | 'perfectionist'
   | 'react'
   | 'react-hooks'
   | 'react-refresh'
@@ -117,14 +119,9 @@ export interface OptionsStylistic extends OptionsOverrides<'@stylistic'> {}
 
 export interface OptionsUnicorn extends OptionsOverrides<'unicorn'> {}
 
-export interface OptionsPathAliases {
-  /**
-   * Custom path aliases to use in the project.
-   **/
-  pathAliases?: string | string[];
-}
+export interface OptionsImport extends OptionsOverrides<'import-x'> {}
 
-export interface OptionsImport extends OptionsPathAliases, OptionsOverrides<'import-x'> {}
+export interface OptionsPerfectionist extends OptionsOverrides<'perfectionist'> {}
 
 export interface OptionsTsconfigPath {
   /**
@@ -246,6 +243,10 @@ export interface OptionsConfig extends OptionsProjectType {
    * Configure the path aliases for the import plugin.
    */
   import?: OptionsImport;
+  /**
+   * Configure the perfectionist plugin.
+   */
+  perfectionist?: OptionsPerfectionist;
   /**
    * Stylistic plugin options.
    */
