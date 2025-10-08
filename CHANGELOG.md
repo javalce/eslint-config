@@ -1,3 +1,15 @@
+# [0.18.0](https://github.com/javalce/eslint-config/compare/v0.17.1...v0.18.0) (2025-10-08)
+
+### Bug Fixes
+
+- set default value for overrides in perfectionist function ([79fc604](https://github.com/javalce/eslint-config/commit/79fc6044d1abee1c784712a724a5082d8e8ac612))
+
+### Features
+
+- add comprehensive React Hooks rules ([a98a152](https://github.com/javalce/eslint-config/commit/a98a1522ce24ba30dec007f145d2807d80a780ca))
+- add perfectionist config to type generation ([3e8d975](https://github.com/javalce/eslint-config/commit/3e8d9755a4892ff296a0531ddcade34164af4e22))
+- add perfectionist ESLint plugin configuration and types ([b4bc3ed](https://github.com/javalce/eslint-config/commit/b4bc3ed51d5cbd3a53fbce060c5533694301a834))
+
 ## [0.17.1](https://github.com/javalce/eslint-config/compare/v0.17.0...v0.17.1) (2025-10-08)
 
 ### Features
