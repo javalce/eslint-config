@@ -1,4 +1,5 @@
 import type { Linter } from 'eslint';
+
 import type { TypedConfigItem } from '../src/types';
 
 import fs from 'node:fs/promises';
@@ -14,6 +15,7 @@ import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
 import { nextjs } from '../src/configs/nextjs';
 import { ngrx } from '../src/configs/ngrx';
+import { perfectionist } from '../src/configs/perfectionist';
 import { react } from '../src/configs/react';
 import { solid } from '../src/configs/solidjs';
 import { stylistic } from '../src/configs/stylistic';
@@ -40,6 +42,7 @@ const configs = combine(
   javascript(),
   comments(),
   imports(),
+  perfectionist(),
   stylistic(),
   unicorn(),
   typescript(),
