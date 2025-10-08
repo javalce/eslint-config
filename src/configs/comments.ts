@@ -1,4 +1,5 @@
 import type { ESLint } from 'eslint';
+
 import type { OptionsEslintComments, TypedConfigItem } from '../types';
 
 // @ts-expect-error - ESLint plugin has no types

@@ -1,4 +1,5 @@
 import type { Linter } from 'eslint';
+
 import type { TypedConfigItem } from '../types';
 
 /**

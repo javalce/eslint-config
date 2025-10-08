@@ -1,9 +1,4 @@
-import type {
-  OptionsPathAliases,
-  OptionsProjectType,
-  OptionsTypescript,
-  TypedConfigItem,
-} from '../types';
+import type { OptionsProjectType, OptionsTypescript, TypedConfigItem } from '../types';
 
 import tseslint from 'typescript-eslint';
 
@@ -15,11 +10,10 @@ import eslintStylisticConfig from '../rules/typescript/stylistic';
 import { resolveTsconfig } from '../utils';
 
 export function typescript({
-  pathAliases,
   tsconfigPath,
   type,
   overrides,
-}: OptionsPathAliases & OptionsTypescript & OptionsProjectType = {}): TypedConfigItem[] {
+}: OptionsTypescript & OptionsProjectType = {}): TypedConfigItem[] {
   function makeParser(types: boolean, files: string[], ignores?: string[]): TypedConfigItem {
     return {
       files,
@@ -78,7 +72,7 @@ export function typescript({
             },
           ]
         : []),
-      createTypescriptImportRules({ pathAliases }),
+      createTypescriptImportRules(),
       {
         name: 'typescript/rules/overrides',
         rules: {

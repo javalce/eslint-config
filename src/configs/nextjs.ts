@@ -1,4 +1,5 @@
 import type { Linter } from 'eslint';
+
 import type { OptionsNext, TypedConfigItem } from '../types';
 
 import fs from 'node:fs';

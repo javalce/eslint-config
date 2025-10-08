@@ -1,8 +1,8 @@
 import type { OptionsAstro, OptionsHasTypescript, TypedConfigItem } from '../types';
 
-import globals from 'globals';
 import parserAstro from 'astro-eslint-parser';
 import pluginAstro from 'eslint-plugin-astro';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 import { GLOB_ASTRO_FILES, GLOB_ASTRO_JS_FILES, GLOB_ASTRO_TS_FILES } from '../globs';

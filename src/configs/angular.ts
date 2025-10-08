@@ -1,4 +1,5 @@
 import type { Linter } from 'eslint';
+
 import type { OptionsAngular, TypedConfigItem } from '../types';
 
 import angularEslint from 'angular-eslint';

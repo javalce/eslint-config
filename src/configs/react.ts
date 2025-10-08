@@ -1,10 +1,10 @@
 import type { OptionsReact, TypedConfigItem } from '../types';
 
-import { isPackageExists } from 'local-pkg';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
+import { isPackageExists } from 'local-pkg';
 
 import { GLOB_SRC_FILES } from '../globs';
 import jsxA11Rules from '../rules/jsx-a11y';
