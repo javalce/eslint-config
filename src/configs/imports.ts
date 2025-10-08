@@ -9,16 +9,13 @@ import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescrip
 import { createNodeResolver, importX } from 'eslint-plugin-import-x';
 
 import { GLOB_CONFIG_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
-import { createPathAliases, resolveRelativePath, resolveTsconfig } from '../utils';
+import { resolveRelativePath, resolveTsconfig } from '../utils';
 
 export function imports({
   typescript,
   tsconfigPath,
-  pathAliases,
   overrides,
 }: OptionsHasTypescript & OptionsTsconfigPath & OptionsImport = {}): TypedConfigItem[] {
-  const customPathAliases = createPathAliases({ pathAliases });
-
   return [
     {
       plugins: {
@@ -132,30 +129,6 @@ export function imports({
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-useless-path-segments.md
          */
         'import-x/no-useless-path-segments': ['error'],
-        /**
-         * Enforce a module import order convention.
-         *
-         * 🔧 Fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/order.md
-         */
-        'import-x/order': [
-          'warn',
-          {
-            groups: [
-              'builtin', // Node.js built-in modules
-              'external', // Packages
-              'internal', // Aliased modules
-              'parent', // Relative parent
-              'sibling', // Relative sibling
-              'index', // Relative index
-            ],
-            'newlines-between': 'always',
-            pathGroups: customPathAliases.map((pattern) => ({
-              group: 'external',
-              pattern,
-              position: 'after',
-            })),
-          },
-        ],
       },
     },
     {

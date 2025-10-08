@@ -1,5 +1,3 @@
-import type { OptionsPathAliases } from './types';
-
 import fs from 'node:fs';
 import { resolve } from 'node:path';
 import process from 'node:process';
@@ -18,12 +16,6 @@ export function normalizeStringArray(
   const array = Array.isArray(value) ? value : [value];
 
   return callback ? array.map(callback) : array;
-}
-
-export function createPathAliases({ pathAliases }: OptionsPathAliases): string[] {
-  const merged = ['@/**', '~/**', ...normalizeStringArray(pathAliases ?? [])];
-
-  return Array.from(new Set(merged));
 }
 
 export function resolveTsconfig(path?: string): string {

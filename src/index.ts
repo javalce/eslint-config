@@ -1,9 +1,4 @@
-import type {
-  OptionsConfig,
-  OptionsPathAliases,
-  OptionsTsconfigPath,
-  TypedConfigItem,
-} from './types';
+import type { OptionsConfig, OptionsTsconfigPath, TypedConfigItem } from './types';
 
 import { isPackageExists } from 'local-pkg';
 
@@ -11,6 +6,7 @@ import { comments } from './configs/comments';
 import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
+import { perfectionist } from './configs/perfectionist';
 import { stylistic } from './configs/stylistic';
 import { unicorn } from './configs/unicorn';
 
@@ -28,8 +24,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
 
   const tsconfigPath = (resolveSubOptions(options, 'typescript') as OptionsTsconfigPath | undefined)
     ?.tsconfigPath;
-  const pathAliases = (resolveSubOptions(options, 'import') as OptionsPathAliases | undefined)
-    ?.pathAliases;
 
   const tsEnabled = isEnabled(options, 'typescript', isPackageExists('typescript'));
   const angularEnabled = isEnabled(options, 'angular');
@@ -51,6 +45,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
       typescript: tsEnabled,
       tsconfigPath,
     }),
+    perfectionist(resolveSubOptions(options, 'perfectionist')),
     stylistic(resolveSubOptions(options, 'stylistic')),
     unicorn(resolveSubOptions(options, 'unicorn')),
   );
@@ -61,7 +56,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     configs.push(
       typescript({
         ...resolveSubOptions(options, 'typescript'),
-        pathAliases,
         type: projectType,
       }),
     );
