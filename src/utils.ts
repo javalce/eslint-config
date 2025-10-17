@@ -3,8 +3,11 @@ import type { Awaitable, TypedConfigItem } from './types';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { isPackageExists } from 'local-pkg';
+
+const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
 
 export const requireModule = createRequire(join(process.cwd(), 'noop.js'));
 
@@ -57,7 +60,7 @@ export function ensureInstalled(packages: Array<string | undefined>): void {
   if (process.env.CI || !process.stdout.isTTY) return;
 
   const nonExistingPackages = packages.filter(
-    (i) => i && !isPackageExists(i, { paths: [] }),
+    (i) => i && !isPackageExists(i, { paths: [scopeUrl] }),
   ) as string[];
 
   if (nonExistingPackages.length === 0) return;
