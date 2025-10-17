@@ -29,6 +29,8 @@ This configuration is opinionated and it may not fit your needs. You can extend 
       - [Testing with Jest](#testing-with-jest)
       - [Testing with Vitest](#testing-with-vitest)
       - [Testing Library](#testing-library)
+  - [Credits](#credits)
+  - [License](#license)
 
 ## Features
 
@@ -505,3 +507,11 @@ export default defineConfig({
 ```
 
 Testing Library will enable the recommended rules for the specific framework you are using.
+
+## Credits
+
+- [@antfu/eslint-config](https://github.com/antfu/eslint-config) - source codes [MIT](https://github.com/antfu/eslint-config/blob/main/LICENSE)
+
+## License
+
+[MIT](./LICENSE) License &copy; 2024-PRESENT [Javier Valero](https://github.com/javalce)
