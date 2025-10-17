@@ -1,3 +1,17 @@
+# [0.19.0](https://github.com/javalce/eslint-config/compare/v0.18.1...v0.19.0) (2025-10-17)
+
+### Bug Fixes
+
+- update package existence check to use correct scope URL ([389e828](https://github.com/javalce/eslint-config/commit/389e828fd938c9d865ebc47714e58082c8bfd5e0))
+
+### Features
+
+- add support for Tanstack Query and Router ESLint plugins ([f8cc771](https://github.com/javalce/eslint-config/commit/f8cc771626bb4ec11d0c0aff9e03a85fffc26244))
+
+### Reverts
+
+- bring back async ESLint config functions and ensure package installation ([f052242](https://github.com/javalce/eslint-config/commit/f052242eb49a84449998c8d41f2a15a6518c610e))
+
 ## [0.18.1](https://github.com/javalce/eslint-config/compare/v0.18.0...v0.18.1) (2025-10-17)
 
 ### Bug Fixes
