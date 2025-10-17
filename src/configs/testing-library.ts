@@ -1,20 +1,9 @@
 import type { OptionsTestingLibrary, TypedConfigItem } from '../types';
 
-import testingLibraryPlugin from 'eslint-plugin-testing-library';
-
 import { GLOB_TEST_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-function makeConfig(name: 'angular' | 'react' | 'vue' | 'svelte'): TypedConfigItem {
-  return {
-    files: GLOB_TEST_FILES,
-    rules: {
-      ...testingLibraryPlugin.configs[name].rules,
-    },
-    name: `testing-library/rules/${name}`,
-  };
-}
-
-export function testingLibrary({
+export async function testingLibrary({
   angular = false,
   react = false,
   svelte = false,
@@ -25,7 +14,21 @@ export function testingLibrary({
   react?: boolean;
   svelte?: boolean;
   vue?: boolean;
-} & OptionsTestingLibrary = {}): TypedConfigItem[] {
+} & OptionsTestingLibrary = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['eslint-plugin-testing-library']);
+
+  const testingLibraryPlugin = await resolveDefaultExport(import('eslint-plugin-testing-library'));
+
+  function makeConfig(name: 'angular' | 'react' | 'vue' | 'svelte'): TypedConfigItem {
+    return {
+      files: GLOB_TEST_FILES,
+      rules: {
+        ...testingLibraryPlugin.configs[name].rules,
+      },
+      name: `testing-library/rules/${name}`,
+    };
+  }
+
   return [
     {
       plugins: {

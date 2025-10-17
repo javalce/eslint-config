@@ -1,14 +1,11 @@
 import type { OptionsReact, TypedConfigItem } from '../types';
 
-import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import { isPackageExists } from 'local-pkg';
 
 import { GLOB_SRC_FILES } from '../globs';
 import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 const REACT_ROUTER_PACKAGES = [
   '@react-router/node',
@@ -18,17 +15,31 @@ const REACT_ROUTER_PACKAGES = [
 ];
 const NEXT_PACKAGES = ['next'];
 
-export function react({ overrides }: OptionsReact = {}): TypedConfigItem[] {
+export async function react({ overrides }: OptionsReact = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled([
+    'eslint-plugin-react',
+    'eslint-plugin-react-hooks',
+    'eslint-plugin-react-refresh',
+    'eslint-plugin-jsx-a11y',
+  ]);
+
+  const [pluginReact, pluginReactHooks, pluginReactRefresh, pluginJsxA11y] = await Promise.all([
+    resolveDefaultExport(import('eslint-plugin-react')),
+    resolveDefaultExport(import('eslint-plugin-react-hooks')),
+    resolveDefaultExport(import('eslint-plugin-react-refresh')),
+    resolveDefaultExport(import('eslint-plugin-jsx-a11y')),
+  ]);
+
   const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
   const isUsingNextJs = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
 
   return [
     {
       plugins: {
-        react: reactPlugin,
-        'react-hooks': reactHooksPlugin,
-        'react-refresh': reactRefreshPlugin,
-        'jsx-a11y': jsxA11yPlugin,
+        react: pluginReact,
+        'react-hooks': pluginReactHooks,
+        'react-refresh': pluginReactRefresh,
+        'jsx-a11y': pluginJsxA11y,
       },
       name: 'react/setup',
     },
@@ -40,8 +51,8 @@ export function react({ overrides }: OptionsReact = {}): TypedConfigItem[] {
           },
         },
         rules: {
-          ...reactPlugin.configs.recommended.rules,
-          ...reactHooksPlugin.configs['recommended-latest'].rules,
+          ...pluginReact.configs.recommended.rules,
+          ...pluginReactHooks.configs['recommended-latest'].rules,
           'react-refresh/only-export-components': [
             'warn',
             {
@@ -84,7 +95,7 @@ export function react({ overrides }: OptionsReact = {}): TypedConfigItem[] {
               ],
             },
           ],
-          ...jsxA11yPlugin.flatConfigs.recommended.rules,
+          ...pluginJsxA11y.flatConfigs.recommended.rules,
         },
         name: 'react/rules',
       },

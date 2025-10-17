@@ -2,39 +2,43 @@ import type { Linter } from 'eslint';
 
 import type { OptionsAngular, TypedConfigItem } from '../types';
 
-import angularEslint from 'angular-eslint';
 import { parser as tsParser } from 'typescript-eslint';
 
 import { GLOB_HTML_FILES, GLOB_TS_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
-  return {
-    name,
-    files: [GLOB_TS_FILES],
-    languageOptions: {
-      parser: tsParser,
-      sourceType: 'module',
-    },
-    processor: angularEslint.processInlineTemplates,
-    rules,
-  };
-}
+export async function angular(options: OptionsAngular = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['angular-eslint']);
 
-function createAngularTemplateConfig(
-  name: string,
-  rules: TypedConfigItem['rules'],
-): TypedConfigItem {
-  return {
-    name,
-    files: [GLOB_HTML_FILES],
-    languageOptions: {
-      parser: angularEslint.templateParser as Linter.Parser,
-    },
-    rules,
-  };
-}
+  const angularEslint = await resolveDefaultExport(import('angular-eslint'));
 
-export function angular(options: OptionsAngular = {}): TypedConfigItem[] {
+  function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
+    return {
+      name,
+      files: [GLOB_TS_FILES],
+      languageOptions: {
+        parser: tsParser,
+        sourceType: 'module',
+      },
+      processor: angularEslint.processInlineTemplates,
+      rules,
+    };
+  }
+
+  function createAngularTemplateConfig(
+    name: string,
+    rules: TypedConfigItem['rules'],
+  ): TypedConfigItem {
+    return {
+      name,
+      files: [GLOB_HTML_FILES],
+      languageOptions: {
+        parser: angularEslint.templateParser as Linter.Parser,
+      },
+      rules,
+    };
+  }
+
   const directive: OptionsAngular['directive'] = {
     type: 'attribute',
     prefix: 'app',

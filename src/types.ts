@@ -2,12 +2,16 @@ import type { Linter } from 'eslint';
 
 import type { RuleOptions } from './typegen';
 
+export type Awaitable<T> = T | Promise<T>;
+
 type RuleKeys =
   | '@angular-eslint'
   | '@angular-eslint/template'
   | '@ngrx'
   | '@next/next'
   | '@stylistic'
+  | '@tanstack/query'
+  | '@tanstack/router'
   | '@typescript-eslint'
   | 'astro'
   | 'eslint'
@@ -79,14 +83,20 @@ export type EcmaVersion =
   | 2024
   | 2025;
 
-export type TypedConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
-  // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+export type TypedConfigItem = Omit<Linter.Config, 'plugins'> & {
   /**
-   * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+   * An object containing a name-value mapping of plugin names to plugin objects.
+   * When `files` is specified, these plugins are only available to the matching files.
    *
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, unknown>;
+
+  /**
+   * An object containing the configured rules. When `files` or `ignores` are
+   * specified, these rule configurations are only available to the matching files.
+   */
+  rules?: Rules;
 };
 
 type ProjectType = 'app' | 'lib';

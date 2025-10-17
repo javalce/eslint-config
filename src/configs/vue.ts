@@ -1,16 +1,21 @@
 import type { OptionsHasTypescript, OptionsVue, TypedConfigItem } from '../types';
 
-import pluginVue from 'eslint-plugin-vue';
-import tseslint from 'typescript-eslint';
-import vueParser from 'vue-eslint-parser';
-
 import { GLOB_VUE_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export function vue({
+export async function vue({
   typescript,
   version = 3,
   overrides,
-}: OptionsHasTypescript & OptionsVue = {}): TypedConfigItem[] {
+}: OptionsHasTypescript & OptionsVue = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['eslint-plugin-vue', 'vue-eslint-parser']);
+
+  const [pluginVue, parserVue, tseslint] = await Promise.all([
+    resolveDefaultExport(import('eslint-plugin-vue')),
+    resolveDefaultExport(import('vue-eslint-parser')),
+    resolveDefaultExport(import('typescript-eslint')),
+  ]);
+
   return [
     {
       name: 'vue/setup',
@@ -40,7 +45,7 @@ export function vue({
       name: 'vue/rules',
       files: [GLOB_VUE_FILES],
       languageOptions: {
-        parser: vueParser,
+        parser: parserVue,
         parserOptions: {
           ecmaFeatures: {
             jsx: true,

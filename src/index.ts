@@ -1,14 +1,28 @@
-import type { OptionsConfig, OptionsTsconfigPath, TypedConfigItem } from './types';
+import type { ConfigNames } from './typegen';
+import type { Awaitable, OptionsConfig, OptionsTsconfigPath, TypedConfigItem } from './types';
 
+import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
+import { angular } from './configs/angular';
+import { astro } from './configs/astro';
 import { comments } from './configs/comments';
 import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
+import { jest } from './configs/jest';
+import { nextjs } from './configs/nextjs';
+import { ngrx } from './configs/ngrx';
 import { perfectionist } from './configs/perfectionist';
+import { react } from './configs/react';
+import { solid } from './configs/solidjs';
 import { stylistic } from './configs/stylistic';
+import { svelte } from './configs/svelte';
+import { testingLibrary } from './configs/testing-library';
+import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
+import { vitest } from './configs/vitest';
+import { vue } from './configs/vue';
 
 /**
  * Generates a custom ESLint configuration based on the provided options.
@@ -18,7 +32,7 @@ import { unicorn } from './configs/unicorn';
  * @returns {Promise<TypedConfigItem[]>} ESLint configuration ready to be used.
  */
 export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
-  const configs: TypedConfigItem[][] = [];
+  const configs: Array<Awaitable<TypedConfigItem[]>> = [];
 
   const projectType = options.type ?? 'app';
 
@@ -51,8 +65,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   );
 
   if (tsEnabled) {
-    const { typescript } = await import('./configs/typescript');
-
     configs.push(
       typescript({
         ...resolveSubOptions(options, 'typescript'),
@@ -62,8 +74,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (angularEnabled) {
-    const { angular } = await import('./configs/angular');
-
     configs.push(
       angular({
         ...resolveSubOptions(options, 'angular'),
@@ -72,8 +82,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (ngrxEnabled) {
-    const { ngrx } = await import('./configs/ngrx');
-
     configs.push(
       ngrx({
         ...resolveSubOptions(options, 'ngrx'),
@@ -82,8 +90,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (reactEnabled) {
-    const { react } = await import('./configs/react');
-
     configs.push(
       react({
         ...resolveSubOptions(options, 'react'),
@@ -92,8 +98,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (nextEnabled) {
-    const { nextjs } = await import('./configs/nextjs');
-
     configs.push(
       nextjs({
         ...resolveSubOptions(options, 'next'),
@@ -102,8 +106,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (astroEnabled) {
-    const { astro } = await import('./configs/astro');
-
     configs.push(
       astro({
         typescript: tsEnabled,
@@ -113,8 +115,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (svelteEnabled) {
-    const { svelte } = await import('./configs/svelte');
-
     configs.push(
       svelte({
         ...resolveSubOptions(options, 'svelte'),
@@ -124,8 +124,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (solidEnabled) {
-    const { solid } = await import('./configs/solidjs');
-
     configs.push(
       solid({
         ...resolveSubOptions(options, 'solid'),
@@ -135,8 +133,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   }
 
   if (vueEnabled) {
-    const { vue } = await import('./configs/vue');
-
     configs.push(
       vue({
         ...resolveSubOptions(options, 'vue'),
@@ -155,8 +151,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     const testingLibraryEnabled = Boolean(testOptions.testingLibrary);
 
     if (enableJest) {
-      const { jest } = await import('./configs/jest');
-
       configs.push(
         jest({
           overrides: testOptions.overrides,
@@ -165,8 +159,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     }
 
     if (enableVitest) {
-      const { vitest } = await import('./configs/vitest');
-
       configs.push(
         vitest({
           typescript: tsEnabled,
@@ -176,8 +168,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     }
 
     if (testingLibraryEnabled) {
-      const { testingLibrary } = await import('./configs/testing-library');
-
       configs.push(
         testingLibrary({
           ...resolveSubOptions(testOptions, 'testingLibrary'),
@@ -192,7 +182,11 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
 
   const additionalConfig = (options.extends ?? []) as TypedConfigItem[];
 
-  return [...configs.flat(), ...additionalConfig];
+  let composer = new FlatConfigComposer<TypedConfigItem, ConfigNames>();
+
+  composer = composer.append(...configs, ...additionalConfig);
+
+  return composer.toConfigs();
 }
 
 type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;

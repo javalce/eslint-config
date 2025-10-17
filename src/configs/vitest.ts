@@ -1,18 +1,21 @@
 import type { OptionsHasTypescript, OptionsVitest, TypedConfigItem } from '../types';
 
-import vitestPlugin from '@vitest/eslint-plugin';
-
 import { GLOB_TEST_FILES } from '../globs';
 import eslintConfigVitest from '../rules/vitest';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export function vitest({
+export async function vitest({
   typescript,
   overrides,
-}: OptionsHasTypescript & OptionsVitest = {}): TypedConfigItem[] {
+}: OptionsHasTypescript & OptionsVitest = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['@vitest/eslint-plugin']);
+
+  const pluginVitest = await resolveDefaultExport(import('@vitest/eslint-plugin'));
+
   return [
     {
       plugins: {
-        vitest: vitestPlugin,
+        vitest: pluginVitest,
       },
       ...(typescript
         ? {
@@ -25,7 +28,7 @@ export function vitest({
         : {}),
       languageOptions: {
         globals: {
-          ...vitestPlugin.environments.env.globals,
+          ...pluginVitest.environments.env.globals,
         },
       },
       name: 'vitest/setup',
@@ -33,7 +36,7 @@ export function vitest({
     {
       files: GLOB_TEST_FILES,
       rules: {
-        ...vitestPlugin.configs.recommended.rules,
+        ...pluginVitest.configs.recommended.rules,
       },
       name: 'vitest/rules',
     },

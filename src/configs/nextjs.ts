@@ -3,27 +3,28 @@ import type { Linter } from 'eslint';
 import type { OptionsNext, TypedConfigItem } from '../types';
 
 import fs from 'node:fs';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import babelParser from '@babel/eslint-parser';
-import nextjsPlugin from '@next/eslint-plugin-next';
-
 import { GLOB_JS_FILES, GLOB_JSX_FILES, GLOB_SRC_FILES } from '../globs';
+import { ensureInstalled, requireModule, resolveDefaultExport } from '../utils';
 
-const require = createRequire(process.cwd());
+const rootPath = process.cwd();
 
-export function nextjs({ overrides }: OptionsNext = {}): TypedConfigItem[] {
-  const rootPath = process.cwd();
+export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['next', '@next/eslint-plugin-next']);
+
+  const pluginNext = await resolveDefaultExport(import('@next/eslint-plugin-next'));
 
   const isAppDir =
     fs.existsSync(path.resolve(rootPath, 'src', 'app')) ||
     fs.existsSync(path.resolve(rootPath, 'app'));
 
+  const babelParser = requireModule('next/dist/compiled/babel/eslint-parser') as Linter.Parser;
+
   const babelOptions = {
     presets: (() => {
       try {
-        require.resolve('next/babel');
+        requireModule.resolve('next/babel');
 
         return ['next/babel'];
       } catch {
@@ -60,7 +61,7 @@ export function nextjs({ overrides }: OptionsNext = {}): TypedConfigItem[] {
   return [
     {
       plugins: {
-        '@next/next': nextjsPlugin,
+        '@next/next': pluginNext,
       },
       name: 'next/setup',
     },
@@ -73,13 +74,13 @@ export function nextjs({ overrides }: OptionsNext = {}): TypedConfigItem[] {
           babelOptions,
         },
       },
-      name: 'next/parser',
+      name: 'next/parser/javascript',
     },
     {
       files: [GLOB_SRC_FILES],
       rules: {
-        ...(nextjsPlugin.configs.recommended.rules as Linter.RulesRecord),
-        ...(nextjsPlugin.configs['core-web-vitals'].rules as Linter.RulesRecord),
+        ...(pluginNext.configs.recommended.rules as Linter.RulesRecord),
+        ...(pluginNext.configs['core-web-vitals'].rules as Linter.RulesRecord),
       },
       name: 'next/rules',
     },

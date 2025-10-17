@@ -1,16 +1,21 @@
 import type { OptionsHasTypescript, OptionsSvelte, TypedConfigItem } from '../types';
 
-import eslintPluginSvelte from 'eslint-plugin-svelte';
-import svelteParser from 'svelte-eslint-parser';
-import tseslint from 'typescript-eslint';
-
 import { GLOB_SVELTE_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export function svelte({
+export async function svelte({
   typescript,
   overrides,
-}: OptionsHasTypescript & OptionsSvelte = {}): TypedConfigItem[] {
-  const recommendedRules = eslintPluginSvelte.configs['flat/recommended'].find(
+}: OptionsHasTypescript & OptionsSvelte = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['eslint-plugin-svelte', 'svelte-eslint-parser']);
+
+  const [pluginSvelte, parserSvelte, tseslint] = await Promise.all([
+    resolveDefaultExport(import('eslint-plugin-svelte')),
+    resolveDefaultExport(import('svelte-eslint-parser')),
+    resolveDefaultExport(import('typescript-eslint')),
+  ]);
+
+  const recommendedRules = pluginSvelte.configs['flat/recommended'].find(
     (config) => config.name === 'svelte:recommended:rules',
   )!;
 
@@ -18,13 +23,13 @@ export function svelte({
     {
       name: 'svelte/setup',
       plugins: {
-        svelte: eslintPluginSvelte,
+        svelte: pluginSvelte,
       },
     },
     {
       files: [GLOB_SVELTE_FILES],
       languageOptions: {
-        parser: svelteParser,
+        parser: parserSvelte,
         parserOptions: {
           extraFileExtensions: ['.svelte'],
           parser: typescript ? tseslint.parser : null,

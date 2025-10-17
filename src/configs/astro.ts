@@ -1,16 +1,22 @@
 import type { OptionsAstro, OptionsHasTypescript, TypedConfigItem } from '../types';
 
-import parserAstro from 'astro-eslint-parser';
-import pluginAstro from 'eslint-plugin-astro';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 import { GLOB_ASTRO_FILES, GLOB_ASTRO_JS_FILES, GLOB_ASTRO_TS_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export function astro({
+export async function astro({
   typescript,
   overrides,
-}: OptionsHasTypescript & OptionsAstro = {}): TypedConfigItem[] {
+}: OptionsHasTypescript & OptionsAstro = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['eslint-plugin-astro', 'astro-eslint-parser']);
+
+  const [pluginAstro, parserAstro] = await Promise.all([
+    resolveDefaultExport(import('eslint-plugin-astro')),
+    resolveDefaultExport(import('astro-eslint-parser')),
+  ]);
+
   const astroJsxA11yConfig = pluginAstro.configs['jsx-a11y-recommended'].find((config) => {
     const pluginKeys = Object.keys(config.plugins ?? {});
 

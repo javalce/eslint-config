@@ -3,14 +3,14 @@ import type { ESLint } from 'eslint';
 import type { OptionsEslintComments, TypedConfigItem } from '../types';
 
 // @ts-expect-error - ESLint plugin has no types
-import commentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
+import pluginComments from '@eslint-community/eslint-plugin-eslint-comments';
 
 export function comments({ overrides }: OptionsEslintComments = {}): TypedConfigItem[] {
   return [
     {
       name: 'eslint-comments/setup',
       plugins: {
-        'eslint-comments': commentsPlugin as ESLint.Plugin,
+        'eslint-comments': pluginComments as ESLint.Plugin,
       },
     },
     {

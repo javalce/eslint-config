@@ -5,11 +5,13 @@ import type {
   TypedConfigItem,
 } from '../types';
 
+import path from 'node:path';
+
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
-import { createNodeResolver, importX } from 'eslint-plugin-import-x';
+import { createNodeResolver, importX as pluginImport } from 'eslint-plugin-import-x';
 
 import { GLOB_CONFIG_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
-import { resolveRelativePath, resolveTsconfig } from '../utils';
+import { resolveTsconfig } from '../utils';
 
 export function imports({
   typescript,
@@ -19,7 +21,7 @@ export function imports({
   return [
     {
       plugins: {
-        'import-x': importX,
+        'import-x': pluginImport,
       },
       name: 'import/setup',
     },
@@ -32,7 +34,7 @@ export function imports({
                 createTypeScriptImportResolver({
                   alwaysTryTypes: true,
                   bun: true,
-                  project: resolveRelativePath(resolveTsconfig(tsconfigPath)),
+                  project: path.resolve(process.cwd(), resolveTsconfig(tsconfigPath)),
                 }),
               ]
             : []),
@@ -43,20 +45,20 @@ export function imports({
     {
       files: [GLOB_TS_FILES, GLOB_TSX_FILES],
       settings: {
-        ...importX.flatConfigs.typescript.settings,
+        ...pluginImport.flatConfigs.typescript.settings,
       },
       rules: {
-        ...importX.flatConfigs.typescript.rules,
+        ...pluginImport.flatConfigs.typescript.rules,
       },
       name: 'import/typescript',
     },
     {
       files: [GLOB_SRC_FILES],
       settings: {
-        ...importX.flatConfigs.react.settings,
+        ...pluginImport.flatConfigs.react.settings,
       },
       languageOptions: {
-        ...importX.flatConfigs.react.languageOptions,
+        ...pluginImport.flatConfigs.react.languageOptions,
       },
       name: 'import/jsx',
     } as TypedConfigItem,

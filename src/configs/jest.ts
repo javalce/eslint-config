@@ -1,16 +1,20 @@
 import type { OptionsJest, TypedConfigItem } from '../types';
 
-import jestPlugin from 'eslint-plugin-jest';
 import globals from 'globals';
 
 import { GLOB_TEST_FILES, GLOB_TS_TEST_FILES } from '../globs';
 import jestConfig from '../rules/jest';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export function jest({ overrides }: OptionsJest = {}): TypedConfigItem[] {
+export async function jest({ overrides }: OptionsJest = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['eslint-plugin-jest']);
+
+  const pluginJest = await resolveDefaultExport(import('eslint-plugin-jest'));
+
   return [
     {
       plugins: {
-        jest: jestPlugin,
+        jest: pluginJest,
       },
       languageOptions: {
         globals: {
@@ -22,8 +26,8 @@ export function jest({ overrides }: OptionsJest = {}): TypedConfigItem[] {
     {
       files: GLOB_TEST_FILES,
       rules: {
-        ...jestPlugin.configs['flat/recommended'].rules,
-        ...jestPlugin.configs['flat/style'].rules,
+        ...pluginJest.configs['flat/recommended'].rules,
+        ...pluginJest.configs['flat/style'].rules,
       },
       name: 'jest/rules',
     },

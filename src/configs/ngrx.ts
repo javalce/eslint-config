@@ -1,18 +1,23 @@
 import type { OptionsNgrx, TypedConfigItem } from '../types';
 
-import ngrxPlugin from '@ngrx/eslint-plugin';
-import ngrxConfig from '@ngrx/eslint-plugin/v9';
-
 import { GLOB_TS_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export function ngrx({
+export async function ngrx({
   store = false,
   effects = false,
   componentStore = false,
   operators = false,
   signals = false,
   overrides,
-}: OptionsNgrx = {}): TypedConfigItem[] {
+}: OptionsNgrx = {}): Promise<TypedConfigItem[]> {
+  ensureInstalled(['@ngrx/eslint-plugin']);
+
+  const [pluginNgrx, ngrxConfig] = await Promise.all([
+    resolveDefaultExport(import('@ngrx/eslint-plugin')),
+    resolveDefaultExport(import('@ngrx/eslint-plugin/v9')),
+  ]);
+
   const configs: Array<[keyof typeof ngrxConfig.configs, boolean]> = [
     ['store', store],
     ['effects', effects],
@@ -26,7 +31,7 @@ export function ngrx({
       name: 'ngrx/setup',
       plugins: {
         '@ngrx': {
-          rules: ngrxPlugin.rules,
+          rules: pluginNgrx.rules,
         },
       },
     },
