@@ -28,6 +28,7 @@ export function typescript({
                   allowDefaultProject: ['./*.js'],
                   defaultProject: resolveTsconfig(tsconfigPath),
                 },
+                tsconfigRootDir: process.cwd(),
               }
             : {}),
         },
