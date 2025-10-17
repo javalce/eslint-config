@@ -18,6 +18,7 @@ import { react } from '../src/configs/react';
 import { solid } from '../src/configs/solidjs';
 import { stylistic } from '../src/configs/stylistic';
 import { svelte } from '../src/configs/svelte';
+import { tanstackQuery, tanstackRouter } from '../src/configs/tanstack';
 import { testingLibrary } from '../src/configs/testing-library';
 import { typescript } from '../src/configs/typescript';
 import { unicorn } from '../src/configs/unicorn';
@@ -55,6 +56,8 @@ const configs = (await combine(
   vue(),
   jest(),
   vitest(),
+  tanstackQuery(),
+  tanstackRouter(),
   testingLibrary({
     angular: true,
     react: true,

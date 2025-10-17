@@ -18,6 +18,7 @@ import { react } from './configs/react';
 import { solid } from './configs/solidjs';
 import { stylistic } from './configs/stylistic';
 import { svelte } from './configs/svelte';
+import { tanstackQuery, tanstackRouter } from './configs/tanstack';
 import { testingLibrary } from './configs/testing-library';
 import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
@@ -48,6 +49,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   const svelteEnabled = isEnabled(options, 'svelte');
   const solidEnabled = isEnabled(options, 'solid');
   const astroEnabled = isEnabled(options, 'astro');
+  const tanstackEnabled = isEnabled(options, 'tanstack');
   const testEnabled = isEnabled(options, 'test');
 
   configs.push(
@@ -139,6 +141,20 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
         typescript: tsEnabled,
       }),
     );
+  }
+
+  if (tanstackEnabled) {
+    const tanstackOptions = resolveSubOptions(options, 'tanstack');
+    const queryEnabled = isEnabled(tanstackOptions, 'query');
+    const routerEnabled = isEnabled(tanstackOptions, 'router');
+
+    if (queryEnabled) {
+      configs.push(tanstackQuery());
+    }
+
+    if (routerEnabled) {
+      configs.push(tanstackRouter());
+    }
   }
 
   if (testEnabled) {

@@ -213,6 +213,32 @@ export interface OptionsVue extends OptionsOverrides<'vue'> {
   version?: VueVersion;
 }
 
+export interface OptionsTanstackQuery extends OptionsOverrides<'@tanstack/query'> {}
+
+export interface OptionsTanstackRouter extends OptionsOverrides<'@tanstack/router'> {}
+
+export interface OptionsTanstack {
+  /**
+   * Enable Tanstack Query support.
+   *
+   * Requires installing:
+   * - `@tanstack/eslint-plugin-query`
+   *
+   * @default false
+   */
+  query?: boolean | OptionsTanstackQuery;
+
+  /**
+   * Enable Tanstack Router support.
+   *
+   * Requires installing:
+   * - `@tanstack/eslint-plugin-router`
+   *
+   * @default false
+   */
+  router?: boolean | OptionsTanstackRouter;
+}
+
 export interface OptionsTestingLibrary extends OptionsOverrides<'testing-library'> {}
 
 interface OptionsHasTestingLibrary {
@@ -352,6 +378,10 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   vue?: boolean | OptionsVue;
+  /**
+   * Enable Tanstack ESLint plugins support.
+   */
+  tanstack?: OptionsTanstack;
   /**
    * Enable testing framework support.
    *
