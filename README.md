@@ -23,6 +23,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
     - [Solidjs](#solidjs)
     - [Vue](#vue)
       - [Vue 2](#vue-2)
+    - [TanStack](#tanstack)
     - [Astro](#astro)
     - [Testing](#testing)
       - [Testing with Jest](#testing-with-jest)
@@ -385,6 +386,31 @@ import { defineConfig } from '@javalce/eslint-config';
 export default defineConfig({
   vue: {
     version: 2,
+  },
+});
+```
+
+### TanStack
+
+[TanStack](https://tanstack.com/) provides powerful tools for building web applications.
+
+The [@tanstack/query](https://tanstack.com/query/latest) and [@tanstack/router](https://tanstack.com/router/latest) libraries have ESLint plugins to enforce best practices while using them.
+
+To enable TanStack Query and Router support, you need to install the `@tanstack/eslint-plugin-query` and `@tanstack/eslint-plugin-router` packages:
+
+```bash
+pnpm add --save-dev @tanstack/eslint-plugin-query @tanstack/eslint-plugin-router
+```
+
+Then enable the rules you want:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  tanstack: {
+    query: true,
+    router: true,
   },
 });
 ```
