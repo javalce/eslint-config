@@ -1,3 +1,10 @@
+## [0.18.1](https://github.com/javalce/eslint-config/compare/v0.18.0...v0.18.1) (2025-10-17)
+
+### Bug Fixes
+
+- add tsconfigRootDir to typescript parser options ([5b543f2](https://github.com/javalce/eslint-config/commit/5b543f25ea91f6d1d4e2c1762fdeb663f0a4ff2b))
+- improve resolveTsconfig function logic for better path resolution ([ed686ce](https://github.com/javalce/eslint-config/commit/ed686ce69f8fcc5dc7042b461b8d192bc6162ee0))
+
 # [0.18.0](https://github.com/javalce/eslint-config/compare/v0.17.1...v0.18.0) (2025-10-08)
 
 ### Bug Fixes
