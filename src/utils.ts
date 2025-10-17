@@ -19,11 +19,21 @@ export function normalizeStringArray(
 }
 
 export function resolveTsconfig(path?: string): string {
-  if (path !== undefined) return path;
+  if (path) return path;
 
-  if (fs.existsSync('tsconfig.eslint.json')) return 'tsconfig.eslint.json';
+  const main = 'tsconfig.json';
+  const eslint = 'tsconfig.eslint.json';
 
-  return 'tsconfig.json';
+  if (fs.existsSync(main)) {
+    const raw = fs.readFileSync(main, 'utf-8');
+    const content = JSON.parse(raw) as Record<string, unknown>;
+
+    if (Array.isArray(content.references) && content.references.length > 0) {
+      return main;
+    }
+  }
+
+  return fs.existsSync(eslint) ? eslint : main;
 }
 
 export function resolveRelativePath(relativePath: string): string {
