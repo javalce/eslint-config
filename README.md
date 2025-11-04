@@ -158,11 +158,7 @@ To enable TypeScript support, you only need to install the `typescript` package:
 pnpm add --save-dev typescript
 ```
 
-By default, it will automatically load the typescript config and the configuration will look for a `tsconfig.json` file in the root of your project.
-
-Some projects use a `tsconfig.eslint.json` file to specify the typescript configuration for ESLint. In that case, it will automatically load the `tsconfig.eslint.json` file if it exists, otherwise it will load the `tsconfig.json` file.
-
-If you want, you can enable explicitly the TypeScript config:
+By default, the TypeScript configuration is enabled automatically is the `typescript` package is installed in your project. If you want to enable it explicitly, you can do it like this:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
@@ -172,7 +168,21 @@ export default defineConfig({
 });
 ```
 
-Also, if you want to use a different file, you can specify it in the configuration:
+Also by default, it will use the `tsconfig.json` file in the root of your project to configure the `projectService` option of the `@typescript-eslint/parser` (see [https://typescript-eslint.io/packages/parser#projectservice](https://typescript-eslint.io/packages/parser#projectservice)). This is the default configuration:
+
+```js
+{
+  parserOptions: {
+    projectService: {
+      allowDefaultProject: ['./*.js'],
+      defaultProject: 'tsconfig.json',
+    },
+    tsconfigRootDir: 'the/path/to/your/project',
+  }
+}
+```
+
+If you want to customize the `defaultProject` file, you can specify the `tsconfigPath` option in the configuration:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
@@ -183,8 +193,6 @@ export default defineConfig({
   },
 });
 ```
-
-Instead of using the absolute path to the tsconfig file(s) in the configuration, you can only pass the filename(s) and let the configuration resolve the absolute path for you.
 
 ### Angular
 
