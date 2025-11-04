@@ -1,3 +1,9 @@
+## [0.19.1](https://github.com/javalce/eslint-config/compare/v0.19.0...v0.19.1) (2025-11-04)
+
+### Bug Fixes
+
+- use tsconfigPath directly instead of resolving it in typescript config ([6695aa6](https://github.com/javalce/eslint-config/commit/6695aa61296529d4f92c822f07bc0f9abad8ebc4))
+
 # [0.19.0](https://github.com/javalce/eslint-config/compare/v0.18.1...v0.19.0) (2025-10-17)
 
 ### Bug Fixes
