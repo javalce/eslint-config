@@ -1,5 +1,5 @@
 import type { ConfigNames } from './typegen';
-import type { Awaitable, OptionsConfig, OptionsTsconfigPath, TypedConfigItem } from './types';
+import type { Awaitable, OptionsConfig, TypedConfigItem } from './types';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
@@ -36,9 +36,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   const configs: Array<Awaitable<TypedConfigItem[]>> = [];
 
   const projectType = options.type ?? 'app';
-
-  const tsconfigPath = (resolveSubOptions(options, 'typescript') as OptionsTsconfigPath | undefined)
-    ?.tsconfigPath;
 
   const tsEnabled = isEnabled(options, 'typescript', isPackageExists('typescript'));
   const angularEnabled = isEnabled(options, 'angular');
