@@ -1,9 +1,10 @@
 import type { Awaitable, TypedConfigItem } from './types';
 
-import { isPackageExists } from 'local-pkg';
 import { createRequire } from 'node:module';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { isPackageExists } from 'local-pkg';
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
 
