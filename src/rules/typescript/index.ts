@@ -9,6 +9,8 @@ const disabledRules: TypedConfigItem['rules'] = {
   '@typescript-eslint/no-non-null-assertion': 'off',
   // Normally, it's used by frameworks like Astro or Next.js or bundlers like Vite to reference it's types in a env.d.ts file.
   '@typescript-eslint/triple-slash-reference': 'off',
+  // This rule is troublesome when working with too complex types, frameworks like Angular or Svelte, or libraries for that frameworks.
+  '@typescript-eslint/unified-signatures': 'off',
 };
 
 const config: TypedConfigItem = {
