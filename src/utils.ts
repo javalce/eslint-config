@@ -1,11 +1,9 @@
 import type { Awaitable, TypedConfigItem } from './types';
 
-import fs from 'node:fs';
+import { isPackageExists } from 'local-pkg';
 import { createRequire } from 'node:module';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-
-import { isPackageExists } from 'local-pkg';
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
 
@@ -36,24 +34,6 @@ export function normalizeStringArray(
   const array = Array.isArray(value) ? value : [value];
 
   return callback ? array.map(callback) : array;
-}
-
-export function resolveTsconfig(path?: string): string {
-  if (path) return path;
-
-  const main = 'tsconfig.json';
-  const eslint = 'tsconfig.eslint.json';
-
-  if (fs.existsSync(main)) {
-    const raw = fs.readFileSync(main, 'utf-8');
-    const content = JSON.parse(raw) as Record<string, unknown>;
-
-    if (Array.isArray(content.references) && content.references.length > 0) {
-      return main;
-    }
-  }
-
-  return fs.existsSync(eslint) ? eslint : main;
 }
 
 export function ensureInstalled(packages: Array<string | undefined>): void {
