@@ -11,7 +11,7 @@ import { ensureInstalled, requireModule, resolveDefaultExport } from '../utils';
 const rootPath = process.cwd();
 
 export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConfigItem[]> {
-  ensureInstalled(['next', '@next/eslint-plugin-next']);
+  ensureInstalled(['@next/eslint-plugin-next']);
 
   const pluginNext = await resolveDefaultExport(import('@next/eslint-plugin-next'));
 
@@ -19,21 +19,31 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConf
     fs.existsSync(path.resolve(rootPath, 'src', 'app')) ||
     fs.existsSync(path.resolve(rootPath, 'app'));
 
-  const babelParser = requireModule('next/dist/compiled/babel/eslint-parser') as Linter.Parser;
-
-  const babelOptions = {
-    presets: (() => {
+  const languageOptions = {
+    parser: (() => {
       try {
-        requireModule.resolve('next/babel');
-
-        return ['next/babel'];
+        return requireModule('next/dist/compiled/babel/eslint-parser') as Linter.Parser;
       } catch {
-        return [];
+        return undefined;
       }
     })(),
-  };
+    parserOptions: {
+      requireConfigFile: false,
+      presets: (() => {
+        try {
+          requireModule.resolve('next/babel');
+
+          return ['next/babel'];
+        } catch {
+          return [];
+        }
+      })(),
+    },
+  } satisfies Linter.LanguageOptions;
 
   const defaultExportRuleFiles = (() => {
+    const middlewareFiles = ['**/middleware.{js,ts}', '**/proxy.{js,ts}'];
+
     if (isAppDir) {
       const filenames = [
         'layout',
@@ -52,10 +62,10 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConf
         'robots',
       ];
 
-      return [`**/app/**/{${filenames.join(',')}}.{js,jsx,tsx}`];
+      return [`**/app/**/{${filenames.join(',')}}.{js,jsx,tsx}`, ...middlewareFiles];
     }
 
-    return ['**/pages/**/*.[jt]s?(x)'];
+    return ['**/pages/**/*.[jt]s?(x)', ...middlewareFiles];
   })();
 
   return [
@@ -67,13 +77,7 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConf
     },
     {
       files: [GLOB_JS_FILES, GLOB_JSX_FILES],
-      languageOptions: {
-        parser: babelParser,
-        parserOptions: {
-          requireConfigFile: false,
-          babelOptions,
-        },
-      },
+      languageOptions,
       name: 'next/parser/javascript',
     },
     {
