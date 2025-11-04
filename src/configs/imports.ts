@@ -1,23 +1,14 @@
-import type {
-  OptionsHasTypescript,
-  OptionsImport,
-  OptionsTsconfigPath,
-  TypedConfigItem,
-} from '../types';
-
-import path from 'node:path';
+import type { OptionsHasTypescript, OptionsImport, TypedConfigItem } from '../types';
 
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver, importX as pluginImport } from 'eslint-plugin-import-x';
 
 import { GLOB_CONFIG_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
-import { resolveTsconfig } from '../utils';
 
 export function imports({
   typescript,
-  tsconfigPath,
   overrides,
-}: OptionsHasTypescript & OptionsTsconfigPath & OptionsImport = {}): TypedConfigItem[] {
+}: OptionsHasTypescript & OptionsImport = {}): TypedConfigItem[] {
   return [
     {
       plugins: {
@@ -29,15 +20,7 @@ export function imports({
       name: 'import/resolver',
       settings: {
         'import-x/resolver-next': [
-          ...(typescript
-            ? [
-                createTypeScriptImportResolver({
-                  alwaysTryTypes: true,
-                  bun: true,
-                  project: path.resolve(process.cwd(), resolveTsconfig(tsconfigPath)),
-                }),
-              ]
-            : []),
+          ...(typescript ? [createTypeScriptImportResolver()] : []),
           createNodeResolver(),
         ],
       },

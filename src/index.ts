@@ -59,7 +59,6 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     imports({
       ...resolveSubOptions(options, 'import'),
       typescript: tsEnabled,
-      tsconfigPath,
     }),
     perfectionist(resolveSubOptions(options, 'perfectionist')),
     stylistic(resolveSubOptions(options, 'stylistic')),
