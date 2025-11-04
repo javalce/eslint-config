@@ -7,10 +7,9 @@ import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import { createTypescriptImportRules } from '../rules/typescript/import';
 import eslintStylisticConfig from '../rules/typescript/stylistic';
-import { resolveTsconfig } from '../utils';
 
 export function typescript({
-  tsconfigPath,
+  tsconfigPath = 'tsconfig.json',
   type,
   overrides,
 }: OptionsTypescript & OptionsProjectType = {}): TypedConfigItem[] {
@@ -26,7 +25,7 @@ export function typescript({
             ? {
                 projectService: {
                   allowDefaultProject: ['./*.js'],
-                  defaultProject: resolveTsconfig(tsconfigPath),
+                  defaultProject: tsconfigPath,
                 },
                 tsconfigRootDir: process.cwd(),
               }
