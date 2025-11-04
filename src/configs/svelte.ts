@@ -1,7 +1,7 @@
-import type { OptionsHasTypescript, OptionsSvelte, TypedConfigItem } from '../types';
+import type { OptionsHasTypescript, OptionsSvelte, TypedConfigItem } from '@/types';
 
-import { GLOB_SVELTE_FILES } from '../globs';
-import { ensureInstalled, resolveDefaultExport } from '../utils';
+import { GLOB_SVELTE_FILES } from '@/globs';
+import { ensureInstalled, resolveDefaultExport } from '@/utils';
 
 export async function svelte({
   typescript,

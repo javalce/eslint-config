@@ -1,11 +1,11 @@
-import type { OptionsReact, TypedConfigItem } from '../types';
+import type { OptionsReact, TypedConfigItem } from '@/types';
 
 import { isPackageExists } from 'local-pkg';
 
-import { GLOB_SRC_FILES } from '../globs';
-import jsxA11Rules from '../rules/jsx-a11y';
-import reactRules from '../rules/react';
-import { ensureInstalled, resolveDefaultExport } from '../utils';
+import { GLOB_SRC_FILES } from '@/globs';
+import jsxA11Rules from '@/rules/jsx-a11y';
+import reactRules from '@/rules/react';
+import { ensureInstalled, resolveDefaultExport } from '@/utils';
 
 const REACT_ROUTER_PACKAGES = [
   '@react-router/node',

@@ -1,12 +1,12 @@
-import type { OptionsJavascript, TypedConfigItem } from '../types';
+import type { OptionsJavascript, TypedConfigItem } from '@/types';
 
 import js from '@eslint/js';
 import globals from 'globals';
 
-import bestPracticeConfig from '../rules/best-practice';
-import es6Config from '../rules/es6';
-import posibleErrorsConfig from '../rules/possible-errors';
-import variablesConfig from '../rules/variables';
+import bestPracticeConfig from '@/rules/best-practice';
+import es6Config from '@/rules/es6';
+import posibleErrorsConfig from '@/rules/possible-errors';
+import variablesConfig from '@/rules/variables';
 
 export function javascript({
   ecmaVersion = 2023,

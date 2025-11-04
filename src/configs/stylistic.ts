@@ -1,4 +1,4 @@
-import type { OptionsStylistic, TypedConfigItem } from '../types';
+import type { OptionsStylistic, TypedConfigItem } from '@/types';
 
 import pluginStylistic from '@stylistic/eslint-plugin';
 

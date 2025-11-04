@@ -1,8 +1,8 @@
-import type { OptionsHasTypescript, OptionsVitest, TypedConfigItem } from '../types';
+import type { OptionsHasTypescript, OptionsVitest, TypedConfigItem } from '@/types';
 
-import { GLOB_TEST_FILES } from '../globs';
-import eslintConfigVitest from '../rules/vitest';
-import { ensureInstalled, resolveDefaultExport } from '../utils';
+import { GLOB_TEST_FILES } from '@/globs';
+import eslintConfigVitest from '@/rules/vitest';
+import { ensureInstalled, resolveDefaultExport } from '@/utils';
 
 export async function vitest({
   typescript,

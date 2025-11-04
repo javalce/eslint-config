@@ -1,4 +1,4 @@
-import type { OptionsPerfectionist, TypedConfigItem } from '../types';
+import type { OptionsPerfectionist, TypedConfigItem } from '@/types';
 
 import pluginPerfectionist from 'eslint-plugin-perfectionist';
 

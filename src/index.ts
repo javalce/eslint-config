@@ -1,29 +1,29 @@
-import type { ConfigNames } from './typegen';
-import type { Awaitable, OptionsConfig, TypedConfigItem } from './types';
+import type { ConfigNames } from '@/typegen';
+import type { Awaitable, OptionsConfig, TypedConfigItem } from '@/types';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
-import { angular } from './configs/angular';
-import { astro } from './configs/astro';
-import { comments } from './configs/comments';
-import { ignores } from './configs/ignores';
-import { imports } from './configs/imports';
-import { javascript } from './configs/javascript';
-import { jest } from './configs/jest';
-import { nextjs } from './configs/nextjs';
-import { ngrx } from './configs/ngrx';
-import { perfectionist } from './configs/perfectionist';
-import { react } from './configs/react';
-import { solid } from './configs/solidjs';
-import { stylistic } from './configs/stylistic';
-import { svelte } from './configs/svelte';
-import { tanstackQuery, tanstackRouter } from './configs/tanstack';
-import { testingLibrary } from './configs/testing-library';
-import { typescript } from './configs/typescript';
-import { unicorn } from './configs/unicorn';
-import { vitest } from './configs/vitest';
-import { vue } from './configs/vue';
+import { angular } from '@/configs/angular';
+import { astro } from '@/configs/astro';
+import { comments } from '@/configs/comments';
+import { ignores } from '@/configs/ignores';
+import { imports } from '@/configs/imports';
+import { javascript } from '@/configs/javascript';
+import { jest } from '@/configs/jest';
+import { nextjs } from '@/configs/nextjs';
+import { ngrx } from '@/configs/ngrx';
+import { perfectionist } from '@/configs/perfectionist';
+import { react } from '@/configs/react';
+import { solid } from '@/configs/solidjs';
+import { stylistic } from '@/configs/stylistic';
+import { svelte } from '@/configs/svelte';
+import { tanstackQuery, tanstackRouter } from '@/configs/tanstack';
+import { testingLibrary } from '@/configs/testing-library';
+import { typescript } from '@/configs/typescript';
+import { unicorn } from '@/configs/unicorn';
+import { vitest } from '@/configs/vitest';
+import { vue } from '@/configs/vue';
 
 /**
  * Generates a custom ESLint configuration based on the provided options.

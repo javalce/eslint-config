@@ -1,4 +1,4 @@
-import type { TypedConfigItem } from '../types';
+import type { TypedConfigItem } from '@/types';
 
 const config: TypedConfigItem = {
   name: 'javascript/rules/variables',

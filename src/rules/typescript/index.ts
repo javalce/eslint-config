@@ -1,4 +1,4 @@
-import type { TypedConfigItem } from '../../types';
+import type { TypedConfigItem } from '@/types';
 
 /**
  * These rules are enabled by `@typescript-eslint`, but we've made the decision

@@ -1,11 +1,11 @@
 import type { Linter } from 'eslint';
 
-import type { OptionsAngular, TypedConfigItem } from '../types';
+import type { OptionsAngular, TypedConfigItem } from '@/types';
 
 import { parser as tsParser } from 'typescript-eslint';
 
-import { GLOB_HTML_FILES, GLOB_TS_FILES } from '../globs';
-import { ensureInstalled, resolveDefaultExport } from '../utils';
+import { GLOB_HTML_FILES, GLOB_TS_FILES } from '@/globs';
+import { ensureInstalled, resolveDefaultExport } from '@/utils';
 
 export async function angular(options: OptionsAngular = {}): Promise<TypedConfigItem[]> {
   ensureInstalled(['angular-eslint']);
