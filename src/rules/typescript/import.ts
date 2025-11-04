@@ -13,11 +13,11 @@ const disabledRules: Partial<Linter.RulesRecord> = {
   'import-x/no-unresolved': 'off',
 };
 
-export function createTypescriptImportRules(): TypedConfigItem {
-  return {
-    name: 'typescript/import/rules',
-    rules: {
-      ...disabledRules,
-    },
-  };
-}
+const config: TypedConfigItem = {
+  name: 'typescript/import/rules',
+  rules: {
+    ...disabledRules,
+  },
+};
+
+export default config;

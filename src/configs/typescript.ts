@@ -5,7 +5,7 @@ import tseslint from 'typescript-eslint';
 import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
-import { createTypescriptImportRules } from '../rules/typescript/import';
+import typescriptImportConfig from '../rules/typescript/import';
 import eslintStylisticConfig from '../rules/typescript/stylistic';
 
 export function typescript({
@@ -72,7 +72,7 @@ export function typescript({
             },
           ]
         : []),
-      createTypescriptImportRules(),
+      typescriptImportConfig,
       {
         name: 'typescript/rules/overrides',
         rules: {
