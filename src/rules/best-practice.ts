@@ -190,12 +190,6 @@ const config: TypedConfigItem = {
      */
     'no-useless-return': 'warn',
     /**
-     * Require using named capture groups in regular expressions.
-     *
-     * 🚫 Not fixable - https://eslint.org/docs/rules/prefer-named-capture-group
-     */
-    'prefer-named-capture-group': 'error',
-    /**
      * Require using Error objects as Promise rejection reasons.
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/prefer-promise-reject-errors
