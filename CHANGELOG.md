@@ -1,3 +1,9 @@
+# [0.20.0](https://github.com/javalce/eslint-config/compare/v0.19.1...v0.20.0) (2025-11-10)
+
+### Reverts
+
+- "refactor: update import paths to use alias '@' for improved readability" ([37b33e0](https://github.com/javalce/eslint-config/commit/37b33e028af282fa7b79993d550141bad4e4331d))
+
 ## [0.19.1](https://github.com/javalce/eslint-config/compare/v0.19.0...v0.19.1) (2025-11-04)
 
 ### Bug Fixes
