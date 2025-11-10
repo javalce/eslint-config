@@ -94,15 +94,9 @@ const config: TypedConfigItem = {
      */
     'no-extra-label': 'error',
     /**
-     * Make people convert types explicitly e.g. `Boolean(foo)` instead of `!!foo`.
-     *
-     * 🔧 Partially Fixable - https://eslint.org/docs/rules/no-implicit-coercion
-     */
-    'no-implicit-coercion': 'error',
-    /**
      * Disallow use of `eval()`-like methods.
      *
-     * https://eslint.org/docs/rules/no-implied-eval
+     * 🚫 Not fixable - https://eslint.org/docs/rules/no-implied-eval
      */
     'no-implied-eval': 'error',
     /**
