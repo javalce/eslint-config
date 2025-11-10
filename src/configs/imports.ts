@@ -3,7 +3,7 @@ import type { OptionsHasTypescript, OptionsImport, TypedConfigItem } from '../ty
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver, importX as pluginImport } from 'eslint-plugin-import-x';
 
-import { GLOB_CONFIG_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
+import { GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 
 export function imports({
   typescript,
@@ -73,12 +73,6 @@ export function imports({
          */
         'import-x/no-cycle': 'error',
         /**
-         * Disallow default exports.
-         *
-         * 🚫 Not fixable - https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md
-         */
-        'import-x/no-default-export': 'error',
-        /**
          * Disallow the use of extraneous packages.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-extraneous-dependencies.md
@@ -115,13 +109,6 @@ export function imports({
          */
         'import-x/no-useless-path-segments': ['error'],
       },
-    },
-    {
-      files: GLOB_CONFIG_FILES,
-      rules: {
-        'import-x/no-default-export': 'off',
-      },
-      name: 'import/rules/no-default-export',
     },
     {
       name: 'import/rules/overrides',

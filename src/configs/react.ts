@@ -111,17 +111,5 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
       ...config,
       files: [GLOB_SRC_FILES],
     })) as TypedConfigItem[]),
-    ...(isUsingReactRouter
-      ? ([
-          // React router requires default exports for routes and layouts.
-          {
-            files: ['**/*.[jt]sx', '*/routes.[jt]s'],
-            rules: {
-              'import-x/no-default-export': 'off',
-            },
-            name: 'react/rules/no-default-export',
-          },
-        ] satisfies TypedConfigItem[])
-      : []),
   ];
 }

@@ -7,7 +7,6 @@ export default defineConfig({
       files: ['src/rules/**/*.ts'],
       rules: {
         'sort-keys': 'error',
-        'import-x/no-default-export': 'off',
       },
     },
   ],

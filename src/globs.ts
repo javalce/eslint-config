@@ -39,5 +39,3 @@ export const GLOB_TS_TEST_FILES = [
   `**/*.bench.${GLOB_SRC_FILES_TS_EXT}`,
   `**/*.benchmark.${GLOB_SRC_FILES_TS_EXT}`,
 ];
-
-export const GLOB_CONFIG_FILES = ['**/*.+(config|conf).?([cm])[jt]s', '**/.*rc.?([cm])[jt]s'];
