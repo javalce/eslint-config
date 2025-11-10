@@ -201,7 +201,7 @@ const config: TypedConfigItem = {
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/prefer-regex-literals
      */
-    'prefer-regex-literals': 'error',
+    'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
     /**
      * Disallow "Yoda conditions", ensuring the comparison.
      *
