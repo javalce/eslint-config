@@ -7,6 +7,8 @@ import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
+const ReactRefreshAllowConstantExportPackages = ['vite'];
+
 const REACT_ROUTER_PACKAGES = [
   '@react-router/node',
   '@react-router/react',
@@ -30,8 +32,11 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
     resolveDefaultExport(import('eslint-plugin-jsx-a11y')),
   ]);
 
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some((pkg) =>
+    isPackageExists(pkg),
+  );
   const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
-  const isUsingNextJs = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
+  const isUsingNext = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
 
   return [
     {
@@ -56,10 +61,10 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
           'react-refresh/only-export-components': [
             'warn',
             {
-              allowConstantExport: true,
+              allowConstantExport: isAllowConstantExport,
               allowExportNames: [
                 ...(() => {
-                  if (isUsingNextJs) {
+                  if (isUsingNext) {
                     return [
                       'dynamic',
                       'dynamicParams',
@@ -73,6 +78,7 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
                       'metadata',
                       'generateMetadata',
                       'viewport',
+                      'generateViewport',
                     ];
                   }
 
