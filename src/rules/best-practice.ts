@@ -4,6 +4,12 @@ const config: TypedConfigItem = {
   name: 'javascript/rules/best-practice',
   rules: {
     /**
+     * Enforce getter and setter pairs in objects and classes
+     *
+     * 🚫 Not fixable - https://eslint.org/docs/rules/accessor-pairs
+     */
+    'accessor-pairs': ['error', { setWithoutGet: true, enforceForClassMembers: true }],
+    /**
      * Require return statements in array methods callbacks.
      *
      * 🚫 Not fixable -https://eslint.org/docs/rules/array-callback-return
@@ -39,12 +45,6 @@ const config: TypedConfigItem = {
      * 🔧 Fixable - https://eslint.org/docs/rules/eqeqeq
      */
     eqeqeq: ['error', 'always', { null: 'ignore' }],
-    /**
-     * Require grouped accessor pairs in object literals and classes.
-     *
-     * 🚫 Not fixable - https://eslint.org/docs/rules/grouped-accessor-pairs
-     */
-    'grouped-accessor-pairs': 'error',
     /**
      * Disallow use of `alert()`.
      *
