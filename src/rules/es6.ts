@@ -19,8 +19,8 @@ const config: TypedConfigItem = {
       'error',
       {
         ignoreDestructuring: false,
-        ignoreImport: false,
         ignoreExport: false,
+        ignoreImport: false,
       },
     ],
     /**

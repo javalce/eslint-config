@@ -8,7 +8,7 @@ const config: TypedConfigItem = {
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/accessor-pairs
      */
-    'accessor-pairs': ['error', { setWithoutGet: true, enforceForClassMembers: true }],
+    'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
     /**
      * Require return statements in array methods callbacks.
      *
