@@ -34,7 +34,7 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://eslint.org/docs/rules/object-shorthand
      */
-    'object-shorthand': 'warn',
+    'object-shorthand': ['error', 'always', { avoidQuotes: true, ignoreConstructors: false }],
     /**
      * Require default to `const` instead of `let`.
      *
