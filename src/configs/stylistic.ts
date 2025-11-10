@@ -64,7 +64,7 @@ export function stylistic({ overrides }: OptionsStylistic = {}): TypedConfigItem
          *
          * 🚫 Not fixable - https://eslint.org/docs/rules/new-cap
          */
-        'new-cap': ['error', { capIsNew: false }],
+        'new-cap': ['error', { newIsCap: true, capIsNew: false, properties: true }],
         /**
          * Disallow use of the Array constructor.
          *
