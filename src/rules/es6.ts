@@ -15,7 +15,14 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://eslint.org/docs/rules/no-useless-rename
      */
-    'no-useless-rename': 'warn',
+    'no-useless-rename': [
+      'error',
+      {
+        ignoreDestructuring: false,
+        ignoreImport: false,
+        ignoreExport: false,
+      },
+    ],
     /**
      * Require `let` or `const` instead of `var`.
      *
