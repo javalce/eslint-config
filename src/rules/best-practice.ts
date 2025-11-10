@@ -110,7 +110,7 @@ const config: TypedConfigItem = {
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/no-labels
      */
-    'no-labels': ['error'],
+    'no-labels': ['error', { allowLoop: false, allowSwitch: false }],
     /**
      * Disallow unnecessary nested blocks.
      *
