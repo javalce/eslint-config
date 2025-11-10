@@ -142,12 +142,6 @@ const config: TypedConfigItem = {
      */
     'no-octal-escape': 'error',
     /**
-     * Disallow reassignment of function parameters.
-     *
-     * 🚫 Not fixable - https://eslint.org/docs/rules/no-param-reassign
-     */
-    'no-param-reassign': 'error',
-    /**
      * Disallow usage of the deprecated `__proto__` property.
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/no-proto
