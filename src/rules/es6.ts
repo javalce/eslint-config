@@ -40,7 +40,7 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://eslint.org/docs/rules/prefer-const
      */
-    'prefer-const': 'warn',
+    'prefer-const': ['error', { destructuring: 'all', ignoreReadBeforeAssign: true }],
     /**
      * Disallow parseInt() in favor of binary, octal, and hexadecimal literals.
      *
