@@ -207,7 +207,7 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://eslint.org/docs/rules/yoda
      */
-    yoda: 'warn',
+    yoda: ['error', 'never'],
   },
 };
 
