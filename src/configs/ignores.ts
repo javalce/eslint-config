@@ -1,4 +1,4 @@
-import type { TypedConfigItem } from '@/types';
+import type { TypedConfigItem } from '../types';
 
 import fs from 'node:fs';
 import path from 'node:path';

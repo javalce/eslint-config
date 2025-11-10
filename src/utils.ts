@@ -1,4 +1,4 @@
-import type { Awaitable, TypedConfigItem } from '@/types';
+import type { Awaitable, TypedConfigItem } from './types';
 
 import { createRequire } from 'node:module';
 import { join } from 'node:path';

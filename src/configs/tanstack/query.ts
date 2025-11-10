@@ -1,4 +1,4 @@
-import type { OptionsTanstackQuery, TypedConfigItem } from '@/types';
+import type { OptionsTanstackQuery, TypedConfigItem } from '../../types';
 
 import {
   GLOB_JS_FILES,
@@ -7,8 +7,8 @@ import {
   GLOB_TS_FILES,
   GLOB_TSX_FILES,
   GLOB_VUE_FILES,
-} from '@/globs';
-import { resolveDefaultExport } from '@/utils';
+} from '../../globs';
+import { resolveDefaultExport } from '../../utils';
 
 export async function tanstackQuery({ overrides }: OptionsTanstackQuery = {}): Promise<
   TypedConfigItem[]

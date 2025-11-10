@@ -1,10 +1,10 @@
-import type { OptionsJest, TypedConfigItem } from '@/types';
+import type { OptionsJest, TypedConfigItem } from '../types';
 
 import globals from 'globals';
 
-import { GLOB_TEST_FILES, GLOB_TS_TEST_FILES } from '@/globs';
-import jestConfig from '@/rules/jest';
-import { ensureInstalled, resolveDefaultExport } from '@/utils';
+import { GLOB_TEST_FILES, GLOB_TS_TEST_FILES } from '../globs';
+import jestConfig from '../rules/jest';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function jest({ overrides }: OptionsJest = {}): Promise<TypedConfigItem[]> {
   ensureInstalled(['eslint-plugin-jest']);

@@ -1,7 +1,7 @@
-import type { OptionsHasTypescript, OptionsVue, TypedConfigItem } from '@/types';
+import type { OptionsHasTypescript, OptionsVue, TypedConfigItem } from '../types';
 
-import { GLOB_VUE_FILES } from '@/globs';
-import { ensureInstalled, resolveDefaultExport } from '@/utils';
+import { GLOB_VUE_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function vue({
   typescript,

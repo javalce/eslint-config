@@ -1,7 +1,7 @@
-import type { OptionsNgrx, TypedConfigItem } from '@/types';
+import type { OptionsNgrx, TypedConfigItem } from '../types';
 
-import { GLOB_TS_FILES } from '@/globs';
-import { ensureInstalled, resolveDefaultExport } from '@/utils';
+import { GLOB_TS_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function ngrx({
   store = false,

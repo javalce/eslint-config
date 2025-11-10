@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-import type { TypedConfigItem } from '@/types';
+import type { TypedConfigItem } from '../types';
 
 /**
  * These are enabled by `jsx-a11y/recommended`, but we've made the decision to

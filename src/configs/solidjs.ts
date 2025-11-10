@@ -1,7 +1,7 @@
-import type { OptionsHasTypescript, OptionsSolid, TypedConfigItem } from '@/types';
+import type { OptionsHasTypescript, OptionsSolid, TypedConfigItem } from '../types';
 
-import { GLOB_JSX_FILES, GLOB_TSX_FILES } from '@/globs';
-import { ensureInstalled, resolveDefaultExport } from '@/utils';
+import { GLOB_JSX_FILES, GLOB_TSX_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function solid({
   typescript,

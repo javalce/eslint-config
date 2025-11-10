@@ -1,12 +1,12 @@
 import type { Linter } from 'eslint';
 
-import type { OptionsNext, TypedConfigItem } from '@/types';
+import type { OptionsNext, TypedConfigItem } from '../types';
 
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { GLOB_JS_FILES, GLOB_JSX_FILES, GLOB_SRC_FILES } from '@/globs';
-import { ensureInstalled, requireModule, resolveDefaultExport } from '@/utils';
+import { GLOB_JS_FILES, GLOB_JSX_FILES, GLOB_SRC_FILES } from '../globs';
+import { ensureInstalled, requireModule, resolveDefaultExport } from '../utils';
 
 const rootPath = process.cwd();
 

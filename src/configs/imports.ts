@@ -1,9 +1,9 @@
-import type { OptionsHasTypescript, OptionsImport, TypedConfigItem } from '@/types';
+import type { OptionsHasTypescript, OptionsImport, TypedConfigItem } from '../types';
 
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver, importX as pluginImport } from 'eslint-plugin-import-x';
 
-import { GLOB_CONFIG_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '@/globs';
+import { GLOB_CONFIG_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 
 export function imports({
   typescript,

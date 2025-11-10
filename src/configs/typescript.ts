@@ -1,12 +1,12 @@
-import type { OptionsProjectType, OptionsTypescript, TypedConfigItem } from '@/types';
+import type { OptionsProjectType, OptionsTypescript, TypedConfigItem } from '../types';
 
 import tseslint from 'typescript-eslint';
 
-import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '@/globs';
-import eslintTypescriptConfig from '@/rules/typescript';
-import eslintExtensionConfig from '@/rules/typescript/extension';
-import typescriptImportConfig from '@/rules/typescript/import';
-import eslintStylisticConfig from '@/rules/typescript/stylistic';
+import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
+import eslintTypescriptConfig from '../rules/typescript';
+import eslintExtensionConfig from '../rules/typescript/extension';
+import typescriptImportConfig from '../rules/typescript/import';
+import eslintStylisticConfig from '../rules/typescript/stylistic';
 
 export function typescript({
   tsconfigPath = 'tsconfig.json',

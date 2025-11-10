@@ -1,7 +1,7 @@
-import type { OptionsTestingLibrary, TypedConfigItem } from '@/types';
+import type { OptionsTestingLibrary, TypedConfigItem } from '../types';
 
-import { GLOB_TEST_FILES } from '@/globs';
-import { ensureInstalled, resolveDefaultExport } from '@/utils';
+import { GLOB_TEST_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function testingLibrary({
   angular = false,

@@ -1,4 +1,4 @@
-import type { OptionsUnicorn, TypedConfigItem } from '@/types';
+import type { OptionsUnicorn, TypedConfigItem } from '../types';
 
 import pluginUnicorn from 'eslint-plugin-unicorn';
 

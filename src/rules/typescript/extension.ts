@@ -1,6 +1,6 @@
-import type { TypedConfigItem } from '@/types';
+import type { TypedConfigItem } from '../../types';
 
-import variablesConfig from '@/rules/variables';
+import variablesConfig from '../variables';
 
 // These share identical configuration options, so we want to keep them in sync.
 

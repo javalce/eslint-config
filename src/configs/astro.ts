@@ -1,10 +1,10 @@
-import type { OptionsAstro, OptionsHasTypescript, TypedConfigItem } from '@/types';
+import type { OptionsAstro, OptionsHasTypescript, TypedConfigItem } from '../types';
 
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-import { GLOB_ASTRO_FILES, GLOB_ASTRO_JS_FILES, GLOB_ASTRO_TS_FILES } from '@/globs';
-import { ensureInstalled, resolveDefaultExport } from '@/utils';
+import { GLOB_ASTRO_FILES, GLOB_ASTRO_JS_FILES, GLOB_ASTRO_TS_FILES } from '../globs';
+import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function astro({
   typescript,
