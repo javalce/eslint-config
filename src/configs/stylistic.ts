@@ -72,12 +72,6 @@ export function stylistic({ overrides }: OptionsStylistic = {}): TypedConfigItem
          */
         'no-array-constructor': 'error',
         /**
-         * Disallow use of bitwise operators.
-         *
-         * 🚫 Not fixable - https://eslint.org/docs/rules/no-bitwise
-         */
-        'no-bitwise': 'error',
-        /**
          * Disallow if as the only statement in an else block.
          *
          * 🔧 Fixable - https://eslint.org/docs/rules/no-lonely-if
