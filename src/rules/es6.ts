@@ -8,7 +8,7 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://eslint.org/docs/rules/no-useless-computed-key
      */
-    'no-useless-computed-key': 'warn',
+    'no-useless-computed-key': ['error', { enforceForClassMembers: true }],
     /**
      * Disallow renaming import, export, and destructured assignments to the
      * same name.
