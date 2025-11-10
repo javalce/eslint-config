@@ -42,12 +42,6 @@ const config: TypedConfigItem = {
      */
     'prefer-const': ['error', { destructuring: 'all', ignoreReadBeforeAssign: true }],
     /**
-     * Disallow parseInt() in favor of binary, octal, and hexadecimal literals.
-     *
-     * 🔧 Fixable - https://eslint.org/docs/rules/prefer-numeric-literals
-     */
-    'prefer-numeric-literals': 'error',
-    /**
      * Require using rest parameters instead of `arguments`.
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/prefer-rest-params
