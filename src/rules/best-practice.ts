@@ -28,6 +28,12 @@ const config: TypedConfigItem = {
      */
     'default-case-last': 'error',
     /**
+     * Enforce dot notation whenever possible.
+     *
+     * 🔧 Fixable - https://eslint.org/docs/rules/dot-notation
+     */
+    'dot-notation': ['warn', { allowKeywords: true }],
+    /**
      * Require triple equals (`===` and `!==`).
      *
      * 🔧 Fixable - https://eslint.org/docs/rules/eqeqeq
