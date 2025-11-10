@@ -38,7 +38,7 @@ const config: TypedConfigItem = {
      *
      * 🔧 Fixable - https://eslint.org/docs/rules/eqeqeq
      */
-    eqeqeq: 'error',
+    eqeqeq: ['error', 'always', { null: 'ignore' }],
     /**
      * Require grouped accessor pairs in object literals and classes.
      *
