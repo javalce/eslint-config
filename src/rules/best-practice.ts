@@ -170,7 +170,7 @@ const config: TypedConfigItem = {
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/no-sequences
      */
-    'no-sequences': 'error',
+    'no-sequences': ['error', { allowInParentheses: true }],
     /**
      * Disallow unnecessary `.call()` and `.apply()`.
      *
