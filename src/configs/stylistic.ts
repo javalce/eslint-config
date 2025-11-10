@@ -94,7 +94,7 @@ export function stylistic({ overrides }: OptionsStylistic = {}): TypedConfigItem
          *
          * 🚫 Not fixable - https://eslint.org/docs/rules/no-unneeded-ternary
          */
-        'no-unneeded-ternary': 'error',
+        'no-unneeded-ternary': ['error', { defaultAssignment: false }],
         /**
          * Require use of an object spread over Object.assign.
          *
