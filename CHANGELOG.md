@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/javalce/eslint-config/compare/v0.20.0...v0.20.1) (2025-11-12)
+
+### Bug Fixes
+
+- add main and types fields to package.json for better module resolution ([4da0473](https://github.com/javalce/eslint-config/commit/4da0473a4bd5cdc89288f7eb7781abece63daf96))
+- set fixedExtension option to false on tsdown to allow .js exports ([422c737](https://github.com/javalce/eslint-config/commit/422c73721ef9908b878f901ff4f1e327dead76eb))
+
 # [0.20.0](https://github.com/javalce/eslint-config/compare/v0.19.1...v0.20.0) (2025-11-10)
 
 ### Reverts
