@@ -28,6 +28,8 @@
       "default": "./dist/globs.js"
     }
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
