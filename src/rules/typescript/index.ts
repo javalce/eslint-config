@@ -50,7 +50,14 @@ const config: TypedConfigItem = {
      *
      * 🚫 Not fixable - https://typescript-eslint.io/rules/explicit-function-return-type/
      */
-    '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
+    '@typescript-eslint/explicit-function-return-type': [
+      'warn',
+      {
+        allowExpressions: true,
+        allowHigherOrderFunctions: true,
+        allowIIFEs: true,
+      },
+    ],
     /**
      * Require using function property types in method signatures.
      *
