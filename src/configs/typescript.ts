@@ -6,7 +6,6 @@ import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
 import typescriptImportConfig from '../rules/typescript/import';
-import eslintStylisticConfig from '../rules/typescript/stylistic';
 
 export function typescript({
   tsconfigPath = 'tsconfig.json',
@@ -59,7 +58,6 @@ export function typescript({
         ...tseslint.configs.stylisticTypeChecked.at(-1),
         name: 'typescript/rules/stylistic-type-checked',
       },
-      eslintStylisticConfig,
       eslintExtensionConfig,
       ...(type === 'app'
         ? [

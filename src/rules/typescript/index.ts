@@ -14,9 +14,15 @@ const disabledRules: TypedConfigItem['rules'] = {
 };
 
 const config: TypedConfigItem = {
-  name: 'typescript/rules/strict-plus',
+  name: 'typescript/rules/types',
   rules: {
     ...disabledRules,
+    /**
+     * Enforce a consistent style for array type annotations.
+     *
+     * 🔧 Fixable - https://typescript-eslint.io/rules/array-type/
+     */
+    '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
     /**
      * Require consistent usage of type exports.
      *
