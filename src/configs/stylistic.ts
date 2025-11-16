@@ -41,8 +41,11 @@ export function stylistic({ overrides }: OptionsStylistic = {}): TypedConfigItem
         '@stylistic/padding-line-between-statements': [
           'warn',
           { blankLine: 'always', prev: '*', next: ['return', 'export'] },
+          { blankLine: 'always', prev: 'export', next: '*' },
+          { blankLine: 'any', prev: 'export', next: 'export' },
           { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
           { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
+          { blankLine: 'always', prev: ['block', 'block-like'], next: '*' },
         ],
         /**
          * Require camel case names.
