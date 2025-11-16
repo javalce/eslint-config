@@ -14,6 +14,7 @@ This configuration is opinionated and it may not fit your needs. You can extend 
     - [Ignore files](#ignore-files)
     - [Custom path aliases](#custom-path-aliases)
     - [TypeScript](#typescript)
+    - [JSX](#jsx)
     - [Angular](#angular)
       - [Customizing selectors](#customizing-selectors)
     - [NgRx](#ngrx)
@@ -190,6 +191,53 @@ import { defineConfig } from '@javalce/eslint-config';
 export default defineConfig({
   typescript: {
     tsconfigPath: './path/to/tsconfig.custom.json',
+  },
+});
+```
+
+### JSX
+
+The `jsx` configuration enables basic JSX support (parsing) for `.jsx` and `.tsx` files and can optionally enable accessibility rules from `eslint-plugin-jsx-a11y`.
+
+Basic usage (parses JSX files):
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  jsx: true,
+});
+```
+
+Enable accessibility rules (requires installing `eslint-plugin-jsx-a11y`):
+
+```bash
+pnpm add --save-dev eslint-plugin-jsx-a11y
+```
+
+Then enable accessibility rules in the config:
+
+```js
+import { defineConfig } from '@javalce/eslint-config';
+
+export default defineConfig({
+  jsx: {
+    a11y: true,
+  },
+});
+```
+
+You can also pass an object to `a11y` to customize or override specific rules provided by `eslint-plugin-jsx-a11y`:
+
+```js
+export default defineConfig({
+  jsx: {
+    a11y: {
+      overrides: {
+        // provide rule overrides using the plugin rule keys
+        'jsx-a11y/anchor-is-valid': 'off',
+      },
+    },
   },
 });
 ```
