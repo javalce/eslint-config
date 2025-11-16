@@ -1,3 +1,14 @@
+# [0.21.0](https://github.com/javalce/eslint-config/compare/v0.20.1...v0.21.0) (2025-11-16)
+
+### Bug Fixes
+
+- update explicit-function-return-type rule to allow higher-order functions and IIFEs ([bb51c84](https://github.com/javalce/eslint-config/commit/bb51c840fd827b6684aea0616844014353d2dc52))
+- update newline-after-import rule to enforce a single newline after imports ([f2d5d79](https://github.com/javalce/eslint-config/commit/f2d5d79a697f4566020727aa12a95910db7ad6a6))
+
+### Features
+
+- add JSX configuration with accessibility rules support ([7499fe6](https://github.com/javalce/eslint-config/commit/7499fe6c7daff49bd3106183dace83c81d5593fb))
+
 ## [0.20.1](https://github.com/javalce/eslint-config/compare/v0.20.0...v0.20.1) (2025-11-12)
 
 ### Bug Fixes
