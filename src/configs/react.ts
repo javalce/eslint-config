@@ -3,7 +3,6 @@ import type { OptionsReact, TypedConfigItem } from '../types';
 import { isPackageExists } from 'local-pkg';
 
 import { GLOB_SRC_FILES } from '../globs';
-import jsxA11Rules from '../rules/jsx-a11y';
 import reactRules from '../rules/react';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
@@ -22,14 +21,12 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
     'eslint-plugin-react',
     'eslint-plugin-react-hooks',
     'eslint-plugin-react-refresh',
-    'eslint-plugin-jsx-a11y',
   ]);
 
-  const [pluginReact, pluginReactHooks, pluginReactRefresh, pluginJsxA11y] = await Promise.all([
+  const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
     resolveDefaultExport(import('eslint-plugin-react')),
     resolveDefaultExport(import('eslint-plugin-react-hooks')),
     resolveDefaultExport(import('eslint-plugin-react-refresh')),
-    resolveDefaultExport(import('eslint-plugin-jsx-a11y')),
   ]);
 
   const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some((pkg) =>
@@ -44,7 +41,6 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
         react: pluginReact,
         'react-hooks': pluginReactHooks,
         'react-refresh': pluginReactRefresh,
-        'jsx-a11y': pluginJsxA11y,
       },
       name: 'react/setup',
     },
@@ -101,12 +97,10 @@ export async function react({ overrides }: OptionsReact = {}): Promise<TypedConf
               ],
             },
           ],
-          ...pluginJsxA11y.flatConfigs.recommended.rules,
         },
         name: 'react/rules',
       },
       reactRules,
-      jsxA11Rules,
       {
         name: 'react/rules/overrides',
         rules: {

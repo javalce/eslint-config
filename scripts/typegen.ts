@@ -11,6 +11,7 @@ import { comments } from '../src/configs/comments';
 import { imports } from '../src/configs/imports';
 import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
+import { jsx } from '../src/configs/jsx';
 import { nextjs } from '../src/configs/nextjs';
 import { ngrx } from '../src/configs/ngrx';
 import { perfectionist } from '../src/configs/perfectionist';
@@ -25,10 +26,6 @@ import { unicorn } from '../src/configs/unicorn';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
 import { combine } from '../src/utils';
-
-// function combine(...configs: Array<TypedConfigItem | TypedConfigItem[]>): TypedConfigItem[] {
-//   return configs.flat();
-// }
 
 const configs = (await combine(
   {
@@ -45,6 +42,7 @@ const configs = (await combine(
   perfectionist(),
   stylistic(),
   unicorn(),
+  jsx({ a11y: true }),
   typescript(),
   angular(),
   ngrx(),

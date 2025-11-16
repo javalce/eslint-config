@@ -3,8 +3,6 @@ import type { OptionsHasTypescript, OptionsImport, TypedConfigItem } from '../ty
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver, importX as pluginImport } from 'eslint-plugin-import-x';
 
-import { GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
-
 export function imports({
   typescript,
   overrides,
@@ -20,31 +18,18 @@ export function imports({
       name: 'import/resolver',
       settings: {
         'import-x/resolver-next': [
-          ...(typescript ? [createTypeScriptImportResolver()] : []),
           createNodeResolver(),
+          ...(typescript ? [createTypeScriptImportResolver()] : []),
         ],
       },
     },
     {
-      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
-      settings: {
-        ...pluginImport.flatConfigs.typescript.settings,
-      },
-      rules: {
-        ...pluginImport.flatConfigs.typescript.rules,
-      },
-      name: 'import/typescript',
-    },
-    {
-      files: [GLOB_SRC_FILES],
       settings: {
         ...pluginImport.flatConfigs.react.settings,
+        ...(typescript ? pluginImport.flatConfigs.typescript.settings : {}),
       },
-      languageOptions: {
-        ...pluginImport.flatConfigs.react.languageOptions,
-      },
-      name: 'import/jsx',
-    } as TypedConfigItem,
+      name: 'import/extensions',
+    },
     {
       name: 'import/rules',
       rules: {

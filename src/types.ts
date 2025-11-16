@@ -133,6 +133,21 @@ export interface OptionsImport extends OptionsOverrides<'import-x'> {}
 
 export interface OptionsPerfectionist extends OptionsOverrides<'perfectionist'> {}
 
+export interface OptionsJSXA11y extends OptionsOverrides<'jsx-a11y'> {}
+
+export interface OptionsJSX {
+  /**
+   * Enable JSX accessibility rules.
+   *
+   * Requires installing:
+   * - `eslint-plugin-jsx-a11y`
+   *
+   * Can be a boolean or an object for custom options and overrides.
+   * @default false
+   */
+  a11y?: boolean | OptionsJSXA11y;
+}
+
 export interface OptionsTsconfigPath {
   /**
    * Provides the path(s) to the TypeScript configuration file(s) for type linting
@@ -191,8 +206,7 @@ export interface OptionsNgrx extends OptionsOverrides<'@ngrx'> {
   signals?: boolean;
 }
 
-export interface OptionsReact
-  extends OptionsOverrides<'react' | 'react-hooks' | 'react-refresh' | 'jsx-a11y'> {}
+export interface OptionsReact extends OptionsOverrides<'react' | 'react-hooks' | 'react-refresh'> {}
 
 export interface OptionsNext extends OptionsOverrides<'@next/next'> {}
 
@@ -298,6 +312,14 @@ export interface OptionsConfig extends OptionsProjectType {
    * @see {@link OptionsTypescript}
    */
   typescript?: boolean | OptionsTypescript;
+  /**
+   * Enable JSX related rules.
+   *
+   * Passing an object to enable JSX accessibility rules.
+   *
+   * @default true
+   */
+  jsx?: boolean | OptionsJSX;
   /**
    * Enable Angular support.
    *

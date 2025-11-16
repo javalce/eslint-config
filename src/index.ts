@@ -11,6 +11,7 @@ import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
 import { jest } from './configs/jest';
+import { jsx } from './configs/jsx';
 import { nextjs } from './configs/nextjs';
 import { ngrx } from './configs/ngrx';
 import { perfectionist } from './configs/perfectionist';
@@ -41,6 +42,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   const angularEnabled = isEnabled(options, 'angular');
   const ngrxEnabled = isEnabled(options, 'ngrx');
   const reactEnabled = isEnabled(options, 'react');
+  const jsxEnabled = isEnabled(options, 'jsx');
   const nextEnabled = isEnabled(options, 'next');
   const vueEnabled = isEnabled(options, 'vue');
   const svelteEnabled = isEnabled(options, 'svelte');
@@ -67,6 +69,14 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
       typescript({
         ...resolveSubOptions(options, 'typescript'),
         type: projectType,
+      }),
+    );
+  }
+
+  if (jsxEnabled) {
+    configs.push(
+      jsx({
+        ...resolveSubOptions(options, 'jsx'),
       }),
     );
   }
