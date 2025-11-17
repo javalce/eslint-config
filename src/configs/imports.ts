@@ -1,12 +1,20 @@
-import type { OptionsHasTypescript, OptionsImport, TypedConfigItem } from '../types';
+import type {
+  OptionsHasTypescript,
+  OptionsImport,
+  OptionsTsconfigPath,
+  TypedConfigItem,
+} from '../types';
+
+import { resolve } from 'node:path';
 
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver, importX as pluginImport } from 'eslint-plugin-import-x';
 
 export function imports({
   typescript,
+  tsconfigPath = 'tsconfig.json',
   overrides,
-}: OptionsHasTypescript & OptionsImport = {}): TypedConfigItem[] {
+}: OptionsHasTypescript & OptionsTsconfigPath & OptionsImport = {}): TypedConfigItem[] {
   return [
     {
       plugins: {
@@ -18,8 +26,17 @@ export function imports({
       name: 'import/resolver',
       settings: {
         'import-x/resolver-next': [
+          ...(typescript
+            ? [
+                createTypeScriptImportResolver({
+                  alwaysTryTypes: true,
+                  // @ts-expect-error -- Bun global variable only available in Bun runtime
+                  bun: typeof Bun !== 'undefined' || process.release.name === 'bun',
+                  ...(tsconfigPath ? { project: resolve(process.cwd(), tsconfigPath) } : {}),
+                }),
+              ]
+            : []),
           createNodeResolver(),
-          ...(typescript ? [createTypeScriptImportResolver()] : []),
         ],
       },
     },
