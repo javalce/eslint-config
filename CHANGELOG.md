@@ -1,3 +1,9 @@
+## [0.21.1](https://github.com/javalce/eslint-config/compare/v0.21.0...v0.21.1) (2025-11-17)
+
+### Bug Fixes
+
+- use correct import resolvers ([383b73b](https://github.com/javalce/eslint-config/commit/383b73baf6f5ab63369a045fe35e0f2f3c341673))
+
 # [0.21.0](https://github.com/javalce/eslint-config/compare/v0.20.1...v0.21.0) (2025-11-16)
 
 ### Bug Fixes
