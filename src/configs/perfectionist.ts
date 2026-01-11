@@ -18,17 +18,17 @@ export function perfectionist({ overrides }: OptionsPerfectionist = {}): TypedCo
           'warn',
           {
             groups: [
-              'type', // Type imports
-              ['parent-type', 'sibling-type', 'index-type', 'internal-type'], // Type imports from aliases and relative paths
-              'builtin', // Node.js built-in modules
-              'external', // Packages
-              'internal', // Aliased modules
-              ['parent', 'sibling', 'index'], // Relative imports
+              'type-import', // Any type imports
+              ['type-parent', 'type-sibling', 'type-index', 'type-internal'], // Type imports from aliases and relative paths
+              'value-builtin', // Node.js built-in modules
+              'value-external', // Packages
+              'value-internal', // Aliased modules
+              ['value-parent', 'value-sibling', 'value-index'], // Relative imports
               'side-effect', // Side-effect imports
-              'object', // Object imports
+              'ts-equals-import', // Any other imports
               'unknown', // Unknown imports
             ],
-            newlinesBetween: 'always',
+            newlinesBetween: 1,
             order: 'asc',
             type: 'natural',
           },
