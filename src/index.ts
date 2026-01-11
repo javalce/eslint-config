@@ -38,7 +38,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
 
   const projectType = options.type ?? 'app';
 
-  const tsEnabled = isEnabled(options, 'typescript', isPackageExists('typescript'));
+  const tsEnabled = isEnabled(options, 'ts', isPackageExists('typescript'));
   const angularEnabled = isEnabled(options, 'angular');
   const ngrxEnabled = isEnabled(options, 'ngrx');
   const reactEnabled = isEnabled(options, 'react');
@@ -53,7 +53,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
 
   configs.push(
     ignores({ files: options.ignores }),
-    javascript(resolveSubOptions(options, 'javascript')),
+    javascript(resolveSubOptions(options, 'js')),
     comments(resolveSubOptions(options, 'comments')),
     imports({
       ...resolveSubOptions(options, 'import'),
@@ -67,7 +67,7 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
   if (tsEnabled) {
     configs.push(
       typescript({
-        ...resolveSubOptions(options, 'typescript'),
+        ...resolveSubOptions(options, 'ts'),
         type: projectType,
       }),
     );

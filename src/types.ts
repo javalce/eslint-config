@@ -158,8 +158,7 @@ export interface OptionsTsconfigPath {
 }
 
 export interface OptionsTypescript
-  extends OptionsTsconfigPath,
-    OptionsOverrides<'@typescript-eslint'> {}
+  extends OptionsTsconfigPath, OptionsOverrides<'@typescript-eslint'> {}
 
 export interface OptionsHasTypescript {
   typescript?: boolean;
@@ -277,7 +276,7 @@ export interface OptionsConfig extends OptionsProjectType {
   /**
    * Core rules.
    */
-  javascript?: OptionsJavascript;
+  js?: OptionsJavascript;
   /**
    * List of glob patterns for files/directories to ignore.
    *
@@ -311,7 +310,7 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default auto-detect based on the dependencies
    * @see {@link OptionsTypescript}
    */
-  typescript?: boolean | OptionsTypescript;
+  ts?: boolean | OptionsTypescript;
   /**
    * Enable JSX related rules.
    *
