@@ -39,21 +39,6 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
     };
   }
 
-  const directive: OptionsAngular['directive'] = {
-    type: 'attribute',
-    prefix: 'app',
-    style: 'camelCase',
-    ...options.directive,
-  };
-  const component: OptionsAngular['component'] = {
-    type: 'element',
-    prefix: 'app',
-    style: 'kebab-case',
-    ...options.component,
-  };
-  const overridesTypescript = options.overrides?.typescript;
-  const overridesTemplate = options.overrides?.template;
-
   return [
     {
       name: 'angular/setup',
@@ -66,10 +51,28 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
       ...angularEslint.configs.tsRecommended
         .map((i) => i.rules)
         .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
-      '@angular-eslint/directive-selector': ['error', directive],
-      '@angular-eslint/component-selector': ['error', component],
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
+          ...options.directive,
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
+          ...options.component,
+        },
+      ],
     }),
-    createAngularConfig('angular/typescript/rules/overrides', { ...overridesTypescript }),
+    createAngularConfig('angular/typescript/rules/overrides', {
+      ...options.overrides?.typescript,
+    }),
     createAngularTemplateConfig('angular/template/rules', {
       ...angularEslint.configs.templateRecommended
         .map((i) => i.rules)
@@ -77,8 +80,9 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
       ...angularEslint.configs.templateAccessibility
         .map((i) => i.rules)
         .reduce((acc, rules) => ({ ...acc, ...rules }), {}),
-      ...overridesTemplate,
     }),
-    createAngularTemplateConfig('angular/template/rules/overrides', { ...overridesTemplate }),
+    createAngularTemplateConfig('angular/template/rules/overrides', {
+      ...options.overrides?.template,
+    }),
   ];
 }
