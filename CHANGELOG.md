@@ -1,3 +1,9 @@
+## [0.21.2](https://github.com/javalce/eslint-config/compare/v0.21.1...v0.21.2) (2026-01-11)
+
+### Bug Fixes
+
+- update import sorting groups and newline settings in perfectionist config ([5613864](https://github.com/javalce/eslint-config/commit/56138643b4545341500a7c59d93cfb7c00c61f3d))
+
 ## [0.21.1](https://github.com/javalce/eslint-config/compare/v0.21.0...v0.21.1) (2025-11-17)
 
 ### Bug Fixes
