@@ -19,7 +19,8 @@ export function perfectionist({ overrides }: OptionsPerfectionist = {}): TypedCo
           {
             groups: [
               'type-import', // Any type imports
-              ['type-parent', 'type-sibling', 'type-index', 'type-internal'], // Type imports from aliases and relative paths
+              'type-internal', // Type imports from aliased modules
+              ['type-parent', 'type-sibling', 'type-index'], // Type imports from relative paths
               'value-builtin', // Node.js built-in modules
               'value-external', // Packages
               'value-internal', // Aliased modules
@@ -30,7 +31,7 @@ export function perfectionist({ overrides }: OptionsPerfectionist = {}): TypedCo
             ],
             newlinesBetween: 1,
             order: 'asc',
-            type: 'natural',
+            type: 'subgroup-order',
           },
         ],
         'perfectionist/sort-named-exports': ['warn', { order: 'asc', type: 'natural' }],
