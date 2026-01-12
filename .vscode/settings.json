@@ -1,13 +1,15 @@
 {
-  "eslint.runtime": "node",
   "editor.codeActionsOnSave": {
+    "source.addMissingImports.ts": "explicit",
     "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "never",
+    "source.removeUnusedImports": "explicit"
   },
+  "eslint.runtime": "node",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "tsconfig.json": "tsconfig.*.json",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, pnpm-workspace.yaml, bun.lockb, bun.lock, .gitignore, *.config.ts, *.config.js, .editorconfig, .prettierignore"
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, pnpm-workspace.yaml, bun.lockb, bun.lock, .gitignore, *.config.ts, *.config.js, .editorconfig, .prettierignore",
+    "tsconfig.json": "tsconfig.*.json"
   }
 }
