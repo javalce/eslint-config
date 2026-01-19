@@ -57,6 +57,12 @@ export function imports({
          */
         'import-x/first': 'error',
         /**
+         * Enforce using top-level type specifiers instead of inline type specifiers.
+         *
+         * 🔧 Fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/consistent-type-specifier-style.md
+         */
+        'import-x/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+        /**
          * Require a newline after the last import-x/require.
          *
          * 🔧 Fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/newline-after-import.md
