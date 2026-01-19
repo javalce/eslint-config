@@ -205,7 +205,9 @@ export interface OptionsNgrx extends OptionsOverrides<'@ngrx'> {
   signals?: boolean;
 }
 
-export interface OptionsReact extends OptionsOverrides<'react' | 'react-hooks' | 'react-refresh'> {}
+export interface OptionsReact extends OptionsOverrides<'react' | 'react-hooks' | 'react-refresh'> {
+  reactCompiler?: boolean;
+}
 
 export interface OptionsNext extends OptionsOverrides<'@next/next'> {}
 
