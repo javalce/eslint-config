@@ -40,7 +40,7 @@ const config: TypedConfigItem = {
     '@typescript-eslint/consistent-type-imports': [
       'warn',
       {
-        disallowTypeAnnotations: true,
+        disallowTypeAnnotations: false,
         fixStyle: 'separate-type-imports',
         prefer: 'type-imports',
       },
