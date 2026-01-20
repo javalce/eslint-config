@@ -215,6 +215,7 @@ export async function react({
                     'generateMetadata',
                     'viewport',
                     'generateViewport',
+                    'generateSitemaps',
                   ];
                 }
 
