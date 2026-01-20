@@ -39,7 +39,6 @@ This configuration is opinionated and it may not fit your needs. You can extend 
 - [ESLint Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files) file format
 - Does not lint `.gitignore` listed files (I think that if you don't want to track a file, you don't want to lint it)
 - Designed to work with TypeScript, React, Next.js, Node.js, and more smoothly out of the box
-- Automatically loads the config for the framework you are using
 - Some rules can be auto-fixed with `eslint --fix`
 - Uses some stylistic rules to make your code more readable and consistent
 
@@ -72,7 +71,7 @@ By default it uses the ecmaVersion `2023`. If you want to use a different versio
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  javascript: {
+  js: {
     ecmaVersion: 2022,
   },
 });
@@ -96,7 +95,7 @@ Some rules are only enabled when you enable specific framework configurations. F
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  typescript: {
+  ts: {
     overrides: {
       '@typescript-eslint/explicit-function-return-type': 'error',
     },
@@ -165,7 +164,7 @@ By default, the TypeScript configuration is enabled automatically is the `typesc
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  typescript: true,
+  ts: true,
 });
 ```
 
@@ -189,7 +188,7 @@ If you want to customize the `defaultProject` file, you can specify the `tsconfi
 import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
-  typescript: {
+  ts: {
     tsconfigPath: './path/to/tsconfig.custom.json',
   },
 });
@@ -343,10 +342,10 @@ export default defineConfig({
 
 ### React
 
-To enable React support, you need to install the `eslint-plugin-react`, `eslint-plugin-react-hooks` and `eslint-plugin-jsx-a11y` packages:
+To enable React support, you need to install the `@eslint-react/eslint-plugin`, `eslint-plugin-react-hooks` and `eslint-plugin-jsx-a11y` packages:
 
 ```bash
-pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y
+pnpm add --save-dev @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y
 ```
 
 Then, update your ESLint configuration file to enable the React config:
@@ -364,7 +363,7 @@ export default defineConfig({
 To enable Next.js support, you need to install all the react plugins and the `@next/eslint-plugin-next` packages:
 
 ```bash
-pnpm add --save-dev eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y @next/eslint-plugin-next
+pnpm add --save-dev @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y @next/eslint-plugin-next
 ```
 
 Then, update your ESLint configuration file to enable the react and Next.js config:
@@ -519,10 +518,10 @@ export default defineConfig({
 
 #### Testing with Vitest
 
-If you are using Vitest, install the `eslint-plugin-vitest` package:
+If you are using Vitest, install the `@vitest/eslint-plugin` package:
 
 ```bash
-pnpm add --save-dev eslint-plugin-vitest
+pnpm add --save-dev @vitest/eslint-plugin
 ```
 
 Then, update your ESLint configuration file to enable the Vitest config:
