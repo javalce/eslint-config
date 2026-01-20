@@ -5,10 +5,9 @@ import type { OptionsReact, TypedConfigItem } from '../types';
 import { isPackageExists } from 'local-pkg';
 
 import { GLOB_SRC_FILES } from '../globs';
-// import reactRules from '../rules/react';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-const ReactRefreshAllowConstantExportPackages = ['vite'];
+const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
 
 const REACT_ROUTER_PACKAGES = [
   '@react-router/node',
@@ -38,7 +37,7 @@ export async function react({
   // @ts-expect-error -- TS cannot infer that plugins is defined
   const plugins = (pluginReact.configs.all.plugins as Linter.Config['plugins'])!;
 
-  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some((pkg) =>
+  const isAllowConstantExport = REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES.some((pkg) =>
     isPackageExists(pkg),
   );
   const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
