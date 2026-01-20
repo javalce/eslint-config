@@ -343,7 +343,7 @@ export interface OptionsConfig extends OptionsProjectType {
    * Enable React support.
    *
    * Requires installing:
-   * - `eslint-plugin-react`
+   * - `@eslint-react/eslint-plugin`
    * - `eslint-plugin-react-hooks`
    * - `eslint-plugin-react-refresh`
    * - `eslint-plugin-jsx-a11y`
