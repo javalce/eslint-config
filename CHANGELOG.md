@@ -1,3 +1,20 @@
+# [0.22.0](https://github.com/javalce/eslint-config/compare/v0.21.3...v0.22.0) (2026-01-20)
+
+### Bug Fixes
+
+- add consistent-type-specifier-style rule to enforce top-level type specifiers ([aaafd94](https://github.com/javalce/eslint-config/commit/aaafd948ac22ec1a904eaf448f2f48765aaa1ab3))
+- allow type annotations in consistent-type-imports rule ([122f8f4](https://github.com/javalce/eslint-config/commit/122f8f49a04747892e162e3ce170f40b65b81411))
+- reorder type import groups and update sort type to natural ([40b1a3d](https://github.com/javalce/eslint-config/commit/40b1a3d2752f56c56642018ea4106c7d244ebbdc))
+- update eslint-plugin-react reference to @eslint-react/eslint-plugin ([5b72e67](https://github.com/javalce/eslint-config/commit/5b72e67ac27e6ced323b115c85eedf564b5961c5))
+- update no-empty-object-type rule to allow empty interfaces ([48e8626](https://github.com/javalce/eslint-config/commit/48e862699421b63ef47c418382537f39645a8dac))
+
+### Features
+
+- add 'generateSitemaps' to the list of allowed options in react function ([3b426c7](https://github.com/javalce/eslint-config/commit/3b426c740d66c6371b67278d97389b1e978ef6cb))
+- add reactCompiler support and split config into named layers ([fe28a99](https://github.com/javalce/eslint-config/commit/fe28a994defe46c366e4b17599dc88c14ea9ad4b))
+- enable stricter eslint-comments rules ([6ff7b34](https://github.com/javalce/eslint-config/commit/6ff7b34504cd09eab10586dbb1678d510418a4be))
+- update ESLint configuration for React ([f3ca57b](https://github.com/javalce/eslint-config/commit/f3ca57bd312e02d3f9ee4396cb91482dfe9dcd58))
+
 ## [0.21.3](https://github.com/javalce/eslint-config/compare/v0.21.2...v0.21.3) (2026-01-12)
 
 ## [0.21.2](https://github.com/javalce/eslint-config/compare/v0.21.1...v0.21.2) (2026-01-11)
