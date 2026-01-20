@@ -52,7 +52,7 @@
     "*": "prettier -w --ignore-unknown"
   },
   "dependencies": {
-    "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.6.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.39.2",
     "@stylistic/eslint-plugin": "^5.7.0",
@@ -63,25 +63,25 @@
     "eslint-plugin-unicorn": "^62.0.0",
     "globals": "^17.0.0",
     "local-pkg": "^1.1.2",
-    "typescript-eslint": "^8.52.0"
+    "typescript-eslint": "^8.53.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.1",
     "@commitlint/config-conventional": "^20.3.1",
     "@eslint/config-inspector": "^1.4.2",
-    "@javalce/prettier-config": "^2.2.0",
+    "@javalce/prettier-config": "^2.2.2",
     "@types/eslint": "^9.6.1",
     "@types/eslint-plugin-jsx-a11y": "^6.10.1",
-    "@types/node": "^24.10.6",
-    "bumpp": "^10.3.2",
+    "@types/node": "^24.10.9",
+    "bumpp": "^10.4.0",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.39.2",
     "eslint-typegen": "^2.3.0",
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
-    "svelte": "^5.46.1",
+    "prettier": "^3.8.0",
+    "svelte": "^5.47.0",
     "tsdown": "^0.19.0",
     "tsx": "^4.21.0",
     "typescript": "5.9.3"
