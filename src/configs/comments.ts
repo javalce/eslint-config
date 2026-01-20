@@ -2,7 +2,6 @@ import type { ESLint } from 'eslint';
 
 import type { OptionsEslintComments, TypedConfigItem } from '../types';
 
-// @ts-expect-error - ESLint plugin has no types
 import pluginComments from '@eslint-community/eslint-plugin-eslint-comments';
 
 export function comments({ overrides }: OptionsEslintComments = {}): TypedConfigItem[] {
@@ -16,11 +15,10 @@ export function comments({ overrides }: OptionsEslintComments = {}): TypedConfig
     {
       name: 'eslint-comments/rules',
       rules: {
-        /**
-         * Require comments on ESlint disable directives.
-         *
-         * 🚫 Not fixable - https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html
-         */
+        'eslint-comments/no-aggregating-enable': 'error',
+        'eslint-comments/no-duplicate-disable': 'error',
+        'eslint-comments/no-unlimited-disable': 'error',
+        'eslint-comments/no-unused-enable': 'error',
         'eslint-comments/require-description': 'error',
       },
     },
