@@ -45,8 +45,8 @@ export function typescript({
       },
       name: 'typescript/setup',
     },
-    makeParser(false, [GLOB_TS_FILES, GLOB_TSX_FILES]),
-    makeParser(true, [GLOB_TS_FILES, GLOB_TSX_FILES], GLOB_ASTRO_TS_FILES),
+    makeParser(false, files),
+    makeParser(true, files, ignores),
     {
       ...tseslint.configs.eslintRecommended,
       files,
