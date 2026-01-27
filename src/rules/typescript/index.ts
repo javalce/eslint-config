@@ -97,7 +97,15 @@ const config: TypedConfigItem = {
      *
      * 🚫 Not fixable - https://typescript-eslint.io/rules/no-extraneous-class/
      */
-    '@typescript-eslint/no-extraneous-class': ['error', { allowWithDecorator: true }],
+    '@typescript-eslint/no-extraneous-class': [
+      'error',
+      {
+        allowConstructorOnly: true,
+        allowEmpty: false,
+        allowStaticOnly: true,
+        allowWithDecorator: true,
+      },
+    ],
     /**
      * Enforce the use of top-level import type qualifier when an import only has specifiers with inline type qualifiers.
      *
