@@ -35,6 +35,9 @@ export function typescript({
     };
   }
 
+  const files = [GLOB_TS_FILES, GLOB_TSX_FILES];
+  const ignores = GLOB_ASTRO_TS_FILES;
+
   return [
     {
       plugins: {
@@ -44,43 +47,59 @@ export function typescript({
     },
     makeParser(false, [GLOB_TS_FILES, GLOB_TSX_FILES]),
     makeParser(true, [GLOB_TS_FILES, GLOB_TSX_FILES], GLOB_ASTRO_TS_FILES),
-    ...([
-      {
-        ...tseslint.configs.eslintRecommended,
-        name: 'typescript/rules/eslint-recommended',
-      },
-      {
-        ...tseslint.configs.strictTypeChecked.at(-1),
-        name: 'typescript/rules/strict-type-checked',
-      },
-      eslintTypescriptConfig,
-      {
-        ...tseslint.configs.stylisticTypeChecked.at(-1),
-        name: 'typescript/rules/stylistic-type-checked',
-      },
-      eslintExtensionConfig,
-      ...(type === 'app'
-        ? [
-            {
-              rules: {
-                '@typescript-eslint/explicit-function-return-type': 'off',
-                '@typescript-eslint/no-floating-promises': 'off',
-              },
-              name: 'typescript/rules/app',
+    {
+      ...tseslint.configs.eslintRecommended,
+      files,
+      ignores,
+      name: 'typescript/rules/eslint-recommended',
+    },
+    {
+      ...tseslint.configs.strictTypeChecked.at(-1),
+      files,
+      ignores,
+      name: 'typescript/rules/strict-type-checked',
+    },
+    {
+      ...eslintTypescriptConfig,
+      files,
+      ignores,
+    },
+    {
+      ...tseslint.configs.stylisticTypeChecked.at(-1),
+      files,
+      ignores,
+      name: 'typescript/rules/stylistic-type-checked',
+    },
+    {
+      ...eslintExtensionConfig,
+      files,
+      ignores,
+    },
+    ...(type === 'app'
+      ? [
+          {
+            files,
+            ignores,
+            rules: {
+              '@typescript-eslint/explicit-function-return-type': 'off',
+              '@typescript-eslint/no-floating-promises': 'off',
             },
-          ]
-        : []),
-      typescriptImportConfig,
-      {
-        name: 'typescript/rules/overrides',
-        rules: {
-          ...overrides,
-        },
+            name: 'typescript/rules/app',
+          },
+        ]
+      : []),
+    {
+      ...typescriptImportConfig,
+      files,
+      ignores,
+    },
+    {
+      name: 'typescript/rules/overrides',
+      files,
+      ignores,
+      rules: {
+        ...overrides,
       },
-    ].map((config) => ({
-      ...config,
-      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
-      ignores: GLOB_ASTRO_TS_FILES,
-    })) as TypedConfigItem[]),
+    },
   ];
 }
