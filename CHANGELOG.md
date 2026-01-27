@@ -1,3 +1,10 @@
+## [0.22.1](https://github.com/javalce/eslint-config/compare/v0.22.0...v0.22.1) (2026-01-27)
+
+### Bug Fixes
+
+- avoid false positives in @typescript-eslint/no-extraneous-class ([988e68d](https://github.com/javalce/eslint-config/commit/988e68d1cc99f5d9ef30de182b4ef9f78cd540db))
+- make TypeScript config scoping explicit ([6d6c2c8](https://github.com/javalce/eslint-config/commit/6d6c2c890e4623e30747e398da8ad8d54625e2f6))
+
 # [0.22.0](https://github.com/javalce/eslint-config/compare/v0.21.3...v0.22.0) (2026-01-20)
 
 ### Bug Fixes
