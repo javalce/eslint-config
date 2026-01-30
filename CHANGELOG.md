@@ -1,3 +1,14 @@
+# [0.23.0](https://github.com/javalce/eslint-config/compare/v0.22.1...v0.23.0) (2026-01-30)
+
+### Bug Fixes
+
+- enable react/no-use-context for React 19+ ([6e57bed](https://github.com/javalce/eslint-config/commit/6e57bedb1a2ec3cffebd18cd83c61b3a935e1713))
+
+### Features
+
+- add Node.js configuration with eslint-plugin-n and related rules ([5a209ae](https://github.com/javalce/eslint-config/commit/5a209ae4ce537acbe0853477d173728d9cfb6a5a))
+- update defineConfig to accept overrides and deprecate options.extends ([f76396a](https://github.com/javalce/eslint-config/commit/f76396a6f936bf85291932bd85460d37b70a88cd))
+
 ## [0.22.1](https://github.com/javalce/eslint-config/compare/v0.22.0...v0.22.1) (2026-01-27)
 
 ### Bug Fixes
