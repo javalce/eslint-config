@@ -2,7 +2,7 @@ import type { Linter } from 'eslint';
 
 import type { Config, OptionsReact } from '../types';
 
-import { isPackageExists } from 'local-pkg';
+import { getPackageInfo, isPackageExists } from 'local-pkg';
 
 import { GLOB_SRC_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
@@ -42,6 +42,10 @@ export async function react({
   );
   const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
   const isUsingNext = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
+  const reactVersion = await getPackageInfo('react', { paths: [process.cwd()] }).then(
+    (info) => info?.version,
+  );
+  const isReact19OrNewer = reactVersion ? parseInt(reactVersion.split('.')[0], 10) >= 19 : false;
 
   const files = [GLOB_SRC_FILES];
 
@@ -110,7 +114,11 @@ export async function react({
         'react/no-unsafe-component-will-receive-props': 'warn',
         'react/no-unsafe-component-will-update': 'warn',
         'react/no-unused-class-component-members': 'warn',
-        'react/no-use-context': 'warn',
+        ...(isReact19OrNewer
+          ? {
+              'react/no-use-context': 'warn',
+            }
+          : {}),
         'react/no-useless-forward-ref': 'warn',
         'react/no-useless-fragment': ['warn', { allowExpressions: true }],
         'react/prefer-use-state-lazy-initialization': 'warn',
