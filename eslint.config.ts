@@ -1,8 +1,10 @@
 import { defineConfig } from './src/index';
 
-export default defineConfig({
-  type: 'lib',
-  extends: [
+export default defineConfig(
+  {
+    type: 'lib',
+  },
+  [
     {
       files: ['src/rules/**/*.ts'],
       rules: {
@@ -10,4 +12,4 @@ export default defineConfig({
       },
     },
   ],
-});
+);
