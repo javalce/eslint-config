@@ -1,4 +1,4 @@
-import type { OptionsTanstackQuery, TypedConfigItem } from '../../types';
+import type { Config, OptionsTanstackQuery } from '../../types';
 
 import {
   GLOB_JS_FILES,
@@ -10,9 +10,7 @@ import {
 } from '../../globs';
 import { resolveDefaultExport } from '../../utils';
 
-export async function tanstackQuery({ overrides }: OptionsTanstackQuery = {}): Promise<
-  TypedConfigItem[]
-> {
+export async function tanstackQuery({ overrides }: OptionsTanstackQuery = {}): Promise<Config[]> {
   const pluginQuery = await resolveDefaultExport(import('@tanstack/eslint-plugin-query'));
   const files = [
     GLOB_JS_FILES,

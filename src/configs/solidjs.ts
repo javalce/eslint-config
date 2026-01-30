@@ -1,4 +1,4 @@
-import type { OptionsHasTypescript, OptionsSolid, TypedConfigItem } from '../types';
+import type { Config, OptionsHasTypescript, OptionsSolid } from '../types';
 
 import { GLOB_JSX_FILES, GLOB_TSX_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
@@ -6,7 +6,7 @@ import { ensureInstalled, resolveDefaultExport } from '../utils';
 export async function solid({
   typescript,
   overrides,
-}: OptionsHasTypescript & OptionsSolid = {}): Promise<TypedConfigItem[]> {
+}: OptionsHasTypescript & OptionsSolid = {}): Promise<Config[]> {
   ensureInstalled(['eslint-plugin-solid']);
 
   const pluginSolid = await resolveDefaultExport(import('eslint-plugin-solid'));

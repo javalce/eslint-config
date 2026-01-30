@@ -1,10 +1,10 @@
-import type { TypedConfigItem } from '../../types';
+import type { Config } from '../../types';
 
 /**
  * These rules are enabled by `@typescript-eslint`, but we've made the decision
  * to disable them.
  */
-const disabledRules: TypedConfigItem['rules'] = {
+const disabledRules: Config['rules'] = {
   // Allow the use of `!` for non-null assertions.
   '@typescript-eslint/no-non-null-assertion': 'off',
   // Normally, it's used by frameworks like Astro or Next.js or bundlers like Vite to reference it's types in a env.d.ts file.
@@ -13,7 +13,7 @@ const disabledRules: TypedConfigItem['rules'] = {
   '@typescript-eslint/unified-signatures': 'off',
 };
 
-const config: TypedConfigItem = {
+const config: Config = {
   name: 'typescript/rules/types',
   rules: {
     ...disabledRules,

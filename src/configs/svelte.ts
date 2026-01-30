@@ -1,4 +1,4 @@
-import type { OptionsHasTypescript, OptionsSvelte, TypedConfigItem } from '../types';
+import type { Config, OptionsHasTypescript, OptionsSvelte } from '../types';
 
 import { GLOB_SVELTE_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
@@ -6,7 +6,7 @@ import { ensureInstalled, resolveDefaultExport } from '../utils';
 export async function svelte({
   typescript,
   overrides,
-}: OptionsHasTypescript & OptionsSvelte = {}): Promise<TypedConfigItem[]> {
+}: OptionsHasTypescript & OptionsSvelte = {}): Promise<Config[]> {
   ensureInstalled(['eslint-plugin-svelte', 'svelte-eslint-parser']);
 
   const [pluginSvelte, parserSvelte, tseslint] = await Promise.all([

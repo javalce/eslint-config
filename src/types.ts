@@ -84,7 +84,7 @@ export type EcmaVersion =
   | 2024
   | 2025;
 
-export type TypedConfigItem = Omit<Linter.Config, 'plugins'> & {
+export type Config = Omit<Linter.Config, 'plugins'> & {
   /**
    * An object containing a name-value mapping of plugin names to plugin objects.
    * When `files` is specified, these plugins are only available to the matching files.

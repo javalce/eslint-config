@@ -1,8 +1,8 @@
-import type { OptionsStylistic, TypedConfigItem } from '../types';
+import type { Config, OptionsStylistic } from '../types';
 
 import pluginStylistic from '@stylistic/eslint-plugin';
 
-export function stylistic({ overrides }: OptionsStylistic = {}): TypedConfigItem[] {
+export function stylistic({ overrides }: OptionsStylistic = {}): Config[] {
   return [
     {
       plugins: {

@@ -1,8 +1,8 @@
-import type { OptionsUnicorn, TypedConfigItem } from '../types';
+import type { Config, OptionsUnicorn } from '../types';
 
 import pluginUnicorn from 'eslint-plugin-unicorn';
 
-export function unicorn({ overrides }: OptionsUnicorn = {}): TypedConfigItem[] {
+export function unicorn({ overrides }: OptionsUnicorn = {}): Config[] {
   return [
     {
       name: 'unicorn/setup',

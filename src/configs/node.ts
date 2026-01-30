@@ -1,8 +1,8 @@
-import type { TypedConfigItem } from '../types';
+import type { Config } from '../types';
 
 import pluginNode from 'eslint-plugin-n';
 
-export function node(): TypedConfigItem[] {
+export function node(): Config[] {
   return [
     {
       name: 'node/setup',

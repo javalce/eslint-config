@@ -1,4 +1,4 @@
-import type { OptionsProjectType, OptionsTypescript, TypedConfigItem } from '../types';
+import type { Config, OptionsProjectType, OptionsTypescript } from '../types';
 
 import tseslint from 'typescript-eslint';
 
@@ -11,8 +11,8 @@ export function typescript({
   tsconfigPath = 'tsconfig.json',
   type,
   overrides,
-}: OptionsTypescript & OptionsProjectType = {}): TypedConfigItem[] {
-  function makeParser(types: boolean, files: string[], ignores?: string[]): TypedConfigItem {
+}: OptionsTypescript & OptionsProjectType = {}): Config[] {
+  function makeParser(types: boolean, files: string[], ignores?: string[]): Config {
     return {
       files,
       ...(ignores ? { ignores } : {}),

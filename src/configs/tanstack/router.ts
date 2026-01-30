@@ -1,4 +1,4 @@
-import type { OptionsTanstackRouter, TypedConfigItem } from '../../types';
+import type { Config, OptionsTanstackRouter } from '../../types';
 
 import {
   GLOB_JS_FILES,
@@ -10,9 +10,7 @@ import {
 } from '../../globs';
 import { resolveDefaultExport } from '../../utils';
 
-export async function tanstackRouter({ overrides }: OptionsTanstackRouter = {}): Promise<
-  TypedConfigItem[]
-> {
+export async function tanstackRouter({ overrides }: OptionsTanstackRouter = {}): Promise<Config[]> {
   const pluginRouter = await resolveDefaultExport(import('@tanstack/eslint-plugin-router'));
   const files = [
     GLOB_JS_FILES,

@@ -1,5 +1,5 @@
 import type { ConfigNames } from './typegen';
-import type { Awaitable, OptionsConfig, TypedConfigItem } from './types';
+import type { Awaitable, Config, OptionsConfig } from './types';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
@@ -31,10 +31,10 @@ import { vue } from './configs/vue';
  *
  * @param {OptionsConfig} options - Options to customize the generated configuration.
  *
- * @returns {Promise<TypedConfigItem[]>} ESLint configuration ready to be used.
+ * @returns {Promise<Config[]>} ESLint configuration ready to be used.
  */
-export async function defineConfig(options: OptionsConfig = {}): Promise<TypedConfigItem[]> {
-  const configs: Array<Awaitable<TypedConfigItem[]>> = [];
+export async function defineConfig(options: OptionsConfig = {}): Promise<Config[]> {
+  const configs: Array<Awaitable<Config[]>> = [];
 
   const projectType = options.type ?? 'app';
 
@@ -202,9 +202,9 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<TypedCo
     }
   }
 
-  const additionalConfig = (options.extends ?? []) as TypedConfigItem[];
+  const additionalConfig = (options.extends ?? []) as Config[];
 
-  let composer = new FlatConfigComposer<TypedConfigItem, ConfigNames>();
+  let composer = new FlatConfigComposer<Config, ConfigNames>();
 
   composer = composer.append(...configs, ...additionalConfig);
 

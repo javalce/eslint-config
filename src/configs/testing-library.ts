@@ -1,4 +1,4 @@
-import type { OptionsTestingLibrary, TypedConfigItem } from '../types';
+import type { Config, OptionsTestingLibrary } from '../types';
 
 import { GLOB_TEST_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
@@ -14,12 +14,12 @@ export async function testingLibrary({
   react?: boolean;
   svelte?: boolean;
   vue?: boolean;
-} & OptionsTestingLibrary = {}): Promise<TypedConfigItem[]> {
+} & OptionsTestingLibrary = {}): Promise<Config[]> {
   ensureInstalled(['eslint-plugin-testing-library']);
 
   const testingLibraryPlugin = await resolveDefaultExport(import('eslint-plugin-testing-library'));
 
-  function makeConfig(name: 'angular' | 'react' | 'vue' | 'svelte'): TypedConfigItem {
+  function makeConfig(name: 'angular' | 'react' | 'vue' | 'svelte'): Config {
     return {
       files: GLOB_TEST_FILES,
       rules: {

@@ -1,9 +1,4 @@
-import type {
-  OptionsHasTypescript,
-  OptionsImport,
-  OptionsTsconfigPath,
-  TypedConfigItem,
-} from '../types';
+import type { Config, OptionsHasTypescript, OptionsImport, OptionsTsconfigPath } from '../types';
 
 import { resolve } from 'node:path';
 
@@ -14,7 +9,7 @@ export function imports({
   typescript,
   tsconfigPath = 'tsconfig.json',
   overrides,
-}: OptionsHasTypescript & OptionsTsconfigPath & OptionsImport = {}): TypedConfigItem[] {
+}: OptionsHasTypescript & OptionsTsconfigPath & OptionsImport = {}): Config[] {
   return [
     {
       plugins: {

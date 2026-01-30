@@ -1,18 +1,18 @@
 import type { Linter } from 'eslint';
 
-import type { OptionsAngular, TypedConfigItem } from '../types';
+import type { Config, OptionsAngular } from '../types';
 
 import { parser as tsParser } from 'typescript-eslint';
 
 import { GLOB_HTML_FILES, GLOB_TS_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export async function angular(options: OptionsAngular = {}): Promise<TypedConfigItem[]> {
+export async function angular(options: OptionsAngular = {}): Promise<Config[]> {
   ensureInstalled(['angular-eslint']);
 
   const angularEslint = await resolveDefaultExport(import('angular-eslint'));
 
-  function createAngularConfig(name: string, rules: TypedConfigItem['rules']): TypedConfigItem {
+  function createAngularConfig(name: string, rules: Config['rules']): Config {
     return {
       name,
       files: [GLOB_TS_FILES],
@@ -25,10 +25,7 @@ export async function angular(options: OptionsAngular = {}): Promise<TypedConfig
     };
   }
 
-  function createAngularTemplateConfig(
-    name: string,
-    rules: TypedConfigItem['rules'],
-  ): TypedConfigItem {
+  function createAngularTemplateConfig(name: string, rules: Config['rules']): Config {
     return {
       name,
       files: [GLOB_HTML_FILES],

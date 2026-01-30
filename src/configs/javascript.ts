@@ -1,4 +1,4 @@
-import type { OptionsJavascript, TypedConfigItem } from '../types';
+import type { Config, OptionsJavascript } from '../types';
 
 import js from '@eslint/js';
 import globals from 'globals';
@@ -8,10 +8,7 @@ import es6Config from '../rules/es6';
 import posibleErrorsConfig from '../rules/possible-errors';
 import variablesConfig from '../rules/variables';
 
-export function javascript({
-  ecmaVersion = 2023,
-  overrides,
-}: OptionsJavascript = {}): TypedConfigItem[] {
+export function javascript({ ecmaVersion = 2023, overrides }: OptionsJavascript = {}): Config[] {
   return [
     {
       linterOptions: {

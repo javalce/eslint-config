@@ -1,11 +1,11 @@
-import type { OptionsJSX, TypedConfigItem } from '../types';
+import type { Config, OptionsJSX } from '../types';
 
 import { GLOB_JSX_FILES, GLOB_TSX_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-export async function jsx({ a11y }: OptionsJSX = {}): Promise<TypedConfigItem[]> {
+export async function jsx({ a11y }: OptionsJSX = {}): Promise<Config[]> {
   const files = [GLOB_JSX_FILES, GLOB_TSX_FILES];
-  const baseConfig: TypedConfigItem[] = [
+  const baseConfig: Config[] = [
     {
       files,
       languageOptions: {

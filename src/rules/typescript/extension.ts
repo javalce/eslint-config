@@ -1,4 +1,4 @@
-import type { TypedConfigItem } from '../../types';
+import type { Config } from '../../types';
 
 import variablesConfig from '../variables';
 
@@ -6,7 +6,7 @@ import variablesConfig from '../variables';
 
 const noUnusedVarsConfig = variablesConfig.rules?.['no-unused-vars'];
 
-const config: TypedConfigItem = {
+const config: Config = {
   name: 'typescript/rules/extension',
   rules: {
     /**

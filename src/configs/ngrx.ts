@@ -1,4 +1,4 @@
-import type { OptionsNgrx, TypedConfigItem } from '../types';
+import type { Config, OptionsNgrx } from '../types';
 
 import { GLOB_TS_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
@@ -10,7 +10,7 @@ export async function ngrx({
   operators = false,
   signals = false,
   overrides,
-}: OptionsNgrx = {}): Promise<TypedConfigItem[]> {
+}: OptionsNgrx = {}): Promise<Config[]> {
   ensureInstalled(['@ngrx/eslint-plugin']);
 
   const [pluginNgrx, ngrxConfig] = await Promise.all([
@@ -26,7 +26,7 @@ export async function ngrx({
     ['signals', signals],
   ];
 
-  const result: TypedConfigItem[] = [
+  const result: Config[] = [
     {
       name: 'ngrx/setup',
       plugins: {

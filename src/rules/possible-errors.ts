@@ -1,6 +1,6 @@
-import type { TypedConfigItem } from '../types';
+import type { Config } from '../types';
 
-const config: TypedConfigItem = {
+const config: Config = {
   name: 'javascript/rules/possible-errors',
   rules: {
     /**

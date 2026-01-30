@@ -1,11 +1,11 @@
 import type { Linter } from 'eslint';
 
-import type { OptionsNext, TypedConfigItem } from '../types';
+import type { Config, OptionsNext } from '../types';
 
 import { GLOB_JS_FILES, GLOB_JSX_FILES, GLOB_SRC_FILES } from '../globs';
 import { ensureInstalled, requireModule, resolveDefaultExport } from '../utils';
 
-export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConfigItem[]> {
+export async function nextjs({ overrides }: OptionsNext = {}): Promise<Config[]> {
   ensureInstalled(['@next/eslint-plugin-next']);
 
   const pluginNext = await resolveDefaultExport(import('@next/eslint-plugin-next'));
@@ -59,5 +59,5 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<TypedConf
       },
       name: 'next/rules/overrides',
     },
-  ] satisfies TypedConfigItem[];
+  ] satisfies Config[];
 }

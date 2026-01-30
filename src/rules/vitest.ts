@@ -1,8 +1,8 @@
-import type { TypedConfigItem } from '../types';
+import type { Config } from '../types';
 
 import { GLOB_TEST_FILES } from '../globs';
 
-const config: TypedConfigItem = {
+const config: Config = {
   files: GLOB_TEST_FILES,
   name: 'vitest/rules/stylistic',
   rules: {

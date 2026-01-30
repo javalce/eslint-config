@@ -1,4 +1,4 @@
-import type { OptionsHasTypescript, OptionsVue, TypedConfigItem } from '../types';
+import type { Config, OptionsHasTypescript, OptionsVue } from '../types';
 
 import { GLOB_VUE_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
@@ -7,7 +7,7 @@ export async function vue({
   typescript,
   version = 3,
   overrides,
-}: OptionsHasTypescript & OptionsVue = {}): Promise<TypedConfigItem[]> {
+}: OptionsHasTypescript & OptionsVue = {}): Promise<Config[]> {
   ensureInstalled(['eslint-plugin-vue', 'vue-eslint-parser']);
 
   const [pluginVue, parserVue, tseslint] = await Promise.all([

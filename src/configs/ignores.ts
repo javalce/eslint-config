@@ -1,4 +1,4 @@
-import type { TypedConfigItem } from '../types';
+import type { Config } from '../types';
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -6,11 +6,11 @@ import path from 'node:path';
 import { includeIgnoreFile } from '@eslint/compat';
 import { globalIgnores } from 'eslint/config';
 
-export function ignores({ files }: { files?: string[] }): TypedConfigItem[] {
+export function ignores({ files }: { files?: string[] }): Config[] {
   const cwd = process.cwd();
   const gitignorePath = path.join(cwd, '.gitignore');
 
-  const config: TypedConfigItem[] = [];
+  const config: Config[] = [];
 
   if (fs.existsSync(gitignorePath)) {
     config.push({

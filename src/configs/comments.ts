@@ -1,10 +1,10 @@
 import type { ESLint } from 'eslint';
 
-import type { OptionsEslintComments, TypedConfigItem } from '../types';
+import type { Config, OptionsEslintComments } from '../types';
 
 import pluginComments from '@eslint-community/eslint-plugin-eslint-comments';
 
-export function comments({ overrides }: OptionsEslintComments = {}): TypedConfigItem[] {
+export function comments({ overrides }: OptionsEslintComments = {}): Config[] {
   return [
     {
       name: 'eslint-comments/setup',

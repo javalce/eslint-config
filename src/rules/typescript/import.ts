@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-import type { TypedConfigItem } from '../../types';
+import type { Config } from '../../types';
 
 /**
  * These are enabled by `import-x/recommended`, but are better handled by
@@ -13,7 +13,7 @@ const disabledRules: Partial<Linter.RulesRecord> = {
   'import-x/no-unresolved': 'off',
 };
 
-const config: TypedConfigItem = {
+const config: Config = {
   name: 'typescript/import/rules',
   rules: {
     ...disabledRules,

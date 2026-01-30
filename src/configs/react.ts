@@ -1,6 +1,6 @@
 import type { Linter } from 'eslint';
 
-import type { OptionsReact, TypedConfigItem } from '../types';
+import type { Config, OptionsReact } from '../types';
 
 import { isPackageExists } from 'local-pkg';
 
@@ -21,7 +21,7 @@ const REACT_COMPILER_PACKAGES = ['babel-plugin-react-compiler'];
 export async function react({
   reactCompiler = REACT_COMPILER_PACKAGES.some((pkg) => isPackageExists(pkg)),
   overrides,
-}: OptionsReact = {}): Promise<TypedConfigItem[]> {
+}: OptionsReact = {}): Promise<Config[]> {
   ensureInstalled([
     '@eslint-react/eslint-plugin',
     'eslint-plugin-react-hooks',

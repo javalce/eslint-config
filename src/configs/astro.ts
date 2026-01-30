@@ -1,4 +1,4 @@
-import type { OptionsAstro, OptionsHasTypescript, TypedConfigItem } from '../types';
+import type { Config, OptionsAstro, OptionsHasTypescript } from '../types';
 
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -9,7 +9,7 @@ import { ensureInstalled, resolveDefaultExport } from '../utils';
 export async function astro({
   typescript,
   overrides,
-}: OptionsHasTypescript & OptionsAstro = {}): Promise<TypedConfigItem[]> {
+}: OptionsHasTypescript & OptionsAstro = {}): Promise<Config[]> {
   ensureInstalled(['eslint-plugin-astro', 'astro-eslint-parser']);
 
   const [pluginAstro, parserAstro] = await Promise.all([
