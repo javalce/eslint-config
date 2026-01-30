@@ -425,6 +425,7 @@ export interface OptionsConfig extends OptionsProjectType {
   /**
    * Provides additional configuration objects for the ESLint configuration.
    *
+   * @deprecated Use the second argument of `defineConfig` to compose configurations. See https://github.com/javalce/eslint-config#composing-configs for migration.
    * @default []
    */
   extends?: Linter.Config[];

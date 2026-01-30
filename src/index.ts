@@ -33,8 +33,34 @@ import { vue } from './configs/vue';
  *
  * @returns {Promise<Config[]>} ESLint configuration ready to be used.
  */
-export async function defineConfig(options: OptionsConfig = {}): Promise<Config[]> {
+export async function defineConfig(
+  options: OptionsConfig = {},
+  overrides: Config[] = [],
+): Promise<Config[]> {
   const configs: Array<Awaitable<Config[]>> = [];
+
+  // eslint-disable-next-line @typescript-eslint/no-deprecated -- workaround for deprecated extends property. Will be removed in the future
+  const originalExtends = options.extends;
+
+  Object.defineProperty(options, 'extends', {
+    get() {
+      const message =
+        'options.extends passed to defineConfig is deprecated and will be removed in a future release. Please use the second argument of defineConfig instead. Migration guide: https://github.com/javalce/eslint-config#composing-configs';
+      const code = 'DEP_ESLINT_CONFIG_EXTENDS';
+
+      if (typeof process !== 'undefined') {
+        process.emitWarning(message, {
+          type: 'DeprecationWarning',
+          code,
+          detail: 'https://github.com/javalce/eslint-config#composing-configs',
+        });
+      } else {
+        console.warn(`[Deprecation ${code}] ${message}`);
+      }
+
+      return originalExtends;
+    },
+  });
 
   const projectType = options.type ?? 'app';
 
@@ -202,11 +228,12 @@ export async function defineConfig(options: OptionsConfig = {}): Promise<Config[
     }
   }
 
-  const additionalConfig = (options.extends ?? []) as Config[];
+  // eslint-disable-next-line @typescript-eslint/no-deprecated -- will be removed in the future
+  const additionalConfig = options.extends;
 
   let composer = new FlatConfigComposer<Config, ConfigNames>();
 
-  composer = composer.append(...configs, ...additionalConfig);
+  composer = composer.append(...configs, ...(additionalConfig ?? []), ...overrides);
 
   return composer.toConfigs();
 }
