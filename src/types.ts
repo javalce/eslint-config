@@ -19,6 +19,7 @@ type RuleKeys =
   | 'import-x'
   | 'jest'
   | 'jsx-a11y'
+  | 'node'
   | 'perfectionist'
   | 'react'
   | 'react-hooks'
@@ -122,6 +123,8 @@ export interface OptionsJavascript extends OptionsOverrides<'eslint'> {
    */
   ecmaVersion?: EcmaVersion;
 }
+
+export interface OptionsNode extends OptionsOverrides<'node'> {}
 
 export interface OptionsEslintComments extends OptionsOverrides<'eslint-comments'> {}
 
@@ -286,6 +289,10 @@ export interface OptionsConfig extends OptionsProjectType {
    * @see https://eslint.org/docs/latest/use/configure/ignore
    */
   ignores?: string[];
+  /**
+   * Configure Node.js additional rules.
+   */
+  node?: OptionsNode;
   /**
    * ESLint comments plugin options.
    */

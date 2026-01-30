@@ -14,6 +14,7 @@ import { jest } from '../src/configs/jest';
 import { jsx } from '../src/configs/jsx';
 import { nextjs } from '../src/configs/nextjs';
 import { ngrx } from '../src/configs/ngrx';
+import { node } from '../src/configs/node';
 import { perfectionist } from '../src/configs/perfectionist';
 import { react } from '../src/configs/react';
 import { solid } from '../src/configs/solidjs';
@@ -37,6 +38,7 @@ const configs = (await combine(
     },
   },
   javascript(),
+  node(),
   comments(),
   imports(),
   perfectionist(),
