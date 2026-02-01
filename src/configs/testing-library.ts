@@ -36,10 +36,10 @@ export async function testingLibrary({
       },
       name: 'testing-library/setup',
     },
-    angular ? makeConfig('angular') : {},
-    react ? makeConfig('react') : {},
-    svelte ? makeConfig('svelte') : {},
-    vue ? makeConfig('vue') : {},
+    ...(angular ? [makeConfig('angular')] : []),
+    ...(react ? [makeConfig('react')] : []),
+    ...(svelte ? [makeConfig('svelte')] : []),
+    ...(vue ? [makeConfig('vue')] : []),
     {
       files: GLOB_TEST_FILES,
       rules: {
