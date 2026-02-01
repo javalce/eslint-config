@@ -277,7 +277,9 @@ interface OptionsHasVitest extends OptionsVitest, OptionsHasTestingLibrary {
 
 type OptionsTest = OptionsHasJest | OptionsHasVitest;
 
-export interface OptionsConfig extends OptionsProjectType {
+interface OptionsPresetHasVitest extends OptionsHasVitest, OptionsHasTypescript {}
+
+export interface OptionsPresetBase {
   /**
    * Core rules.
    */
@@ -313,6 +315,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * Unicorn plugin options.
    */
   unicorn?: OptionsUnicorn;
+}
+
+interface OptionsConfigWithTypescript {
   /**
    * Enable TypeScript support.
    *
@@ -320,14 +325,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * @see {@link OptionsTypescript}
    */
   ts?: boolean | OptionsTypescript;
-  /**
-   * Enable JSX related rules.
-   *
-   * Passing an object to enable JSX accessibility rules.
-   *
-   * @default true
-   */
-  jsx?: boolean | OptionsJSX;
+}
+
+interface OptionsConfigWithAngular {
   /**
    * Enable Angular support.
    *
@@ -337,6 +337,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   angular?: boolean | OptionsAngular;
+}
+
+interface OptionsConfigWithNgrx {
   /**
    * Enable NgRx support.
    *
@@ -346,6 +349,20 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   ngrx?: OptionsNgrx;
+}
+
+interface OptionsConfigWithJSX {
+  /**
+   * Enable JSX related rules.
+   *
+   * Passing an object to enable JSX accessibility rules.
+   *
+   * @default true
+   */
+  jsx?: boolean | OptionsJSX;
+}
+
+interface OptionsConfigWithReact {
   /**
    * Enable React support.
    *
@@ -358,6 +375,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   react?: boolean | OptionsReact;
+}
+
+interface OptionsConfigWithNext {
   /**
    * Enable Next.js support.
    *
@@ -369,6 +389,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   next?: boolean | OptionsNext;
+}
+
+interface OptionsConfigWithAstro {
   /**
    * Enable Astro support.
    *
@@ -381,6 +404,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   astro?: boolean | OptionsAstro;
+}
+
+interface OptionsConfigWithSvelte {
   /**
    * Enable Svelte support.
    *
@@ -390,6 +416,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   svelte?: boolean | OptionsSvelte;
+}
+
+interface OptionsConfigWithSolid {
   /**
    * Enable SolidJS support.
    *
@@ -399,6 +428,9 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   solid?: boolean | OptionsSolid;
+}
+
+interface OptionsConfigWithVue {
   /**
    * Enable Vue support.
    *
@@ -408,10 +440,16 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default false
    */
   vue?: boolean | OptionsVue;
+}
+
+interface OptionsConfigWithTanstack {
   /**
    * Enable Tanstack ESLint plugins support.
    */
   tanstack?: OptionsTanstack;
+}
+
+interface OptionsConfigWithTest {
   /**
    * Enable testing framework support.
    *
@@ -422,11 +460,47 @@ export interface OptionsConfig extends OptionsProjectType {
    * @default undefined
    */
   test?: OptionsTest;
-  /**
-   * Provides additional configuration objects for the ESLint configuration.
-   *
-   * @deprecated Use the second argument of `defineConfig` to compose configurations. See https://github.com/javalce/eslint-config#composing-configs for migration.
-   * @default []
-   */
-  extends?: Linter.Config[];
 }
+
+export interface OptionsPresetTypescript extends OptionsProjectType, OptionsConfigWithTypescript {}
+
+export interface OptionsPresetAngular extends OptionsConfigWithAngular, OptionsConfigWithNgrx {}
+
+export interface OptionsPresetReact extends OptionsConfigWithJSX, OptionsConfigWithReact {}
+
+export interface OptionsPresetNext extends OptionsPresetReact, OptionsConfigWithNext {}
+
+export interface OptionsPresetAstro extends OptionsConfigWithAstro, OptionsHasTypescript {}
+
+export interface OptionsPresetSvelte extends OptionsConfigWithSvelte, OptionsHasTypescript {}
+
+export interface OptionsPresetSolid
+  extends OptionsConfigWithJSX, OptionsConfigWithSolid, OptionsHasTypescript {}
+
+export interface OptionsPresetVue extends OptionsConfigWithVue, OptionsHasTypescript {}
+
+export type OptionsPresetTest = (OptionsHasJest | OptionsPresetHasVitest) & {
+  testingLibrary?: OptionsTestingLibrary & {
+    angular?: boolean;
+    react?: boolean;
+    svelte?: boolean;
+    vue?: boolean;
+  };
+};
+
+export interface OptionsConfig
+  extends
+    OptionsPresetBase,
+    OptionsProjectType,
+    OptionsConfigWithTypescript,
+    OptionsConfigWithJSX,
+    OptionsConfigWithAngular,
+    OptionsConfigWithNgrx,
+    OptionsConfigWithReact,
+    OptionsConfigWithNext,
+    OptionsConfigWithAstro,
+    OptionsConfigWithSvelte,
+    OptionsConfigWithSolid,
+    OptionsConfigWithVue,
+    OptionsConfigWithTanstack,
+    OptionsConfigWithTest {}

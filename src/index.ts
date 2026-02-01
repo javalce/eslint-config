@@ -1,5 +1,19 @@
 import type { ConfigNames } from './typegen';
-import type { Awaitable, Config, OptionsConfig } from './types';
+import type {
+  Awaitable,
+  Config,
+  OptionsConfig,
+  OptionsPresetAngular,
+  OptionsPresetAstro,
+  OptionsPresetBase,
+  OptionsPresetNext,
+  OptionsPresetReact,
+  OptionsPresetSolid,
+  OptionsPresetSvelte,
+  OptionsPresetTest,
+  OptionsPresetTypescript,
+  OptionsPresetVue,
+} from './types';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
@@ -27,6 +41,146 @@ import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
 
+function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    ignores({ files: options.ignores }),
+    javascript(resolveSubOptions(options, 'js')),
+    comments(resolveSubOptions(options, 'comments')),
+    imports(resolveSubOptions(options, 'import')),
+    perfectionist(resolveSubOptions(options, 'perfectionist')),
+    stylistic(resolveSubOptions(options, 'stylistic')),
+    unicorn(resolveSubOptions(options, 'unicorn')),
+    node(resolveSubOptions(options, 'node')),
+  ).toConfigs();
+}
+
+function presetTypescript(options: OptionsPresetTypescript = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    typescript({
+      ...resolveSubOptions(options, 'ts'),
+      type: options.type ?? 'app',
+    }),
+  ).toConfigs();
+}
+
+function presetAngular(options: OptionsPresetAngular = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    angular({
+      ...resolveSubOptions(options, 'angular'),
+    }),
+    ngrx({
+      ...resolveSubOptions(options, 'ngrx'),
+    }),
+  ).toConfigs();
+}
+
+function presetReact(options: OptionsPresetReact = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    jsx({
+      ...resolveSubOptions(options, 'jsx'),
+    }),
+    react({
+      ...resolveSubOptions(options, 'react'),
+    }),
+  ).toConfigs();
+}
+
+function presetNextjs(options: OptionsPresetNext = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    jsx({
+      ...resolveSubOptions(options, 'jsx'),
+    }),
+    react({
+      ...resolveSubOptions(options, 'react'),
+    }),
+    nextjs({
+      ...resolveSubOptions(options, 'next'),
+    }),
+  ).toConfigs();
+}
+
+function presetAstro(options: OptionsPresetAstro = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    astro({
+      ...resolveSubOptions(options, 'astro'),
+      typescript: Boolean(options.typescript),
+    }),
+  ).toConfigs();
+}
+
+function presetSvelte(options: OptionsPresetSvelte = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    svelte({
+      ...resolveSubOptions(options, 'svelte'),
+      typescript: Boolean(options.typescript),
+    }),
+  ).toConfigs();
+}
+
+function presetSolid(options: OptionsPresetSolid = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    jsx({
+      ...resolveSubOptions(options, 'jsx'),
+    }),
+    solid({
+      ...resolveSubOptions(options, 'solid'),
+      typescript: Boolean(options.typescript),
+    }),
+  ).toConfigs();
+}
+
+function presetVue(options: OptionsPresetVue = {}): Promise<Config[]> {
+  return new FlatConfigComposer<Config, ConfigNames>(
+    vue({
+      ...resolveSubOptions(options, 'vue'),
+      typescript: Boolean(options.typescript),
+    }),
+  ).toConfigs();
+}
+
+function presetTest(options: OptionsPresetTest): Promise<Config[]> {
+  const configs: Array<Awaitable<Config[]>> = [];
+
+  if (options.framework === 'jest') {
+    configs.push(
+      jest({
+        overrides: options.overrides,
+      }),
+    );
+  }
+
+  if (options.framework === 'vitest') {
+    configs.push(
+      vitest({
+        typescript: options.typescript,
+        overrides: options.overrides,
+      }),
+    );
+  }
+
+  if (isEnabled(options, 'testingLibrary')) {
+    configs.push(testingLibrary(options.testingLibrary));
+  }
+
+  return new FlatConfigComposer<Config, ConfigNames>(...configs).toConfigs();
+}
+
+/**
+ * Presets available in eslint-config.
+ */
+export const presets = {
+  base: presetBase,
+  typescript: presetTypescript,
+  angular: presetAngular,
+  react: presetReact,
+  nextjs: presetNextjs,
+  astro: presetAstro,
+  svelte: presetSvelte,
+  solid: presetSolid,
+  vue: presetVue,
+  test: presetTest,
+};
+
 /**
  * Generates a custom ESLint configuration based on the provided options.
  *
@@ -39,29 +193,6 @@ export async function defineConfig(
   overrides: Config[] = [],
 ): Promise<Config[]> {
   const configs: Array<Awaitable<Config[]>> = [];
-
-  // eslint-disable-next-line @typescript-eslint/no-deprecated -- workaround for deprecated extends property. Will be removed in the future
-  const originalExtends = options.extends;
-
-  Object.defineProperty(options, 'extends', {
-    get() {
-      const message =
-        'options.extends passed to defineConfig is deprecated and will be removed in a future release. Please use the second argument of defineConfig instead. Migration guide: https://github.com/javalce/eslint-config#composing-configs';
-      const code = 'DEP_ESLINT_CONFIG_EXTENDS';
-
-      if (typeof process !== 'undefined') {
-        process.emitWarning(message, {
-          type: 'DeprecationWarning',
-          code,
-          detail: 'https://github.com/javalce/eslint-config#composing-configs',
-        });
-      } else {
-        console.warn(`[Deprecation ${code}] ${message}`);
-      }
-
-      return originalExtends;
-    },
-  });
 
   const projectType = options.type ?? 'app';
 
@@ -78,19 +209,7 @@ export async function defineConfig(
   const tanstackEnabled = isEnabled(options, 'tanstack');
   const testEnabled = isEnabled(options, 'test');
 
-  configs.push(
-    ignores({ files: options.ignores }),
-    javascript(resolveSubOptions(options, 'js')),
-    comments(resolveSubOptions(options, 'comments')),
-    imports({
-      ...resolveSubOptions(options, 'import'),
-      typescript: tsEnabled,
-    }),
-    perfectionist(resolveSubOptions(options, 'perfectionist')),
-    stylistic(resolveSubOptions(options, 'stylistic')),
-    unicorn(resolveSubOptions(options, 'unicorn')),
-    node(resolveSubOptions(options, 'node')),
-  );
+  configs.push(presetBase(options));
 
   if (tsEnabled) {
     configs.push(
@@ -194,48 +313,27 @@ export async function defineConfig(
   if (testEnabled) {
     const testOptions = resolveSubOptions(options, 'test');
 
-    const testingFramework = testOptions.framework;
-    const enableJest = testingFramework === 'jest';
-    const enableVitest = testingFramework === 'vitest';
+    const testingLibraryOptions = resolveSubOptions(testOptions, 'testingLibrary');
 
-    const testingLibraryEnabled = Boolean(testOptions.testingLibrary);
-
-    if (enableJest) {
-      configs.push(
-        jest({
-          overrides: testOptions.overrides,
-        }),
-      );
-    }
-
-    if (enableVitest) {
-      configs.push(
-        vitest({
-          typescript: tsEnabled,
-          overrides: testOptions.overrides,
-        }),
-      );
-    }
-
-    if (testingLibraryEnabled) {
-      configs.push(
-        testingLibrary({
-          ...resolveSubOptions(testOptions, 'testingLibrary'),
-          angular: angularEnabled,
-          react: reactEnabled,
-          svelte: svelteEnabled,
-          vue: vueEnabled,
-        }),
-      );
-    }
+    configs.push(
+      presetTest({
+        ...testOptions,
+        testingLibrary: isEnabled(testOptions, 'testingLibrary')
+          ? {
+              ...testingLibraryOptions,
+              angular: angularEnabled,
+              react: reactEnabled,
+              svelte: svelteEnabled,
+              vue: vueEnabled,
+            }
+          : false,
+      }),
+    );
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-deprecated -- will be removed in the future
-  const additionalConfig = options.extends;
 
   let composer = new FlatConfigComposer<Config, ConfigNames>();
 
-  composer = composer.append(...configs, ...(additionalConfig ?? []), ...overrides);
+  composer = composer.append(...configs, ...overrides);
 
   return composer.toConfigs();
 }
