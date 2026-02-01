@@ -14,6 +14,7 @@ import { jest } from './configs/jest';
 import { jsx } from './configs/jsx';
 import { nextjs } from './configs/nextjs';
 import { ngrx } from './configs/ngrx';
+import { node } from './configs/node';
 import { perfectionist } from './configs/perfectionist';
 import { react } from './configs/react';
 import { solid } from './configs/solidjs';
@@ -88,6 +89,7 @@ export async function defineConfig(
     perfectionist(resolveSubOptions(options, 'perfectionist')),
     stylistic(resolveSubOptions(options, 'stylistic')),
     unicorn(resolveSubOptions(options, 'unicorn')),
+    node(resolveSubOptions(options, 'node')),
   );
 
   if (tsEnabled) {

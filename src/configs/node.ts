@@ -1,8 +1,8 @@
-import type { Config } from '../types';
+import type { Config, OptionsNode } from '../types';
 
 import pluginNode from 'eslint-plugin-n';
 
-export function node(): Config[] {
+export function node({ overrides }: OptionsNode = {}): Config[] {
   return [
     {
       name: 'node/setup',
@@ -23,7 +23,9 @@ export function node(): Config[] {
     },
     {
       name: 'node/rules/overrides',
-      rules: {},
+      rules: {
+        ...overrides,
+      },
     },
   ];
 }
