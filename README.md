@@ -30,6 +30,8 @@ This configuration is opinionated and it may not fit your needs. You can extend 
       - [Testing with Jest](#testing-with-jest)
       - [Testing with Vitest](#testing-with-vitest)
       - [Testing Library](#testing-library)
+  - [Additional configuration](#additional-configuration)
+    - [Presets](#presets)
   - [Credits](#credits)
   - [License](#license)
 
@@ -562,6 +564,73 @@ export default defineConfig({
 ```
 
 Testing Library will enable the recommended rules for the specific framework you are using.
+
+## Additional configuration
+
+This section documents helpers for composing and reusing configuration blocks: presets and mergeConfig.
+
+### Presets
+
+The package exports a set of presets that generate ESLint Flat Config blocks. Each preset is a function that returns an array of ESLint Flat Config objects (returned as a Promise/awaitable). You can use presets directly or compose them with `mergeConfig` or `defineConfig`.
+
+Available presets:
+
+| Preset       | Description                                                                                   |
+| ------------ | --------------------------------------------------------------------------------------------- |
+| `base`       | Base configuration with common rules and settings for JavaScript projects.                    |
+| `typescript` | TypeScript-specific configuration with rules and settings for TypeScript projects.            |
+| `angular`    | Angular-specific configuration with rules and settings for Angular projects.                  |
+| `react`      | React-specific configuration with rules and settings for React projects.                      |
+| `nextjs`     | Next.js-specific configuration with rules and settings for Next.js projects.                  |
+| `astro`      | Astro-specific configuration with rules and settings for Astro projects.                      |
+| `svelte`     | Svelte-specific configuration with rules and settings for Svelte projects.                    |
+| `solid`      | Solidjs-specific configuration with rules and settings for Solidjs projects.                  |
+| `vue`        | Vue-specific configuration with rules and settings for Vue projects.                          |
+| `test`       | Testing-specific configuration with rules and settings for testing frameworks (Jest, Vitest). |
+
+Behavior and recommendations:
+
+- Presets are designed to be composed together to build a complete ESLint configuration for your project.
+- Presets are functions which return promises, so they can perform asynchronous operations if needed
+- Because presets returns promises, it is recommended to use them with `mergeConfig` as it handles awaitables automatically.
+- You need to include explicitly the presets you want to use in your project. For example, if you are using TypeScript and React, you need to include `base`, `typescript`, and `react` presets.
+- Next.js preset includes React preset internally, so you don't need to add both when using Next.js.
+
+Usage examples:
+
+```js
+import { presets, mergeConfig } from '@javalce/eslint-config';
+
+// Compose presets directly with mergeConfig
+export default mergeConfig(
+  presets.base(),
+  presets.typescript({
+    type: 'lib',
+  }),
+  presets.react({
+    jsx: { a11y: true },
+  }),
+);
+```
+
+You can also add custom config blocks when composing presets:
+
+```js
+import { presets, mergeConfig } from '@javalce/eslint-config';
+
+export default mergeConfig(
+  presets.base(),
+  presets.typescript({
+    type: 'lib',
+  }),
+  {
+    files: ['**/*.ts'],
+    rules: {
+      'no-console': 'warn',
+    },
+  },
+);
+```
 
 ## Credits
 
