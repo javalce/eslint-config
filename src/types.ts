@@ -479,6 +479,8 @@ export interface OptionsPresetSolid
 
 export interface OptionsPresetVue extends OptionsConfigWithVue, OptionsHasTypescript {}
 
+export interface OptionsPresetTanstack extends OptionsTanstack {}
+
 export type OptionsPresetTest = (OptionsHasJest | OptionsPresetHasVitest) & {
   testingLibrary?: OptionsTestingLibrary & {
     angular?: boolean;

@@ -9,6 +9,7 @@ import type {
   OptionsPresetReact,
   OptionsPresetSolid,
   OptionsPresetSvelte,
+  OptionsPresetTanstack,
   OptionsPresetTest,
   OptionsPresetTypescript,
   OptionsPresetVue,
@@ -138,6 +139,28 @@ async function presetVue(options: OptionsPresetVue = {}): Promise<Config[]> {
   );
 }
 
+async function presetTanstack(options: OptionsPresetTanstack = {}): Promise<Config[]> {
+  const configs: Array<Awaitable<Config[]>> = [];
+
+  if (options.query) {
+    configs.push(
+      tanstackQuery({
+        ...resolveSubOptions(options, 'query'),
+      }),
+    );
+  }
+
+  if (options.router) {
+    configs.push(
+      tanstackRouter({
+        ...resolveSubOptions(options, 'router'),
+      }),
+    );
+  }
+
+  return Promise.all(configs.map((c) => Promise.resolve(c))).then((configs) => configs.flat());
+}
+
 async function presetTest(options: OptionsPresetTest): Promise<Config[]> {
   const configs: Array<Awaitable<Config[]>> = [];
 
@@ -178,6 +201,7 @@ export const presets = {
   svelte: presetSvelte,
   solid: presetSolid,
   vue: presetVue,
+  tanstack: presetTanstack,
   test: presetTest,
 };
 
