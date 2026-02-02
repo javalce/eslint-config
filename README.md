@@ -586,6 +586,7 @@ Available presets:
 | `svelte`     | Svelte-specific configuration with rules and settings for Svelte projects.                    |
 | `solid`      | Solidjs-specific configuration with rules and settings for Solidjs projects.                  |
 | `vue`        | Vue-specific configuration with rules and settings for Vue projects.                          |
+| `tanstack`   | TanStack-specific configuration with rules and settings for TanStack Query and Router.        |
 | `test`       | Testing-specific configuration with rules and settings for testing frameworks (Jest, Vitest). |
 
 Behavior and recommendations:
