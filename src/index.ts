@@ -338,6 +338,14 @@ export async function defineConfig(
   return composer.toConfigs();
 }
 
+export async function mergeConfig(
+  ...configs: Array<Awaitable<Config | Config[]>>
+): Promise<Config[]> {
+  const resolved = await Promise.all(configs);
+
+  return resolved.flat();
+}
+
 type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
 
 function resolveSubOptions<T, K extends keyof T>(options: T, key: K): ResolvedOptions<T[K]> {
