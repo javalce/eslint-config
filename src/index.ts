@@ -57,7 +57,7 @@ async function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
 async function presetTypescript(options: OptionsPresetTypescript = {}): Promise<Config[]> {
   return Promise.resolve(
     typescript({
-      ...resolveSubOptions(options, 'ts'),
+      ...options,
       type: options.type ?? 'app',
     }),
   );

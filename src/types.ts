@@ -462,7 +462,7 @@ interface OptionsConfigWithTest {
   test?: OptionsTest;
 }
 
-export interface OptionsPresetTypescript extends OptionsProjectType, OptionsConfigWithTypescript {}
+export interface OptionsPresetTypescript extends OptionsProjectType, OptionsTypescript {}
 
 export interface OptionsPresetAngular extends OptionsConfigWithAngular, OptionsConfigWithNgrx {}
 
