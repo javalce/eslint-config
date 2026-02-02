@@ -1,4 +1,3 @@
-import type { ConfigNames } from './typegen';
 import type {
   Awaitable,
   Config,
@@ -15,7 +14,6 @@ import type {
   OptionsPresetVue,
 } from './types';
 
-import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { isPackageExists } from 'local-pkg';
 
 import { angular } from './configs/angular';
@@ -41,52 +39,54 @@ import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
 
-function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
-    ignores({ files: options.ignores }),
-    javascript(resolveSubOptions(options, 'js')),
-    comments(resolveSubOptions(options, 'comments')),
-    imports(resolveSubOptions(options, 'import')),
-    perfectionist(resolveSubOptions(options, 'perfectionist')),
-    stylistic(resolveSubOptions(options, 'stylistic')),
-    unicorn(resolveSubOptions(options, 'unicorn')),
-    node(resolveSubOptions(options, 'node')),
-  ).toConfigs();
+async function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
+  return Promise.resolve(
+    [
+      ignores({ files: options.ignores }),
+      javascript(resolveSubOptions(options, 'js')),
+      comments(resolveSubOptions(options, 'comments')),
+      imports(resolveSubOptions(options, 'import')),
+      perfectionist(resolveSubOptions(options, 'perfectionist')),
+      stylistic(resolveSubOptions(options, 'stylistic')),
+      unicorn(resolveSubOptions(options, 'unicorn')),
+      node(resolveSubOptions(options, 'node')),
+    ].flat(),
+  );
 }
 
-function presetTypescript(options: OptionsPresetTypescript = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetTypescript(options: OptionsPresetTypescript = {}): Promise<Config[]> {
+  return Promise.resolve(
     typescript({
       ...resolveSubOptions(options, 'ts'),
       type: options.type ?? 'app',
     }),
-  ).toConfigs();
+  );
 }
 
-function presetAngular(options: OptionsPresetAngular = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetAngular(options: OptionsPresetAngular = {}): Promise<Config[]> {
+  return Promise.all([
     angular({
       ...resolveSubOptions(options, 'angular'),
     }),
     ngrx({
       ...resolveSubOptions(options, 'ngrx'),
     }),
-  ).toConfigs();
+  ]).then((configs) => configs.flat());
 }
 
-function presetReact(options: OptionsPresetReact = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetReact(options: OptionsPresetReact = {}): Promise<Config[]> {
+  return Promise.all([
     jsx({
       ...resolveSubOptions(options, 'jsx'),
     }),
     react({
       ...resolveSubOptions(options, 'react'),
     }),
-  ).toConfigs();
+  ]).then((configs) => configs.flat());
 }
 
-function presetNextjs(options: OptionsPresetNext = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetNextjs(options: OptionsPresetNext = {}): Promise<Config[]> {
+  return Promise.all([
     jsx({
       ...resolveSubOptions(options, 'jsx'),
     }),
@@ -96,29 +96,29 @@ function presetNextjs(options: OptionsPresetNext = {}): Promise<Config[]> {
     nextjs({
       ...resolveSubOptions(options, 'next'),
     }),
-  ).toConfigs();
+  ]).then((configs) => configs.flat());
 }
 
-function presetAstro(options: OptionsPresetAstro = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetAstro(options: OptionsPresetAstro = {}): Promise<Config[]> {
+  return Promise.resolve(
     astro({
       ...resolveSubOptions(options, 'astro'),
       typescript: Boolean(options.typescript),
     }),
-  ).toConfigs();
+  );
 }
 
-function presetSvelte(options: OptionsPresetSvelte = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetSvelte(options: OptionsPresetSvelte = {}): Promise<Config[]> {
+  return Promise.resolve(
     svelte({
       ...resolveSubOptions(options, 'svelte'),
       typescript: Boolean(options.typescript),
     }),
-  ).toConfigs();
+  );
 }
 
-function presetSolid(options: OptionsPresetSolid = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetSolid(options: OptionsPresetSolid = {}): Promise<Config[]> {
+  return Promise.all([
     jsx({
       ...resolveSubOptions(options, 'jsx'),
     }),
@@ -126,19 +126,19 @@ function presetSolid(options: OptionsPresetSolid = {}): Promise<Config[]> {
       ...resolveSubOptions(options, 'solid'),
       typescript: Boolean(options.typescript),
     }),
-  ).toConfigs();
+  ]).then((configs) => configs.flat());
 }
 
-function presetVue(options: OptionsPresetVue = {}): Promise<Config[]> {
-  return new FlatConfigComposer<Config, ConfigNames>(
+async function presetVue(options: OptionsPresetVue = {}): Promise<Config[]> {
+  return Promise.resolve(
     vue({
       ...resolveSubOptions(options, 'vue'),
       typescript: Boolean(options.typescript),
     }),
-  ).toConfigs();
+  );
 }
 
-function presetTest(options: OptionsPresetTest): Promise<Config[]> {
+async function presetTest(options: OptionsPresetTest): Promise<Config[]> {
   const configs: Array<Awaitable<Config[]>> = [];
 
   if (options.framework === 'jest') {
@@ -162,7 +162,7 @@ function presetTest(options: OptionsPresetTest): Promise<Config[]> {
     configs.push(testingLibrary(options.testingLibrary));
   }
 
-  return new FlatConfigComposer<Config, ConfigNames>(...configs).toConfigs();
+  return Promise.all(configs.map((c) => Promise.resolve(c))).then((configs) => configs.flat());
 }
 
 /**
@@ -331,17 +331,15 @@ export async function defineConfig(
     );
   }
 
-  let composer = new FlatConfigComposer<Config, ConfigNames>();
+  configs.push(overrides);
 
-  composer = composer.append(...configs, ...overrides);
-
-  return composer.toConfigs();
+  return Promise.all(configs.map((c) => Promise.resolve(c))).then((configs) => configs.flat());
 }
 
 export async function mergeConfig(
   ...configs: Array<Awaitable<Config | Config[]>>
 ): Promise<Config[]> {
-  const resolved = await Promise.all(configs);
+  const resolved = await Promise.all(configs.map((c) => Promise.resolve(c)));
 
   return resolved.flat();
 }
