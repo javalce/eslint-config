@@ -1,4 +1,4 @@
-import type { Awaitable, Config } from './types';
+import type { Awaitable } from './types';
 
 import { createRequire } from 'node:module';
 import { join } from 'node:path';
@@ -9,15 +9,6 @@ import { isPackageExists } from 'local-pkg';
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url));
 
 export const requireModule = createRequire(join(process.cwd(), 'noop.js'));
-
-/**
- * Combine array and non-array configs into a single array.
- */
-export async function combine(...configs: Array<Awaitable<Config | Config[]>>): Promise<Config[]> {
-  const resolved = await Promise.all(configs.map((c) => Promise.resolve(c)));
-
-  return resolved.flat();
-}
 
 /**
  * Normalizes a value to a string array and optionally applies a callback to each element.

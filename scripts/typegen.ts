@@ -26,9 +26,9 @@ import { typescript } from '../src/configs/typescript';
 import { unicorn } from '../src/configs/unicorn';
 import { vitest } from '../src/configs/vitest';
 import { vue } from '../src/configs/vue';
-import { combine } from '../src/utils';
+import { mergeConfig } from '../src/index';
 
-const configs = (await combine(
+const configs = (await mergeConfig(
   {
     plugins: {
       '': {
