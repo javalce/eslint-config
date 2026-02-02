@@ -513,7 +513,7 @@ import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
   test: {
-    framework: 'jest',
+    runner: 'jest',
   },
 });
 ```
@@ -533,7 +533,7 @@ import { defineConfig } from '@javalce/eslint-config';
 
 export default defineConfig({
   test: {
-    framework: 'vitest',
+    runner: 'vitest',
   },
 });
 ```
@@ -557,7 +557,7 @@ export default defineConfig({
   vue: true,
   svelte: true,
   test: {
-    framework: 'vitest',
+    runner: 'vitest',
     testingLibrary: true,
   },
 });
