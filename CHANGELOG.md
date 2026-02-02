@@ -1,3 +1,15 @@
+# [0.24.0](https://github.com/javalce/eslint-config/compare/v0.23.0...v0.24.0) (2026-02-02)
+
+### Bug Fixes
+
+- add node config ([ee3de38](https://github.com/javalce/eslint-config/commit/ee3de38cb9ad603b9961ddb4bbe13cdcf89115bc))
+
+### Features
+
+- add mergeConfig function to combine multiple ESLint configurations ([c29bdb3](https://github.com/javalce/eslint-config/commit/c29bdb324ce6c33d7f1fb91746f02fe1effc0e2f))
+- add presets for composable config ([75fe961](https://github.com/javalce/eslint-config/commit/75fe96103b6412f22f168c0d991cce779e92a2eb))
+- add Tanstack preset support ([a35dd80](https://github.com/javalce/eslint-config/commit/a35dd80ee4c7bc495fb770540e3947e333426efc))
+
 # [0.23.0](https://github.com/javalce/eslint-config/compare/v0.22.1...v0.23.0) (2026-01-30)
 
 ### Bug Fixes
