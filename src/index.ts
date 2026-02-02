@@ -164,7 +164,7 @@ async function presetTanstack(options: OptionsPresetTanstack = {}): Promise<Conf
 async function presetTest(options: OptionsPresetTest): Promise<Config[]> {
   const configs: Array<Awaitable<Config[]>> = [];
 
-  if (options.framework === 'jest') {
+  if (options.runner === 'jest') {
     configs.push(
       jest({
         overrides: options.overrides,
@@ -172,7 +172,7 @@ async function presetTest(options: OptionsPresetTest): Promise<Config[]> {
     );
   }
 
-  if (options.framework === 'vitest') {
+  if (options.runner === 'vitest') {
     configs.push(
       vitest({
         typescript: options.typescript,

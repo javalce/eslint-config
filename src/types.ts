@@ -266,13 +266,13 @@ interface OptionsHasTestingLibrary {
 export interface OptionsJest extends OptionsOverrides<'jest'> {}
 
 interface OptionsHasJest extends OptionsJest, OptionsHasTestingLibrary {
-  framework: 'jest';
+  runner: 'jest';
 }
 
 export interface OptionsVitest extends OptionsOverrides<'vitest'> {}
 
 interface OptionsHasVitest extends OptionsVitest, OptionsHasTestingLibrary {
-  framework: 'vitest';
+  runner: 'vitest';
 }
 
 type OptionsTest = OptionsHasJest | OptionsHasVitest;
