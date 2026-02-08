@@ -124,6 +124,16 @@ export async function react({
         'react/prefer-namespace-import': 'error',
       },
     },
+    {
+      name: 'react/rules/typescript',
+      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+      rules: {
+        'react/jsx-no-duplicate-props': 'off',
+        'react/jsx-no-undef': 'off',
+        'react/jsx-uses-react': 'off',
+        'react/jsx-uses-vars': 'off',
+      },
+    },
     ...(isTypeAware
       ? [
           {
@@ -155,6 +165,14 @@ export async function react({
         'react-dom/no-unsafe-target-blank': 'error',
         'react-dom/no-use-form-state': 'error',
         'react-dom/no-void-elements-with-children': 'error',
+      },
+    },
+    {
+      name: 'react/rules/dom/typescript',
+      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+      rules: {
+        'react-dom/no-string-style-prop': 'off',
+        'react-dom/no-unknown-property': 'off',
       },
     },
     {
