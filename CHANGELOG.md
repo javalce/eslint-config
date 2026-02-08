@@ -1,3 +1,14 @@
+## [0.24.1](https://github.com/javalce/eslint-config/compare/v0.24.0...v0.24.1) (2026-02-08)
+
+### Bug Fixes
+
+- nest Babel presets under parserOptions.babelOptions ([d6c9629](https://github.com/javalce/eslint-config/commit/d6c962949197fbf6438b626c1afc65d160bb4f28))
+- restrict React rules to TS files when type information is available ([ce0dbfd](https://github.com/javalce/eslint-config/commit/ce0dbfd734a2d1facedf9b63d13800315b300f6e))
+
+### Features
+
+- add TypeScript-specific React and DOM rule configs ([adcac25](https://github.com/javalce/eslint-config/commit/adcac258a9d5041c23816f7e60f2b3334a2c1403))
+
 # [0.24.0](https://github.com/javalce/eslint-config/compare/v0.23.0...v0.24.0) (2026-02-02)
 
 ### Bug Fixes
