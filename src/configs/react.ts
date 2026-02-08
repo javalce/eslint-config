@@ -4,7 +4,7 @@ import type { Config, OptionsReact } from '../types';
 
 import { getPackageInfo, isPackageExists } from 'local-pkg';
 
-import { GLOB_SRC_FILES } from '../globs';
+import { GLOB_ASTRO_TS_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
@@ -19,9 +19,10 @@ const NEXT_PACKAGES = ['next'];
 const REACT_COMPILER_PACKAGES = ['babel-plugin-react-compiler'];
 
 export async function react({
+  typeAware: isTypeAware = isPackageExists('typescript'),
   reactCompiler = REACT_COMPILER_PACKAGES.some((pkg) => isPackageExists(pkg)),
   overrides,
-}: OptionsReact = {}): Promise<Config[]> {
+}: OptionsReact & { typeAware?: boolean } = {}): Promise<Config[]> {
   ensureInstalled([
     '@eslint-react/eslint-plugin',
     'eslint-plugin-react-hooks',
@@ -98,8 +99,6 @@ export async function react({
         'react/no-default-props': 'error',
         'react/no-direct-mutation-state': 'error',
         'react/no-forward-ref': 'warn',
-        'react/no-implicit-key': 'warn',
-        'react/no-leaked-conditional-rendering': 'warn',
         'react/no-missing-key': 'error',
         'react/no-nested-component-definitions': 'error',
         'react/no-nested-lazy-component-declarations': 'error',
@@ -125,6 +124,19 @@ export async function react({
         'react/prefer-namespace-import': 'error',
       },
     },
+    ...(isTypeAware
+      ? [
+          {
+            files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+            ignores: GLOB_ASTRO_TS_FILES,
+            rules: {
+              'react/no-implicit-key': 'error',
+              'react/no-leaked-conditional-rendering': 'warn',
+            },
+            name: 'react/rules/type-aware',
+          } satisfies Config,
+        ]
+      : []),
     {
       name: 'react/rules/dom',
       files,
