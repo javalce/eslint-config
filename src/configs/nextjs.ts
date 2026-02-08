@@ -20,15 +20,17 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<Config[]>
     })(),
     parserOptions: {
       requireConfigFile: false,
-      presets: (() => {
-        try {
-          requireModule.resolve('next/babel');
+      babelOptions: {
+        presets: (() => {
+          try {
+            requireModule.resolve('next/babel');
 
-          return ['next/babel'];
-        } catch {
-          return [];
-        }
-      })(),
+            return ['next/babel'];
+          } catch {
+            return [];
+          }
+        })(),
+      },
     },
   } satisfies Linter.LanguageOptions;
 
