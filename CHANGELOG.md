@@ -1,3 +1,9 @@
+## [0.24.2](https://github.com/javalce/eslint-config/compare/v0.24.1...v0.24.2) (2026-02-24)
+
+### Bug Fixes
+
+- pass TypeScript options to imports config on presetBase ([ea0d366](https://github.com/javalce/eslint-config/commit/ea0d366138a9841bd9f77893554c3f3133af63cd))
+
 ## [0.24.1](https://github.com/javalce/eslint-config/compare/v0.24.0...v0.24.1) (2026-02-08)
 
 ### Bug Fixes
