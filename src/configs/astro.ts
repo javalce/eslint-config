@@ -32,7 +32,7 @@ export async function astro({
     },
     {
       name: 'astro/base',
-      files: [...GLOB_ASTRO_FILES],
+      files: GLOB_ASTRO_FILES,
       languageOptions: {
         globals: {
           ...globals.node,
@@ -49,7 +49,7 @@ export async function astro({
     },
     {
       name: 'astro/javascript',
-      files: [...GLOB_ASTRO_JS_FILES],
+      files: GLOB_ASTRO_JS_FILES,
       languageOptions: {
         globals: {
           ...globals.browser,
@@ -59,7 +59,7 @@ export async function astro({
     },
     {
       name: 'astro/typescript',
-      files: [...GLOB_ASTRO_TS_FILES],
+      files: GLOB_ASTRO_TS_FILES,
       languageOptions: {
         globals: {
           ...globals.browser,
@@ -73,7 +73,7 @@ export async function astro({
     },
     {
       name: 'astro/recommended',
-      files: [...GLOB_ASTRO_FILES],
+      files: GLOB_ASTRO_FILES,
       rules: {
         'astro/missing-client-only-directive-value': 'error',
         'astro/no-conflict-set-directives': 'error',
@@ -87,12 +87,12 @@ export async function astro({
     },
     {
       name: 'astro/jsx-a11y-recommended',
-      files: [...GLOB_ASTRO_FILES],
+      files: GLOB_ASTRO_FILES,
       ...astroJsxA11yConfig,
     },
     {
       name: 'astro/rules/overrides',
-      files: [...GLOB_ASTRO_FILES],
+      files: GLOB_ASTRO_FILES,
       rules: {
         ...overrides,
       },
