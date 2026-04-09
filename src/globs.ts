@@ -33,3 +33,12 @@ export const GLOB_TS_TEST_FILES = [
   `**/*.bench.${GLOB_SRC_FILES_TS_EXT}`,
   `**/*.benchmark.${GLOB_SRC_FILES_TS_EXT}`,
 ];
+
+export const GLOB_TANSTACK_ROUTER_FILES = `src/routes/**/*.tsx`;
+
+export const GLOB_EXCLUDE_FILES = [
+  // Generated files
+  '**/*.gen.[jt]s?(x)',
+  '**/*.generated.[jt]s?(x)',
+  '**/generated/**/*',
+];
