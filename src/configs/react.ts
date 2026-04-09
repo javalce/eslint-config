@@ -16,11 +16,9 @@ const REACT_ROUTER_PACKAGES = [
   '@react-router/dev',
 ];
 const NEXT_PACKAGES = ['next'];
-const REACT_COMPILER_PACKAGES = ['babel-plugin-react-compiler'];
 
 export async function react({
   typeAware: isTypeAware = isPackageExists('typescript'),
-  reactCompiler = REACT_COMPILER_PACKAGES.some((pkg) => isPackageExists(pkg)),
   overrides,
 }: OptionsReact & { typeAware?: boolean } = {}): Promise<Config[]> {
   ensureInstalled([
@@ -57,9 +55,9 @@ export async function react({
         react: plugins['@eslint-react'],
         'react-dom': plugins['@eslint-react/dom'],
         'react-hooks': pluginReactHooks,
-        'react-hooks-extra': plugins['@eslint-react/hooks-extra'],
         'react-naming-convention': plugins['@eslint-react/naming-convention'],
         'react-refresh': pluginReactRefresh,
+        'react-rsc': plugins['@eslint-react/rsc'],
         'react-web-api': plugins['@eslint-react/web-api'],
       },
     },
@@ -181,32 +179,16 @@ export async function react({
       rules: {
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
-        ...(reactCompiler
-          ? {
-              'react-hooks/config': 'error',
-              'react-hooks/error-boundaries': 'error',
-              'react-hooks/component-hook-factories': 'error',
-              'react-hooks/gating': 'error',
-              'react-hooks/globals': 'error',
-              'react-hooks/immutability': 'error',
-              'react-hooks/preserve-manual-memoization': 'error',
-              'react-hooks/purity': 'error',
-              'react-hooks/refs': 'error',
-              'react-hooks/set-state-in-effect': 'error',
-              'react-hooks/set-state-in-render': 'error',
-              'react-hooks/static-components': 'error',
-              'react-hooks/unsupported-syntax': 'warn',
-              'react-hooks/use-memo': 'error',
-              'react-hooks/incompatible-library': 'warn',
-            }
-          : {}),
-      },
-    },
-    {
-      name: 'react/rules/react-hooks-extra',
-      files,
-      rules: {
-        'react-hooks-extra/no-direct-set-state-in-use-effect': 'warn',
+        'react-hooks/component-hook-factories': 'error',
+        'react-hooks/error-boundaries': 'error',
+        'react-hooks/immutability': 'error',
+        'react-hooks/use-memo': 'error',
+        'react-hooks/purity': 'error',
+        'react-hooks/refs': 'error',
+        'react-hooks/set-state-in-effect': 'error',
+        'react-hooks/set-state-in-render': 'error',
+        'react-hooks/static-components': 'error',
+        'react-hooks/unsupported-syntax': 'warn',
       },
     },
     {
@@ -223,8 +205,16 @@ export async function react({
       name: 'react/rules/naming-convention',
       files,
       rules: {
-        'react-naming-convention/use-state': 'warn',
-        'react-naming-convention/component-name': 'warn',
+        'react-naming-convention/use-state': [
+          'warn',
+          {
+            enforceAssignment: true,
+            enforceSetterName: true,
+          },
+        ],
+        'react-naming-convention/context-name': 'warn',
+        'react-naming-convention/id-name': 'warn',
+        'react-naming-convention/ref-name': 'warn',
       },
     },
     {
@@ -275,6 +265,13 @@ export async function react({
             ],
           },
         ],
+      },
+    },
+    {
+      name: 'react/rules/rsc',
+      files,
+      rules: {
+        'react-rsc/function-definition': 'error',
       },
     },
     {
