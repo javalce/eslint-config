@@ -13,11 +13,9 @@ export function unicorn({ overrides }: OptionsUnicorn = {}): Config[] {
     {
       name: 'unicorn/rules',
       rules: {
-        /**
-         * Require consistent filename case for all linted files.
-         *
-         * 🚫 Not fixable - https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/filename-case.md
-         */
+        'unicorn/consistent-empty-array-spread': 'error',
+        'unicorn/error-message': 'error',
+        'unicorn/escape-case': 'error',
         'unicorn/filename-case': [
           'error',
           {
@@ -25,19 +23,23 @@ export function unicorn({ overrides }: OptionsUnicorn = {}): Config[] {
             ignore: [
               /**
                * Ignore routing file conventions for React Router and TanStack Router
-               *
-               * @see https://tanstack.com/router/latest/docs/framework/react/routing/file-naming-conventions
                */
               '^\\$[a-zA-Z0-9]+\\.[jt]s?(x)$',
             ],
           },
         ],
-        /**
-         * Require using the `node:` protocol when importing Node.js built-in modules.
-         *
-         * 🔧 Fixable - https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-node-protocol.md
-         */
-        'unicorn/prefer-node-protocol': 'warn',
+        'unicorn/new-for-builtins': 'error',
+        'unicorn/no-instanceof-builtins': 'error',
+        'unicorn/no-new-array': 'error',
+        'unicorn/no-new-buffer': 'error',
+        'unicorn/number-literal-case': 'error',
+        'unicorn/prefer-dom-node-text-content': 'error',
+        'unicorn/prefer-includes': 'error',
+        'unicorn/prefer-node-protocol': 'error',
+        'unicorn/prefer-number-properties': 'error',
+        'unicorn/prefer-string-starts-ends-with': 'error',
+        'unicorn/prefer-type-error': 'error',
+        'unicorn/throw-new-error': 'error',
       },
     },
     {
