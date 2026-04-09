@@ -21,6 +21,7 @@ import { isPackageExists } from 'local-pkg';
 import { angular } from './configs/angular';
 import { astro } from './configs/astro';
 import { comments } from './configs/comments';
+import { e18e } from './configs/e18e';
 import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
@@ -55,6 +56,10 @@ async function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
       stylistic(resolveSubOptions(options, 'stylistic')),
       unicorn(resolveSubOptions(options, 'unicorn')),
       node(resolveSubOptions(options, 'node')),
+      e18e({
+        ...resolveSubOptions(options, 'e18e'),
+        type: options.type,
+      }),
     ].flat(),
   );
 }
@@ -246,6 +251,7 @@ export async function defineConfig(
         typescript: tsEnabled,
         tsconfigPath: tsOptions?.tsconfigPath,
       },
+      type: projectType,
     }),
   );
 

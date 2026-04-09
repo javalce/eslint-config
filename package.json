@@ -50,6 +50,7 @@
     "*": "prettier -w --ignore-unknown"
   },
   "dependencies": {
+    "@e18e/eslint-plugin": "^0.3.0",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.7.1",
     "@eslint/compat": "^2.0.5",
     "@eslint/js": "^9.39.4",

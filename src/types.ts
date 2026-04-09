@@ -14,6 +14,7 @@ type RuleKeys =
   | '@tanstack/router'
   | '@typescript-eslint'
   | 'astro'
+  | 'e18e'
   | 'eslint'
   | 'eslint-comments'
   | 'import-x'
@@ -135,6 +136,30 @@ export interface OptionsUnicorn extends OptionsOverrides<'unicorn'> {}
 export interface OptionsImport extends OptionsOverrides<'import-x'> {}
 
 export interface OptionsPerfectionist extends OptionsOverrides<'perfectionist'> {}
+
+export interface OptionsE18e extends OptionsOverrides<'e18e'> {
+  /**
+   * Include modernization rules
+   *
+   * @see https://github.com/e18e/eslint-plugin#modernization
+   * @default true
+   */
+  modernization?: boolean;
+  /**
+   * Include module replacements rules
+   *
+   * @see https://github.com/e18e/eslint-plugin#module-replacements
+   * @default type === 'lib'
+   */
+  moduleReplacements?: boolean;
+  /**
+   * Include performance improvement rules
+   *
+   * @see https://github.com/e18e/eslint-plugin#performance-improvements
+   * @default true
+   */
+  performanceImprovements?: boolean;
+}
 
 export interface OptionsJSXA11y extends OptionsOverrides<'jsx-a11y'> {}
 
@@ -315,6 +340,10 @@ export interface OptionsConfigBase {
    * Unicorn plugin options.
    */
   unicorn?: OptionsUnicorn;
+  /**
+   * E18e plugin options.
+   */
+  e18e?: OptionsE18e;
 }
 
 export interface OptionsPresetBase extends OptionsConfigBase, OptionsProjectType {

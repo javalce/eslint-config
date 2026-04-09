@@ -8,6 +8,7 @@ import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { angular } from '../src/configs/angular';
 import { astro } from '../src/configs/astro';
 import { comments } from '../src/configs/comments';
+import { e18e } from '../src/configs/e18e';
 import { imports } from '../src/configs/imports';
 import { javascript } from '../src/configs/javascript';
 import { jest } from '../src/configs/jest';
@@ -44,6 +45,7 @@ const configs = (await mergeConfig(
   perfectionist(),
   stylistic(),
   unicorn(),
+  e18e(),
   jsx({ a11y: true }),
   typescript(),
   angular(),
