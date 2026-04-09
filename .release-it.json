@@ -2,16 +2,18 @@
   "$schema": "./node_modules/release-it/schema/release-it.json",
   "git": {
     "commitMessage": "release: v${version}",
-    "tagAnnotation": "v${version}",
-    "requireCleanWorkingDir": false
+    "tagAnnotation": "v${version}"
   },
   "hooks": {
     "before:release": ["pnpm build"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "angular",
-      "infile": "CHANGELOG.md"
+      "infile": "CHANGELOG.md",
+      "ignoreRecommendedBump": true,
+      "preset": {
+        "name": "angular"
+      }
     }
   }
 }
