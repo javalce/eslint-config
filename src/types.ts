@@ -279,7 +279,7 @@ type OptionsTest = OptionsHasJest | OptionsHasVitest;
 
 interface OptionsPresetHasVitest extends OptionsHasVitest, OptionsHasTypescript {}
 
-export interface OptionsPresetBase {
+export interface OptionsConfigBase {
   /**
    * Core rules.
    */
@@ -315,6 +315,10 @@ export interface OptionsPresetBase {
    * Unicorn plugin options.
    */
   unicorn?: OptionsUnicorn;
+}
+
+export interface OptionsPresetBase extends OptionsConfigBase, OptionsProjectType {
+  tsInfo?: OptionsHasTypescript & OptionsTsconfigPath;
 }
 
 interface OptionsConfigWithTypescript {
@@ -492,7 +496,7 @@ export type OptionsPresetTest = (OptionsHasJest | OptionsPresetHasVitest) & {
 
 export interface OptionsConfig
   extends
-    OptionsPresetBase,
+    OptionsConfigBase,
     OptionsProjectType,
     OptionsConfigWithTypescript,
     OptionsConfigWithJSX,

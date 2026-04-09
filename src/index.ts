@@ -2,7 +2,6 @@ import type {
   Awaitable,
   Config,
   OptionsConfig,
-  OptionsHasTypescript,
   OptionsPresetAngular,
   OptionsPresetAstro,
   OptionsPresetBase,
@@ -14,7 +13,6 @@ import type {
   OptionsPresetTest,
   OptionsPresetTypescript,
   OptionsPresetVue,
-  OptionsTsconfigPath,
   OptionsTypescript,
 } from './types';
 
@@ -43,10 +41,7 @@ import { unicorn } from './configs/unicorn';
 import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
 
-async function presetBase(
-  options: OptionsPresetBase = {},
-  tsInfo: OptionsHasTypescript & OptionsTsconfigPath = {},
-): Promise<Config[]> {
+async function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
   return Promise.resolve(
     [
       ignores({ files: options.ignores }),
@@ -54,7 +49,7 @@ async function presetBase(
       comments(resolveSubOptions(options, 'comments')),
       imports({
         ...resolveSubOptions(options, 'import'),
-        ...tsInfo,
+        ...options.tsInfo,
       }),
       perfectionist(resolveSubOptions(options, 'perfectionist')),
       stylistic(resolveSubOptions(options, 'stylistic')),
@@ -245,7 +240,13 @@ export async function defineConfig(
   const tsOptions = resolveSubOptions(options, 'ts') as OptionsTypescript | undefined;
 
   configs.push(
-    presetBase(options, { typescript: tsEnabled, tsconfigPath: tsOptions?.tsconfigPath }),
+    presetBase({
+      ...options,
+      tsInfo: {
+        typescript: tsEnabled,
+        tsconfigPath: tsOptions?.tsconfigPath,
+      },
+    }),
   );
 
   if (tsEnabled) {
