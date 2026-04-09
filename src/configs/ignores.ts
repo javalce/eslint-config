@@ -6,25 +6,16 @@ import path from 'node:path';
 import { includeIgnoreFile } from '@eslint/compat';
 import { globalIgnores } from 'eslint/config';
 
-export function ignores({ files }: { files?: string[] }): Config[] {
+import { GLOB_EXCLUDE_FILES } from '../globs';
+
+export function ignores({ files = [] }: { files?: string[] }): Config[] {
   const cwd = process.cwd();
   const gitignorePath = path.join(cwd, '.gitignore');
 
-  const config: Config[] = [];
-
-  if (fs.existsSync(gitignorePath)) {
-    config.push({
-      ...includeIgnoreFile(gitignorePath),
-      name: 'gitignore',
-    });
-  }
-
-  if (files) {
-    config.push({
-      ...globalIgnores(files),
-      name: 'ignores',
-    });
-  }
-
-  return config;
+  return [
+    ...(fs.existsSync(gitignorePath)
+      ? [includeIgnoreFile(gitignorePath, 'eslint/gitignores')]
+      : []),
+    globalIgnores([...GLOB_EXCLUDE_FILES, ...files], 'eslint/ignores'),
+  ];
 }
