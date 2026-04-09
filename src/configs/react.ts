@@ -4,7 +4,13 @@ import type { Config, OptionsReact } from '../types';
 
 import { getPackageInfo, isPackageExists } from 'local-pkg';
 
-import { GLOB_ASTRO_TS_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
+import {
+  GLOB_ASTRO_TS_FILES,
+  GLOB_SRC_FILES,
+  GLOB_TANSTACK_ROUTER_FILES,
+  GLOB_TS_FILES,
+  GLOB_TSX_FILES,
+} from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
@@ -16,6 +22,7 @@ const REACT_ROUTER_PACKAGES = [
   '@react-router/dev',
 ];
 const NEXT_PACKAGES = ['next'];
+const TANSTACK_ROUTER_PACKAGES = ['@tanstack/react-router'];
 
 export async function react({
   typeAware: isTypeAware = isPackageExists('typescript'),
@@ -41,6 +48,7 @@ export async function react({
   );
   const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
   const isUsingNext = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
+  const isUsingTanStackRouter = TANSTACK_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
   const reactVersion = await getPackageInfo('react', { paths: [process.cwd()] }).then(
     (info) => info?.version,
   );
@@ -276,9 +284,20 @@ export async function react({
         ],
       },
     },
+    ...(isUsingTanStackRouter
+      ? ([
+          {
+            name: 'react/rules/tanstack-router',
+            files: [GLOB_TANSTACK_ROUTER_FILES],
+            rules: {
+              'react-refresh/only-export-components': 'off', // Disable the base rule
+            },
+          },
+        ] satisfies Config[])
+      : []),
     {
       name: 'react/rules/rsc',
-      files,
+      files: [GLOB_TANSTACK_ROUTER_FILES],
       rules: {
         'react-rsc/function-definition': 'error',
       },
