@@ -229,6 +229,8 @@ export async function react({
               ...(() => {
                 if (isUsingNext) {
                   return [
+                    // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+                    'experimental_ppr',
                     'dynamic',
                     'dynamicParams',
                     'revalidate',
@@ -236,13 +238,20 @@ export async function react({
                     'runtime',
                     'preferredRegion',
                     'maxDuration',
-                    'config',
-                    'generateStaticParams',
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
                     'metadata',
                     'generateMetadata',
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
                     'viewport',
                     'generateViewport',
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
+                    'generateImageMetadata',
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
                     'generateSitemaps',
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
+                    'generateStaticParams',
+                    // Legacy Next.js config export
+                    'config',
                   ];
                 }
 
