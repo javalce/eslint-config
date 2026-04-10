@@ -39,4 +39,10 @@ export const GLOB_EXCLUDE_FILES = [
   '**/*.gen.[jt]s?(x)',
   '**/*.generated.[jt]s?(x)',
   '**/generated/**/*',
+
+  // AI related files
+  '**/.context',
+  '**/.claude',
+  '**/.agents',
+  '**/.*/skills',
 ];
