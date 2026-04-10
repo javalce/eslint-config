@@ -24,7 +24,6 @@ type RuleKeys =
   | 'perfectionist'
   | 'react'
   | 'react-hooks'
-  | 'react-refresh'
   | 'solid'
   | 'svelte'
   | 'testing-library'
@@ -233,7 +232,7 @@ export interface OptionsNgrx extends OptionsOverrides<'@ngrx'> {
   signals?: boolean;
 }
 
-export interface OptionsReact extends OptionsOverrides<'react' | 'react-hooks' | 'react-refresh'> {}
+export interface OptionsReact extends OptionsOverrides<'react' | 'react-hooks'> {}
 
 export interface OptionsNext extends OptionsOverrides<'@next/next'> {}
 

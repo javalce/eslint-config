@@ -13,46 +13,26 @@ import {
 } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
-const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
-
-const REACT_ROUTER_PACKAGES = [
-  '@react-router/node',
-  '@react-router/react',
-  '@react-router/serve',
-  '@react-router/dev',
-];
-const NEXT_PACKAGES = ['next'];
-const TANSTACK_ROUTER_PACKAGES = ['@tanstack/react-router'];
-
 export async function react({
   typeAware: isTypeAware = isPackageExists('typescript'),
   overrides,
 }: OptionsReact & { typeAware?: boolean } = {}): Promise<Config[]> {
-  ensureInstalled([
-    '@eslint-react/eslint-plugin',
-    'eslint-plugin-react-hooks',
-    'eslint-plugin-react-refresh',
-  ]);
+  ensureInstalled(['@eslint-react/eslint-plugin', 'eslint-plugin-react-hooks']);
 
-  const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
+  const [pluginReact, pluginReactHooks] = await Promise.all([
     resolveDefaultExport(import('@eslint-react/eslint-plugin')),
     resolveDefaultExport(import('eslint-plugin-react-hooks')),
-    resolveDefaultExport(import('eslint-plugin-react-refresh')),
   ]);
 
   // @ts-expect-error -- TS cannot infer that plugins is defined
   const plugins = (pluginReact.configs.all.plugins as Linter.Config['plugins'])!;
 
-  const isAllowConstantExport = REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES.some((pkg) =>
-    isPackageExists(pkg),
-  );
-  const isUsingReactRouter = REACT_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
-  const isUsingNext = NEXT_PACKAGES.some((pkg) => isPackageExists(pkg));
-  const isUsingTanStackRouter = TANSTACK_ROUTER_PACKAGES.some((pkg) => isPackageExists(pkg));
   const reactVersion = await getPackageInfo('react', { paths: [process.cwd()] }).then(
     (info) => info?.version,
   );
-  const isReact19OrNewer = reactVersion ? parseInt(reactVersion.split('.')[0], 10) >= 19 : false;
+  const isReact19OrNewer = reactVersion
+    ? Number.parseInt(reactVersion.split('.')[0], 10) >= 19
+    : false;
 
   const files = [GLOB_SRC_FILES];
 
@@ -64,7 +44,6 @@ export async function react({
         'react-dom': plugins['@eslint-react/dom'],
         'react-hooks': pluginReactHooks,
         'react-naming-convention': plugins['@eslint-react/naming-convention'],
-        'react-refresh': pluginReactRefresh,
         'react-rsc': plugins['@eslint-react/rsc'],
         'react-web-api': plugins['@eslint-react/web-api'],
       },
@@ -225,76 +204,6 @@ export async function react({
         'react-naming-convention/ref-name': 'warn',
       },
     },
-    {
-      name: 'react/rules/react-refresh',
-      files,
-      rules: {
-        'react-refresh/only-export-components': [
-          'warn',
-          {
-            allowConstantExport: isAllowConstantExport,
-            allowExportNames: [
-              ...(() => {
-                if (isUsingNext) {
-                  return [
-                    // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-                    'experimental_ppr',
-                    'dynamic',
-                    'dynamicParams',
-                    'revalidate',
-                    'fetchCache',
-                    'runtime',
-                    'preferredRegion',
-                    'maxDuration',
-                    // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-                    'metadata',
-                    'generateMetadata',
-                    // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-                    'viewport',
-                    'generateViewport',
-                    // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
-                    'generateImageMetadata',
-                    // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
-                    'generateSitemaps',
-                    // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
-                    'generateStaticParams',
-                    // Legacy Next.js config export
-                    'config',
-                  ];
-                }
-
-                if (isUsingReactRouter) {
-                  return [
-                    'meta',
-                    'links',
-                    'headers',
-                    'loader',
-                    'action',
-                    'clientLoader',
-                    'clientAction',
-                    'handle',
-                    'shouldRevalidate',
-                  ];
-                }
-
-                return [];
-              })(),
-            ],
-          },
-        ],
-      },
-    },
-    ...(isUsingTanStackRouter
-      ? ([
-          {
-            name: 'react/rules/tanstack-router',
-            files: [GLOB_TANSTACK_ROUTER_FILES],
-            rules: {
-              'react-refresh/only-export-components': 'off', // Disable the base rule
-            },
-          },
-        ] satisfies Config[])
-      : []),
     {
       name: 'react/rules/rsc',
       files: [GLOB_TANSTACK_ROUTER_FILES],
