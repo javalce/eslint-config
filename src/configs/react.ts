@@ -4,13 +4,7 @@ import type { Config, OptionsReact } from '../types';
 
 import { getPackageInfo, isPackageExists } from 'local-pkg';
 
-import {
-  GLOB_ASTRO_TS_FILES,
-  GLOB_SRC_FILES,
-  GLOB_TANSTACK_ROUTER_FILES,
-  GLOB_TS_FILES,
-  GLOB_TSX_FILES,
-} from '../globs';
+import { GLOB_ASTRO_TS_FILES, GLOB_SRC_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function react({
@@ -206,7 +200,7 @@ export async function react({
     },
     {
       name: 'react/rules/rsc',
-      files: [GLOB_TANSTACK_ROUTER_FILES],
+      files,
       rules: {
         'react-rsc/function-definition': 'error',
       },
