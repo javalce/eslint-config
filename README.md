@@ -123,7 +123,9 @@ This way we added a Perfectionist plugin configuration.
 
 ### Ignore files
 
-By default, the ESLint configuration will ignore all files in the `.gitignore` file. If you want to ignore additional files, you can pass the `ignores` option to the configuration:
+By default, the ESLint configuration will ignore all files in the `.gitignore` file of your project and other common files like generated files or AI files.
+
+If you want to ignore additional files, you can pass the `ignores` option to the configuration:
 
 ```js
 import { defineConfig } from '@javalce/eslint-config';
