@@ -1,3 +1,22 @@
+# Changelog
+
+# [0.25.0](https://github.com/javalce/eslint-config/compare/v0.24.2...v0.25.0) (2026-04-12)
+
+### Bug Fixes
+
+- update typescript peer dependency to only allow version 5 ([3d8c3d9](https://github.com/javalce/eslint-config/commit/3d8c3d961033bb92a83a88237c83cf995c2d35b4))
+- use correct files for react server components rules ([fb9d8de](https://github.com/javalce/eslint-config/commit/fb9d8de77858d9f8a507b7fa680a7d7d5d70a7cf))
+
+### Features
+
+- add AI related files to exclusion patterns ([edad64f](https://github.com/javalce/eslint-config/commit/edad64fa20f1dab3b3bf66a7cbf79d9c3268277b))
+- add e18e plugin configuration and integrate into presets ([3807504](https://github.com/javalce/eslint-config/commit/3807504eb99f89cf55e7227de1365c6016d17f9e))
+- add glob patterns for TanStack Router and exclude generated files ([38eb3cf](https://github.com/javalce/eslint-config/commit/38eb3cffa739dbf4668aab82529356c7201b8f22))
+- add support for Next.js experimental features in react configuration ([cf9b43f](https://github.com/javalce/eslint-config/commit/cf9b43f5f790201669c4f726744d4b22be019c5d))
+- enhance react configuration by refining hooks rules and adding RSC support ([1ebadab](https://github.com/javalce/eslint-config/commit/1ebadabb4df00c7fef4de4c5b761b3019edf8a40))
+- turn off react refresh rule on tanstack router route files ([0d5b1bd](https://github.com/javalce/eslint-config/commit/0d5b1bd527e848f15dfdad835bf844c6b0010bca))
+- update unicorn rules ([60d470d](https://github.com/javalce/eslint-config/commit/60d470d356910029f0e613d4e3c0569a08eec9b3))
+
 ## [0.24.2](https://github.com/javalce/eslint-config/compare/v0.24.1...v0.24.2) (2026-02-24)
 
 ### Bug Fixes
