@@ -344,10 +344,10 @@ export default defineConfig({
 
 ### React
 
-To enable React support, you need to install the `@eslint-react/eslint-plugin`, `eslint-plugin-react-hooks` and `eslint-plugin-jsx-a11y` packages:
+To enable React support, you need to install the `@eslint-react/eslint-plugin` and `eslint-plugin-react-hooks` packages:
 
 ```bash
-pnpm add --save-dev @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y
+pnpm add --save-dev @eslint-react/eslint-plugin eslint-plugin-react-hooks
 ```
 
 Then, update your ESLint configuration file to enable the React config:
@@ -365,7 +365,7 @@ export default defineConfig({
 To enable Next.js support, you need to install all the react plugins and the `@next/eslint-plugin-next` packages:
 
 ```bash
-pnpm add --save-dev @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh eslint-plugin-jsx-a11y @next/eslint-plugin-next
+pnpm add --save-dev @eslint-react/eslint-plugin eslint-plugin-react-hooks @next/eslint-plugin-next
 ```
 
 Then, update your ESLint configuration file to enable the react and Next.js config:
