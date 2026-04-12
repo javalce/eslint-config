@@ -40,6 +40,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "prepack": "pnpm build",
     "prepare": "husky",
     "release": "release-it",
     "release:test": "release-it --dry-run",
