@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.1](https://github.com/javalce/eslint-config/compare/v0.25.0...v0.25.1) (2026-04-26)
+
+### Bug Fixes
+
+- allow throwing any object by disabling '@typescript-eslint/only-throw-error' rule ([cec35b0](https://github.com/javalce/eslint-config/commit/cec35b02fa6a2d1c633edb891c29a42afef420fe))
+- extend OptionsReact type to include additional React-related rules ([bbf96c8](https://github.com/javalce/eslint-config/commit/bbf96c809fa5d19b549f2071078d858d42752e6a))
+
 # [0.25.0](https://github.com/javalce/eslint-config/compare/v0.24.2...v0.25.0) (2026-04-12)
 
 ### Bug Fixes
