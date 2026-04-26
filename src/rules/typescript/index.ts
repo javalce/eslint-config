@@ -7,6 +7,8 @@ import type { Config } from '../../types';
 const disabledRules: Config['rules'] = {
   // Allow the use of `!` for non-null assertions.
   '@typescript-eslint/no-non-null-assertion': 'off',
+  // Allow throwing any object, not just `Error` instances. This is common when you want to end a process without needing to create an `Error` object, such as redirecting to another page in a web application.
+  '@typescript-eslint/only-throw-error': 'off',
   // Normally, it's used by frameworks like Astro or Next.js or bundlers like Vite to reference it's types in a env.d.ts file.
   '@typescript-eslint/triple-slash-reference': 'off',
   // This rule is troublesome when working with too complex types, frameworks like Angular or Svelte, or libraries for that frameworks.
