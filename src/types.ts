@@ -23,7 +23,11 @@ type RuleKeys =
   | 'node'
   | 'perfectionist'
   | 'react'
+  | 'react-dom'
   | 'react-hooks'
+  | 'react-naming-convention'
+  | 'react-rsc'
+  | 'react-web-api'
   | 'solid'
   | 'svelte'
   | 'testing-library'
@@ -232,7 +236,9 @@ export interface OptionsNgrx extends OptionsOverrides<'@ngrx'> {
   signals?: boolean;
 }
 
-export interface OptionsReact extends OptionsOverrides<'react' | 'react-hooks'> {}
+export interface OptionsReact extends OptionsOverrides<
+  'react' | 'react-dom' | 'react-hooks' | 'react-naming-convention' | 'react-rsc' | 'react-web-api'
+> {}
 
 export interface OptionsNext extends OptionsOverrides<'@next/next'> {}
 
