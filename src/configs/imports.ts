@@ -5,6 +5,8 @@ import { resolve } from 'node:path';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver, importX as pluginImport } from 'eslint-plugin-import-x';
 
+import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
+
 export function imports({
   typescript,
   tsconfigPath = 'tsconfig.json',
@@ -111,6 +113,17 @@ export function imports({
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-useless-path-segments.md
          */
         'import-x/no-useless-path-segments': ['error'],
+      },
+    },
+    {
+      name: 'import/rules/typescript',
+      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+      ignores: GLOB_ASTRO_TS_FILES,
+      rules: {
+        'import-x/default': 'off',
+        'import-x/export': 'off',
+        'import-x/namespace': 'off',
+        'import-x/no-unresolved': 'off',
       },
     },
     {

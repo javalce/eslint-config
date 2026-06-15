@@ -5,7 +5,6 @@ import tseslint from 'typescript-eslint';
 import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
 import eslintTypescriptConfig from '../rules/typescript';
 import eslintExtensionConfig from '../rules/typescript/extension';
-import typescriptImportConfig from '../rules/typescript/import';
 
 export function typescript({
   tsconfigPath = 'tsconfig.json',
@@ -88,11 +87,6 @@ export function typescript({
           },
         ]
       : []),
-    {
-      ...typescriptImportConfig,
-      files,
-      ignores,
-    },
     {
       name: 'typescript/rules/overrides',
       files,
