@@ -160,7 +160,6 @@ export async function react({
       rules: {
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
-        'react-hooks/component-hook-factories': 'error',
         'react-hooks/error-boundaries': 'error',
         'react-hooks/immutability': 'error',
         'react-hooks/use-memo': 'error',
