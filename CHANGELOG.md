@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.26.0](https://github.com/javalce/eslint-config/compare/v0.25.1...v0.26.0) (2026-06-15)
+
+### Features
+
+- add camelcaseAllows option to javascript config for additional naming flexibility ([a53f135](https://github.com/javalce/eslint-config/commit/a53f135c03d2c5dede8cf7d5bf03963c9f38b23e))
+
 ## [0.25.1](https://github.com/javalce/eslint-config/compare/v0.25.0...v0.25.1) (2026-04-26)
 
 ### Bug Fixes
