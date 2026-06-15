@@ -8,7 +8,11 @@ import es6Config from '../rules/es6';
 import posibleErrorsConfig from '../rules/possible-errors';
 import variablesConfig from '../rules/variables';
 
-export function javascript({ ecmaVersion = 2023, overrides }: OptionsJavascript = {}): Config[] {
+export function javascript({
+  ecmaVersion = 2023,
+  camelcaseAllows = [],
+  overrides,
+}: OptionsJavascript = {}): Config[] {
   return [
     {
       linterOptions: {
@@ -43,7 +47,11 @@ export function javascript({ ecmaVersion = 2023, overrides }: OptionsJavascript 
          */
         camelcase: [
           'error',
-          { allow: ['^UNSAFE_'], ignoreDestructuring: false, properties: 'never' },
+          {
+            allow: ['^UNSAFE_', ...camelcaseAllows],
+            ignoreDestructuring: false,
+            properties: 'never',
+          },
         ],
         /**
          * Require function expressions to have a name.

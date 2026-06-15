@@ -126,6 +126,13 @@ export interface OptionsJavascript extends OptionsOverrides<'eslint'> {
    * @default 2023
    */
   ecmaVersion?: EcmaVersion;
+  /**
+   * Allow snake_case names in addition to camelCase.
+   * It will merge with the default value `['^UNSAFE_']` to allow names starting with `UNSAFE_`.
+   *
+   * @default []
+   */
+  camelcaseAllows?: string[];
 }
 
 export interface OptionsNode extends OptionsOverrides<'node'> {}
