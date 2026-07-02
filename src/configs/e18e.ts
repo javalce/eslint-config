@@ -1,5 +1,3 @@
-import type { Linter } from 'eslint';
-
 import type { Config, OptionsE18e, OptionsProjectType } from '../types';
 
 import pluginE18e from '@e18e/eslint-plugin';
@@ -13,8 +11,7 @@ export function e18e(options: OptionsE18e & OptionsProjectType = {}): Config[] {
     overrides,
   } = options;
 
-  // TODO: better types needed on the e18e side
-  const configs = pluginE18e.configs as Record<string, Linter.Config>;
+  const configs = pluginE18e.configs;
 
   return [
     {
