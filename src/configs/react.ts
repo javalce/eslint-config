@@ -1,5 +1,3 @@
-import type { Linter } from 'eslint';
-
 import type { Config, OptionsReact } from '../types';
 
 import { getPackageInfo, isPackageExists } from 'local-pkg';
@@ -11,15 +9,13 @@ export async function react({
   typeAware: isTypeAware = isPackageExists('typescript'),
   overrides,
 }: OptionsReact & { typeAware?: boolean } = {}): Promise<Config[]> {
-  ensureInstalled(['@eslint-react/eslint-plugin', 'eslint-plugin-react-hooks']);
+  ensureInstalled(['@eslint-react/eslint-plugin']);
 
-  const [pluginReact, pluginReactHooks] = await Promise.all([
+  const [pluginReact] = await Promise.all([
     resolveDefaultExport(import('@eslint-react/eslint-plugin')),
-    resolveDefaultExport(import('eslint-plugin-react-hooks')),
   ]);
 
-  // @ts-expect-error -- TS cannot infer that plugins is defined
-  const plugins = (pluginReact.configs.all.plugins as Linter.Config['plugins'])!;
+  const plugins = pluginReact.configs.all.plugins!;
 
   const reactVersion = await getPackageInfo('react', { paths: [process.cwd()] }).then(
     (info) => info?.version,
@@ -35,11 +31,6 @@ export async function react({
       name: 'react/setup',
       plugins: {
         react: plugins['@eslint-react'],
-        'react-dom': plugins['@eslint-react/dom'],
-        'react-hooks': pluginReactHooks,
-        'react-naming-convention': plugins['@eslint-react/naming-convention'],
-        'react-rsc': plugins['@eslint-react/rsc'],
-        'react-web-api': plugins['@eslint-react/web-api'],
       },
     },
     {
@@ -48,6 +39,8 @@ export async function react({
       settings: {
         react: {
           version: 'detect',
+          importSource: 'react',
+          polymorphicPropName: 'as',
         },
       },
     },
@@ -55,13 +48,6 @@ export async function react({
       name: 'react/rules',
       files,
       rules: {
-        'react/jsx-key-before-spread': 'warn',
-        'react/jsx-no-comment-textnodes': 'warn',
-        'react/jsx-no-duplicate-props': 'warn',
-        'react/jsx-shorthand-boolean': 'warn',
-        'react/jsx-shorthand-fragment': 'warn',
-        'react/jsx-uses-react': 'warn',
-        'react/jsx-uses-vars': 'warn',
         'react/no-access-state-in-setstate': 'error',
         'react/no-array-index-key': 'warn',
         'react/no-children-count': 'warn',
@@ -75,18 +61,14 @@ export async function react({
         'react/no-component-will-update': 'error',
         'react/no-context-provider': 'warn',
         'react/no-create-ref': 'error',
-        'react/no-default-props': 'error',
         'react/no-direct-mutation-state': 'error',
         'react/no-forward-ref': 'warn',
         'react/no-missing-key': 'error',
         'react/no-nested-component-definitions': 'error',
         'react/no-nested-lazy-component-declarations': 'error',
-        'react/no-prop-types': 'error',
-        'react/no-redundant-should-component-update': 'error',
         'react/no-set-state-in-component-did-mount': 'warn',
         'react/no-set-state-in-component-did-update': 'warn',
         'react/no-set-state-in-component-will-update': 'warn',
-        'react/no-string-refs': 'error',
         'react/no-unnecessary-use-prefix': 'warn',
         'react/no-unsafe-component-will-mount': 'warn',
         'react/no-unsafe-component-will-receive-props': 'warn',
@@ -97,20 +79,7 @@ export async function react({
               'react/no-use-context': 'warn',
             }
           : {}),
-        'react/no-useless-forward-ref': 'warn',
-        'react/no-useless-fragment': ['warn', { allowExpressions: true }],
-        'react/prefer-use-state-lazy-initialization': 'warn',
-        'react/prefer-namespace-import': 'error',
-      },
-    },
-    {
-      name: 'react/rules/typescript',
-      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
-      rules: {
-        'react/jsx-no-duplicate-props': 'off',
-        'react/jsx-no-undef': 'off',
-        'react/jsx-uses-react': 'off',
-        'react/jsx-uses-vars': 'off',
+        'react/use-state': 'warn',
       },
     },
     ...(isTypeAware
@@ -127,81 +96,84 @@ export async function react({
         ]
       : []),
     {
-      name: 'react/rules/dom',
+      name: 'react/rules/jsx',
       files,
       rules: {
-        'react-dom/no-dangerously-set-innerhtml': 'warn',
-        'react-dom/no-dangerously-set-innerhtml-with-children': 'error',
-        'react-dom/no-find-dom-node': 'error',
-        'react-dom/no-flush-sync': 'error',
-        'react-dom/no-hydrate': 'error',
-        'react-dom/no-missing-button-type': 'warn',
-        'react-dom/no-namespace': 'error',
-        'react-dom/no-render': 'error',
-        'react-dom/no-render-return-value': 'error',
-        'react-dom/no-script-url': 'warn',
-        'react-dom/no-unsafe-iframe-sandbox': 'warn',
-        'react-dom/no-unsafe-target-blank': 'error',
-        'react-dom/no-use-form-state': 'error',
-        'react-dom/no-void-elements-with-children': 'error',
+        'react/jsx-no-children-prop': 'warn',
+        'react/jsx-no-children-prop-with-children': 'error',
+        'react/jsx-no-comment-textnodes': 'warn',
+        'react/jsx-no-key-after-spread': 'error',
+        'react/jsx-no-leaked-dollar': 'warn',
+        'react/jsx-no-leaked-semicolon': 'warn',
+        'react/jsx-no-namespace': 'error',
+        'react/jsx-no-useless-fragment': ['warn', { allowExpressions: true }],
       },
     },
     {
-      name: 'react/rules/dom/typescript',
-      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+      name: 'react/rules/dom',
+      files,
       rules: {
-        'react-dom/no-string-style-prop': 'off',
-        'react-dom/no-unknown-property': 'off',
+        'react/dom-no-dangerously-set-innerhtml': 'warn',
+        'react/dom-no-dangerously-set-innerhtml-with-children': 'error',
+        'react/dom-no-find-dom-node': 'error',
+        'react/dom-no-flush-sync': 'error',
+        'react/dom-no-hydrate': 'error',
+        'react/dom-no-missing-button-type': 'warn',
+        'react/dom-no-render': 'error',
+        'react/dom-no-render-return-value': 'error',
+        'react/dom-no-script-url': 'warn',
+        'react/dom-no-string-style-prop': 'warn',
+        'react/dom-no-unknown-property': ['error', { ignore: ['css'] }],
+        'react/dom-no-unsafe-iframe-sandbox': 'warn',
+        'react/dom-no-unsafe-target-blank': 'error',
+        'react/dom-no-use-form-state': 'error',
+        'react/dom-no-void-elements-with-children': 'error',
       },
     },
     {
       name: 'react/rules/react-hooks',
       files,
       rules: {
-        'react-hooks/rules-of-hooks': 'error',
-        'react-hooks/exhaustive-deps': 'warn',
-        'react-hooks/error-boundaries': 'error',
-        'react-hooks/immutability': 'error',
-        'react-hooks/use-memo': 'error',
-        'react-hooks/purity': 'error',
-        'react-hooks/refs': 'error',
-        'react-hooks/set-state-in-effect': 'error',
-        'react-hooks/set-state-in-render': 'error',
-        'react-hooks/static-components': 'error',
-        'react-hooks/unsupported-syntax': 'warn',
+        'react/exhaustive-deps': 'warn',
+        'react/rules-of-hooks': 'error',
+        'react/error-boundaries': 'error',
+        'react/globals': 'error',
+        'react/immutability': 'error',
+        'react/purity': 'error',
+        'react/refs': 'error',
+        'react/set-state-in-effect': 'error',
+        'react/set-state-in-render': 'error',
+        'react/static-components': 'error',
+        'react/unsupported-syntax': 'warn',
+        'react/use-memo': 'error',
       },
     },
     {
       name: 'react/rules/web-api',
       files,
       rules: {
-        'react-web-api/no-leaked-event-listener': 'warn',
-        'react-web-api/no-leaked-interval': 'warn',
-        'react-web-api/no-leaked-resize-observer': 'warn',
-        'react-web-api/no-leaked-timeout': 'warn',
+        'react/web-api-no-leaked-event-listener': 'warn',
+        'react/web-api-no-leaked-fetch': 'warn',
+        'react/web-api-no-leaked-intersection-observer': 'warn',
+        'react/web-api-no-leaked-interval': 'warn',
+        'react/web-api-no-leaked-resize-observer': 'warn',
+        'react/web-api-no-leaked-timeout': 'warn',
       },
     },
     {
       name: 'react/rules/naming-convention',
       files,
       rules: {
-        'react-naming-convention/use-state': [
-          'warn',
-          {
-            enforceAssignment: true,
-            enforceSetterName: true,
-          },
-        ],
-        'react-naming-convention/context-name': 'warn',
-        'react-naming-convention/id-name': 'warn',
-        'react-naming-convention/ref-name': 'warn',
+        'react/naming-convention-context-name': 'warn',
+        'react/naming-convention-id-name': 'warn',
+        'react/naming-convention-ref-name': 'warn',
       },
     },
     {
       name: 'react/rules/rsc',
       files,
       rules: {
-        'react-rsc/function-definition': 'error',
+        'react/rsc-function-definition': 'error',
       },
     },
     {
