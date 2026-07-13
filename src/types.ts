@@ -23,11 +23,6 @@ type RuleKeys =
   | 'node'
   | 'perfectionist'
   | 'react'
-  | 'react-dom'
-  | 'react-hooks'
-  | 'react-naming-convention'
-  | 'react-rsc'
-  | 'react-web-api'
   | 'solid'
   | 'svelte'
   | 'testing-library'
@@ -75,18 +70,7 @@ type ExtractRules<Prefix extends RuleKeys, AllRules extends RuleOptions = RuleOp
 interface Rules extends RuleOptions {}
 
 export type EcmaVersion =
-  | 5
-  | 2015
-  | 2016
-  | 2017
-  | 2018
-  | 2019
-  | 2020
-  | 2021
-  | 2022
-  | 2023
-  | 2024
-  | 2025;
+  5 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025;
 
 export type Config = Omit<Linter.Config, 'plugins'> & {
   /**
@@ -243,9 +227,7 @@ export interface OptionsNgrx extends OptionsOverrides<'@ngrx'> {
   signals?: boolean;
 }
 
-export interface OptionsReact extends OptionsOverrides<
-  'react' | 'react-dom' | 'react-hooks' | 'react-naming-convention' | 'react-rsc' | 'react-web-api'
-> {}
+export interface OptionsReact extends OptionsOverrides<'react'> {}
 
 export interface OptionsNext extends OptionsOverrides<'@next/next'> {}
 
