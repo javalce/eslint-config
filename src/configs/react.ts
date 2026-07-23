@@ -188,7 +188,7 @@ export async function react({
             customGroups: [
               {
                 groupName: 'callback',
-                elementNamePattern: '^on.+',
+                elementNamePattern: '^on[A-Z]',
               },
               {
                 groupName: 'reserved',
