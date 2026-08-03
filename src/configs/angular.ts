@@ -1,5 +1,3 @@
-import type { Linter } from 'eslint';
-
 import type { Config, OptionsAngular } from '../types';
 
 import { parser as tsParser } from 'typescript-eslint';
@@ -30,7 +28,7 @@ export async function angular(options: OptionsAngular = {}): Promise<Config[]> {
       name,
       files: [GLOB_HTML_FILES],
       languageOptions: {
-        parser: angularEslint.templateParser as Linter.Parser,
+        parser: angularEslint.templateParser,
       },
       rules,
     };

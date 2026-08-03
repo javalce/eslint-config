@@ -1,5 +1,3 @@
-import type { ESLint } from 'eslint';
-
 import type { Config, OptionsEslintComments } from '../types';
 
 import pluginComments from '@eslint-community/eslint-plugin-eslint-comments';
@@ -9,7 +7,7 @@ export function comments({ overrides }: OptionsEslintComments = {}): Config[] {
     {
       name: 'eslint-comments/setup',
       plugins: {
-        'eslint-comments': pluginComments as ESLint.Plugin,
+        'eslint-comments': pluginComments,
       },
     },
     {
