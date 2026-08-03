@@ -204,6 +204,15 @@ export async function react({
       },
     },
     {
+      name: 'react/rules/typescript',
+      files: [GLOB_TS_FILES, GLOB_TSX_FILES],
+      rules: {
+        // Rules already handled by TypeScript
+        'react/dom-no-string-style-prop': 'off',
+        'react/dom-no-unknown-property': 'off',
+      },
+    },
+    {
       files,
       name: 'react/rules/overrides',
       rules: {
