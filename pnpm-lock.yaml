@@ -20,9 +20,6 @@ importers:
       '@eslint-react/eslint-plugin':
         specifier: ^5
         version: 5.18.1(eslint@10.8.0(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
-      '@eslint/compat':
-        specifier: ^2.1.0
-        version: 2.1.0(eslint@10.8.0(jiti@2.7.0)(supports-color@7.2.0))
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.8.0(jiti@2.7.0)(supports-color@7.2.0))
@@ -778,15 +775,6 @@ packages:
     peerDependencies:
       eslint: '*'
       typescript: '*'
-
-  '@eslint/compat@2.1.0':
-    resolution: {integrity: sha512-LgaSCymEpw7tF53xvDw9SNsraPb1IBHxpdABIOM0hW8UAlP8znrjYtuxfR58FSJ3L9BhwD+FaPRFQpZq84Nh6g==}
-    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
-    peerDependencies:
-      eslint: ^8.40 || 9 || 10
-    peerDependenciesMeta:
-      eslint:
-        optional: true
 
   '@eslint/config-array@0.21.2':
     resolution: {integrity: sha512-nJl2KGTlrf9GjLimgIru+V/mzgSK0ABCDQRvxw5BjURL7WfH5uoWmizbH7QB6MmnMBd8cIC9uceWnezL1VZWWw==}
@@ -5267,12 +5255,6 @@ snapshots:
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
-
-  '@eslint/compat@2.1.0(eslint@10.8.0(jiti@2.7.0)(supports-color@7.2.0))':
-    dependencies:
-      '@eslint/core': 1.2.1
-    optionalDependencies:
-      eslint: 10.8.0(jiti@2.7.0)(supports-color@7.2.0)
 
   '@eslint/config-array@0.21.2(supports-color@7.2.0)':
     dependencies:

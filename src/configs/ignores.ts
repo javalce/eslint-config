@@ -3,8 +3,7 @@ import type { Config } from '../types';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { includeIgnoreFile } from '@eslint/compat';
-import { globalIgnores } from 'eslint/config';
+import { globalIgnores, includeIgnoreFile } from 'eslint/config';
 
 import { GLOB_EXCLUDE_FILES } from '../globs';
 
