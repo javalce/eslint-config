@@ -17,7 +17,7 @@ type RuleKeys =
   | 'e18e'
   | 'eslint'
   | 'eslint-comments'
-  | 'import-x'
+  | 'import'
   | 'jest'
   | 'jsx-a11y'
   | 'node'
@@ -127,7 +127,7 @@ export interface OptionsStylistic extends OptionsOverrides<'@stylistic'> {}
 
 export interface OptionsUnicorn extends OptionsOverrides<'unicorn'> {}
 
-export interface OptionsImport extends OptionsOverrides<'import-x'> {}
+export interface OptionsImport extends OptionsOverrides<'import'> {}
 
 export interface OptionsPerfectionist extends OptionsOverrides<'perfectionist'> {}
 

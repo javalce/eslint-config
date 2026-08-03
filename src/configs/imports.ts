@@ -15,7 +15,7 @@ export function imports({
   return [
     {
       plugins: {
-        'import-x': pluginImport,
+        import: pluginImport,
       },
       name: 'import/setup',
     },
@@ -52,67 +52,67 @@ export function imports({
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/first.md
          */
-        'import-x/first': 'error',
+        'import/first': 'error',
         /**
          * Enforce using top-level type specifiers instead of inline type specifiers.
          *
          * 🔧 Fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/consistent-type-specifier-style.md
          */
-        'import-x/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+        'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
         /**
          * Require a newline after the last import-x/require.
          *
          * 🔧 Fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/newline-after-import.md
          */
-        'import-x/newline-after-import': ['warn', { count: 1 }],
+        'import/newline-after-import': ['warn', { count: 1 }],
         /**
          * Disallow import of modules using absolute paths.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-absolute-path.md
          */
-        'import-x/no-absolute-path': 'error',
+        'import/no-absolute-path': 'error',
         /**
          * Disallow cyclical dependencies between modules.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-cycle.md
          */
-        'import-x/no-cycle': 'error',
+        'import/no-cycle': 'error',
         /**
          * Disallow the use of extraneous packages.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-extraneous-dependencies.md
          */
-        'import-x/no-extraneous-dependencies': ['error', { includeTypes: true }],
+        'import/no-extraneous-dependencies': ['error', { includeTypes: true }],
         /**
          * Disallow mutable exports.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-mutable-exports.md
          */
-        'import-x/no-mutable-exports': 'error',
+        'import/no-mutable-exports': 'error',
         /**
          * Reports use of a default export as a locally named import.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-named-default.md
          */
-        'import-x/no-named-default': 'warn',
+        'import/no-named-default': 'warn',
         /**
          * Disallow importing packages through relative paths.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-relative-packages.md
          */
-        'import-x/no-relative-packages': 'warn',
+        'import/no-relative-packages': 'warn',
         /**
          * Disallow a module from importing itself.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-self-import.md
          */
-        'import-x/no-self-import': 'error',
+        'import/no-self-import': 'error',
         /**
          * Ensures that there are no useless path segments.
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-useless-path-segments.md
          */
-        'import-x/no-useless-path-segments': ['error'],
+        'import/no-useless-path-segments': ['error'],
       },
     },
     {
@@ -120,10 +120,10 @@ export function imports({
       files: [GLOB_TS_FILES, GLOB_TSX_FILES],
       ignores: GLOB_ASTRO_TS_FILES,
       rules: {
-        'import-x/default': 'off',
-        'import-x/export': 'off',
-        'import-x/namespace': 'off',
-        'import-x/no-unresolved': 'off',
+        'import/default': 'off',
+        'import/export': 'off',
+        'import/namespace': 'off',
+        'import/no-unresolved': 'off',
       },
     },
     {
