@@ -21,7 +21,6 @@ This configuration is opinionated and it may not fit your needs. You can extend 
     - [React](#react)
     - [Next.js](#nextjs)
     - [Svelte](#svelte)
-    - [Solidjs](#solidjs)
     - [Vue](#vue)
       - [Vue 2](#vue-2)
     - [TanStack](#tanstack)
@@ -401,24 +400,6 @@ export default defineConfig({
 });
 ```
 
-### Solidjs
-
-To enable Solidjs support, you need to install the `eslint-plugin-solid` package:
-
-```bash
-pnpm add --save-dev eslint-plugin-solid
-```
-
-Then, update your ESLint configuration file to enable the Solidjs config:
-
-```js
-import { defineConfig } from '@javalce/eslint-config';
-
-export default defineConfig({
-  solidjs: true,
-});
-```
-
 ### Vue
 
 To enable Vue support, you need to install the `eslint-plugin-vue` and `vue-eslint-parser` package:
@@ -494,7 +475,7 @@ export default defineConfig({
 });
 ```
 
-Astro can be integrated with other frameworks like React, Vue, Svelte, Solidjs, etc. You can enable the respective configs to lint the code of the framework.
+Astro can be integrated with other frameworks like React, Vue, Svelte, etc. You can enable the respective configs to lint the code of the framework.
 
 ### Testing
 
@@ -586,7 +567,6 @@ Available presets:
 | `nextjs`     | Next.js-specific configuration with rules and settings for Next.js projects.                  |
 | `astro`      | Astro-specific configuration with rules and settings for Astro projects.                      |
 | `svelte`     | Svelte-specific configuration with rules and settings for Svelte projects.                    |
-| `solid`      | Solidjs-specific configuration with rules and settings for Solidjs projects.                  |
 | `vue`        | Vue-specific configuration with rules and settings for Vue projects.                          |
 | `tanstack`   | TanStack-specific configuration with rules and settings for TanStack Query and Router.        |
 | `test`       | Testing-specific configuration with rules and settings for testing frameworks (Jest, Vitest). |

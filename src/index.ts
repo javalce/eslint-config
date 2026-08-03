@@ -7,7 +7,6 @@ import type {
   OptionsPresetBase,
   OptionsPresetNext,
   OptionsPresetReact,
-  OptionsPresetSolid,
   OptionsPresetSvelte,
   OptionsPresetTanstack,
   OptionsPresetTest,
@@ -32,7 +31,6 @@ import { ngrx } from './configs/ngrx';
 import { node } from './configs/node';
 import { perfectionist } from './configs/perfectionist';
 import { react } from './configs/react';
-import { solid } from './configs/solidjs';
 import { stylistic } from './configs/stylistic';
 import { svelte } from './configs/svelte';
 import { tanstackQuery, tanstackRouter } from './configs/tanstack';
@@ -127,18 +125,6 @@ async function presetSvelte(options: OptionsPresetSvelte = {}): Promise<Config[]
   );
 }
 
-async function presetSolid(options: OptionsPresetSolid = {}): Promise<Config[]> {
-  return Promise.all([
-    jsx({
-      ...resolveSubOptions(options, 'jsx'),
-    }),
-    solid({
-      ...resolveSubOptions(options, 'solid'),
-      typescript: Boolean(options.typescript),
-    }),
-  ]).then((configs) => configs.flat());
-}
-
 async function presetVue(options: OptionsPresetVue = {}): Promise<Config[]> {
   return Promise.resolve(
     vue({
@@ -208,7 +194,6 @@ export const presets = {
   nextjs: presetNextjs,
   astro: presetAstro,
   svelte: presetSvelte,
-  solid: presetSolid,
   vue: presetVue,
   tanstack: presetTanstack,
   test: presetTest,
@@ -237,7 +222,6 @@ export async function defineConfig(
   const nextEnabled = isEnabled(options, 'next');
   const vueEnabled = isEnabled(options, 'vue');
   const svelteEnabled = isEnabled(options, 'svelte');
-  const solidEnabled = isEnabled(options, 'solid');
   const astroEnabled = isEnabled(options, 'astro');
   const tanstackEnabled = isEnabled(options, 'tanstack');
   const testEnabled = isEnabled(options, 'test');
@@ -317,15 +301,6 @@ export async function defineConfig(
     configs.push(
       svelte({
         ...resolveSubOptions(options, 'svelte'),
-        typescript: tsEnabled,
-      }),
-    );
-  }
-
-  if (solidEnabled) {
-    configs.push(
-      solid({
-        ...resolveSubOptions(options, 'solid'),
         typescript: tsEnabled,
       }),
     );

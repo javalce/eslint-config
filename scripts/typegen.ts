@@ -18,7 +18,6 @@ import { ngrx } from '../src/configs/ngrx';
 import { node } from '../src/configs/node';
 import { perfectionist } from '../src/configs/perfectionist';
 import { react } from '../src/configs/react';
-import { solid } from '../src/configs/solidjs';
 import { stylistic } from '../src/configs/stylistic';
 import { svelte } from '../src/configs/svelte';
 import { tanstackQuery, tanstackRouter } from '../src/configs/tanstack';
@@ -54,7 +53,6 @@ const configs = (await mergeConfig(
   nextjs(),
   astro(),
   svelte(),
-  solid(),
   vue(),
   jest(),
   vitest(),

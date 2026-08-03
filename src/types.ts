@@ -23,7 +23,6 @@ type RuleKeys =
   | 'node'
   | 'perfectionist'
   | 'react'
-  | 'solid'
   | 'svelte'
   | 'testing-library'
   | 'unicorn'
@@ -235,8 +234,6 @@ export interface OptionsAstro extends OptionsOverrides<'astro' | 'jsx-a11y'> {}
 
 export interface OptionsSvelte extends OptionsOverrides<'svelte'> {}
 
-export interface OptionsSolid extends OptionsOverrides<'solid'> {}
-
 type VueVersion = 2 | 3;
 
 export interface OptionsVue extends OptionsOverrides<'vue'> {
@@ -443,18 +440,6 @@ interface OptionsConfigWithSvelte {
   svelte?: boolean | OptionsSvelte;
 }
 
-interface OptionsConfigWithSolid {
-  /**
-   * Enable SolidJS support.
-   *
-   * Requires installing:
-   * - `eslint-plugin-solid`
-   *
-   * @default false
-   */
-  solid?: boolean | OptionsSolid;
-}
-
 interface OptionsConfigWithVue {
   /**
    * Enable Vue support.
@@ -499,9 +484,6 @@ export interface OptionsPresetAstro extends OptionsConfigWithAstro, OptionsHasTy
 
 export interface OptionsPresetSvelte extends OptionsConfigWithSvelte, OptionsHasTypescript {}
 
-export interface OptionsPresetSolid
-  extends OptionsConfigWithJSX, OptionsConfigWithSolid, OptionsHasTypescript {}
-
 export interface OptionsPresetVue extends OptionsConfigWithVue, OptionsHasTypescript {}
 
 export interface OptionsPresetTanstack extends OptionsTanstack {}
@@ -527,7 +509,6 @@ export interface OptionsConfig
     OptionsConfigWithNext,
     OptionsConfigWithAstro,
     OptionsConfigWithSvelte,
-    OptionsConfigWithSolid,
     OptionsConfigWithVue,
     OptionsConfigWithTanstack,
     OptionsConfigWithTest {}
