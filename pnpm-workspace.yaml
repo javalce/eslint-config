@@ -1,5 +1,6 @@
 allowBuilds:
   esbuild: false
+  simple-git-hooks: true
   unrs-resolver: false
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
