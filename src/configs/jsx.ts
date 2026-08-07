@@ -17,6 +17,30 @@ export async function jsx({ a11y }: OptionsJSX = {}): Promise<Config[]> {
       },
       name: 'jsx/setup',
     },
+    {
+      name: 'jsx/rules/stylistic',
+      files,
+      rules: {
+        '@stylistic/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],
+        '@stylistic/jsx-pascal-case': ['error', { allowAllCaps: false }],
+        '@stylistic/jsx-self-closing-comp': ['warn', { component: true, html: true }],
+        'perfectionist/sort-jsx-props': [
+          'warn',
+          {
+            customGroups: [
+              {
+                groupName: 'callback',
+                elementNamePattern: '^on.+',
+              },
+            ],
+            groups: ['shorthand-prop', 'unknown', 'callback'],
+            newlinesBetween: 0,
+            order: 'asc',
+            type: 'natural',
+          },
+        ],
+      },
+    },
   ];
 
   if (!a11y) {
