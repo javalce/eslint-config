@@ -180,8 +180,6 @@ export async function react({
       name: 'react/rules/stylistic',
       files,
       rules: {
-        '@stylistic/jsx-curly-brace-presence': 'warn',
-        '@stylistic/jsx-self-closing-comp': 'warn',
         'perfectionist/sort-jsx-props': [
           'warn',
           {
