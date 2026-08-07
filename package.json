@@ -48,11 +48,8 @@
     "typegen": "tsx scripts/typegen.ts"
   },
   "simple-git-hooks": {
-    "pre-commit": "lint-staged",
+    "pre-commit": "pnpm lint-staged",
     "commit-msg": "pnpm commitlint --edit $1"
-  },
-  "lint-staged": {
-    "*": "prettier -w --ignore-unknown"
   },
   "dependencies": {
     "@e18e/eslint-plugin": "^0.8.0",
