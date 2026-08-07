@@ -1,5 +1,18 @@
 # Changelog
 
+# [0.27.0](https://github.com/javalce/eslint-config/compare/v0.26.0...v0.27.0) (2026-08-07)
+
+### Bug Fixes
+
+- remove removed react rule names ([482ca65](https://github.com/javalce/eslint-config/commit/482ca65c2a473a97ee28a9f5b0c56ac5c774ef34))
+- update elementNamePattern for callback group in react config ([a7b33eb](https://github.com/javalce/eslint-config/commit/a7b33eb0e0844454ec348cc5a6a5669a7f6bcf8f))
+
+### Features
+
+- add stylistic rules for JSX configuration ([d552f43](https://github.com/javalce/eslint-config/commit/d552f4393c67a784591fa433cc007848e974592b))
+- add TypeScript rules overrides for react configuration ([59623ec](https://github.com/javalce/eslint-config/commit/59623ecf12fa6bb16fab0a81f2b24f683069603d))
+- update dependencies and eslint to v10+ ([b409366](https://github.com/javalce/eslint-config/commit/b40936629ecc611cc12db3f074a6ad61824ed3da))
+
 # [0.26.0](https://github.com/javalce/eslint-config/compare/v0.25.1...v0.26.0) (2026-06-15)
 
 ### Features
