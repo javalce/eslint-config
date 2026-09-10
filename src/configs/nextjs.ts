@@ -11,13 +11,6 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<Config[]>
   const pluginNext = await resolveDefaultExport(import('@next/eslint-plugin-next'));
 
   const languageOptions = {
-    parser: (() => {
-      try {
-        return requireModule('next/dist/compiled/babel/eslint-parser') as Linter.Parser;
-      } catch {
-        return undefined;
-      }
-    })(),
     parserOptions: {
       requireConfigFile: false,
       babelOptions: {
@@ -49,8 +42,8 @@ export async function nextjs({ overrides }: OptionsNext = {}): Promise<Config[]>
     {
       files: [GLOB_SRC_FILES],
       rules: {
-        ...(pluginNext.configs.recommended.rules as Linter.RulesRecord),
-        ...(pluginNext.configs['core-web-vitals'].rules as Linter.RulesRecord),
+        ...pluginNext.configs.recommended.rules,
+        ...pluginNext.configs['core-web-vitals'].rules,
       },
       name: 'next/rules',
     },
