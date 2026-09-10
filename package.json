@@ -89,7 +89,7 @@
   "peerDependencies": {
     "@eslint-react/eslint-plugin": "^5",
     "@next/eslint-plugin-next": "^15 || ^16",
-    "@ngrx/eslint-plugin": "^20 || ^21 || ^22",
+    "@ngrx/eslint-plugin": "^22",
     "@tanstack/eslint-plugin-query": "^5",
     "@tanstack/eslint-plugin-router": "^1",
     "@vitest/eslint-plugin": "^1",
