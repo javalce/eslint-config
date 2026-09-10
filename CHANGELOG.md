@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.27.1](https://github.com/javalce/eslint-config/compare/v0.27.0...v0.27.1) (2026-09-10)
+
+### Bug Fixes
+
+- remove 'astro/valid-compile' rule from astro configuration ([a31d477](https://github.com/javalce/eslint-config/commit/a31d477aada4249bbaf85ad3ec1e0b98aaee0fa0))
+- remove parser from nextjs configuration ([97a5308](https://github.com/javalce/eslint-config/commit/97a530806cbe076ae786f9a8634bd077ecab26d8))
+- update @ngrx/eslint-plugin peer dependency to version 22 ([1eab6ee](https://github.com/javalce/eslint-config/commit/1eab6eee039491e43fb7fbd81b2970d9298003aa))
+- update ngrx config to use the latest eslint-plugin configuration ([c7d356e](https://github.com/javalce/eslint-config/commit/c7d356e2eb4bb511085c72f52843f405681cc7a4))
+- use base eslint 'no-loop-func' instead of the typescript deprecated one ([0e3841a](https://github.com/javalce/eslint-config/commit/0e3841a8a747229592fbda8374e3b901288a7ccb))
+
 # [0.27.0](https://github.com/javalce/eslint-config/compare/v0.26.0...v0.27.0) (2026-08-07)
 
 ### Bug Fixes
