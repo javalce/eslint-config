@@ -82,7 +82,6 @@ export async function astro({
         'astro/no-deprecated-astro-resolve': 'error',
         'astro/no-deprecated-getentrybyslug': 'error',
         'astro/no-unused-define-vars-in-style': 'error',
-        'astro/valid-compile': 'error',
       },
     },
     {
