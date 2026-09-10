@@ -3,15 +3,5 @@ allowBuilds:
   simple-git-hooks: true
   unrs-resolver: false
 minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-  - '@hono/node-server@2.0.5'
-  - undici@6.28.0
-  - fast-uri@3.1.5
-  - hono@4.12.34
-overrides:
-  '@hono/node-server@<2.0.5': ^2.0.5
-  fast-uri@>=3.0.0 <3.1.5: ^3.1.5
-  hono@<4.12.34: ^4.12.34
-  undici@<6.28.0: ^6.28.0
 publicHoistPattern:
   - '*prettier*'
