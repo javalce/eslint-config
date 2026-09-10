@@ -118,6 +118,12 @@ const config: Config = {
      */
     'no-lone-blocks': 'error',
     /**
+     * Disallow creation of functions within loops.
+     *
+     * 🚫 Not fixable - https://typescript-eslint.io/rules/no-loop-func/
+     */
+    'no-loop-func': 'error',
+    /**
      * Disallow `new` for side effects.
      *
      * 🚫 Not fixable - https://eslint.org/docs/rules/no-new

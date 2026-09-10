@@ -23,12 +23,6 @@ const config: Config = {
      */
     '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'always' }],
     /**
-     * Disallow creation of functions within loops.
-     *
-     * 🚫 Not fixable - https://typescript-eslint.io/rules/no-loop-func/
-     */
-    '@typescript-eslint/no-loop-func': 'error',
-    /**
      * Disallow unused variables.
      *
      * 🚫 Not fixable - https://typescript-eslint.io/rules/no-unused-vars/
