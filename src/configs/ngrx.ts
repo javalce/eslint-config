@@ -13,12 +13,9 @@ export async function ngrx({
 }: OptionsNgrx = {}): Promise<Config[]> {
   ensureInstalled(['@ngrx/eslint-plugin']);
 
-  const [pluginNgrx, ngrxConfig] = await Promise.all([
-    resolveDefaultExport(import('@ngrx/eslint-plugin')),
-    resolveDefaultExport(import('@ngrx/eslint-plugin/v9')),
-  ]);
+  const pluginNgrx = await resolveDefaultExport(import('@ngrx/eslint-plugin'));
 
-  const configs: Array<[keyof typeof ngrxConfig.configs, boolean]> = [
+  const configs: Array<[keyof typeof pluginNgrx.configs, boolean]> = [
     ['store', store],
     ['effects', effects],
     ['componentStore', componentStore],
@@ -41,7 +38,7 @@ export async function ngrx({
         name: `ngrx/${name}`,
         files: [GLOB_TS_FILES],
         rules: {
-          ...ngrxConfig.configs[name].at(-1)?.rules,
+          ...pluginNgrx.configs[name].at(-1)?.rules,
         },
       })),
     {
