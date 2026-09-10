@@ -33,7 +33,7 @@ export async function jsx({ a11y }: OptionsJSX = {}): Promise<Config[]> {
                 elementNamePattern: '^on.+',
               },
             ],
-            groups: ['shorthand-prop', 'unknown', 'callback'],
+            groups: ['shorthand-prop', 'multiline-prop', 'unknown', 'callback'],
             newlinesBetween: 0,
             order: 'asc',
             type: 'natural',
