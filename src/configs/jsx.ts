@@ -1,7 +1,7 @@
 import type { Config, OptionsJSX } from '../types';
 
 import { GLOB_JSX_FILES, GLOB_TSX_FILES } from '../globs';
-import { ensureInstalled, resolveDefaultExport } from '../utils';
+import { ensureInstalled, renameRules, resolveDefaultExport } from '../utils';
 
 export async function jsx({ a11y }: OptionsJSX = {}): Promise<Config[]> {
   const files = [GLOB_JSX_FILES, GLOB_TSX_FILES];
@@ -47,9 +47,9 @@ export async function jsx({ a11y }: OptionsJSX = {}): Promise<Config[]> {
     return baseConfig;
   }
 
-  ensureInstalled(['eslint-plugin-jsx-a11y']);
+  ensureInstalled(['eslint-plugin-jsx-a11y-x']);
 
-  const pluginJsxA11y = await resolveDefaultExport(import('eslint-plugin-jsx-a11y'));
+  const pluginJsxA11y = await resolveDefaultExport(import('eslint-plugin-jsx-a11y-x'));
 
   return [
     ...baseConfig,
@@ -62,7 +62,7 @@ export async function jsx({ a11y }: OptionsJSX = {}): Promise<Config[]> {
     {
       files,
       rules: {
-        ...pluginJsxA11y.flatConfigs.recommended.rules,
+        ...renameRules(pluginJsxA11y.configs.recommended.rules, { 'jsx-a11y-x': 'jsx-a11y' }),
       },
       name: 'jsx/a11y/rules',
     },

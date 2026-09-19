@@ -10,7 +10,7 @@ export async function astro({
   typescript,
   overrides,
 }: OptionsHasTypescript & OptionsAstro = {}): Promise<Config[]> {
-  ensureInstalled(['eslint-plugin-astro', 'astro-eslint-parser']);
+  ensureInstalled(['eslint-plugin-astro', 'astro-eslint-parser', 'eslint-plugin-jsx-a11y-x']);
 
   const [pluginAstro, parserAstro] = await Promise.all([
     resolveDefaultExport(import('eslint-plugin-astro')),
