@@ -211,10 +211,10 @@ export default defineConfig({
 });
 ```
 
-Enable accessibility rules (requires installing `eslint-plugin-jsx-a11y`):
+Enable accessibility rules (requires installing `eslint-plugin-jsx-a11y-x`):
 
 ```bash
-pnpm add --save-dev eslint-plugin-jsx-a11y
+pnpm add --save-dev eslint-plugin-jsx-a11y-x
 ```
 
 Then enable accessibility rules in the config:
@@ -459,10 +459,10 @@ export default defineConfig({
 
 ### Astro
 
-To enable Astro support, you need to install the `astro-eslint-plugin`, `astro-eslint-parser` and `eslint-plugin-jsx-a11y` package:
+To enable Astro support, you need to install the `astro-eslint-plugin`, `astro-eslint-parser` and `eslint-plugin-jsx-a11y-x` package:
 
 ```bash
-pnpm add --save-dev astro-eslint-plugin astro-eslint-parser eslint-plugin-jsx-a11y
+pnpm add --save-dev astro-eslint-plugin astro-eslint-parser eslint-plugin-jsx-a11y-x
 ```
 
 Then, update your ESLint configuration file to enable the Astro config:
