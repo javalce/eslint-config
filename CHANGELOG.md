@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.28.0](https://github.com/javalce/eslint-config/compare/v0.27.1...v0.28.0) (2026-09-20)
+
+### Features
+
+- update eslint-plugin-jsx-a11y to jsx-a11y-x for better accessibility support ([d0836aa](https://github.com/javalce/eslint-config/commit/d0836aa96c963f12638997acb96b77a395d315b0))
+
 ## [0.27.1](https://github.com/javalce/eslint-config/compare/v0.27.0...v0.27.1) (2026-09-10)
 
 ### Bug Fixes
