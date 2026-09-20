@@ -3,8 +3,8 @@ import type { Config, OptionsProjectType, OptionsTypescript } from '../types';
 import tseslint from 'typescript-eslint';
 
 import { GLOB_ASTRO_TS_FILES, GLOB_TS_FILES, GLOB_TSX_FILES } from '../globs';
-import eslintTypescriptConfig from '../rules/typescript';
-import eslintExtensionConfig from '../rules/typescript/extension';
+import eslintTypescriptExtensionConfig from '../rules/typescript/extension';
+import eslintTypescriptTypesConfig from '../rules/typescript/types';
 
 export function typescript({
   tsconfigPath = 'tsconfig.json',
@@ -59,7 +59,7 @@ export function typescript({
       name: 'typescript/rules/strict-type-checked',
     },
     {
-      ...eslintTypescriptConfig,
+      ...eslintTypescriptTypesConfig,
       files,
       ignores,
     },
@@ -70,7 +70,7 @@ export function typescript({
       name: 'typescript/rules/stylistic-type-checked',
     },
     {
-      ...eslintExtensionConfig,
+      ...eslintTypescriptExtensionConfig,
       files,
       ignores,
     },
