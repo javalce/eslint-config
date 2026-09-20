@@ -3,7 +3,6 @@ import type { Config, OptionsJest } from '../types';
 import globals from 'globals';
 
 import { GLOB_TEST_FILES, GLOB_TS_TEST_FILES } from '../globs';
-import jestConfig from '../rules/jest';
 import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function jest({ overrides }: OptionsJest = {}): Promise<Config[]> {
@@ -31,7 +30,24 @@ export async function jest({ overrides }: OptionsJest = {}): Promise<Config[]> {
       },
       name: 'jest/rules',
     },
-    jestConfig,
+    {
+      files: GLOB_TEST_FILES,
+      name: 'jest/rules/stylistic',
+      rules: {
+        /**
+         * Disallow duplicate setup and teardown hooks.
+         *
+         * 🚫 Not fixable - https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-duplicate-hooks.md
+         */
+        'jest/no-duplicate-hooks': 'error',
+        /**
+         * Require lowercase test names.
+         *
+         * 🔧 Fixable - https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/prefer-lowercase-title.md
+         */
+        'jest/prefer-lowercase-title': ['warn', { ignoreTopLevelDescribe: true }],
+      },
+    },
     // Prefer the Jest version of this rule. This silently fails when type
     // information is not available.
     {
