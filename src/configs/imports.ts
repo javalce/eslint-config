@@ -76,7 +76,7 @@ export function imports({
          *
          * 🚫 Not fixable - https://github.com/un-ts/eslint-plugin-import-x/blob/master/docs/rules/no-cycle.md
          */
-        'import/no-cycle': 'error',
+        'import/no-cycle': ['error', { ignoreExternal: true }],
         /**
          * Disallow the use of extraneous packages.
          *
