@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.28.1](https://github.com/javalce/eslint-config/compare/v0.28.0...v0.28.1) (2026-10-09)
+
+### Bug Fixes
+
+- update 'import/no-cycle' rule to ignore external imports ([d24a8ac](https://github.com/javalce/eslint-config/commit/d24a8ac121adc0c0161104ca12b4b67d8dbd392d))
+
 # [0.28.0](https://github.com/javalce/eslint-config/compare/v0.27.1...v0.28.0) (2026-09-20)
 
 ### Features
