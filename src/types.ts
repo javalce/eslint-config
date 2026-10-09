@@ -480,7 +480,8 @@ export interface OptionsPresetReact extends OptionsConfigWithJSX, OptionsConfigW
 
 export interface OptionsPresetNext extends OptionsPresetReact, OptionsConfigWithNext {}
 
-export interface OptionsPresetAstro extends OptionsConfigWithAstro, OptionsHasTypescript {}
+export interface OptionsPresetAstro
+  extends OptionsConfigWithAstro, OptionsHasTypescript, OptionsTsconfigPath {}
 
 export interface OptionsPresetSvelte extends OptionsConfigWithSvelte, OptionsHasTypescript {}
 

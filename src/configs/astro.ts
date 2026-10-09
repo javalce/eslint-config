@@ -1,4 +1,7 @@
 import type { Config, OptionsAstro, OptionsHasTypescript } from '../types';
+import type { OptionsTsconfigPath } from '../types';
+
+import path from 'node:path';
 
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -8,8 +11,9 @@ import { ensureInstalled, resolveDefaultExport } from '../utils';
 
 export async function astro({
   typescript,
+  tsconfigPath = 'tsconfig.json',
   overrides,
-}: OptionsHasTypescript & OptionsAstro = {}): Promise<Config[]> {
+}: OptionsHasTypescript & OptionsTsconfigPath & OptionsAstro = {}): Promise<Config[]> {
   ensureInstalled(['eslint-plugin-astro', 'astro-eslint-parser', 'eslint-plugin-jsx-a11y-x']);
 
   const [pluginAstro, parserAstro] = await Promise.all([
@@ -17,11 +21,17 @@ export async function astro({
     resolveDefaultExport(import('astro-eslint-parser')),
   ]);
 
-  const astroJsxA11yConfig = pluginAstro.configs['jsx-a11y-recommended'].find((config) => {
-    const pluginKeys = Object.keys(config.plugins ?? {});
-
-    return pluginKeys.includes('jsx-a11y');
-  });
+  const astroCoreModules = [
+    'actions',
+    'assets',
+    'config',
+    'content',
+    'env',
+    'i18n',
+    'middleware',
+    'static-paths',
+    'transitions',
+  ].map((module) => `astro:${module}`);
 
   return [
     {
@@ -41,8 +51,15 @@ export async function astro({
         parser: parserAstro,
         sourceType: 'module',
         parserOptions: {
-          parser: typescript ? tseslint.parser : undefined,
           extraFileExtensions: ['.astro'],
+          ...(typescript
+            ? {
+                parser: tseslint.parser,
+                project: path.join(process.cwd(), tsconfigPath),
+              }
+            : {
+                parser: undefined,
+              }),
         },
       },
       processor: typescript ? 'astro/client-side-ts' : 'astro/astro',
@@ -72,6 +89,15 @@ export async function astro({
       },
     },
     {
+      name: 'astro/import',
+      settings: {
+        'import-x/core-modules': astroCoreModules,
+        'import-x/parsers': {
+          'astro-eslint-parser': ['.astro'],
+        },
+      },
+    },
+    {
       name: 'astro/recommended',
       files: GLOB_ASTRO_FILES,
       rules: {
@@ -89,7 +115,7 @@ export async function astro({
     {
       name: 'astro/jsx-a11y-recommended',
       files: GLOB_ASTRO_FILES,
-      ...astroJsxA11yConfig,
+      ...pluginAstro.configs['jsx-a11y-recommended'].at(-1),
     },
     {
       name: 'astro/rules/overrides',

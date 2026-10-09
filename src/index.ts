@@ -112,6 +112,7 @@ async function presetAstro(options: OptionsPresetAstro = {}): Promise<Config[]> 
     astro({
       ...resolveSubOptions(options, 'astro'),
       typescript: Boolean(options.typescript),
+      tsconfigPath: options.tsconfigPath,
     }),
   );
 }
@@ -292,6 +293,7 @@ export async function defineConfig(
     configs.push(
       astro({
         typescript: tsEnabled,
+        tsconfigPath: tsOptions?.tsconfigPath,
         ...resolveSubOptions(options, 'astro'),
       }),
     );
