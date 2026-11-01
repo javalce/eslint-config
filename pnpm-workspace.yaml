@@ -3,5 +3,8 @@ allowBuilds:
   simple-git-hooks: true
   unrs-resolver: false
 minimumReleaseAge: 1440
+overrides:
+  basic-ftp@<=6.2.0: ^6.2.1
+  minimatch@<11.0.1: ^11.0.1
 publicHoistPattern:
   - '*prettier*'
