@@ -9,7 +9,7 @@ import { isEnabled, resolveSubOptions } from './utils';
  * Returns an object with boolean flags for decision making
  */
 export function resolveFrameworkFlags(options: OptionsConfig): {
-  projectType: string;
+  projectType: 'app' | 'lib';
   ts: boolean;
   jsx: boolean;
   react: boolean;
