@@ -15,30 +15,29 @@ import type {
   OptionsTypescript,
 } from './types';
 
-import { isPackageExists } from 'local-pkg';
-
-import { angular } from './configs/angular';
 import { astro } from './configs/astro';
 import { comments } from './configs/comments';
 import { e18e } from './configs/e18e';
 import { ignores } from './configs/ignores';
 import { imports } from './configs/imports';
 import { javascript } from './configs/javascript';
-import { jest } from './configs/jest';
-import { jsx } from './configs/jsx';
-import { nextjs } from './configs/nextjs';
 import { ngrx } from './configs/ngrx';
 import { node } from './configs/node';
 import { perfectionist } from './configs/perfectionist';
-import { react } from './configs/react';
 import { stylistic } from './configs/stylistic';
 import { svelte } from './configs/svelte';
-import { tanstackQuery, tanstackRouter } from './configs/tanstack';
-import { testingLibrary } from './configs/testing-library';
 import { typescript } from './configs/typescript';
 import { unicorn } from './configs/unicorn';
-import { vitest } from './configs/vitest';
 import { vue } from './configs/vue';
+import { prepareTsInfo, resolveFrameworkFlags } from './internal/resolvers';
+import {
+  loadAngularStack,
+  loadNextjsStack,
+  loadReactStack,
+  loadTanstackStack,
+  loadTestStack,
+} from './internal/stack-loaders';
+import { resolveSubOptions } from './internal/utils';
 
 async function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
   return Promise.resolve(
@@ -72,39 +71,15 @@ async function presetTypescript(options: OptionsPresetTypescript = {}): Promise<
 }
 
 async function presetAngular(options: OptionsPresetAngular = {}): Promise<Config[]> {
-  return Promise.all([
-    angular({
-      ...resolveSubOptions(options, 'angular'),
-    }),
-    ngrx({
-      ...resolveSubOptions(options, 'ngrx'),
-    }),
-  ]).then((configs) => configs.flat());
+  return loadAngularStack(options);
 }
 
 async function presetReact(options: OptionsPresetReact = {}): Promise<Config[]> {
-  return Promise.all([
-    jsx({
-      ...resolveSubOptions(options, 'jsx'),
-    }),
-    react({
-      ...resolveSubOptions(options, 'react'),
-    }),
-  ]).then((configs) => configs.flat());
+  return loadReactStack(options);
 }
 
 async function presetNextjs(options: OptionsPresetNext = {}): Promise<Config[]> {
-  return Promise.all([
-    jsx({
-      ...resolveSubOptions(options, 'jsx'),
-    }),
-    react({
-      ...resolveSubOptions(options, 'react'),
-    }),
-    nextjs({
-      ...resolveSubOptions(options, 'next'),
-    }),
-  ]).then((configs) => configs.flat());
+  return loadNextjsStack(options);
 }
 
 async function presetAstro(options: OptionsPresetAstro = {}): Promise<Config[]> {
@@ -136,52 +111,16 @@ async function presetVue(options: OptionsPresetVue = {}): Promise<Config[]> {
 }
 
 async function presetTanstack(options: OptionsPresetTanstack = {}): Promise<Config[]> {
-  const configs: Array<Awaitable<Config[]>> = [];
-
-  if (options.query) {
-    configs.push(
-      tanstackQuery({
-        ...resolveSubOptions(options, 'query'),
-      }),
-    );
-  }
-
-  if (options.router) {
-    configs.push(
-      tanstackRouter({
-        ...resolveSubOptions(options, 'router'),
-      }),
-    );
-  }
-
-  return Promise.all(configs.map((c) => Promise.resolve(c))).then((configs) => configs.flat());
+  return loadTanstackStack(options);
 }
 
 async function presetTest(options: OptionsPresetTest): Promise<Config[]> {
-  const configs: Array<Awaitable<Config[]>> = [];
-
-  if (options.runner === 'jest') {
-    configs.push(
-      jest({
-        overrides: options.overrides,
-      }),
-    );
-  }
-
-  if (options.runner === 'vitest') {
-    configs.push(
-      vitest({
-        typescript: options.typescript,
-        overrides: options.overrides,
-      }),
-    );
-  }
-
-  if (isEnabled(options, 'testingLibrary')) {
-    configs.push(testingLibrary(options.testingLibrary));
-  }
-
-  return Promise.all(configs.map((c) => Promise.resolve(c))).then((configs) => configs.flat());
+  return loadTestStack(options, {
+    angular: false,
+    react: false,
+    svelte: false,
+    vue: false,
+  });
 }
 
 /**
@@ -213,34 +152,20 @@ export async function defineConfig(
 ): Promise<Config[]> {
   const configs: Array<Awaitable<Config[]>> = [];
 
-  const projectType = options.type ?? 'app';
-
-  const tsEnabled = isEnabled(options, 'ts', isPackageExists('typescript'));
-  const angularEnabled = isEnabled(options, 'angular');
-  const ngrxEnabled = isEnabled(options, 'ngrx');
-  const reactEnabled = isEnabled(options, 'react');
-  const jsxEnabled = isEnabled(options, 'jsx');
-  const nextEnabled = isEnabled(options, 'next');
-  const vueEnabled = isEnabled(options, 'vue');
-  const svelteEnabled = isEnabled(options, 'svelte');
-  const astroEnabled = isEnabled(options, 'astro');
-  const tanstackEnabled = isEnabled(options, 'tanstack');
-  const testEnabled = isEnabled(options, 'test');
-
+  const flags = resolveFrameworkFlags(options);
+  const tsInfo = prepareTsInfo(options, flags.ts);
   const tsOptions = resolveSubOptions(options, 'ts') as OptionsTypescript | undefined;
+  const projectType = flags.projectType as 'app' | 'lib';
 
   configs.push(
     presetBase({
       ...options,
-      tsInfo: {
-        typescript: tsEnabled,
-        tsconfigPath: tsOptions?.tsconfigPath,
-      },
+      tsInfo,
       type: projectType,
     }),
   );
 
-  if (tsEnabled) {
+  if (flags.ts) {
     configs.push(
       typescript({
         ...resolveSubOptions(options, 'ts'),
@@ -249,23 +174,25 @@ export async function defineConfig(
     );
   }
 
-  if (jsxEnabled) {
+  if (flags.jsx || flags.react) {
     configs.push(
-      jsx({
-        ...resolveSubOptions(options, 'jsx'),
+      loadReactStack({
+        jsx: resolveSubOptions(options, 'jsx'),
+        react: resolveSubOptions(options, 'react'),
       }),
     );
   }
 
-  if (angularEnabled) {
+  if (flags.angular) {
     configs.push(
-      angular({
-        ...resolveSubOptions(options, 'angular'),
+      loadAngularStack({
+        angular: resolveSubOptions(options, 'angular'),
+        ngrx: resolveSubOptions(options, 'ngrx'),
       }),
     );
   }
 
-  if (ngrxEnabled) {
+  if (flags.ngrx && !flags.angular) {
     configs.push(
       ngrx({
         ...resolveSubOptions(options, 'ngrx'),
@@ -273,81 +200,55 @@ export async function defineConfig(
     );
   }
 
-  if (reactEnabled) {
+  if (flags.next) {
     configs.push(
-      react({
-        ...resolveSubOptions(options, 'react'),
+      loadNextjsStack({
+        jsx: resolveSubOptions(options, 'jsx'),
+        react: resolveSubOptions(options, 'react'),
+        next: resolveSubOptions(options, 'next'),
       }),
     );
   }
 
-  if (nextEnabled) {
-    configs.push(
-      nextjs({
-        ...resolveSubOptions(options, 'next'),
-      }),
-    );
-  }
-
-  if (astroEnabled) {
+  if (flags.astro) {
     configs.push(
       astro({
-        typescript: tsEnabled,
+        typescript: flags.ts,
         tsconfigPath: tsOptions?.tsconfigPath,
         ...resolveSubOptions(options, 'astro'),
       }),
     );
   }
 
-  if (svelteEnabled) {
+  if (flags.svelte) {
     configs.push(
       svelte({
         ...resolveSubOptions(options, 'svelte'),
-        typescript: tsEnabled,
+        typescript: flags.ts,
       }),
     );
   }
 
-  if (vueEnabled) {
+  if (flags.vue) {
     configs.push(
       vue({
         ...resolveSubOptions(options, 'vue'),
-        typescript: tsEnabled,
+        typescript: flags.ts,
       }),
     );
   }
 
-  if (tanstackEnabled) {
-    const tanstackOptions = resolveSubOptions(options, 'tanstack');
-    const queryEnabled = isEnabled(tanstackOptions, 'query');
-    const routerEnabled = isEnabled(tanstackOptions, 'router');
-
-    if (queryEnabled) {
-      configs.push(tanstackQuery());
-    }
-
-    if (routerEnabled) {
-      configs.push(tanstackRouter());
-    }
+  if (flags.tanstack) {
+    configs.push(loadTanstackStack(resolveSubOptions(options, 'tanstack')));
   }
 
-  if (testEnabled) {
-    const testOptions = resolveSubOptions(options, 'test');
-
-    const testingLibraryOptions = resolveSubOptions(testOptions, 'testingLibrary');
-
+  if (flags.test) {
     configs.push(
-      presetTest({
-        ...testOptions,
-        testingLibrary: isEnabled(testOptions, 'testingLibrary')
-          ? {
-              ...testingLibraryOptions,
-              angular: angularEnabled,
-              react: reactEnabled,
-              svelte: svelteEnabled,
-              vue: vueEnabled,
-            }
-          : false,
+      loadTestStack(resolveSubOptions(options, 'test'), {
+        angular: flags.angular,
+        react: flags.react,
+        svelte: flags.svelte,
+        vue: flags.vue,
       }),
     );
   }
@@ -363,21 +264,4 @@ export async function mergeConfig(
   const resolved = await Promise.all(configs.map((c) => Promise.resolve(c)));
 
   return resolved.flat();
-}
-
-type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
-
-function resolveSubOptions<T, K extends keyof T>(options: T, key: K): ResolvedOptions<T[K]> {
-  return typeof options[key] === 'boolean'
-    ? ({} as ResolvedOptions<T[K]>)
-    : ((options[key] ?? {}) as ResolvedOptions<T[K]>);
-}
-
-function isEnabled<T>(options: T, key: keyof T, defaultValue = false): boolean {
-  const option = options[key];
-
-  if (option === undefined) return defaultValue;
-  if (typeof option === 'boolean') return option;
-
-  return true;
 }
