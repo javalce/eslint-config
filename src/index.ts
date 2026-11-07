@@ -42,6 +42,8 @@ import { vue } from './configs/vue';
 import { prepareTsInfo, resolveFrameworkFlags } from './internal/resolvers';
 import { isEnabled, resolveSubOptions } from './internal/utils';
 
+export type * from './types';
+
 async function presetBase(options: OptionsPresetBase = {}): Promise<Config[]> {
   return Promise.resolve(
     [
