@@ -1,4 +1,4 @@
-import type { OptionsConfig, OptionsTypescript } from '../types';
+import type { OptionsConfig, OptionsTypescript, ProjectType } from '../types';
 
 import { isPackageExists } from 'local-pkg';
 
@@ -9,7 +9,7 @@ import { isEnabled, resolveSubOptions } from './utils';
  * Returns an object with boolean flags for decision making
  */
 export function resolveFrameworkFlags(options: OptionsConfig): {
-  projectType: 'app' | 'lib';
+  projectType: ProjectType;
   ts: boolean;
   jsx: boolean;
   react: boolean;

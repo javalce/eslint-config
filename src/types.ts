@@ -87,7 +87,7 @@ export type Config = Omit<Linter.Config, 'plugins'> & {
   rules?: Rules;
 };
 
-type ProjectType = 'app' | 'lib';
+export type ProjectType = 'app' | 'lib';
 
 export interface OptionsProjectType {
   /**
