@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.2](https://github.com/javalce/eslint-config/compare/v0.28.1...v0.28.2) (2026-11-11)
+
+### Bug Fixes
+
+- export ProjectType for improved type usage in resolvers ([267a9d1](https://github.com/javalce/eslint-config/commit/267a9d171034c3df44a15fda6c39013addb37044))
+- export types from './types' for better type accessibility ([5822856](https://github.com/javalce/eslint-config/commit/58228560e9f9dc335d84113252cfe6abad22353f))
+
 ## [0.28.1](https://github.com/javalce/eslint-config/compare/v0.28.0...v0.28.1) (2026-10-09)
 
 ### Bug Fixes
